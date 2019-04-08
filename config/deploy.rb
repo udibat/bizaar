@@ -4,7 +4,7 @@ set :application, "bizaar.ca"
 set :repo_url, "git@gitlab-ce.roobykon.com:roobykon/bizaar.git"
 
 set :rvm_type, :user
-set :rvm_ruby_version, '2.3.4'
+set :rvm_ruby_version, '2.3.4@bizaar'
 
 set :bundle_binstubs, -> { release_path.join('bin') }
 set :bundle_gemfile, -> { release_path.join('Gemfile') }
