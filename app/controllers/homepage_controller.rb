@@ -144,6 +144,10 @@ class HomepageController < ApplicationController
 
   end
 
+  def homepage
+
+  end
+
   private
 
   def parse_relevant_search_fields(params, relevant_filters)
