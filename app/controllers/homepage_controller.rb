@@ -140,6 +140,10 @@ class HomepageController < ApplicationController
   # rubocop:enable AbcSize
   # rubocop:enable MethodLength
 
+  def become_a_tutor
+
+  end
+
   private
 
   def parse_relevant_search_fields(params, relevant_filters)
