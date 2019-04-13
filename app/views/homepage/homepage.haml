@@ -1,1 +1,12 @@
-homepage
+- content_for :title_header do
+  - is_homepage = params[:controller] == "homepage" && params[:action] == "index"
+  - hidden_slogan = !@current_community.show_slogan? ? "hidden-title-part" : ""
+  - hidden_description = !@current_community.show_description? ? "hidden-title-part" : ""
+  %h1.marketplace-lander-content-title{class: hidden_slogan}= community_slogan.html_safe
+  %p.marketplace-lander-content-description{class: hidden_description}= community_description.html_safe
+
+.home-tutors
+  %h2.title Here’s what some our tutors are up to:
+  .home-fluid-thumbnail-grid-wide
+    .home-fluid-thumbnail-grid
+
