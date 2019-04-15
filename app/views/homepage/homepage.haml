@@ -2,8 +2,8 @@
   - is_homepage = params[:controller] == "homepage" && params[:action] == "index"
   - hidden_slogan = !@current_community.show_slogan? ? "hidden-title-part" : ""
   - hidden_description = !@current_community.show_description? ? "hidden-title-part" : ""
-  %h1.marketplace-lander-content-title{class: hidden_slogan}= community_slogan.html_safe
-  %p.marketplace-lander-content-description{class: hidden_description}= community_description.html_safe
+  %h1.marketplace-lander-content-title.cursor{class: hidden_slogan}
+  %p.marketplace-lander-content-description{class: hidden_description}
 
 .home-tutors
   .container
@@ -12,8 +12,10 @@
       .home-fluid-thumbnail-grid
 .how-it-works
   .container
-    %h2.section-title Here’s how it works:
-    .row
+    %h2.section-title.text-center 
+      %span.white Here’s 
+      %span.violet how it works:
+    .row.how-works-list
       .col-4
         .image-block
           = image_tag 'homepage/quality.png'
@@ -30,8 +32,8 @@
         .text
           %p Members will now be able to find classes tailored to their location, level of experience.
     .link-holder
-      = link_to 'Start Looking for classes now!', '#'
-      = link_to 'Learn more about being a bizaar Instructor', '#'
+      = link_to 'Start Looking for classes now!', '#', class: 'button button--white button--left'
+      = link_to 'Learn more about being a bizaar Instructor', '#', class: 'button button--transparent button--right'
 .ways
   .container
     %h2.section-title Different Ways to Learn

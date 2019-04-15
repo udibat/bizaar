@@ -54,7 +54,8 @@
           = yield :description
           .banner
             .container
-              = yield :title_header
+              #output.output
+                = yield :title_header
               = render partial: 'custom_search'
         - elsif !(is_homepage && FeatureFlagHelper.feature_enabled?(:topbar_v1))
           .coverimage

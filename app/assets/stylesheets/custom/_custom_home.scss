@@ -1,12 +1,30 @@
+@import 'mixins/all';
+
 .banner {
   background-color: #5f499e;
   height: 500px;
   .marketplace-lander-content-title {
     padding: 0;
+    min-height: 139px;
+    font-size: 55px;
+    width: 490px;
+    line-height: 1.2;
+    margin-bottom: 10px;
   }
   .marketplace-lander-content-description {
     margin: 0;
+    min-height: 25px;
+    font-size: 18px;
+    font-family: 'Sintony', sans-serif;
+    width: 100%;
+    max-width: 100%;
+    font-weight: normal;
+    margin-bottom: 25px;
   }
+}
+
+.output {
+  padding-top: 100px;
 }
 
 .marketplace-lander {
@@ -21,8 +39,61 @@
   }
 }
 
+.home-search {
+  display: flex;
+  .input-icon-holder {
+    margin-right: 2.25%;
+    &:first-of-type {
+      width: 47%;
+    }
+    &:last-of-type {
+      width: 29.5%;
+    }
+    .input {
+      width: 100%;
+    }
+  }
+  .search-btn {
+    width: 18%;
+    margin: 0;
+    border-radius: 0;
+    text-transform: uppercase;
+    background-color: $cust-green;
+    line-height: 1;
+    font-weight: bold;
+    padding-bottom: 10px;
+  }
+}
+
 .how-it-works {
-  background-color: #5f499e;
+  background-color: $cust-violet;
+  text-align: center;
+  padding: 80px 0 75px;
+  .section-title {
+    display: inline-block;
+    background-color: $cust-green;
+    padding: 10px 38px;
+    margin-bottom: 65px;
+  }
+}
+
+.how-works-list {
+  margin-bottom: 60px;
+  .image-block {
+    height: 64px;
+    margin-bottom: 15px;
+  }
+  .text {
+    color: #fff;
+    font-family: 'Sintony', sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: bold;
+    padding: 0 30px;
+    p {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .base-list {

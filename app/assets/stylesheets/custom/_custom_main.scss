@@ -1,3 +1,5 @@
+@import 'mixins/all';
+
 body.homepage_homepage {
   .page-content {
     .wrapper {
@@ -14,6 +16,7 @@ body.homepage_homepage {
 
 .section-title {
   font-size: 32px;
+  font-weight: bold;
 }
 
 .input-icon-holder {
@@ -27,6 +30,111 @@ body.homepage_homepage {
   width: 32px;
   height: 32px;
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
+  transform: translateY(-50%);
+  [class*="icon-"] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+// Typewriter
+
+.cursor::after {
+  content:'';
+  display:inline-block;
+  margin-left:3px;
+  background-color:white;
+  animation-name:blink;
+  animation-duration:0.5s;
+  animation-iteration-count: infinite;
+}
+
+h1.cursor::after {
+  height: 55px;
+  width: 13px;
+}
+
+p.cursor::after {
+  height: 18px;
+  width: 6px;
+}
+
+@keyframes blink {
+  0% {
+    opacity:1;
+  }
+  49% {
+    opacity:1;
+  }
+  50% {
+    opacity:0;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+// END: Typewriter
+
+.violet {
+  color: $cust-violet;
+}
+
+.white {
+  color: #fff;
+}
+
+.text-center {
+  text-align: center;
+}
+
+img {
+  display: inline-block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.link-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 0;
+  line-height: 1;
+  &--white {
+    background-color: #fff;
+    color: $cust-violet;
+    font-weight: bold;
+    font-size: 16px;
+    border: 2px solid #fff;
+    &:hover {
+      background-color: transparent;
+      color: #fff;
+    }
+  }
+  &--transparent {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    &:hover {
+      color: $cust-violet;
+      background-color: #fff;
+    }
+  }
+  &--left {
+    margin-right: 15px;
+  }
+  &--right {
+    margin-left: 15px;
+  }
 }

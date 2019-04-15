@@ -100,4 +100,5 @@
 //= require stripe_form2
 //= require analytics
 //= require social-insurance-number
+//= require typewriter
 //= require_self
