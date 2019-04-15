@@ -53,7 +53,9 @@
         - elsif is_home
           = yield :description
           .banner
-            = yield :title_header
+            .container
+              = yield :title_header
+              = render partial: 'custom_search'
         - elsif !(is_homepage && FeatureFlagHelper.feature_enabled?(:topbar_v1))
           .coverimage
             %figure.marketplace-cover-small.fluidratio
@@ -90,6 +92,9 @@
 
     - if @custom_footer.try(:display?)
       = render 'layouts/footer'
+    
+    // footer
+    = render partial: 'layouts/custom_footer' unless (request.fullpath.start_with?('/admin') || request.fullpath.start_with?('/en/admin'))
 
     -# Most of the JavaScript should be for performance reasons at the end of the body
 

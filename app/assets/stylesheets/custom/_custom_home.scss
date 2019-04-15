@@ -1,3 +1,35 @@
 .banner {
-  background-color: #000;
+  background-color: #5f499e;
+  height: 500px;
+  .marketplace-lander-content-title {
+    padding: 0;
+  }
+  .marketplace-lander-content-description {
+    margin: 0;
+  }
+}
+
+.marketplace-lander {
+  input[type=text] {
+    font-size: 14px;
+    padding-left: 32px;
+    border-radius: 0;
+    line-height: normal;
+    min-height: 1px;
+    font-family: 'Sintony', sans-serif;
+    font-weight: normal;
+  }
+}
+
+.how-it-works {
+  background-color: #5f499e;
+}
+
+.base-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.inspiration-list {
+  background-image: url(image-path("homepage/inspiration.jpg"));
 }
