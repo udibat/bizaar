@@ -2,38 +2,38 @@
   .container
     .row.footer-list
       .col-4
-        .footer-title Company
-        %ul.base-list
-          %li.base-list__item
-            = link_to 'About Us', '#'
-          %li.base-list__item
-            = link_to 'Our Blog', '#'
-          %li.base-list__item
-            = link_to 'Contact Us', '#'
+        %h4.footer-title Company
+        %ul.base-list.footer-menu
+          %li.base-list__item.footer-menu__item
+            = link_to 'About Us', '#', class: 'footer-link'
+          %li.base-list__item.footer-menu__item
+            = link_to 'Our Blog', '#', class: 'footer-link'
+          %li.base-list__item.footer-menu__item
+            = link_to 'Contact Us', '#', class: 'footer-link'
       .col-4
-        .footer-title Contact
-        %ul.base-list.footer-list--socials
-          %li.base-list__item
-            = mail_to 'contact@bizaar.ca', 'contact@bizaar.ca'
-          %li.base-list__item
-            = link_to '#' do
+        %h4.footer-title Contact
+        %ul.base-list
+          %li.base-list__item.footer-menu__item
+            = mail_to 'contact@bizaar.ca', 'contact@bizaar.ca', class: 'footer-link'
+          %li.base-list__item.footer-menu--socials
+            = link_to '#', class: 'social-link' do
               = image_tag 'homepage/facebook.png'
-            = link_to '#' do
+            = link_to '#', class: 'social-link' do
               = image_tag 'homepage/instagram.png'
-            = link_to '#' do
+            = link_to '#', class: 'social-link' do
               = image_tag 'homepage/twitter.png'
       .col-4
-        .footer-title Learn more
-        %ul.base-list
-          %li.base-list__item
-            = link_to 'Become a Tutor', '#'
-          %li.base-list__item
-            = link_to 'Safety', '#'
-          %li.base-list__item
-            = link_to 'Terms and Conditions', '#'
-          %li.base-list__item
-            = link_to 'Privacy Agreement', '#'
-          %li.base-list__item
-            = link_to 'Community Pact', '#'
+        %h4.footer-title Learn more
+        %ul.base-list.footer-menu
+          %li.base-list__item.footer-menu__item
+            = link_to 'Become a Tutor', '#', class: 'footer-link'
+          %li.base-list__item.footer-menu__item
+            = link_to 'Safety', '#', class: 'footer-link'
+          %li.base-list__item.footer-menu__item
+            = link_to 'Terms and Conditions', '#', class: 'footer-link'
+          %li.base-list__item.footer-menu__item
+            = link_to 'Privacy Agreement', '#', class: 'footer-link'
+          %li.base-list__item.footer-menu__item
+            = link_to 'Community Pact', '#', class: 'footer-link'
 
 

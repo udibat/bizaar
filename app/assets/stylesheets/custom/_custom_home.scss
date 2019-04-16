@@ -1,8 +1,11 @@
 @import 'mixins/all';
 
 .banner {
-  background-color: #5f499e;
-  height: 500px;
+  height: 617px;
+  background-image: url(image-path('homepage/home-banner.png'));
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 -3px;
   .marketplace-lander-content-title {
     padding: 0;
     min-height: 139px;
@@ -68,7 +71,10 @@
 // how-it-works 
 
 .how-it-works {
-  background-color: $cust-violet;
+  background-image: url(image-path('homepage/home-banner-2.jpg'));
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   text-align: center;
   padding: 80px 0 75px;
   .section-title {
@@ -94,6 +100,7 @@
     padding: 0 30px;
     p {
       margin-bottom: 0;
+      color: #fff;
     }
   }
 }
@@ -180,4 +187,5 @@
 }
 
 .inspiration-list {
+
 }
