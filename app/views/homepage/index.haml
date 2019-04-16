@@ -9,10 +9,10 @@
   - maps_key = MarketplaceHelper.google_maps_key(@current_community.id)
   - key_param = maps_key ? "&key=#{maps_key}" : ""
   - # Topbar adds its own maps script, otherwise add it if location search enabled or map is visible
-  - needs_maps = !FeatureFlagHelper.feature_enabled?(:topbar_v1) && (main_search != :keyword || @view_type.eql?("map"))
-  - if(needs_maps)
-    = javascript_include_tag "//maps.googleapis.com/maps/api/js?libraries=places#{key_param}"
-  - if(@view_type.eql?("map"))
+  -# - needs_maps = !FeatureFlagHelper.feature_enabled?(:topbar_v1) && (main_search != :keyword || @view_type.eql?("map"))
+  -# - if(needs_maps)
+  = javascript_include_tag "//maps.googleapis.com/maps/api/js?libraries=places#{key_param}"
+  -# - if(@view_type.eql?("map"))
     = javascript_include_tag "markerclusterer.js"
 
 - content_for :title_header do
@@ -62,13 +62,13 @@
         .home-toolbar-show-filters-button#home-toolbar-show-filters
           = t(".filter")
 
-    .home-toolbar-button-group{:class => listing_shape_menu_enabled || @category_menu_enabled ? "filters-enabled" : ""}
-      - ["grid", "list", "map"].each do |view_type|
-        - selected_class = @view_type == view_type ? "selected" : ""
-        = link_to search_path(search_params.merge(view: view_type)), :class => "home-toolbar-button-group-button #{selected_class}", :title => t("homepage.filters.#{view_type}_button") do
-          = icon_tag(view_type, ["icon-fix", "home-button-group-icon"])
-          %span.home-toolbar-button-text
-            = t("homepage.filters.#{view_type}_button")
+    -# .home-toolbar-button-group{:class => listing_shape_menu_enabled || @category_menu_enabled ? "filters-enabled" : ""}
+    -#   - ["grid", "list", "map"].each do |view_type|
+    -#     - selected_class = @view_type == view_type ? "selected" : ""
+    -#     = link_to search_path(search_params.merge(view: view_type)), :class => "home-toolbar-button-group-button #{selected_class}", :title => t("homepage.filters.#{view_type}_button") do
+    -#       = icon_tag(view_type, ["icon-fix", "home-button-group-icon"])
+    -#       %span.home-toolbar-button-text
+    -#         = t("homepage.filters.#{view_type}_button")
 
     - if listing_shape_menu_enabled || @category_menu_enabled
       .home-toolbar-filters.home-toolbar-filters-mobile-hidden#home-toolbar-filters
@@ -135,27 +135,27 @@
         #desktop-filters
           - # Filters will be relocated here when in desktop
 
-    - main_container_class = if @category_menu_enabled then "col-9" else "col-12" end
-    %div{:class => main_container_class}
+    -# - main_container_class = if @category_menu_enabled then "col-9" else "col-12" end
+    %div{:class => 'col-12'}
       - if @listings.total_entries > 0
-        - if @view_type.eql?("map")
-          .home-map
-            = render :partial => "map", locals: { viewport: viewport }
-        - else
-          - if @view_type.eql?("grid")
-            %div{class: @category_menu_enabled ? "home-fluid-thumbnail-grid-narrow" : "home-fluid-thumbnail-grid-wide"}
-              .home-fluid-thumbnail-grid
-                = render partial: "grid_item", collection: @listings, as: :listing, locals: { show_distance: location_search_in_use }
-          - else
-            .home-listings
-              - if (location_search_in_use)
-                = render partial: "list_item_with_distance", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map, show_distance: location_search_in_use }
-              - else
-                = render partial: "list_item", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map }
+        -# - if @view_type.eql?("map")
+        -# - else
+        -#   - if @view_type.eql?("grid")
+        %div{class: @category_menu_enabled ? "home-fluid-thumbnail-grid-narrow" : "home-fluid-thumbnail-grid-wide"}
+          .home-fluid-thumbnail-grid
+            = render partial: "grid_item", collection: @listings, as: :listing, locals: { show_distance: location_search_in_use }
           .home-loading-more
             = will_paginate(@listings)
             - item_container = if @view_type.eql?("grid") then '.home-fluid-thumbnail-grid' else '.home-listings' end
             = pageless(@listings.total_pages, item_container, current_search_path_without_page, t('.loading_more_content'), current_page)
+        .home-map
+          = render :partial => "map", locals: { viewport: viewport }
+          -# - else
+          -#   .home-listings
+          -#     - if (location_search_in_use)
+          -#       = render partial: "list_item_with_distance", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map, show_distance: location_search_in_use }
+          -#     - else
+          -#       = render partial: "list_item", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map }
       - else
         .home-no-listings
           - if params[:q] || params[:category] || params[:share_type] # Some filter in use

@@ -7,19 +7,57 @@
       -# Listing author details
       .home-fluid-thumbnail-grid-author
         .home-fluid-thumbnail-grid-author-avatar
-          = link_to(person_path(username: listing.author.username)) do
+          = link_to(person_path(username: listing.author.username), class: 'author-avatar-link') do
             = image_tag(listing.author.avatar.thumb || missing_avatar(:thumb), :class => "home-fluid-thumbnail-grid-author-avatar-image")
+          .competitor.small-block
+            .image-block
+              = image_tag 'homepage/medal.png'
+            .text Competitor
+        -# - distance = Maybe(listing.distance).or_else(nil)
+        -# - name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type)
+        -# - if(!show_distance || distance.blank?)
+        -#   = link_to(person_path(username: listing.author.username), :class => "home-fluid-thumbnail-grid-author-name", title: name) do
+        -#     = name
+        -# - else
+        -#   .home-fluid-thumbnail-grid-details
+        -#     = link_to(person_path(username: listing.author.username), class: "home-fluid-thumbnail-grid-details-author-name", title: name) do
+        -#       = name
+        -#     - dist = format_distance(distance)
+        -#     - dist_string = "#{dist} #{listing.distance_unit}"
+        -#     .home-fluid-thumbnail-grid-details-distance{title: dist_string}
+        -#       = dist_string
+        .listing-details
+          .certified.small-block
+            .image-block
+              = image_tag 'homepage/certificate.png'
+            .text
+              Certified Instructor
+          .fluid-thumbnail-grid-image-title{:class => ""}
+            = listing.title
+          .author-item.author-item--price
+            .fluid-thumbnail-grid-image-price-container{:class => ""}
+              - if listing.price
+                %span.fluid-thumbnail-grid-image-price 
+                  From 
+                  = MoneyViewUtils.to_humanized(listing.price)
+                  - price_unit = price_quantity_slash_unit(listing)
+                - if !price_unit.blank?
+                  - price_text = " "
+                  %span.fluid-thumbnail-grid-image-quantity{:title => price_text}
+                    = price_text
+                    a class
+              -# - else
+              -#   %span.fluid-thumbnail-grid-image-type{:class => ""}
+              -#     = shape_name(listing)
+            .name 
+              = link_to 'With Dylan H', '#', class: 'name-link'
+          .author-item
+            .rating
+              .icon-star
+              .icon-star
+              .icon-star
+              .icon-star
+              .icon-star-empty
+            .reviews
+              = link_to '5 reviews', '#', class: 'reviews-link'
 
-        - distance = Maybe(listing.distance).or_else(nil)
-        - name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type)
-        - if(!show_distance || distance.blank?)
-          = link_to(person_path(username: listing.author.username), :class => "home-fluid-thumbnail-grid-author-name", title: name) do
-            = name
-        - else
-          .home-fluid-thumbnail-grid-details
-            = link_to(person_path(username: listing.author.username), class: "home-fluid-thumbnail-grid-details-author-name", title: name) do
-              = name
-            - dist = format_distance(distance)
-            - dist_string = "#{dist} #{listing.distance_unit}"
-            .home-fluid-thumbnail-grid-details-distance{title: dist_string}
-              = dist_string
