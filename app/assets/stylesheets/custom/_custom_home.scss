@@ -16,6 +16,7 @@
     @include media(mid-desktop) {
       font-size: 55px;
       width: 490px;
+      max-width: 100%;
       min-height: 139px;
     }
   }
