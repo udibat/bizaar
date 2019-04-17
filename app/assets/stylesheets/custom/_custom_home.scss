@@ -292,6 +292,9 @@
   .image-block {
     width: 14px;
   }
+  .image {
+    vertical-align: baseline;
+  }
   .text {
     font-family: 'Sintony', sans-serif;
     font-size: 13px;
@@ -342,12 +345,6 @@
 }
 
 @media (min-width: 63em) {
-  .home-fluid-thumbnail-grid-wide {
-    .home-fluid-thumbnail-grid-item {
-      width: 33.33%;
-    }
-  }
-
   .home-fluid-thumbnail-grid-wide.homepage-listings-list {
     .home-fluid-thumbnail-grid-item {
       &:first-of-type {

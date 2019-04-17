@@ -62,13 +62,13 @@
         .home-toolbar-show-filters-button#home-toolbar-show-filters
           = t(".filter")
 
-    -# .home-toolbar-button-group{:class => listing_shape_menu_enabled || @category_menu_enabled ? "filters-enabled" : ""}
-    -#   - ["grid", "list", "map"].each do |view_type|
-    -#     - selected_class = @view_type == view_type ? "selected" : ""
-    -#     = link_to search_path(search_params.merge(view: view_type)), :class => "home-toolbar-button-group-button #{selected_class}", :title => t("homepage.filters.#{view_type}_button") do
-    -#       = icon_tag(view_type, ["icon-fix", "home-button-group-icon"])
-    -#       %span.home-toolbar-button-text
-    -#         = t("homepage.filters.#{view_type}_button")
+    .home-toolbar-button-group{:class => listing_shape_menu_enabled || @category_menu_enabled ? "filters-enabled" : ""}
+      - ["grid", "map"].each do |view_type|
+        - selected_class = @view_type == view_type ? "selected" : ""
+        = link_to search_path(search_params.merge(view: view_type)), :class => "home-toolbar-button-group-button #{selected_class}", :title => t("homepage.filters.#{view_type}_button") do
+          = icon_tag(view_type, ["icon-fix", "home-button-group-icon"])
+          %span.home-toolbar-button-text
+            = t("homepage.filters.#{view_type}_button")
 
     - if listing_shape_menu_enabled || @category_menu_enabled
       .home-toolbar-filters.home-toolbar-filters-mobile-hidden#home-toolbar-filters
@@ -135,18 +135,27 @@
         #desktop-filters
           - # Filters will be relocated here when in desktop
 
-    - main_container_class = if @category_menu_enabled then "col-9" else "col-12" end
-    %div{:class => main_container_class}
+  .row
+    %div{:class => 'col-9 listings-main-container'}
       - if @listings.total_entries > 0
-        .home-map
-          = render :partial => "map", locals: { viewport: viewport }
-        %div{class: @category_menu_enabled ? "home-fluid-thumbnail-grid-narrow" : "home-fluid-thumbnail-grid-wide"}
-          .home-fluid-thumbnail-grid
-            = render partial: "grid_item", collection: @listings, as: :listing, locals: { show_distance: location_search_in_use }
-        .home-loading-more
-          = will_paginate(@listings)
-          - item_container = if @view_type.eql?("grid") then '.home-fluid-thumbnail-grid' else '.home-listings' end
-          = pageless(@listings.total_pages, item_container, current_search_path_without_page, t('.loading_more_content'), current_page)
+        - if @view_type.eql?("map")
+          .home-map.map-mobile
+            = render :partial => "map", locals: { viewport: viewport }
+        - else
+          - if @view_type.eql?("grid")
+            %div{class: "home-fluid-thumbnail-grid-wide search-listings-list"}
+              .home-fluid-thumbnail-grid
+                = render partial: "grid_item", collection: @listings, as: :listing, locals: { show_distance: location_search_in_use }
+          -# - else
+          -#   .home-listings
+          -#     - if (location_search_in_use)
+          -#       = render partial: "list_item_with_distance", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map, show_distance: location_search_in_use }
+          -#     - else
+          -#       = render partial: "list_item", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map }
+          .home-loading-more
+            = will_paginate(@listings)
+            - item_container = if @view_type.eql?("grid") then '.home-fluid-thumbnail-grid' else '.home-listings' end
+            = pageless(@listings.total_pages, item_container, current_search_path_without_page, t('.loading_more_content'), current_page)
       - else
         .home-no-listings
           - if params[:q] || params[:category] || params[:share_type] # Some filter in use
@@ -155,3 +164,7 @@
             = t(".no_listings_notification",
                   add_listing_link: link_to(t(".add_listing_link_text"),
                   new_listing_path(ref: "add_listing_link"))).html_safe
+    
+    .custom-map-desktop.col-3
+      .home-map
+        = render :partial => "map", locals: { viewport: viewport }

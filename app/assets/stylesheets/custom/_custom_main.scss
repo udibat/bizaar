@@ -125,7 +125,6 @@ img {
   &--white {
     background-color: #fff;
     color: $cust-violet;
-    font-weight: bold;
     font-size: 16px;
     border: 2px solid #fff;
     &:hover {
@@ -141,6 +140,10 @@ img {
       color: $cust-violet;
       background-color: #fff;
     }
+  }
+  &--violet {
+    background-color: $cust-violet;
+    color: #fff;
   }
   &--left {
     margin-right: 15px;
