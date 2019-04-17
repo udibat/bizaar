@@ -1,1 +1,131 @@
-homepage
+- content_for :title_header do
+  - is_homepage = params[:controller] == "homepage" && params[:action] == "index"
+  - hidden_slogan = !@current_community.show_slogan? ? "hidden-title-part" : ""
+  - hidden_description = !@current_community.show_description? ? "hidden-title-part" : ""
+  %h1.marketplace-lander-content-title.cursor{class: hidden_slogan}
+  %p.marketplace-lander-content-description{class: hidden_description}
+
+.home-tutors
+  .container
+    %h2.section-title.text-center Here’s what some our tutors are up to:
+    .home-fluid-thumbnail-grid-wide.homepage-listings-list
+      .home-fluid-thumbnail-grid
+        // there is the place where need to render listings
+    .home-tutors-link.text-center
+      = link_to 'see more of our top tutors', '#', class: 'link'
+.how-it-works
+  .container
+    %h2.section-title.text-center 
+      %span.white Here’s 
+      %span.violet how it works:
+    .row.how-works-list
+      .col-4
+        .image-block
+          = image_tag 'homepage/quality.png'
+        .text
+          %p We verify Instructors IDs for safety and Certifications/Awards for authentication.
+      .col-4
+        .image-block
+          = image_tag 'homepage/blogging.png'
+        .text
+          %p Instructors create a page for their class with their schedule, photos, and more.
+      .col-4
+        .image-block
+          = image_tag 'homepage/human-resources.png'
+        .text
+          %p Members will now be able to find classes tailored to their location, level of experience.
+    .link-holder
+      = link_to 'Start Looking for classes now!', '#', class: 'button button--white button--left'
+      = link_to 'Learn more about being a bizaar Instructor', '#', class: 'button button--transparent button--right'
+.ways
+  .container
+    %h2.section-title.text-center Different Ways to Learn
+    .row
+      .col-4
+        .image-block
+          = image_tag 'homepage/ways1.png'
+        .text
+          %h3.list-item-title One and Done Class
+          %p Do you want to learn how to change your car oil, or how to rip an apple apart with your bare hands? You know, everyday things that take only one Session to master. Look no farther than One and Done’s!
+      .col-4
+        .image-block
+          = image_tag 'homepage/ways2.png'
+        .text
+          %h3.list-item-title Pay as You Go Class
+          %p Not sure about a curriculum, or about the class itself? Try Pay as You Go Classes- You decide how many Sessions to buy and when to schedule them. 
+      .col-4
+        .image-block
+          = image_tag 'homepage/ways3.png'
+        .text
+          %h3.list-item-title Committed Class
+          %p Commit yourself to a planned out curriculum, start date and weekly schedule. Instructors carefully plan out their Committed Classes, so you know what you’re getting from the start
+.inspiration
+  .container
+    %h2.section-title 
+      Need inspiration?
+      %br/
+      Here’s some categories to get you started
+    .inspiration-list
+      .row
+        .col-6
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/mortarboard.png'
+            %h4.category-title University Class Tutors
+        .col-6
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/camping-tent.png'
+            %h4.category-title Outdoor Activities
+      .row
+        .col-6
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/weight.png'
+            %h4.category-title Sports and Fitness
+        .col-6
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/baking.png'
+            %h4.category-title Cooking and Baking
+      .row
+        .col-6
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/brush.png'
+            %h4.category-title Arts and Crafts
+        .col-6
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/book.png'
+            %h4.category-title Language and Writing
+      .row
+        .col-6
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/mouse.png'
+            %h4.category-title Design and Development
+        .col-6
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/joystick.png'
+            %h4.category-title Games and Recreation
+      .row
+        .col-6
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/paint-roller.png'
+            %h4.category-title Home Economics
+        .col-6
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/guitar.png'
+            %h4.category-title Music
+      .row
+        .col-12.full-block
+          = link_to '#', class: 'inspiration-link' do
+            .image-icon
+              = image_tag 'homepage/elephant.png'
+            %h4.category-title Spice things up! Try our unconventional and “bizarre” category classes!
+
+

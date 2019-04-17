@@ -1,0 +1,11 @@
+= form_tag '#', id: :home_search, class: 'home-search' do
+  .input-icon-holder
+    = label_tag :name_field, class: 'label-icon' do
+      %i.icon-search
+    = text_field :name_field, '', placeholder: 'Name something you want to learn', class: 'input'
+  .input-icon-holder
+    = label_tag :place_field, class: 'label-icon' do
+      %i.icon-map-marker
+    = text_field :place_field, '', placeholder: 'Where are you?', class: 'input'
+  = submit_tag 'Find a class!', class: 'button search-btn'
+
