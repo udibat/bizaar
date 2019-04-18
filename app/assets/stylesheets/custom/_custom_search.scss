@@ -45,6 +45,9 @@
     display: block;
     width: 33%;
   }
+  @media (min-width: 1441px) {
+    width: 25%;
+  }
 }
 
 .search-listings-list {
@@ -104,4 +107,208 @@
   background-color: #fff;
   padding: 20px 34px;
   border: 1px solid #f4f6f3;
+  .title {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+}
+
+.schedule-item {
+  line-height: 1;
+  padding: 5px 0;
+  .text {
+    font-size: 13px;
+    color: $cust-violet;
+    font-family: 'Sintony', sans-serif;
+    font-weight: bold;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+}
+
+.home-toolbar {
+  .home-search {
+    justify-content: flex-start;
+    max-width: 790px;
+  }
+}
+
+//  customizing filters
+
+.book-immediately {
+  position: relative;
+  .input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  .label {
+    max-width: 169px;
+    box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.17);
+  }
+}
+
+.checkbox-item {
+  position: relative;
+  .input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  .label {
+    display: inline-block;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    margin: 0;
+  }
+  &.days {
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
+    .label {
+      font-size: 17px;
+      padding: 10px 8px;
+      min-width: 41px;
+    }
+  }
+}
+
+.no-pseudo {
+  input[type="checkbox"]:checked + .label {
+    background-color: $cust-green;
+    color: #fff;
+  }
+}
+
+.day-time {
+  .label {
+    font-size: 15px;
+  }
+}
+
+.checkbox-holder {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+.default-checkbox {
+  position: relative;
+  input[type="checkbox"] + .label {
+    padding-left: 18px;
+    margin: 0;
+    font-size: 16px;
+    &::before {
+      position: absolute;
+      content: '';
+      width: 15px;
+      height: 15px;
+      border: 1px solid $cust-light-gray;
+      display: inline-block;
+      left: 0;
+      top: 5px;
+    }
+    &::after {
+      content: '\f00c';
+      font-family: FontAwesome;
+      color: #fff;
+      position: absolute;
+      left: 1px;
+      top: 6px;
+      font-size: 12px;
+      font-weight: normal;
+    }
+  }
+  input[type="checkbox"]:checked + .label {
+    &::before {
+      background-color: $cust-green;
+      border-color: $cust-green;
+    }
+  }
+}
+
+.schedule-holder {
+  font-size: 13px;
+}
+
+.schedule-data,
+.price-data {
+  font-size: 15px;
+  padding: 20px 10px;
+  width: 342px;
+  background-color: #fff;
+  border: 2px solid $cust-green;
+}
+
+.price-data {
+  width: 250px;
+}
+
+.day-time {
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
+}
+
+.chosen {
+  margin-bottom: 15px;
+}
+
+.another-option-block {
+  margin-top: 30px;
+}
+
+.another-btn {
+  margin: 0 0 15px 0;
+  background-color: transparent;
+  color: $cust-violet;
+  padding: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  &:hover, &:focus, &:active {
+    background-color: transparent;
+    color: $cust-green;
+    outline: none;
+  }
+}
+
+.filter-title-btn {
+  max-width: 169px;
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.dropdown-btn {
+  .btn {
+    position: relative;
+    &::before {
+      content: '';
+      width: 9px;
+      height: 9px;
+      border-left: 1px solid $cust-green;
+      border-bottom: 1px solid $cust-green;
+      transform: rotate(-45deg);
+      display: inline-block;
+      position: absolute;
+      top: 9;
+      left: 10px;
+    }
+  }
+}
+
+.custom-filter-title {
+  text-align: left;
+  font-weight: normal;
+  font-size: 18px;
+  border-bottom: none;
 }

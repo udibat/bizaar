@@ -39,7 +39,8 @@
   padding-top: 100px;
 }
 
-.marketplace-lander {
+.marketplace-lander, 
+.home-search {
   input[type=text] {
     font-size: 14px;
     padding-left: 32px;
@@ -256,6 +257,7 @@
   display: flex;
   background-color: #fff;
   padding: 17px 0;
+  min-height: 200px;
 }
 
 .fluid-thumbnail-grid-image-image-container {
@@ -342,6 +344,14 @@
 
 .fluid-thumbnail-grid-image-price-container {
   margin-right: 25px;
+}
+
+.home-fluid-thumbnail-grid-wide.homepage-listings-list {
+  .fluid-thumbnail-grid-listing-schedule, 
+  .fluid-thumbnail-grid-listing-info {
+    display: none;
+  }
+
 }
 
 @media (min-width: 63em) {

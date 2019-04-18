@@ -71,7 +71,7 @@ h1.cursor::after {
   height: 33px;
   width: 13px;
   @include media(mid-desktop) {
-    height: 53px;
+    height: 51px;
   }
 }
 
@@ -116,7 +116,7 @@ img {
   vertical-align: top;
 }
 
-.button {
+.btn {
   padding: 10px 20px;
   text-transform: uppercase;
   font-weight: bold;
@@ -144,6 +144,16 @@ img {
   &--violet {
     background-color: $cust-violet;
     color: #fff;
+  }
+  &--green {
+    background-color: $cust-green;
+    border: 2px solid $cust-green;
+    color: #fff;
+  }
+  &--green-transp {
+    background-color: transparent;
+    border: 2px solid $cust-green;
+    color: $cust-green;
   }
   &--left {
     margin-right: 15px;
@@ -232,4 +242,69 @@ img {
   }
 }
 
+
+// ui slider customization
+
+.price-data {
+  .noUi-horizontal .noUi-handle {
+    border-top: 22px solid $cust-violet;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .noUi-horizontal {
+    height: 3px;
+  }
+
+  .noUi-connect {
+    background: $cust-violet;
+  }
+}
+
+
+.custom-filter-checkbox-label {
+  position: relative;
+  input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  input[type="checkbox"] + span {
+    padding-left: 18px;
+    margin: 0;
+    font-size: 16px;
+    &::before {
+      position: absolute;
+      content: '';
+      width: 15px;
+      height: 15px;
+      border: 1px solid $cust-light-gray;
+      display: inline-block;
+      left: 0;
+      top: 5px;
+    }
+    &::after {
+      content: '\f00c';
+      font-family: FontAwesome;
+      color: #fff;
+      position: absolute;
+      left: 1px;
+      top: 6px;
+      font-size: 12px;
+      font-weight: normal;
+      line-height: 1;
+    }
+  }
+  input[type="checkbox"]:checked + span {
+    &::before {
+      background-color: $cust-green;
+      border-color: $cust-green;
+    }
+  }
+}
 
