@@ -2,9 +2,9 @@
   .col-12
     -# .custom-filter-title
     -#   = t("listings.form.price.price")
-.row
+.row.filter-data-item
   .col-12
-    .custom-filter-options
+    .custom-filter-options.custom-filter-options--price
       - id = ["range-slider", "price"].join("-")
       .range-slider{id: id}
         - min = MoneyUtil.to_units(MoneyUtil.to_money(@current_community.price_filter_min, @current_community.currency))

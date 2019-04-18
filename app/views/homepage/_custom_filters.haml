@@ -2,7 +2,7 @@
 
   - field.with_type do |type|
     - if [:dropdown, :checkbox].include?(type)
-      .row
+      .row.filter-data-item
         .col-12
           .custom-filter-title
             = field.name(I18n.locale)

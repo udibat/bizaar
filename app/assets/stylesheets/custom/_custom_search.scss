@@ -29,7 +29,8 @@
   }
 }
 
-.listings-main-container {
+.listings-main-container,
+.more-options-holder .filter-data {
   width: 100%;
   @media (min-width: 1125px) {
     width: 67%;
@@ -37,6 +38,10 @@
   @media (min-width: 1441px) {
     width: 75%;
   }
+}
+
+.listings-main-container {
+  padding-top: 70px;
 }
 
 .custom-map-desktop {
@@ -129,7 +134,7 @@
 .home-toolbar {
   .home-search {
     justify-content: flex-start;
-    max-width: 790px;
+    max-width: 67%;
   }
 }
 
@@ -281,11 +286,22 @@
   }
 }
 
+.filter-title {
+  font-size: 26px;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-bottom: 30px;
+}
+
 .filter-title-btn {
   max-width: 169px;
   text-align: center;
   font-size: 13px;
   cursor: pointer;
+}
+
+.filter-data {
+  padding: 70px 20px 50px 0;
 }
 
 .dropdown-btn {
@@ -311,4 +327,87 @@
   font-weight: normal;
   font-size: 18px;
   border-bottom: none;
+  font-family: 'Sintony', sans-serif;
+  margin-bottom: 10px;
+}
+
+.custom-filter-options {
+  &:not(.custom-filter-options--price) {
+    column-count: 3;
+  }
+}
+
+.location-item {
+  display: flex;
+  align-items: center;
+}
+
+input[type="text"].distance-input,
+input[type="text"].location-input {
+  display: inline-block;
+  margin: 0 10px;
+  border: none;
+  border-radius: 0;
+  box-shadow: 2px 2px 1px rgba(1, 1, 1, 0.17);
+}
+
+input[type="text"].distance-input {
+  width: 50px;
+}
+
+input[type="text"].location-input {
+  width: 200px;
+}
+
+.filter-data-item {
+  margin-bottom: 40px;
+}
+
+.custom-filter-checkbox-container {
+  margin-bottom: 5px;
+}
+
+.one-session {
+  display: flex;
+  align-items: center;
+  .custom-filter-title {
+    margin-right: 25px;
+    margin-bottom: 0;
+  }
+}
+
+.filter-dropdown {
+  display: none;
+}
+
+.filter-btns-holder {
+  display: flex;
+  align-items: flex-start;
+  margin: 15px 0;
+}
+
+.price-range-holder, 
+.more-options-holder,
+.schedule-holder,
+.book-immediately {
+  flex-shrink: 0;
+  min-width: 169px;
+  margin-right: 35px;
+}
+
+.more-options-holder {
+  margin-right: 0;
+}
+
+.home-toolbar {
+  margin-bottom: 0;
+}
+
+.search-title {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.custom-map-desktop {
+  height: 100%;
 }

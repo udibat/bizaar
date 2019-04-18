@@ -117,10 +117,20 @@
         .filter-title-btn
           .btn.btn--green More Options
         .filter-data.filter-dropdown
+          %h3.filter-title More options
+          .location-holder.filter-data-item
+            .custom-filter-title Location
+            .location-item
+              Whithin 
+              = text_field :distance_from, '', class: 'distance-input'
+              km of
+              = text_field :location_city, '', class: 'location-input'
           = render :partial => "filters", :locals => { show_price_filter: show_price_filter, show_custom_fields: @show_custom_fields, filters: filters }
-        
-
-    .col-3
+          .one-session.filter-data-item
+            .custom-filter-title One-session Class
+            = label_tag :switcher, class: 'switch' do
+              = check_box_tag :switcher, nil, false
+              %span.slider.round
 
 
     .home-toolbar-button-group{:class => listing_shape_menu_enabled || @category_menu_enabled ? "filters-enabled" : ""}
@@ -177,7 +187,7 @@
         -#   #filters
         -#     = render :partial => "filters", :locals => { show_price_filter: show_price_filter, show_custom_fields: @show_custom_fields, filters: filters }
 
-  .row
+  -# .row
     -# - if @category_menu_enabled
     -#   .col-3.visible-tablet
     -#     - if @show_categories
@@ -198,6 +208,7 @@
     
   .row
     %div{:class => 'col-9 listings-main-container'}
+      %h3.search-title Search Results
       - if @listings.total_entries > 0
         - if @view_type.eql?("map")
           .home-map.map-mobile
