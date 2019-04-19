@@ -30,7 +30,7 @@
 }
 
 .listings-main-container,
-.more-options-holder .filter-data {
+.filter-data {
   width: 100%;
   @media (min-width: 1125px) {
     width: 67%;
@@ -151,7 +151,6 @@
     opacity: 0;
   }
   .label {
-    max-width: 169px;
     box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.17);
   }
 }
@@ -287,21 +286,16 @@
 }
 
 .filter-title {
-  font-size: 26px;
+  font-size: 30px;
   font-weight: bold;
   text-transform: capitalize;
   margin-bottom: 30px;
 }
 
 .filter-title-btn {
-  max-width: 169px;
   text-align: center;
   font-size: 13px;
   cursor: pointer;
-}
-
-.filter-data {
-  padding: 70px 20px 50px 0;
 }
 
 .dropdown-btn {
@@ -325,7 +319,7 @@
 .custom-filter-title {
   text-align: left;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 20px;
   border-bottom: none;
   font-family: 'Sintony', sans-serif;
   margin-bottom: 10px;
@@ -340,6 +334,8 @@
 .location-item {
   display: flex;
   align-items: center;
+  font-size: 14px;
+  font-family: 'Sintony', sans-serif;
 }
 
 input[type="text"].distance-input,
@@ -360,11 +356,11 @@ input[type="text"].location-input {
 }
 
 .filter-data-item {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .custom-filter-checkbox-container {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .one-session {
@@ -376,23 +372,16 @@ input[type="text"].location-input {
   }
 }
 
-.filter-dropdown {
-  display: none;
-}
-
 .filter-btns-holder {
-  display: flex;
-  align-items: flex-start;
   margin: 15px 0;
+  position: relative;
 }
 
 .price-range-holder, 
 .more-options-holder,
 .schedule-holder,
 .book-immediately {
-  flex-shrink: 0;
-  min-width: 169px;
-  margin-right: 35px;
+  position: relative;
 }
 
 .more-options-holder {
@@ -410,4 +399,31 @@ input[type="text"].location-input {
 
 .custom-map-desktop {
   height: 100%;
+}
+
+.action-btn {
+  margin: 0.75em 0;
+  display: inline-block;
+}
+
+.filter-dropdown {
+  display: none;
+  position: absolute;
+}
+
+.schedule-data,
+.price-data {
+  top: 37px;
+  left: 0;
+  z-index: 10;
+}
+
+.filter-data {
+  display: block;
+  padding: 70px 20px 50px 0;
+  position: absolute;
+  top: 52px;
+  left: 0;
+  z-index: 10;
+  background-color: #fff;
 }

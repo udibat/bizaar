@@ -277,8 +277,9 @@ img {
   input[type="checkbox"] + span {
     padding-left: 18px;
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     &::before {
+      font-family: 'Sintony', sans-serif;
       position: absolute;
       content: '';
       width: 15px;

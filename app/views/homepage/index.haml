@@ -61,13 +61,13 @@
     -#   .home-toolbar-show-filters-button-container
     -#     .home-toolbar-show-filters-button#home-toolbar-show-filters
     -#       = t(".filter")
-
-    = render partial: "custom_search"
-    .filter-btns-holder
-      .book-immediately.checkbox-item.no-pseudo
+    .search-holder
+      = render partial: "custom_search"
+    .filter-btns-holder.row
+      .col-2.book-immediately.checkbox-item.no-pseudo
         = check_box_tag :book_immed, nil, false, class: 'input'
         = label_tag :book_immed, 'Book Immediately', class: 'btn btn--green-transp label'
-      .schedule-holder
+      .col-2.schedule-holder
         .schedule-btn.dropdown-btn.filter-title-btn
           .btn.btn--green-transp Schedule - Any
         .schedule-data.filter-dropdown
@@ -107,30 +107,30 @@
           .another-option-block
             = button_tag '+ Add another option', type: 'button', class: 'another-btn'
 
-      .price-range-holder
+      .col-2.price-range-holder
         .dropdown-btn.filter-title-btn
           .btn.btn--green-transp Price Range - Any
         .price-data.filter-dropdown
           = render :partial => "price_filter"
 
-      .more-options-holder
+      .col-2.more-options-holder
         .filter-title-btn
           .btn.btn--green More Options
-        .filter-data.filter-dropdown
-          %h3.filter-title More options
-          .location-holder.filter-data-item
-            .custom-filter-title Location
-            .location-item
-              Whithin 
-              = text_field :distance_from, '', class: 'distance-input'
-              km of
-              = text_field :location_city, '', class: 'location-input'
-          = render :partial => "filters", :locals => { show_price_filter: show_price_filter, show_custom_fields: @show_custom_fields, filters: filters }
-          .one-session.filter-data-item
-            .custom-filter-title One-session Class
-            = label_tag :switcher, class: 'switch' do
-              = check_box_tag :switcher, nil, false
-              %span.slider.round
+      .filter-data.filter-dropdown
+        %h3.filter-title More options
+        .location-holder.filter-data-item
+          .custom-filter-title Location
+          .location-item
+            Whithin 
+            = text_field :distance_from, '', class: 'distance-input'
+            km of
+            = text_field :location_city, '', class: 'location-input'
+        = render :partial => "filters", :locals => { show_price_filter: show_price_filter, show_custom_fields: @show_custom_fields, filters: filters }
+        .one-session.filter-data-item
+          .custom-filter-title One-session Class
+          = label_tag :switcher, class: 'switch' do
+            = check_box_tag :switcher, nil, false
+            %span.slider.round
 
 
     .home-toolbar-button-group{:class => listing_shape_menu_enabled || @category_menu_enabled ? "filters-enabled" : ""}
