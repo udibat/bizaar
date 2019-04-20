@@ -2,10 +2,18 @@
 
 .homepage_index {
   .page-content {
+    padding: 0;
     .wrapper {
       max-width: 100%;
-      padding-left: 45px;
-      padding-right: 45px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .wrapper-inner {
+    padding-left: 45px;
+    padding-right: 45px;
+    .row {
+      margin-bottom: 0;
     }
   }
 }
@@ -29,14 +37,23 @@
   }
 }
 
-.listings-main-container,
-.filter-data {
+.listings-main-container {
   width: 100%;
   @media (min-width: 1125px) {
     width: 67%;
   }
   @media (min-width: 1441px) {
     width: 75%;
+  }
+}
+
+.filter-data {
+  width: 100%;
+  @media (min-width: 1125px) {
+    width: calc(67% + 45px);
+  }
+  @media (min-width: 1441px) {
+    width: calc(75% + 45px);
   }
 }
 
@@ -132,6 +149,9 @@
 }
 
 .home-toolbar {
+  padding: 60px 0 5px;
+  background-color: #f4f6f3;
+  box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.17);
   .home-search {
     justify-content: flex-start;
     max-width: 67%;
@@ -292,10 +312,12 @@
   margin-bottom: 30px;
 }
 
-.filter-title-btn {
+.filter-title-btn,
+.more-options-btn {
   text-align: center;
   font-size: 13px;
   cursor: pointer;
+  position: relative;
 }
 
 .dropdown-btn {
@@ -384,8 +406,29 @@ input[type="text"].location-input {
   position: relative;
 }
 
+.price-range-holder, 
+.schedule-holder {
+  &.active {
+    .filter-title-btn {
+      z-index: 10;
+      background-color: #fff;
+    }
+    .filter-dropdown {
+      display: block;
+    }
+  }
+}
+
 .more-options-holder {
   margin-right: 0;
+  &.active {
+    .filter-title-btn {
+      z-index: 10;
+    }
+    & + .filter-dropdown {
+      display: block;
+    }
+  }
 }
 
 .home-toolbar {
@@ -399,7 +442,28 @@ input[type="text"].location-input {
 
 .custom-map-desktop {
   height: 100%;
+  .home-map {
+    height: 100%;
+    & > .map {
+      height: 100vh;
+    }
+    &.absolute {
+      position: absolute;
+      top: auto;
+      bottom: 23vh;
+    }
+    &.fixed {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 45px;
+      height: 100%;
+      width: calc(33% - 2.6em);
+    }
+  }
 }
+
+
 
 .action-btn {
   margin: 0.75em 0;
@@ -414,15 +478,31 @@ input[type="text"].location-input {
 .schedule-data,
 .price-data {
   top: 37px;
-  left: 0;
+  left: 0.75em;
   z-index: 10;
 }
 
 .filter-data {
-  padding: 70px 20px 50px 0;
+  padding: 70px 20px 50px 20px;
   position: absolute;
   top: 52px;
-  left: 0;
+  left: -45px;
   z-index: 10;
   background-color: #fff;
+}
+
+.search-result-container {
+  position: relative;
+  &.opened {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(#171717, 0.2);
+      z-index: 9;
+    }
+  }
 }
