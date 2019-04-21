@@ -29,3 +29,33 @@ $(document).ready(function() {
 
 });
 
+$(window).on('scroll', function() {
+  (function () {
+    var homeMap = $('#home-map');
+
+    function isInViewport (el) {
+      var elementTop = $(el).offset().top;
+      var elementBottom = elementTop + $(el).outerHeight();
+
+      var viewportTop = $(window).scrollTop();
+      var viewportBottom = viewportTop + $(window).height();
+
+      return elementBottom > viewportTop && elementTop < viewportBottom;
+    };
+
+    if (homeMap.length) {
+      var offsetTopMap = $('.custom-map-desktop').offset().top;
+      var scrollTopWindow = $(this).scrollTop();
+
+      if (scrollTopWindow >= offsetTopMap) {
+        homeMap.addClass('fixed');
+      } else {
+        homeMap.removeClass('fixed');
+      }
+
+      if (isInViewport('.custom-footer')) {
+        homeMap.removeClass('fixed');
+      }
+    }
+  })();
+});
