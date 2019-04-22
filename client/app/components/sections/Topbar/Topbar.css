@@ -10,6 +10,7 @@
   border-bottom: 1px solid var(--Topbar_borderColor);
   font-size: var(--Topbar_fontSize);
   font-family: var(--Topbar_fontFamily);
+  position: relative;
 
   @media (--medium-viewport) {
     height: var(--Topbar_tabletHeight);
@@ -18,7 +19,7 @@
 
   @media (--large-viewport) {
     /*height: var(--Topbar_height);*/
-    height: 92px;
+    height: 58px;
     padding: var(--Topbar_padding);
   }
 
@@ -64,6 +65,12 @@
   & .topbarLogo {
     max-height: var(--Topbar_logoMaxHeightMobile);
     max-width: 70%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 20;
+    margin-right: 0;
 
     & span {
       @media (max-width: 320px) {
@@ -82,7 +89,8 @@
       /*max-height: var(--Topbar_logoMaxHeight);*/
       /*max-width: 18em;*/
       max-height: 100%;
-      height: 118px;
+      min-height: 74px;
+      width: 233px;
     }
   }
 
@@ -154,7 +162,8 @@
 
     @media (--large-viewport) {
       width: var(--Topbar_avatarSize);
-      padding: var(--Topbar_avatarPadding);
+      /*padding: var(--Topbar_avatarPadding);*/
+      padding: 6.5px 0;
     }
   }
 
