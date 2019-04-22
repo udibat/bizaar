@@ -2,13 +2,14 @@ class ListingPresenter < MemoisticPresenter
   include ListingAvailabilityManage
   include Rails.application.routes.url_helpers
   attr_accessor :listing, :current_community, :form_path, :params, :current_image, :prev_image_id, :next_image_id
-  attr_reader :shape, :current_user
+  attr_reader :shape, :current_user, :testimonials
 
   def initialize(listing, current_community, params, current_user)
     @listing = listing
     @current_community = current_community
     @current_user = current_user
     @params = params
+    @testimonials = listing.testimonials.order(created_at: :desc)
     set_current_image
   end
 

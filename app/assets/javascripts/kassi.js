@@ -509,6 +509,7 @@ function initialize_profile_view(profile_id) {
     var request_path = $(this).data().url;
     $.get(request_path, function(data) {
       $('#profile-listings-list').html(data);
+      display_rating($('#profile-listings-list'));
     });
     return false;
   });
@@ -523,6 +524,7 @@ function initialize_profile_view(profile_id) {
     request_path = profile_id + "/testimonials";
     $.get(request_path, {per_page: 200, page: 1}, function(data) {
       $('#profile-testimonials-list').html(data);
+      display_rating($('#profile-testimonials-list'));
     });
     return false;
   });

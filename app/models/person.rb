@@ -45,6 +45,7 @@
 #  google_oauth2_id                   :string(255)
 #  linkedin_id                        :string(255)
 #  mark                               :integer
+#  rating_cache                       :string(255)      default({:count=>0, :avg=>0})
 #
 # Indexes
 #
@@ -129,6 +130,7 @@ class Person < ApplicationRecord
   has_one :stripe_account
   has_one :paypal_account
   has_many :starter_transactions, :class_name => "Transaction", :foreign_key => "starter_id"
+  serialize :rating_cache, Hash
 
   deprecate communities: "Use accepted_community instead.",
             community_memberships: "Use community_membership instead.",
@@ -265,6 +267,14 @@ class Person < ApplicationRecord
         email.update_attribute(:send_notifications, email_ids.include?(email.id.to_s))
       end
     end
+  end
+
+  def reset_rating_cache!
+    cache = {
+      avg: received_testimonials.average(:grade).to_f.round(2).to_f.round(2),
+      count: received_testimonials.count,
+    }
+    self.update_column(:rating_cache, cache)
   end
 
   def last_community_updates_at
