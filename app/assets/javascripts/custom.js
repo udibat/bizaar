@@ -27,6 +27,13 @@ $(document).ready(function() {
     }
   });
 
+    $('.change_mark').on('change', function(){
+        var url = $(this).data('url'),
+            member_id = $(this).data('member-id'),
+            value = $(this).val();
+        $.post(url, {mark: value, person_id: member_id});
+    });
+
 });
 
 $(window).on('scroll', function() {
