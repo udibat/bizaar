@@ -56,7 +56,7 @@
             .container
               #output.output
                 = yield :title_header
-              = render partial: 'custom_search'
+              = render partial: 'custom_home_search'
         - elsif !(is_homepage && FeatureFlagHelper.feature_enabled?(:topbar_v1))
           .coverimage
             %figure.marketplace-cover-small.fluidratio

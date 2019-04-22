@@ -11,7 +11,7 @@
             = image_tag(listing.author.avatar.thumb || missing_avatar(:thumb), :class => "home-fluid-thumbnail-grid-author-avatar-image")
           .competitor.small-block
             .image-block
-              = image_tag 'homepage/medal.png'
+              = image_tag 'homepage/medal.png', class: 'image'
             .text Competitor
         -# - distance = Maybe(listing.distance).or_else(nil)
         -# - name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type)
@@ -29,7 +29,7 @@
         .listing-details
           .certified.small-block
             .image-block
-              = image_tag 'homepage/certificate.png'
+              = image_tag 'homepage/certificate.png', class: 'image'
             .text
               Certified Instructor
           .fluid-thumbnail-grid-image-title{:class => ""}

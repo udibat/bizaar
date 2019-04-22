@@ -13,18 +13,15 @@
       = image_tag first_image_url, {:alt => listed_listing_title(listing), :class => "#{modifier_class} fluid-thumbnail-grid-image-image"}
 
     .fluid-thumbnail-grid-image-overlay{:class => "#{modifier_class}"}
-    -# .fluid-thumbnail-grid-image-title{:class => "#{modifier_class}"}
-    -#   = listing.title
-
-    -# .fluid-thumbnail-grid-image-price-container{:class => "#{modifier_class}"}
-    -#   - if listing.price
-    -#     %span.fluid-thumbnail-grid-image-price
-    -#       = MoneyViewUtils.to_humanized(listing.price)
-    -#       - price_unit = price_quantity_slash_unit(listing)
-    -#     - if !price_unit.blank?
-    -#       - price_text = " " + price_unit
-    -#       %span.fluid-thumbnail-grid-image-quantity{:title => price_text}
-    -#         = price_text
-    -#   - else
-    -#     %span.fluid-thumbnail-grid-image-type{:class => "#{modifier_class}"}
-    -#       = shape_name(listing)
+    .fluid-thumbnail-grid-listing-info{:class => "#{modifier_class}"}
+      %span.text lvl: Beginner, adept
+    .fluid-thumbnail-grid-listing-schedule{:class => "#{modifier_class}"}
+      %h4.title Pay as You Go Class
+      .schedule-list
+        .schedule-item
+          %span.text Fridays
+          %span.text 6pm - 7:30pm
+        .schedule-item
+          %span.text Saturdays
+          %span.text 2pm - 3pm
+      = link_to 'Book immediately', '#', class: 'btn btn--violet action-btn'
