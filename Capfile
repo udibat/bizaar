@@ -27,6 +27,7 @@ require "capistrano/rails/assets"
 require "capistrano/rails/migrations"
 require 'capistrano/npm'
 require 'whenever/capistrano'
+require 'capistrano/rocket_chat'
 # require "capistrano/passenger"
 
 # Load custom tasks from  if you have any defined

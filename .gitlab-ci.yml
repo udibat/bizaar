@@ -1,0 +1,11 @@
+deploy_staging:
+  type: deploy
+  environment:
+    name: staging
+    url: xiplaw.roobykon.com
+  tags:
+    - bizaar-ssh
+  script:
+    - bundle install && cap staging deploy && exit
+  only:
+    - staging

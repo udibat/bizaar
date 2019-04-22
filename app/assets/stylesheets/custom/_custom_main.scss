@@ -184,18 +184,22 @@ img {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  .button--left {
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .btn--left {
     margin-right: 0;
   }
-  .button--right {
+  .btn--right {
     margin-left: 0;
   }
   @include media(small-tablet) {
     flex-wrap: nowrap;
-    .button--left {
+    .btn--left {
       margin-right: 15px;
     }
-    .button--right {
+    .btn--right {
       margin-left: 15px;
     }
   }
