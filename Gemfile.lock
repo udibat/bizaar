@@ -122,6 +122,9 @@ GEM
     capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano-rocket-chat (0.1.0)
+      capistrano (>= 3.1)
+      httparty
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
@@ -271,6 +274,9 @@ GEM
     htmlentities (4.3.4)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httparty (0.17.0)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
     i18n (0.8.6)
     i18n-js (3.0.0)
       i18n (~> 0.6, >= 0.6.6)
@@ -637,6 +643,7 @@ DEPENDENCIES
   capistrano-bundler (~> 1.3)
   capistrano-npm
   capistrano-rails (~> 1.3)
+  capistrano-rocket-chat
   capistrano-rvm
   capybara (~> 2.18.0)
   coffee-rails (~> 4.2.2)

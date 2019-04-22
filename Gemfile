@@ -185,3 +185,5 @@ group :development do
   gem 'capistrano-npm'
   gem 'whenever'
 end
+
+gem 'capistrano-rocket-chat'
