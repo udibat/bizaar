@@ -1,49 +1,52 @@
-= link_to(listing_path(listing), :class => "fluid-thumbnail-grid-image-item-link") do
-  .fluid-thumbnail-grid-image-image-container
-    - with_first_listing_image(listing) do |first_image_url|
-      = image_tag first_image_url, {:alt => listed_listing_title(listing), :class => "fluid-thumbnail-grid-image-image"}
+.home-fluid-thumbnail-grid-item
+  %div
+    = link_to(listing_path(listing), :class => "fluid-thumbnail-grid-image-item-link") do
+      .fluid-thumbnail-grid-image-image-container
+        - with_first_listing_image(listing) do |first_image_url|
+          = image_tag first_image_url, {:alt => listed_listing_title(listing), :class => "fluid-thumbnail-grid-image-image"}
 
-.home-fluid-thumbnail-grid-author
-  .home-fluid-thumbnail-grid-author-avatar
-    = link_to(person_path(username: listing.author.username), class: 'author-avatar-link') do
-      = image_tag(listing.author.image(:thumb) || missing_avatar(:thumb), :class => "home-fluid-thumbnail-grid-author-avatar-image")
-    .competitor.small-block
-      .image-block
-        = image_tag 'homepage/medal.png'
-
-  .listing-details
-    .certified.small-block
-      .image-block
-        = image_tag 'homepage/certificate.png'
-      .text
-        Certified Instructor
-    .fluid-thumbnail-grid-image-title{:class => ""}
-      = listing.title
-    .author-item.author-item--price
-      .fluid-thumbnail-grid-image-price-container{:class => ""}
-        - if listing.price
-          %span.fluid-thumbnail-grid-image-price
-            From
-            = MoneyViewUtils.to_humanized(listing.price)
-            - price_unit = price_quantity_slash_unit(listing)
-          - if !price_unit.blank?
-            - price_text = " "
-            %span.fluid-thumbnail-grid-image-quantity{:title => price_text}
-              = price_text
-              a class
-        -# - else
-        -#   %span.fluid-thumbnail-grid-image-type{:class => ""}
-        -#     = shape_name(listing)
-      .name
-        - name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type)
-        = link_to(person_path(username: listing.author.username), :class => "home-fluid-thumbnail-grid-author-name", title: name) do
-          = name
-    .author-item
-      .rating
-        .icon-star
-        .icon-star
-        .icon-star
-        .icon-star
-        .icon-star-empty
-      .reviews
-        = link_to '5 reviews', '#', class: 'reviews-link'
+    .home-fluid-thumbnail-grid-author
+      .home-fluid-thumbnail-grid-author-avatar
+        = link_to(person_path(username: listing.author.username), class: 'author-avatar-link') do
+          = image_tag(listing.author.image(:thumb) || missing_avatar(:thumb), :class => "home-fluid-thumbnail-grid-author-avatar-image")
+        .competitor.small-block
+          .image-block
+            = image_tag 'homepage/medal.png', class: 'image'
+          .text Competitor
+      .listing-details
+        .certified.small-block
+          .image-block
+            = image_tag 'homepage/certificate.png', class: 'image'
+          .text
+            Certified Instructor
+        .fluid-thumbnail-grid-image-title{:class => ""}
+          = listing.title
+        .author-item.author-item--price
+          .fluid-thumbnail-grid-image-price-container{:class => ""}
+            - if listing.price
+              %span.fluid-thumbnail-grid-image-price
+                From
+                = MoneyViewUtils.to_humanized(listing.price)
+                - price_unit = price_quantity_slash_unit(listing)
+              - if !price_unit.blank?
+                - price_text = " "
+                %span.fluid-thumbnail-grid-image-quantity{:title => price_text}
+                  = price_text
+                  a class
+            -# - else
+            -#   %span.fluid-thumbnail-grid-image-type{:class => ""}
+            -#     = shape_name(listing)
+          .name
+            - name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type)
+            = link_to(person_path(username: listing.author.username), :class => "name-link", title: name) do
+              With
+              = name
+        .author-item
+          .rating
+            .icon-star
+            .icon-star
+            .icon-star
+            .icon-star
+            .icon-star-empty
+          .reviews
+            = link_to '5 reviews', '#', class: 'reviews-link'
