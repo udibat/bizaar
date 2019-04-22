@@ -240,8 +240,23 @@ class Topbar extends Component {
 
     return div({ className: classNames('Topbar', css.topbar) }, [
       hasMenuProps ? r(MenuMobile, { ...mobileMenuProps, className: css.topbarMobileMenu }) : null,
+      div({ className: css.topbarMenuSpacer }, hasMenuProps ?
+        r(MenuPriority, menuProps) :
+        null),
       r(Logo, { ...this.props.logo, className: classNames(css.topbarLogo, textLogo), color: marketplaceColor1 }),
       div({ className: css.topbarMediumSpacer }),
+      this.props.avatarDropdown && loggedInUsername ?
+        r(AvatarDropdown, {
+          ...avatarDropdownProps(this.props.avatarDropdown, marketplaceColor1,
+                                 loggedInUsername, isAdmin, this.props.unReadMessagesCount, this.props.routes),
+          classSet: css.topbarAvatarDropdown,
+        }) :
+        r(LoginLinks, {
+          loginUrl: loginRoute,
+          signupUrl: signupRoute,
+          customColor: marketplaceColor1,
+          className: css.topbarLinks,
+        }),
       this.props.search ?
         r(SearchBar, {
           mode: this.props.search.mode,
@@ -264,26 +279,11 @@ class Topbar extends Component {
           },
         }) :
         div({ className: css.topbarMobileSearchPlaceholder }),
-      div({ className: css.topbarMenuSpacer }, hasMenuProps ?
-        r(MenuPriority, menuProps) :
-        null),
       hasMultipleLanguages ? r(Menu, {
         ...languageMenuProps,
         className: {
           [css.topbarMenu]: true,
         } }) : null,
-      this.props.avatarDropdown && loggedInUsername ?
-        r(AvatarDropdown, {
-          ...avatarDropdownProps(this.props.avatarDropdown, marketplaceColor1,
-                                 loggedInUsername, isAdmin, this.props.unReadMessagesCount, this.props.routes),
-          classSet: css.topbarAvatarDropdown,
-        }) :
-        r(LoginLinks, {
-          loginUrl: loginRoute,
-          signupUrl: signupRoute,
-          customColor: marketplaceColor1,
-          className: css.topbarLinks,
-        }),
       this.props.newListingButton ?
         r(AddNewListingButton, {
           ...this.props.newListingButton,

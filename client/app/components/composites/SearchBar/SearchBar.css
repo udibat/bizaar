@@ -39,7 +39,7 @@
     display: flex;
   }
 
-  @media (--large-viewport) {
+  /*@media (--large-viewport) {
     display: inline-flex;
     position: relative;
     height: var(--SearchBar_height);
@@ -51,7 +51,7 @@
 
   @media (--search-desktop-wide) {
     width: var(--SearchBar_width);
-  }
+  }*/
 
   &:hover .focusContainer::before {
     border-color: var(--SearchBar_borderColorActive);
@@ -79,10 +79,10 @@
   z-index: var(--SearchBar_focusContainerZIndex); /* Required to allow mouse event to the inputs/buttons. */
   transition: border-color 0.1s ease-in;
 
-  @media (--large-viewport) {
+  /*@media (--large-viewport) {
     display: block;
     border-radius: calc(var(--SearchBar_height) / 2);
-  }
+  }*/
 }
 
 .keywordInput,
@@ -341,9 +341,9 @@
     margin-top: var(--SearchBar_iconTopMarginFix);
   }
 
-  @media (--large-viewport) {
+  /*@media (--large-viewport) {
     display: none;
-  }
+  }*/
 }
 
 /* CSS triangle pointing to the search toggle icon */

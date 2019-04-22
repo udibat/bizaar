@@ -101,4 +101,5 @@
 //= require analytics
 //= require social-insurance-number
 //= require typewriter
+//= require custom
 //= require_self
