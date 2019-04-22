@@ -54,7 +54,9 @@ $(window).on('scroll', function() {
       }
 
       if (isInViewport('.custom-footer')) {
-        homeMap.removeClass('fixed');
+        homeMap.removeClass('fixed').addClass('absolute');
+      } else {
+        homeMap.removeClass('absolute');
       }
     }
   })();

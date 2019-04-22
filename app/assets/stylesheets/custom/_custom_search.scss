@@ -450,7 +450,12 @@ input[type="text"].location-input {
     &.absolute {
       position: absolute;
       top: auto;
-      bottom: 23vh;
+      bottom: 0;
+      right: 45px;
+      width: calc(33% - 2.6em);
+      > .map {
+        height: 100%;
+      }
     }
     &.fixed {
       position: fixed;
