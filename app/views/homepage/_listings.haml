@@ -13,13 +13,13 @@
         - if listing.author.competitor?
           .competitor.small-block
             .image-block
-              = image_tag 'homepage/medal.png'
+              = image_tag 'homepage/medal.png', class: 'image'
             .text
               Competitor
         - elsif listing.author.certified_instructor?
           .certified.small-block
             .image-block
-              = image_tag 'homepage/certificate.png'
+              = image_tag 'homepage/certificate.png', class: 'image'
             .text
               Certified Instructor
         .fluid-thumbnail-grid-image-title{:class => ""}

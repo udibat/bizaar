@@ -1,1 +1,6 @@
-Become-a-tutor page
+- content_for :title_header do
+  - is_homepage = params[:controller] == "homepage" && params[:action] == "index"
+  - hidden_slogan = !@current_community.show_slogan? ? "hidden-title-part" : ""
+  - hidden_description = !@current_community.show_description? ? "hidden-title-part" : ""
+  %h1.marketplace-lander-content-title.cursor Put Your Skills to Use
+  %p.marketplace-lander-content-description Earn money with your passions, skills and talents by joining our community.

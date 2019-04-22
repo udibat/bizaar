@@ -73,27 +73,29 @@ body {
 
 // Typewriter
 
-.cursor::after {
-  content:'';
-  display:inline-block;
-  margin-left:3px;
-  background-color:white;
-  animation-name:blink;
-  animation-duration:0.5s;
-  animation-iteration-count: infinite;
-}
-
-h1.cursor::after {
-  height: 33px;
-  width: 13px;
-  @include media(mid-desktop) {
-    height: 51px;
+.output {
+  .cursor::after {
+    content:'';
+    display:inline-block;
+    margin-left:3px;
+    background-color:white;
+    animation-name:blink;
+    animation-duration:0.5s;
+    animation-iteration-count: infinite;
   }
-}
 
-p.cursor::after {
-  height: 16px;
-  width: 6px;
+  h1.cursor::after {
+    height: 33px;
+    width: 13px;
+    @include media(mid-desktop) {
+      height: 51px;
+    }
+  }
+
+  p.cursor::after {
+    height: 16px;
+    width: 6px;
+  }
 }
 
 @keyframes blink {

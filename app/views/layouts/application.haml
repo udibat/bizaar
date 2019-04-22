@@ -9,6 +9,7 @@
 
     - is_homepage = params[:controller] == "homepage" && params[:action] == "index"
     - is_home = params[:controller] == "homepage" && params[:action] == "homepage"
+    - is_become_a_tutor = params[:controller] == "homepage" && params[:action] == "become_a_tutor"
     %noscript
       .noscript-padding
         -# Noscript content will be positioned here
@@ -57,6 +58,12 @@
               #output.output
                 = yield :title_header
               = render partial: 'custom_home_search'
+        - elsif is_become_a_tutor
+          .banner
+            .container
+              = yield :title_header
+              = yield :description
+              = render partial: 'become_instructor'
         - elsif !(is_homepage && FeatureFlagHelper.feature_enabled?(:topbar_v1))
           .coverimage
             %figure.marketplace-cover-small.fluidratio
