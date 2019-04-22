@@ -9,10 +9,17 @@
         .home-fluid-thumbnail-grid-author-avatar
           = link_to(person_path(username: listing.author.username), class: 'author-avatar-link') do
             = image_tag(listing.author.avatar.thumb || missing_avatar(:thumb), :class => "home-fluid-thumbnail-grid-author-avatar-image")
-          .competitor.small-block
-            .image-block
-              = image_tag 'homepage/medal.png', class: 'image'
-            .text Competitor
+
+          - if listing.author.mark == 'competitor'
+            .competitor.small-block
+              .image-block
+                = image_tag 'homepage/medal.png', class: 'image'
+              .text Competitor
+          - elsif listing.author.mark == 'certified_instructor'
+            .certified.small-block
+              .image-block
+                = image_tag 'homepage/certificate.png', class: 'image'
+              .text Certified Instructor
         -# - distance = Maybe(listing.distance).or_else(nil)
         -# - name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type)
         -# - if(!show_distance || distance.blank?)
@@ -27,11 +34,6 @@
         -#     .home-fluid-thumbnail-grid-details-distance{title: dist_string}
         -#       = dist_string
         .listing-details
-          .certified.small-block
-            .image-block
-              = image_tag 'homepage/certificate.png', class: 'image'
-            .text
-              Certified Instructor
           .fluid-thumbnail-grid-image-title{:class => ""}
             = listing.title
           .author-item.author-item--price

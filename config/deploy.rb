@@ -21,6 +21,8 @@ set :keep_releases, 3
 set :format, :pretty
 set :pty, true
 
+set :rocket_chat_webhook_url, "https://rocketchat.roobykon.net/hooks/h9J7FabELEsxWKiob/wG7W7PuWNgFYNHrYN7Tqc36N5jNpsgf3sddz7cdNwqYeQtBR"
+
 namespace :deploy do
   after :publishing, :app_restart
   desc 'restart application'

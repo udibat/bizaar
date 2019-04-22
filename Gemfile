@@ -177,11 +177,11 @@ gem 'rubyzip', '~> 1.2.2'
 gem 'daemons'
 gem 'puma'
 
-group :development do
-  gem 'capistrano', '~> 3.6'
-  gem 'capistrano-rvm' 
-  gem 'capistrano-bundler', '~> 1.3'
-  gem 'capistrano-rails', '~> 1.3'
-  gem 'capistrano-npm'
-  gem 'whenever'
-end
+gem 'capistrano', '~> 3.6'
+gem 'capistrano-rvm' 
+gem 'capistrano-bundler', '~> 1.3'
+gem 'capistrano-rails', '~> 1.3'
+gem 'capistrano-npm'
+gem 'whenever'
+
+gem 'capistrano-rocket-chat'

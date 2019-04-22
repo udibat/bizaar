@@ -24,6 +24,12 @@ class Admin::CommunityMembershipsController < Admin::AdminBaseController
     end
   end
 
+  def person_mark
+    person = Person.find_by(id: params[:person_id])
+    person.update(mark: params[:mark].presence)
+    render body: nil, status: 200
+  end
+
   def ban
     if @service.membership_current_user?
       flash[:error] = t("admin.communities.manage_members.ban_me_error")
