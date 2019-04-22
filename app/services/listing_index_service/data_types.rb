@@ -50,7 +50,8 @@ module ListingIndexService::DataTypes
     [:display_name, :string, :optional],
     [:avatar, entity: AvatarImage],
     [:is_deleted, :bool, default: false],
-    [:num_of_reviews, :fixnum, default: 0]
+    [:num_of_reviews, :fixnum, default: 0],
+    [:mark, :string, :optional]
   )
 
   Listing = EntityUtils.define_builder(

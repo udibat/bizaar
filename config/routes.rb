@@ -306,6 +306,7 @@ Rails.application.routes.draw do
           collection do
             post :promote_admin
             post :posting_allowed
+            post :person_mark
           end
         end
         resource :paypal_preferences, only: :index do
