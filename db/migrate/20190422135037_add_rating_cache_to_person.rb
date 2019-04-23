@@ -1,13 +1,13 @@
 class AddRatingCacheToPerson < ActiveRecord::Migration[5.1]
   def up
     blank = { count: 0, avg: 0 }.to_yaml
-    add_column :people, :rating_cache, :string, default: blank
-    Person.find_each do |person|
-      person.reset_rating_cache!
+    add_column :listings, :rating_cache, :string, default: blank
+    Listing.find_each do |listing|
+      listing.reset_rating_cache!
     end
   end
 
   def down
-    remove_column :people, :rating_cache
+    remove_column :listings, :rating_cache
   end
 end
