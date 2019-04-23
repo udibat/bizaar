@@ -109,7 +109,47 @@
 }
 
 .instruction-title {
-  font-size: 45px;
-  font-weight: 900;
   margin-bottom: 30px;
+}
+
+.title-holder {
+  margin-bottom: 30px;
+}
+
+.be-your-boss {
+  padding: 100px 0 25px;
+  background-image: url(image-path('homepage/become-a-tutor-banner4.jpg'));
+  @include background-position;
+  .list-item {
+    margin: 45px 0;
+  }
+  .text {
+    font-size: 14px;
+    font-family: 'Sintony', sans-serif;
+    line-height: 20px;
+  }
+}
+
+.icons-block {
+  font-size: 36px;
+  margin-bottom: 25px;
+}
+
+.image.shield {
+  height: 37px;
+}
+
+.share-passion {
+  padding: 85px 0 75px;
+  @include background-position;
+  background-image: url(image-path('homepage/become-a-tutor-banner2'));
+  .text, .section-title-big, .section-subtitle {
+    color: #fff;
+  }
+  .text {
+    float: right;
+    max-width: 600px;
+    font-size: 14px;
+    font-family: 'Sintony', sans-serif;
+  }
 }

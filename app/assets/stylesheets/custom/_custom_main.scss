@@ -1,11 +1,12 @@
 @import 'mixins/all';
 
-h1, h2, h3, h4, h5, h6, p, span {
+h1, h2, h3, h4, h5, h6, p, span, div {
   color: $cust-text;
 }
 
 body {
-  &.homepage_homepage {
+  &.homepage_homepage,
+  &.homepage_become_a_tutor {
     color: $cust-text;
     .page-content {
       .wrapper {
@@ -40,11 +41,35 @@ body {
   @include media(mid-desktop) {
     padding: 0;
   }
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
 }
 
 .section-title {
   font-size: 32px;
   font-weight: bold;
+}
+
+.section-title-big {
+  font-size: 45px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.small-title {
+  font-size: 21px;
+  font-weight: 900;
+  margin-bottom: 24px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Sintony', sans-serif;
 }
 
 .input-icon-holder {
@@ -395,3 +420,6 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.text-right {
+  text-align: right;
+}
