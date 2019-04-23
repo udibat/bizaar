@@ -240,8 +240,11 @@
     margin-bottom: 10px;
     span {
       color: $cust-text;
-      margin-left: -9px;
     }
+  }
+  .single-btn {
+    font-size: 13px;
+    padding: 6.5px 20px;
   }
 }
 

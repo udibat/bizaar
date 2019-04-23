@@ -57,7 +57,10 @@
     width: 100%;
     margin-bottom: 10px;
   }
-  .link-holder {
+}
+
+.link-holder {
+  &.socials-signup {
     width: 100%;
     .link {
       color: #fff;
@@ -151,5 +154,34 @@
     max-width: 600px;
     font-size: 14px;
     font-family: 'Sintony', sans-serif;
+  }
+}
+
+.ready-to-tutor {
+  padding: 65px 0 45px;
+  @include background-position;
+  background-image: url(image-path('homepage/become-a-tutor-banner3'));
+  .text, .section-title-big, .section-subtitle {
+    color: #fff;
+  }
+  &-inner {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+}
+
+.ready-tutor-btn {
+  color: #fff;
+  background-color: $cust-violet;
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 15px;
+  position: relative;
+  border-bottom: 5px solid $cust-green;
+  &.btn {
+  border-radius: 0 0 5px 5px;
+    
   }
 }
