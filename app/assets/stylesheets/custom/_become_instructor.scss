@@ -1,0 +1,67 @@
+@import 'mixins/all';
+
+.homepage_become_a_tutor {
+  .banner {
+    padding: 85px 70px;
+    height: auto;
+    background-image: url(image-path('homepage/become-a-tutor-banner1.jpg'));
+    .marketplace-lander-content-title {
+      font-size: 55px;
+      max-width: 100%;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+      min-height: 1px;
+    }
+    .marketplace-lander-content-description {
+      font-size: 18px;
+      text-align: center;
+      font-family: 'Sintony', sans-serif;
+      margin-bottom: 40px;
+      min-height: 1px;
+    }
+  }
+}
+
+.become-instructor-form {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  .input[type="text"] {
+    width: 49%;
+    margin-bottom: 25px;
+    box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.17);
+    font-size: 14px;
+    padding: 8px 15px;
+    font-family: 'Sintony', sans-serif;
+    &::-webkit-input-placeholder {
+      color: $cust-violet;
+    }
+    &::-moz-placeholder {
+      color: $cust-violet;
+    }
+    &:-ms-input-placeholder {
+      color: $cust-violet;
+    }
+    &:-moz-placeholder {
+      color: $cust-violet;
+    }
+  }
+  .submit-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .link-holder {
+    width: 100%;
+    .link {
+      color: #fff;
+      text-decoration: underline;
+      margin: 0 7.5%;
+      font-size: 14px;
+      font-family: 'Sintony', sans-serif;
+    }
+  }
+}
