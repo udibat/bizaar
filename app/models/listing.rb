@@ -151,11 +151,12 @@ class Listing < ApplicationRecord
   end
 
   def reset_rating_cache!
-    cache = {
-      avg: testimonials.average(:grade).to_f.round(2).to_f.round(2),
-      count: testimonials.count,
-    }
-    self.update_column(:rating_cache, cache)
+    # cache = {
+    #   avg: author.testimonials.average(:grade).to_f.round(2).to_f.round(2),
+    #   count: author.testimonials.count,
+    # }
+    # self.update_column(:rating_cache, cache)
+    update_column(:rating_cache, author.rating_cache)
   end
 
 
