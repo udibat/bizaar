@@ -54,10 +54,14 @@ body {
 }
 
 .section-title-big {
-  font-size: 45px;
+  font-size: 33px;
   font-weight: 900;
   text-align: center;
   margin-bottom: 10px;
+  line-height: 1.2;
+  @include media(tablet) {
+    font-size: 45px;
+  }
 }
 
 .small-title {
@@ -246,6 +250,24 @@ img {
 .custom-footer {
   background-color: $cust-text;
   padding: 50px 0;
+  position: relative;
+  &::before {
+    content: '';
+    background: rgba(140,204,142,1);
+    background: -moz-linear-gradient(left, rgba(140,204,142,1) 0%, rgba(95,73,158,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(140,204,142,1)), color-stop(100%, rgba(95,73,158,1)));
+    background: -webkit-linear-gradient(left, rgba(140,204,142,1) 0%, rgba(95,73,158,1) 100%);
+    background: -o-linear-gradient(left, rgba(140,204,142,1) 0%, rgba(95,73,158,1) 100%);
+    background: -ms-linear-gradient(left, rgba(140,204,142,1) 0%, rgba(95,73,158,1) 100%);
+    background: linear-gradient(to right, rgba(140,204,142,1) 0%, rgba(95,73,158,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ccc8e', endColorstr='#5f499e', GradientType=1 );
+    width: 100%;
+    height: 5px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
 
 .footer-list {
@@ -430,5 +452,7 @@ input:checked + .slider:before {
 }
 
 .text-right {
-  text-align: right;
+  @include media(tablet) {
+    text-align: right;
+  }
 }

@@ -2,16 +2,23 @@
 
 .homepage_become_a_tutor {
   .banner {
-    padding: 85px 70px;
+    padding: 50px 0;
     height: auto;
     background-image: url(image-path('homepage/become-a-tutor-banner1.jpg'));
+    @include media(tablet) {
+      padding: 85px 0 70px;
+    }
     .marketplace-lander-content-title {
-      font-size: 55px;
+      font-size: 37px;
       max-width: 100%;
       width: 100%;
       text-align: center;
       margin-bottom: 20px;
       min-height: 1px;
+      font-weight: 900;
+      @include media(tablet) {
+        font-size: 55px;
+      }
     }
     .marketplace-lander-content-description {
       font-size: 18px;
@@ -34,7 +41,7 @@
   align-items: center;
   justify-content: space-between;
   .input[type="text"] {
-    width: 49%;
+    width: 100%;
     margin-bottom: 25px;
     box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.17);
     font-size: 14px;
@@ -51,6 +58,9 @@
     }
     &:-moz-placeholder {
       color: $cust-violet;
+    }
+    @include media(small-tablet) {
+      width: 49%;
     }
   }
   .submit-btn {
@@ -78,10 +88,12 @@
 
 .instruction-inner {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   .text-block {
     text-align: center;
-    padding-right: 15px;
     flex-shrink: 0;
+    margin-bottom: 20px;
   }
   .num {
     font-size: 32px;
@@ -91,6 +103,13 @@
     font-size: 14px;
     line-height: 16px;
     margin: 15px 0;
+  }
+  @include media(small-tablet) {
+    flex-wrap: nowrap;
+    .text-block {
+      padding-right: 15px;
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -111,7 +130,7 @@
   }
 }
 
-.instruction-title {
+.section-title-big.instruction-title {
   margin-bottom: 30px;
 }
 
@@ -120,9 +139,12 @@
 }
 
 .be-your-boss {
-  padding: 100px 0 25px;
+  padding: 25px 0;
   background-image: url(image-path('homepage/become-a-tutor-banner4.jpg'));
   @include background-position;
+  @include media(tablet) {
+    padding: 100px 0 25px;
+  }
   .list-item {
     margin: 45px 0;
   }
@@ -130,6 +152,14 @@
     font-size: 14px;
     font-family: 'Sintony', sans-serif;
     line-height: 20px;
+  }
+  .small-title {
+    @include media(tablet) {
+      min-height: 48px;
+    }
+    @include media(desktop) {
+      min-height: 1px;
+    }
   }
 }
 
@@ -150,10 +180,12 @@
     color: #fff;
   }
   .text {
-    float: right;
-    max-width: 600px;
     font-size: 14px;
     font-family: 'Sintony', sans-serif;
+    @include media(tablet) {
+      float: right;
+      max-width: 600px;
+    }
   }
 }
 
@@ -182,6 +214,6 @@
   border-bottom: 5px solid $cust-green;
   &.btn {
   border-radius: 0 0 5px 5px;
-    
+
   }
 }
