@@ -6,9 +6,16 @@ module HomepageHelper
   end
 
   def with_first_listing_image(listing, &block)
-    Maybe(listing)
-      .listing_images
+    Maybe(listing).listing_images
       .map { |images| images.first }[:medium].each { |url|
+      block.call(url)
+    }
+  end
+
+  def with_listing_image(listing, &block)
+    Maybe(listing.listing_images.first).select { |li| li.image_ready? }.map { |li|
+       li.image.url(:medium)
+    }.each { |url|
       block.call(url)
     }
   end
