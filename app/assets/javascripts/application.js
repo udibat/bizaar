@@ -102,4 +102,5 @@
 //= require social-insurance-number
 //= require typewriter
 //= require custom
+//= require jquery.raty.min
 //= require_self

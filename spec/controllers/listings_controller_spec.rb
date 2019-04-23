@@ -49,6 +49,7 @@
 #  availability                    :string(32)       default("none")
 #  per_hour_ready                  :boolean          default(FALSE)
 #  state                           :string(255)      default("approved")
+#  rating_cache                    :string(255)      default({:count=>0, :avg=>0})
 #
 # Indexes
 #

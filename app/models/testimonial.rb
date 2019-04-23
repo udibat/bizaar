@@ -26,14 +26,14 @@ class Testimonial < ApplicationRecord
   belongs_to :receiver, :class_name => "Person"
   belongs_to :tx, class_name: "Transaction", foreign_key: "transaction_id"
 
-  validates_inclusion_of :grade, :in => 0..1, :allow_nil => false
+  validates_inclusion_of :grade, :in => 0..5, :allow_nil => false
 
   scope :positive, -> { where("grade >= 0.5") }
   scope :negative, -> { where("grade < 0.5") }
   scope :id_order, -> { order("id DESC") }
   scope :non_blocked, -> { where(blocked: false) }
   scope :blocked, -> { where(blocked: true) }
-
+  after_save :update_caches
   scope :by_community, -> (community) {
     joins(:tx).merge(Transaction.by_community(community.id).exist)
   }
@@ -50,4 +50,14 @@ class Testimonial < ApplicationRecord
   def positive?
     grade >= 0.5
   end
+
+  private
+
+  def update_caches
+    return if tx.blank?
+
+    tx.listing.reset_rating_cache! if tx.listing.present?
+    receiver.reset_rating_cache!   if receiver.present?
+  end
+
 end

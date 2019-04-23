@@ -45,11 +45,17 @@
               With
               = name
         .author-item
-          .rating
+          - if listing.rating_cache.present? && listing.rating_cache[:count].to_i.positive?
+            %span.rating-container
+              %span.stars{ data: { rating: listing.rating_cache[:avg] } }
+            .reviews
+              = link_to "#{listing.rating_cache[:count]} reviews", '#', class: 'reviews-link'
+
+          -#.rating
             .icon-star
             .icon-star
             .icon-star
             .icon-star
             .icon-star-empty
-          .reviews
+          -#.reviews
             = link_to '5 reviews', '#', class: 'reviews-link'

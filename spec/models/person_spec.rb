@@ -45,6 +45,7 @@
 #  google_oauth2_id                   :string(255)
 #  linkedin_id                        :string(255)
 #  mark                               :integer
+#  rating_cache                       :string(255)      default({:count=>0, :avg=>0})
 #
 # Indexes
 #
