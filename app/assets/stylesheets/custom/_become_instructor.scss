@@ -1,0 +1,219 @@
+@import 'mixins/all';
+
+.homepage_become_a_tutor {
+  .banner {
+    padding: 50px 0;
+    height: auto;
+    background-image: url(image-path('homepage/become-a-tutor-banner1.jpg'));
+    @include media(tablet) {
+      padding: 85px 0 70px;
+    }
+    .marketplace-lander-content-title {
+      font-size: 37px;
+      max-width: 100%;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+      min-height: 1px;
+      font-weight: 900;
+      @include media(tablet) {
+        font-size: 55px;
+      }
+    }
+    .marketplace-lander-content-description {
+      font-size: 18px;
+      text-align: center;
+      font-family: 'Sintony', sans-serif;
+      margin-bottom: 40px;
+      min-height: 1px;
+    }
+  }
+  .page-content {
+    padding: 0;
+  }
+}
+
+.become-instructor-form {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  .input[type="text"] {
+    width: 100%;
+    margin-bottom: 25px;
+    box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.17);
+    font-size: 14px;
+    padding: 8px 15px;
+    font-family: 'Sintony', sans-serif;
+    &::-webkit-input-placeholder {
+      color: $cust-violet;
+    }
+    &::-moz-placeholder {
+      color: $cust-violet;
+    }
+    &:-ms-input-placeholder {
+      color: $cust-violet;
+    }
+    &:-moz-placeholder {
+      color: $cust-violet;
+    }
+    @include media(small-tablet) {
+      width: 49%;
+    }
+  }
+  .submit-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+.link-holder {
+  &.socials-signup {
+    width: 100%;
+    .link {
+      color: #fff;
+      text-decoration: underline;
+      margin: 0 7.5%;
+      font-size: 14px;
+      font-family: 'Sintony', sans-serif;
+    }
+  }
+}
+
+.instruction {
+  padding: 70px 0;
+}
+
+.instruction-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .text-block {
+    text-align: center;
+    flex-shrink: 0;
+    margin-bottom: 20px;
+  }
+  .num {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  .text {
+    font-size: 14px;
+    line-height: 16px;
+    margin: 15px 0;
+  }
+  @include media(small-tablet) {
+    flex-wrap: nowrap;
+    .text-block {
+      padding-right: 15px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.instruction-step-item {
+  position: relative;
+  &::after {
+    content: '';
+    width: 1px;
+    height: 33px;
+    background-color: $cust-violet;
+    display: block;
+    margin: 0 auto 15px;
+  }
+  &:last-child {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.section-title-big.instruction-title {
+  margin-bottom: 30px;
+}
+
+.title-holder {
+  margin-bottom: 30px;
+}
+
+.be-your-boss {
+  padding: 25px 0;
+  background-image: url(image-path('homepage/become-a-tutor-banner4.jpg'));
+  @include background-position;
+  @include media(tablet) {
+    padding: 100px 0 25px;
+  }
+  .list-item {
+    margin: 45px 0;
+  }
+  .text {
+    font-size: 14px;
+    font-family: 'Sintony', sans-serif;
+    line-height: 20px;
+  }
+  .small-title {
+    @include media(tablet) {
+      min-height: 48px;
+    }
+    @include media(desktop) {
+      min-height: 1px;
+    }
+  }
+}
+
+.icons-block {
+  font-size: 36px;
+  margin-bottom: 25px;
+}
+
+.image.shield {
+  height: 37px;
+}
+
+.share-passion {
+  padding: 85px 0 75px;
+  @include background-position;
+  background-image: url(image-path('homepage/become-a-tutor-banner2'));
+  .text, .section-title-big, .section-subtitle {
+    color: #fff;
+  }
+  .text {
+    font-size: 14px;
+    font-family: 'Sintony', sans-serif;
+    @include media(tablet) {
+      float: right;
+      max-width: 600px;
+    }
+  }
+}
+
+.ready-to-tutor {
+  padding: 65px 0 45px;
+  @include background-position;
+  background-image: url(image-path('homepage/become-a-tutor-banner3'));
+  .text, .section-title-big, .section-subtitle {
+    color: #fff;
+  }
+  &-inner {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+}
+
+.ready-tutor-btn {
+  color: #fff;
+  background-color: $cust-violet;
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 15px;
+  position: relative;
+  border-bottom: 5px solid $cust-green;
+  &.btn {
+  border-radius: 0 0 5px 5px;
+
+  }
+}

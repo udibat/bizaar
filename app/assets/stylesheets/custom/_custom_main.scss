@@ -1,11 +1,12 @@
 @import 'mixins/all';
 
-h1, h2, h3, h4, h5, h6, p, span {
+h1, h2, h3, h4, h5, h6, p, span, div {
   color: $cust-text;
 }
 
 body {
-  &.homepage_homepage {
+  &.homepage_homepage,
+  &.homepage_become_a_tutor {
     color: $cust-text;
     .page-content {
       .wrapper {
@@ -40,11 +41,39 @@ body {
   @include media(mid-desktop) {
     padding: 0;
   }
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
 }
 
 .section-title {
   font-size: 32px;
   font-weight: bold;
+}
+
+.section-title-big {
+  font-size: 33px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  @include media(tablet) {
+    font-size: 45px;
+  }
+}
+
+.small-title {
+  font-size: 21px;
+  font-weight: 900;
+  margin-bottom: 24px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Sintony', sans-serif;
 }
 
 .input-icon-holder {
@@ -173,12 +202,21 @@ img {
     border: 2px solid $cust-green;
     color: $cust-green;
   }
+  &--violet-transp {
+    background-color: transparent;
+    border: 2px solid $cust-violet;
+    color: $cust-violet;
+  }
   &--left {
     margin-right: 15px;
   }
   &--right {
     margin-left: 15px;
   }
+}
+
+.single-btn {
+  display: inline-block;
 }
 
 .link-holder {
@@ -212,6 +250,24 @@ img {
 .custom-footer {
   background-color: $cust-text;
   padding: 50px 0;
+  position: relative;
+  &::before {
+    content: '';
+    background: rgba(140,204,142,1);
+    background: -moz-linear-gradient(left, rgba(140,204,142,1) 0%, rgba(95,73,158,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(140,204,142,1)), color-stop(100%, rgba(95,73,158,1)));
+    background: -webkit-linear-gradient(left, rgba(140,204,142,1) 0%, rgba(95,73,158,1) 100%);
+    background: -o-linear-gradient(left, rgba(140,204,142,1) 0%, rgba(95,73,158,1) 100%);
+    background: -ms-linear-gradient(left, rgba(140,204,142,1) 0%, rgba(95,73,158,1) 100%);
+    background: linear-gradient(to right, rgba(140,204,142,1) 0%, rgba(95,73,158,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ccc8e', endColorstr='#5f499e', GradientType=1 );
+    width: 100%;
+    height: 5px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
 
 .footer-list {
@@ -395,3 +451,8 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.text-right {
+  @include media(tablet) {
+    text-align: right;
+  }
+}

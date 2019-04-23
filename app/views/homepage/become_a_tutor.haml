@@ -4,3 +4,153 @@
   - hidden_description = !@current_community.show_description? ? "hidden-title-part" : ""
   %h1.marketplace-lander-content-title.cursor Put Your Skills to Use
   %p.marketplace-lander-content-description Earn money with your passions, skills and talents by joining our community.
+
+.instruction
+  .container
+    .instruction-inner
+      .text-block
+        %h2.section-title-big.instruction-title As easy as...
+        .instruction-step-item
+          .num 1
+          .text 
+            Sign up with us 
+            %br/
+            and create a profile.
+        .instruction-step-item
+          .num 2
+          .text 
+            Add certifications, awards 
+            %br/ 
+            and any qualifications you 
+            %br/
+            have.
+        .instruction-step-item
+          .num 3
+          .text 
+            Post your Class
+            %br/
+            plan with pictures
+            %br/
+            and description.
+        .instruction-step-item
+          .num 4
+          .text 
+            Start accepting Members,
+            %br/
+            meeting new people
+            %br/
+            and earning money!
+      .image-block
+        = image_tag "homepage/instruction.jpg", class: 'image'
+.be-your-boss
+  .container
+    .title-holder
+      %h2.section-title-big Be your own boss
+      %p.section-subtitle Arrange your own schedule, fees, students and more
+    .row
+      .col-4.text-center.list-item
+        .icons-block
+          .icon-calendar
+        .small-title Work at your own convenience
+        .text As one of our instructors, you make your own schedule according to your availability. 
+      .col-4.text-center.list-item
+        .icons-block
+          .icon-money
+        .small-title Get paid immediately
+        .text You will automatically get paid as soon as your class ends- no waiting for paychecks!
+      .col-4.text-center.list-item
+        .icons-block
+          .icon-group
+        .small-title Approve your students
+        .text You can choose how many Members to take for any Class, as well as decide if you want to accept them immediately. 
+      .col-4.text-center.list-item
+        .icons-block
+          .icon-check
+        .small-title Your classes, your choice
+        .text Our team wants to ensure that our Instructors have as much freedom to create the class they want.
+      .col-4.text-center.list-item
+        .icons-block
+          = image_tag "homepage/shield.png", class: 'image shield'
+        .small-title Safety first
+        .text If safety is a concern, you can require that Members get their ID verifed 
+      .col-4.text-center.list-item
+        .icons-block
+          .icon-map-marker
+        .small-title Anywhere, anytime
+        .text Choose your class location, be it in a community centre, your studio, a park, a cafe- It’s up to you!
+.share-passion
+  .container
+    .title-holder
+      %h2.section-title-big.text-right Share your passion
+      %p.section-subtitle.text-right Come join a community that values your skills and talents 
+    .text.text-right
+      At Bizaar you can teach literally anything as long as the subject isn't inappropriate or particularly dangerous for either yourself or our members. We focus on fostering a safe environment where both our members and instructors feel free to practice their trades and passions whatever those may be. The most important restriction is that the experience should be fun!
+.ways
+  .title-holder
+    %h2.section-title-big Different ways to help you reach your Members
+    %p.section-subtitle We have 3 types of classes to accomodate your teaching style and scheduling.
+  .container
+    .row
+      .col-4
+        .image-block
+          = image_tag 'homepage/ways1.png'
+        .text
+          %h3.small-title One and Done Class
+          %p Got a skill or talent that only takes a single session to learn? One and Done’s are just that!
+          %ul.list
+            %li.item
+              %span Your Class always consists of One session.
+            %li.item
+              %span This class is ideal for simple skills, such as “How to Make a Spaghetti Dinner”, or as an Introductory Class for a Pay as You Go Class.
+            %li.item
+              %span Paid 2 hours after each session.
+            %li.item
+              = link_to "Bizaar Service Fee", "#", class: 'link'
+              %span is 15%
+      .col-4
+        .image-block
+          = image_tag 'homepage/ways2.png'
+        .text
+          %h3.small-title Pay as You Go Class
+          %p A Pay As You Go Class is more flexible for both you and the Members, but requires more ongoing management. 
+          %ul.list
+            %li.item
+              %span Your class dates are adjustable.
+            %li.item
+              %span You decide how much to charge for how many Sessions.
+            %li.item
+              %span Flexible class structure.
+            %li.item
+              %span Paid 2 hours after each session.
+            %li.item
+              = link_to "Bizaar Service Fee", "#", class: 'link'
+              %span is 10% - 15% 
+      .col-4
+        .image-block
+          = image_tag 'homepage/ways3.png'
+        .text
+          %h3.small-title Committed Class
+          %p A Committed Class class is ideal for Instructors who have a planned class structure, and can commit to a set weekly schedule.
+          %ul.list
+            %li.item 
+              %span The Class starts and ends on a defined date.
+            %li.item 
+              %span Your weekly class dates are not adjustable.
+            %li.item 
+              %span You can create a class that lasts from between 2 weeks to 6 months.
+            %li.item 
+              %span Paid every 2 weeks.
+            %li.item 
+              = link_to 'Bizaar Service Fee', '#', class: 'link'
+              %span  is 8% to 12%
+    = link_to 'Learn more about how to start creating classes', '#', class: 'btn btn--violet-transp single-btn'
+.ready-to-tutor
+  .container
+    .title-holder
+      %h2.section-title-big Ready to tutor?
+      %p.section-subtitle Sign up now and you can start creating your own Classes!
+    .ready-to-tutor-inner
+      = link_to 'Become an Instructor', '#', class: 'btn ready-tutor-btn'
+      .link-holder.socials-signup
+        = link_to 'Sign up with Facebook', '#', class: 'link'
+        = link_to 'Sign up with Google', '#', class: 'link'

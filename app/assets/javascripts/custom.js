@@ -1,4 +1,24 @@
+function display_rating(dom) {
+    dom.find(".stars[data-rating]").each(function(){
+        var opts = {
+            readOnly: !$(this).data('target'),
+            half: true,
+            score: parseFloat($(this).data('rating'))
+        };
+
+        if (!opts.readOnly) {
+            opts.target = $(this).data('target');
+            opts.targetType = 'number';
+            opts.targetKeep = true;
+        }
+        console.log(opts);
+        $(this).raty(opts);
+    });
+}
+
 $(document).ready(function() {
+  display_rating($("body"));
+
   $('.home-toolbar').on('click', '.filter-title-btn', function(event) {
     event.preventDefault();
     var parent = $(this).parent();
