@@ -21,6 +21,9 @@
       min-height: 1px;
     }
   }
+  .page-content {
+    padding: 0;
+  }
 }
 
 .become-instructor-form {
@@ -64,4 +67,49 @@
       font-family: 'Sintony', sans-serif;
     }
   }
+}
+
+.instruction {
+  padding: 70px 0;
+}
+
+.instruction-inner {
+  display: flex;
+  .text-block {
+    text-align: center;
+    padding-right: 15px;
+    flex-shrink: 0;
+  }
+  .num {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  .text {
+    font-size: 14px;
+    line-height: 16px;
+    margin: 15px 0;
+  }
+}
+
+.instruction-step-item {
+  position: relative;
+  &::after {
+    content: '';
+    width: 1px;
+    height: 33px;
+    background-color: $cust-violet;
+    display: block;
+    margin: 0 auto 15px;
+  }
+  &:last-child {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.instruction-title {
+  font-size: 45px;
+  font-weight: 900;
+  margin-bottom: 30px;
 }
