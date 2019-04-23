@@ -198,12 +198,21 @@ img {
     border: 2px solid $cust-green;
     color: $cust-green;
   }
+  &--violet-transp {
+    background-color: transparent;
+    border: 2px solid $cust-violet;
+    color: $cust-violet;
+  }
   &--left {
     margin-right: 15px;
   }
   &--right {
     margin-left: 15px;
   }
+}
+
+.single-btn {
+  display: inline-block;
 }
 
 .link-holder {
