@@ -176,6 +176,7 @@ gem 'rubyzip', '~> 1.2.2'
 
 gem 'daemons'
 gem 'puma'
+gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
 
 gem 'capistrano', '~> 3.6'
 gem 'capistrano-rvm' 

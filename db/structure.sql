@@ -822,6 +822,7 @@ CREATE TABLE `listings` (
   `availability` varchar(32) DEFAULT 'none',
   `per_hour_ready` tinyint(1) DEFAULT '0',
   `state` varchar(255) DEFAULT 'approved',
+  `rating_cache` varchar(255) DEFAULT '---\n:count: 0\n:avg: 0\n',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_listings_on_uuid` (`uuid`),
   KEY `index_listings_on_new_category_id` (`category_id`) USING BTREE,
@@ -1242,6 +1243,7 @@ CREATE TABLE `people` (
   `google_oauth2_id` varchar(255) DEFAULT NULL,
   `linkedin_id` varchar(255) DEFAULT NULL,
   `mark` int(11) DEFAULT NULL,
+  `rating_cache` varchar(255) DEFAULT '---\n:count: 0\n:avg: 0\n',
   UNIQUE KEY `index_people_on_username_and_community_id` (`username`,`community_id`) USING BTREE,
   UNIQUE KEY `index_people_on_uuid` (`uuid`),
   UNIQUE KEY `index_people_on_email` (`email`) USING BTREE,
@@ -2378,6 +2380,8 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190305112030'),
 ('20190319114719'),
 ('20190319122745'),
-('20190422094009');
+('20190422094009'),
+('20190422135012'),
+('20190422135037');
 
 

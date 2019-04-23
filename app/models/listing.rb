@@ -49,6 +49,7 @@
 #  availability                    :string(32)       default("none")
 #  per_hour_ready                  :boolean          default(FALSE)
 #  state                           :string(255)      default("approved")
+#  rating_cache                    :string(255)      default({:count=>0, :avg=>0})
 #
 # Indexes
 #
@@ -107,10 +108,14 @@ class Listing < ApplicationRecord
 
   before_validation :set_valid_until_time
 
+  has_many :transactions
+  has_many :testimonials, -> { where('testimonials.receiver_id = transactions.listing_author_id') }, through: :transactions
+
   validates_presence_of :author_id
   validates_length_of :title, :in => 2..65, :allow_nil => false
 
   scope :exist, -> { where(deleted: false) }
+  serialize :rating_cache, Hash
 
   scope :search_title_author_category, ->(pattern) do
     joins(:author)
@@ -144,6 +149,16 @@ class Listing < ApplicationRecord
   def set_updates_email_at_to_now
     self.updates_email_at ||= Time.now
   end
+
+  def reset_rating_cache!
+    # cache = {
+    #   avg: author.testimonials.average(:grade).to_f.round(2).to_f.round(2),
+    #   count: author.testimonials.count,
+    # }
+    # self.update_column(:rating_cache, cache)
+    update_column(:rating_cache, author.rating_cache)
+  end
+
 
   def uuid_object
     if self[:uuid].nil?

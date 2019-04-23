@@ -200,6 +200,7 @@
              , function (data) {
                  $.isFunction(settings.scrape) ? settings.scrape(data) : data;
                  loader ? loader.before(data) : element.append(data);
+                 display_rating(element);
                 loading(FALSE);
                // if there is a complete callback we call it
                 if (settings.complete) settings.complete.call();
@@ -210,6 +211,7 @@
             , function (data) {
                 $.isFunction(settings.scrape) ? settings.scrape(data) : data;
                 loader ? loader.before(data) : element.append(data);
+                display_rating(element);
                loading(FALSE);
                if (settings.complete) settings.complete.call();
            }, 'html');
