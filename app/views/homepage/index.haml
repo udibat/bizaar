@@ -109,6 +109,25 @@
           .price-data.filter-dropdown
             = render :partial => "price_filter"
 
+        .col-2.class-type-holder
+          .class-type-btn.dropdown-btn.filter-title-btn
+            .btn.btn--green-transp Class Type - Any
+          .class-type-data.filter-dropdown
+            .checkbox-holder
+              .checkbox-item.default-checkbox
+                = check_box_tag :one_done, nil, false, class: 'input'
+                = label_tag :one_done, 'One and Done', class: 'label'
+              .checkbox-item.default-checkbox
+                = check_box_tag :pay, nil, false, class: 'input'
+                = label_tag :pay, 'Pay as You Go', class: 'label'
+              .checkbox-item.default-checkbox
+                = check_box_tag :commited, nil, false, class: 'input'
+                = label_tag :commited, 'Committed', class: 'label'
+              .checkbox-item.default-checkbox
+                = check_box_tag :any, nil, false, class: 'input'
+                = label_tag :any, 'Any', class: 'label'
+            = link_to 'I’d like to know more about Class Types', '#', class: 'link'
+
         .col-2.more-options-holder
           .more-options-btn
             .btn.btn--green More Options

@@ -265,12 +265,42 @@
 }
 
 .schedule-data,
-.price-data {
+.price-data,
+.class-type-data {
   font-size: 15px;
   padding: 20px 10px;
   width: 342px;
   background-color: #fff;
   border: 2px solid $cust-green;
+}
+
+.class-type-holder {
+  position: relative;
+}
+
+.class-type-data {
+  width: 275px;
+  .checkbox-holder {
+    flex-wrap: wrap;
+  }
+  .checkbox-item {
+    width: 100%;
+  }
+  .label {
+    text-align: left;
+    font-weight: normal;
+    font-family: 'Sintony', sans-serif;
+  }
+  .default-checkbox input[type="checkbox"] + .label {
+    font-size: 13px;
+    padding-left: 23px;
+  }
+  .link {
+    text-decoration: underline;
+    font-size: 13px;
+    font-family: 'Sintony', sans-serif;
+    font-weight: bold;
+  }
 }
 
 .price-data {
@@ -366,7 +396,7 @@ input[type="text"].location-input {
   margin: 0 10px;
   border: none;
   border-radius: 0;
-  box-shadow: 2px 2px 1px rgba(1, 1, 1, 0.17);
+  box-shadow: 0.5px 0.866px 1px rgba(1, 1, 1, 0.17);
 }
 
 input[type="text"].distance-input {
@@ -397,6 +427,16 @@ input[type="text"].location-input {
 .filter-btns-holder {
   margin: 15px 0;
   position: relative;
+  .btn {
+    font-weight: normal;
+    text-transform: capitalize;
+    padding: 12.5px 20px;
+  }
+  .more-options-btn {
+    .btn {
+      text-transform: uppercase;
+    }
+  }
 }
 
 .price-range-holder, 
@@ -407,7 +447,8 @@ input[type="text"].location-input {
 }
 
 .price-range-holder, 
-.schedule-holder {
+.schedule-holder,
+.class-type-holder {
   &.active {
     .filter-title-btn {
       z-index: 10;
@@ -481,8 +522,9 @@ input[type="text"].location-input {
 }
 
 .schedule-data,
-.price-data {
-  top: 37px;
+.price-data,
+.class-type-data {
+  top: 50px;
   left: 0.75em;
   z-index: 10;
 }
