@@ -56,7 +56,7 @@ class HomepageController < ApplicationController
     includes =
       case @view_type
       when "grid"
-        [:author, :listing_images]
+        [:author, :listing_images, :location]
       when "list"
         [:author, :listing_images, :num_of_reviews]
       when "map"
@@ -82,9 +82,9 @@ class HomepageController < ApplicationController
                                   keyword_search_in_use: keyword_in_use,
                                   relevant_search_fields: relevant_search_fields)
 
-    if @view_type == 'map'
-      viewport = viewport_geometry(params[:boundingbox], params[:lc], @current_community.location)
-    end
+    # if @view_type == 'map'
+    viewport = viewport_geometry(params[:boundingbox], params[:lc], @current_community.location)
+    # end
 
     if FeatureFlagHelper.feature_enabled?(:searchpage_v1)
       search_result.on_success { |listings|
@@ -97,7 +97,7 @@ class HomepageController < ApplicationController
       search_result.on_success { |listings|
         @listings = listings # TODO Remove
 
-        if @view_type == "grid" then
+        if @view_type == "grid"
           render partial: "grid_item", collection: @listings, as: :listing, locals: { show_distance: location_in_use }
         elsif location_in_use
           render partial: "list_item_with_distance", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map, show_distance: location_in_use }
@@ -175,7 +175,8 @@ class HomepageController < ApplicationController
       price_max: params[:price_max],
       locale: I18n.locale,
       include_closed: false,
-      sort: nil
+      sort: nil,
+      boundingbox: params[:boundingbox]
     }
 
     if @view_type != 'map' && location_search_in_use
