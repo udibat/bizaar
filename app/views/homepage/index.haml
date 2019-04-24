@@ -118,9 +118,9 @@
             .custom-filter-title Location
             .location-item
               Whithin 
-              = text_field :distance_from, '', class: 'distance-input'
+              = text_field_tag :distance_from, '', class: 'distance-input'
               km of
-              = text_field :location_city, '', class: 'location-input'
+              = text_field_tag :location_city, '', class: 'location-input'
           = render :partial => "filters", :locals => { show_price_filter: show_price_filter, show_custom_fields: @show_custom_fields, filters: filters }
           .one-session.filter-data-item
             .custom-filter-title One-session Class
