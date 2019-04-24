@@ -114,7 +114,6 @@ GEM
       clavius (~> 1.0)
       tzinfo
     builder (3.2.3)
-    byebug (9.0.6)
     callsite (0.0.11)
     camertron-eprun (1.1.1)
     capistrano (3.11.0)
@@ -419,9 +418,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (3.4.2)
-      byebug (~> 9.0)
-      pry (~> 0.10)
     public_suffix (2.0.5)
     puma (3.12.1)
     pusher-client (0.6.2)
@@ -706,7 +702,6 @@ DEPENDENCIES
   paypal-sdk-permissions (~> 1.96.4)
   possibly (~> 1.0.1)
   premailer (~> 1.10.4)
-  pry-byebug
   public_suffix (~> 2.0.5)
   puma
   rack-attack (~> 5.0.1)
