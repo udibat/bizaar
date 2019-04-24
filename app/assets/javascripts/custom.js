@@ -56,8 +56,11 @@ $(document).ready(function() {
 
   $('#homepage-filters').on('click', '#clear_btn', function(event) {
     event.preventDefault();
-    console.log('test');
-    $(this).parents('form').get(0).reset();
+    var form = $(this).parents('#homepage-filters');
+    form.find('input:text, input:password, input:file, select, textarea').val('');
+    form.find('input:radio, input:checkbox')
+         .removeAttr('checked').removeAttr('selected');
+    form.get(0).submit();
   });
 
 });
