@@ -47,12 +47,18 @@ $(document).ready(function() {
     }
   });
 
-    $('.change_mark').on('change', function(){
-        var url = $(this).data('url'),
-            member_id = $(this).data('member-id'),
-            value = $(this).val();
-        $.post(url, {mark: value, person_id: member_id});
-    });
+  $('.change_mark').on('change', function(){
+      var url = $(this).data('url'),
+          member_id = $(this).data('member-id'),
+          value = $(this).val();
+      $.post(url, {mark: value, person_id: member_id});
+  });
+
+  $('#homepage-filters').on('click', '#clear_btn', function(event) {
+    event.preventDefault();
+    console.log('test');
+    $(this).parents('form').get(0).reset();
+  });
 
 });
 

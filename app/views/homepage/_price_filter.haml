@@ -18,7 +18,7 @@
           :javascript
             window.ST.rangeFilter("##{id}", #{range.to_json.html_safe}, #{start.to_json.html_safe}, #{labels.to_json.html_safe}, #{fields.to_json.html_safe}, false)
 
-.row
+.row.filter-price-text
   .col-12
     .left
       -# %span.custom-filter-min-max-title= t("homepage.custom_filters.min")

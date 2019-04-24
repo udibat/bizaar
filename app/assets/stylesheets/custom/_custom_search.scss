@@ -271,11 +271,13 @@
   padding: 20px 10px;
   width: 342px;
   background-color: #fff;
-  border: 2px solid $cust-green;
 }
 
 .class-type-holder {
   position: relative;
+  .filter-action-holder {
+    border-bottom: 1px solid #d0d0d0;
+  }
 }
 
 .class-type-data {
@@ -304,7 +306,11 @@
 }
 
 .price-data {
-  width: 250px;
+  width: 370px;
+}
+
+.filter-price-text {
+  margin-top: 15px;
 }
 
 .day-time {
@@ -431,6 +437,7 @@ input[type="text"].location-input {
     font-weight: normal;
     text-transform: capitalize;
     padding: 12.5px 20px;
+    box-shadow: 0.5px 0.866px 1px rgba(1, 1, 1, 0.17);
   }
   .more-options-btn {
     .btn {
@@ -550,6 +557,31 @@ input[type="text"].location-input {
       bottom: 0;
       background-color: rgba(#171717, 0.2);
       z-index: 9;
+    }
+  }
+}
+
+.filter-action-holder {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  .link {
+    background-color: transparent;
+    color: $cust-violet;
+    font-size: 13px;
+    font-family: 'Sintony', sans-serif;
+    font-weight: bold;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    &:hover, &:focus, &:active {
+      outline: none;
+    }
+    &.gray {
+      color: #c6c6c6;
     }
   }
 }
