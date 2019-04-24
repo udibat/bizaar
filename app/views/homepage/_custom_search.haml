@@ -1,18 +1,19 @@
-.row
-  .col-4
-    .input-icon-holder
-      = label_tag :name_field, class: 'label-icon' do
-        %i.icon-search
-      = text_field :name_field, '', placeholder: 'Any', class: 'input'
-  .col-3
-    = text_field 'location[name]', '', id: 'location',class: 'input'
-    = hidden_field_tag 'location[lat]', '', id: 'lat-value'
-    = hidden_field_tag 'location[lng]', '', id: 'lng-value'
+= form_tag search_without_locale_path, method: :get do
+  .row
+    .col-4
+      .input-icon-holder
+        = label_tag :name_field, class: 'label-icon' do
+          %i.icon-search
+        = text_field :name_field, '', placeholder: 'Any', class: 'input'
+    .col-3
+      = text_field 'location[name]', '', id: 'location',class: 'input'
+      = hidden_field_tag 'location[lat]', '', id: 'lat-value'
+      = hidden_field_tag 'location[lng]', '', id: 'lng-value'
 
-  .col-2
-    .input-icon-holder.search
-      = label_tag :name_field, class: 'label-icon' do
-        %i.icon-search.search-btn-icon
-      = submit_tag 'Search', class: 'search-btn'
+    .col-2
+      .input-icon-holder.search
+        = label_tag :name_field, class: 'label-icon' do
+          %i.icon-search.search-btn-icon
+        = submit_tag 'Search', class: 'search-btn'
 
 = render 'homepage/js_search'

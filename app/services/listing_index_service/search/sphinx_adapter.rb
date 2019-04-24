@@ -61,6 +61,15 @@ module ListingIndexService::Search
         DatabaseSearchHelper.success_result(0, [], nil)
       else
 
+        geo_search = parse_geo_search_params(search)
+
+        coords = Maybe(search[:boundingbox]).split(',').or_else(nil)
+        if coords
+          sw_lat, sw_lng, ne_lat, ne_lng = coords
+          @latitude = radians(sw_lat.to_f)..radians(ne_lat.to_f)
+          @longitude = radians(sw_lng.to_f)..radians(ne_lng.to_f)
+        end
+
         with = HashUtils.compact(
           {
             community_id: community_id,
@@ -68,6 +77,9 @@ module ListingIndexService::Search
             listing_shape_id: search[:listing_shape_id],
             price_cents: search[:price_cents],
             listing_id: numeric_search_match_listing_ids,
+            geodist: geo_search[:distance_max],
+            latitude: @latitude,
+            longitude: @longitude
           })
 
         selection_groups = search[:fields].select { |v| v[:type] == :selection_group }
@@ -89,6 +101,7 @@ module ListingIndexService::Search
           with: with,
           with_all: with_all,
           order: 'sort_date DESC',
+          geo: geo_search[:origin],
           max_query_time: 1000 # Timeout and fail after 1s
         )
 

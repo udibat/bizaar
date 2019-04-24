@@ -1,14 +1,19 @@
-.home-search.search-holder
-  .input-icon-holder
-    = label_tag :name_field, class: 'label-icon' do
-      %i.icon-search
-    = text_field :name_field, '', placeholder: 'Name something you want to learn', class: 'input'
-  .input-icon-holder
-    = label_tag 'location[name]', class: 'label-icon' do
-      %i.icon-map-marker
-    = text_field 'location[name]', '', id: 'location', placeholder: 'Where are you?', class: 'input'
-    = hidden_field_tag 'location[lat]', '', id: 'lat-value'
-    = hidden_field_tag 'location[lng]', '', id: 'lng-value'
-  = submit_tag 'Find a class!', class: 'search-btn'
+= form_tag search_without_locale_path, method: :get, id: 'homepage-filters' do
+  .home-search.search-holder
+    .input-icon-holder
+      = label_tag :name_field, class: 'label-icon' do
+        %i.icon-search
+      = text_field :name_field, '', placeholder: 'Name something you want to learn', class: 'input'
+    .input-icon-holder
+      = label_tag 'location[name]', class: 'label-icon' do
+        %i.icon-map-marker
+      = text_field 'location[name]', '', id: 'location', placeholder: 'Where are you?', class: 'input'
+      = hidden_field_tag 'location[lat]', '', id: 'lat-value'
+      = hidden_field_tag 'location[lng]', '', id: 'lng-value'
+      = hidden_field_tag 'lc', params[:lc]
+      = hidden_field_tag 'ls', ''
+      = hidden_field_tag 'boundingbox', params[:boundingbox]
+      = hidden_field_tag 'distance_max', ''
+    = submit_tag 'Find a class!', class: 'search-btn'
 
 = render 'homepage/js_search'
