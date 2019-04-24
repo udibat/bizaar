@@ -106,7 +106,8 @@ module ListingIndexService::Search
         )
 
         begin
-          DatabaseSearchHelper.success_result(models.total_entries, models, includes)
+          distances_hash = geo_search[:origin] ? collect_geo_distances(models, search[:distance_unit]) : {}
+          DatabaseSearchHelper.success_result(models.total_entries, models, includes, distances_hash)
         rescue ThinkingSphinx::SphinxError => e
           Result::Error.new(e)
         end
@@ -121,7 +122,7 @@ module ListingIndexService::Search
       geo_params = { order: (search[:sort] == :distance ? 'geodist ASC' : nil), origin: [radians(search[:latitude]), radians(search[:longitude])] }
       if search[:distance_max].present?
         max_distance_meters = search[:distance_max] * DISTANCE_UNIT_FACTORS[search[:distance_unit]]
-        geo_params[:distance_max] = 0..max_distance_meters.to_i
+        geo_params[:distance_max] = 0.0..max_distance_meters.to_f
       end
       geo_params
     end

@@ -2,7 +2,13 @@ module ListingIndexService::Search::DatabaseSearchHelper
 
   module_function
 
-  def success_result(count, listings, includes)
+  def success_result(count, listings, includes, distances = {})
+
+    # converted_listings = listings.map do |listing|
+    #   distance_hash = distances[listing.id] || {}
+    #   ListingIndexService::Search::Converters.listing_hash(listing, includes, distance_hash)
+    # end
+
     Result::Success.new(
       {count: count, listings: listings.map { |l| ListingIndexService::Search::Converters.listing_hash(l, includes) }})
   end
