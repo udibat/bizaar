@@ -456,3 +456,10 @@ input:checked + .slider:before {
     text-align: right;
   }
 }
+
+.home-toolbar-button-group-button.selected, 
+.home-toolbar-show-filters-button.selected {
+  .home-toolbar-button-text {
+    color: #fff;
+  }
+}
