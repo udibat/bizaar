@@ -212,22 +212,56 @@
   .section-title {
     margin-bottom: 30px;
   }
-  .list-item-title {
-    font-size: 21px;
-    font-weight: 900;
-    margin-bottom: 24px;
-  }
+  
   .image-block {
     margin-bottom: 15px;
   }
   .text {
     p {
-      padding: 0 36px;
+      padding: 0 25px;
       font-family: 'Sintony', sans-serif;
       font-size: 13px;
       line-height: 22px;
       margin-bottom: 0;
     }
+  }
+  .list {
+    list-style-position: inside;
+    padding: 0 20px;
+    margin: 30px 0 60px;
+    .link {
+      text-decoration: underline;
+    }
+  }
+  .item {
+    color: $cust-violet;
+    font-size: 16px;
+    font-family: 'Sintony', sans-serif;
+    margin-bottom: 10px;
+    span {
+      color: $cust-text;
+    }
+    a, span {
+      font-size: 13px;
+    }
+  }
+  .single-btn {
+    font-size: 13px;
+    padding: 6.5px 20px;
+    margin-top: 25px;
+  }
+  &-item {
+    background-color: #f4f6f3;
+    padding: 13px 0 33px;
+    .list {
+      margin-bottom: 0;
+    }
+  }
+  &.become {
+    padding: 80px 0 45px;
+  }
+  .item-inner {
+    margin-left: -10px;
   }
 }
 
