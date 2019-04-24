@@ -246,6 +246,13 @@
     font-size: 13px;
     padding: 6.5px 20px;
   }
+  &-item {
+    background-color: #f4f6f3;
+    padding: 13px 0 33px;
+    .list {
+      margin-bottom: 0;
+    }
+  }
 }
 
 // END: ways
