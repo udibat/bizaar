@@ -71,3 +71,10 @@
 @mixin clickable-area-ie {
   background-image: url(data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==)
 }
+
+
+@mixin background-position {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
