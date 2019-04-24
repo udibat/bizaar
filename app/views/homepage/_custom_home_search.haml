@@ -1,12 +1,7 @@
 - content_for :extra_javascript do
-  - # maps.google can't be loaded twice
   - maps_key = MarketplaceHelper.google_maps_key(@current_community.id)
   - key_param = maps_key ? "&key=#{maps_key}" : ""
-  - # Topbar adds its own maps script, otherwise add it if location search enabled or map is visible
-  -#- needs_maps = !FeatureFlagHelper.feature_enabled?(:topbar_v1) && (main_search != :keyword || @view_type.eql?("map"))
-  -#- if(needs_maps)
   = javascript_include_tag "//maps.googleapis.com/maps/api/js?libraries=places#{key_param}"
-  -#= javascript_include_tag "markerclusterer.js"
 
 - content_for :extra_javascript do
   :javascript
@@ -21,14 +16,10 @@
     .input-icon-holder
       = label_tag 'location[name]', class: 'label-icon' do
         %i.icon-map-marker
-      = text_field 'q', '', id: 'location', placeholder: 'Where are you?', class: 'input'
-      -#= hidden_field_tag 'location[lat]', '', id: 'lat-value'
-      -#= hidden_field_tag 'location[lng]', '', id: 'lng-value'
+      = text_field_tag 'q', '', id: 'location', placeholder: 'Where are you?', class: 'input'
       = hidden_field_tag 'lc', params[:lc]
       = hidden_field_tag 'ls', ''
       = hidden_field_tag 'boundingbox', params[:boundingbox]
       = hidden_field_tag 'distance_max', ''
       = hidden_field_tag "view", "grid"
     = submit_tag 'Find a class!', class: 'search-btn'
-
--#= render 'homepage/js_search'

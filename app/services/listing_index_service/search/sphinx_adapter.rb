@@ -114,6 +114,29 @@ module ListingIndexService::Search
 
     end
 
+    DISTANCE_UNIT_FACTORS = { miles: 1609.0, km: 1000.0 }
+
+    def parse_geo_search_params(search)
+      return {} unless search[:latitude].present? && search[:longitude].present?
+      geo_params = { order: (search[:sort] == :distance ? 'geodist ASC' : nil), origin: [radians(search[:latitude]), radians(search[:longitude])] }
+      if search[:distance_max].present?
+        max_distance_meters = search[:distance_max] * DISTANCE_UNIT_FACTORS[search[:distance_unit]]
+        geo_params[:distance_max] = 0..max_distance_meters.to_f
+      end
+      geo_params
+    end
+
+    def radians(degrees)
+      degrees * Math::PI / 180
+    end
+
+    def collect_geo_distances(models, geo_unit)
+      models.each_with_object({}) do |listing, result|
+        distance = listing.distance / DISTANCE_UNIT_FACTORS[geo_unit]
+        result[listing.id] = { distance_unit: geo_unit, distance: distance }
+      end
+    end
+
     def search_out_of_bounds?(per_page, page)
       pages = (SPHINX_MAX_MATCHES.to_f / per_page.to_f)
       page > pages.ceil
