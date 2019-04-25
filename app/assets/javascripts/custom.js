@@ -65,6 +65,9 @@ $(document).ready(function() {
 
   addNewOption();
 
+  changeDropdownName();
+  priceRangeChangeName();
+
 });
 
 $(window).on('scroll', function() {
@@ -117,10 +120,36 @@ function addNewOption() {
 
       var id = input.attr('id');
       var labelFor = label.attr('for');
-      
+
       input.attr('id', id + count);
       label.attr('for', labelFor + count);
       input.prop('checked', false);
     })
   });
+}
+
+// TODO: call this function when form submit
+function changeDropdownName() {
+  $('.filters-holder').on('change', 'input', function(){
+    var $this = $(this);
+    var parent = $this.parents('.filters-holder');
+    var checkLength = parent.find('input:checked').length;
+
+    var toggleBtn = parent.find('.toggle-btn');
+    var defaultText = toggleBtn.data('default');
+    var selectedText = toggleBtn.data('selected');
+
+    if(checkLength) {
+      toggleBtn.text(selectedText);
+    } else {
+      toggleBtn.text(defaultText);
+    }
+  })
+}
+
+function priceRangeChangeName() {
+  $('.price-range-holder').on('change', '#range-slider-price', function(){
+    var val = $('#price_min').val();
+    $(this).val();
+  })
 }

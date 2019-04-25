@@ -63,9 +63,9 @@
         .col-2.book-immediately.checkbox-item.no-pseudo
           = check_box_tag :book_immed, nil, false, class: 'input'
           = label_tag :book_immed, 'Book Immediately', class: 'btn btn--green-transp label'
-        .col-2.schedule-holder
+        .col-2.schedule-holder.filters-holder
           .schedule-btn.dropdown-btn.filter-title-btn
-            .btn.btn--green-transp Schedule - Any
+            .btn.btn--green-transp.toggle-btn{'data-default'=>'Schedule - Any', 'data-selected' => 'Schedule Selected' } Schedule - Any
           .schedule-data.filter-dropdown
             .chosen Monday and Wednesday Evenings
             .option-container
@@ -117,9 +117,9 @@
               = submit_tag 'Apply', id: 'apply_btn', class: 'link'
               = button_tag 'Clear', id: 'clear_btn', type: 'button', class: 'link gray'
 
-        .col-2.class-type-holder
+        .col-2.class-type-holder.filters-holder
           .class-type-btn.dropdown-btn.filter-title-btn
-            .btn.btn--green-transp Class Type - Any
+            .btn.btn--green-transp.toggle-btn{'data-default'=>'Class Type - Any', 'data-selected' => 'Class Type Selected' } Class Type - Any
           .class-type-data.filter-dropdown
             .checkbox-holder
               .checkbox-item.default-checkbox

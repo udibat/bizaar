@@ -263,6 +263,11 @@
   .item-inner {
     margin-left: -10px;
   }
+  &:not(.become) {
+    .link-holder {
+      margin-top: 35px;
+    }
+  }
 }
 
 // END: ways
