@@ -47,16 +47,6 @@
   }
 }
 
-.filter-data {
-  width: 100%;
-  @media (min-width: 1125px) {
-    width: calc(67% + 45px);
-  }
-  @media (min-width: 1441px) {
-    width: calc(75% + 45px);
-  }
-}
-
 .listings-main-container {
   padding-top: 70px;
 }
@@ -199,8 +189,12 @@
     }
     .label {
       font-size: 17px;
-      padding: 10px 8px;
-      min-width: 41px;
+      padding: 10px 5px;
+      min-width: 37px;
+      @include media(large-mobile) {
+        min-width: 41px;
+        padding: 10px 8px;
+      }
     }
   }
 }
@@ -368,7 +362,7 @@
       transform: rotate(-45deg);
       display: inline-block;
       position: absolute;
-      top: 9;
+      top: 13px;
       left: 10px;
     }
   }
@@ -464,6 +458,17 @@ input[type="text"].location-input {
     .filter-dropdown {
       display: block;
     }
+    .dropdown-btn {
+      .btn {
+        background-color: $cust-green;
+        color: #fff;
+        &::before {
+          border-color: #fff;
+          top: 18px;
+          transform: rotate(135deg);
+        }
+      }
+    }
   }
 }
 
@@ -513,6 +518,12 @@ input[type="text"].location-input {
       height: 100%;
       width: calc(33% - 2.6em);
     }
+    @media (min-width: 1441px) {
+      &.absolute,
+      &.fixed {
+        width: calc(25% - 2.2em);
+      }
+    }
   }
 }
 
@@ -532,17 +543,36 @@ input[type="text"].location-input {
 .price-data,
 .class-type-data {
   top: 50px;
-  left: 0.75em;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
+  max-width: calc(100vw - 2%);
+  @include media(small-tablet) {
+    left: 0.75em;
+    transform: translateX(0);
+  }
 }
 
 .filter-data {
   padding: 70px 20px 50px 20px;
   position: absolute;
-  top: 52px;
-  left: -45px;
+  top: 326px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
   background-color: #fff;
+  width: 100%;
+  @include media(tablet) {
+    top: 52px;
+    left: -45px;
+    transform: translateX(0);
+  }
+  @media (min-width: 1125px) {
+    width: calc(67% + 45px);
+  }
+  @media (min-width: 1441px) {
+    width: calc(75% + 45px);
+  }
 }
 
 .search-result-container {
@@ -584,4 +614,8 @@ input[type="text"].location-input {
       color: #c6c6c6;
     }
   }
+}
+
+.option-item {
+  margin-bottom: 30px;
 }

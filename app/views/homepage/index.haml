@@ -69,43 +69,44 @@
           .schedule-data.filter-dropdown
             .chosen Monday and Wednesday Evenings
             .option-container
-              .checkbox-holder
-                .checkbox-item.no-pseudo.days
-                  = check_box_tag :mon, nil, false, class: 'input'
-                  = label_tag :mon, 'M', class: 'btn btn--green-transp label'
-                .checkbox-item.no-pseudo.days
-                  = check_box_tag :tus, nil, false, class: 'input'
-                  = label_tag :tus, 'Tu', class: 'btn btn--green-transp label'
-                .checkbox-item.no-pseudo.days
-                  = check_box_tag :wed, nil, false, class: 'input'
-                  = label_tag :wed, 'W', class: 'btn btn--green-transp label'
-                .checkbox-item.no-pseudo.days
-                  = check_box_tag :thur, nil, false, class: 'input'
-                  = label_tag :thur, 'Th', class: 'btn btn--green-transp label'
-                .checkbox-item.no-pseudo.days
-                  = check_box_tag :fr, nil, false, class: 'input'
-                  = label_tag :fr, 'F', class: 'btn btn--green-transp label'
-                .checkbox-item.no-pseudo.days
-                  = check_box_tag :sat, nil, false, class: 'input'
-                  = label_tag :sat, 'Sa', class: 'btn btn--green-transp label'
-                .checkbox-item.no-pseudo.days
-                  = check_box_tag :sun, nil, false, class: 'input'
-                  = label_tag :sun, 'Su', class: 'btn btn--green-transp label'
-              .checkbox-holder
-                .checkbox-item.day-time.default-checkbox
-                  = check_box_tag :mornings, nil, false, class: 'input'
-                  = label_tag :mornings, 'Mornings', class: 'label'
-                .checkbox-item.day-time.default-checkbox
-                  = check_box_tag :afternoons, nil, false, class: 'input'
-                  = label_tag :afternoons, 'Afternoons', class: 'label'
-                .checkbox-item.day-time.default-checkbox
-                  = check_box_tag :evenings, nil, false, class: 'input'
-                  = label_tag :evenings, 'Evenings', class: 'label'
-              .filter-action-holder
-                = submit_tag 'Apply', id: 'apply_btn', class: 'link'
-                = button_tag 'Clear', id: 'clear_btn', type: 'button', class: 'link gray'
+              .option-item
+                .checkbox-holder
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :mon, :mon, false, class: 'input'
+                    = label_tag :mon, 'M', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :tus, :tus, false, class: 'input'
+                    = label_tag :tus, 'Tu', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :wed, :wed, false, class: 'input'
+                    = label_tag :wed, 'W', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :thur, :thur, false, class: 'input'
+                    = label_tag :thur, 'Th', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :fr, :fr, false, class: 'input'
+                    = label_tag :fr, 'F', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :sat, :sat, false, class: 'input'
+                    = label_tag :sat, 'Sa', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :sun, :sun, false, class: 'input'
+                    = label_tag :sun, 'Su', class: 'btn btn--green-transp label'
+                .checkbox-holder
+                  .checkbox-item.day-time.default-checkbox
+                    = check_box_tag :mornings, :mornings, false, class: 'input'
+                    = label_tag :mornings, 'Mornings', class: 'label'
+                  .checkbox-item.day-time.default-checkbox
+                    = check_box_tag :afternoons, :afternoons, false, class: 'input'
+                    = label_tag :afternoons, 'Afternoons', class: 'label'
+                  .checkbox-item.day-time.default-checkbox
+                    = check_box_tag :evenings, :evenings, false, class: 'input'
+                    = label_tag :evenings, 'Evenings', class: 'label'
             .another-option-block
-              = button_tag '+ Add another option', type: 'button', class: 'another-btn'
+              = button_tag '+ Add another option', type: 'button', class: 'another-btn', id: 'add_new_option'
+            .filter-action-holder
+              = submit_tag 'Apply', id: 'apply_btn', class: 'link'
+              = button_tag 'Clear', id: 'clear_btn', type: 'button', class: 'link gray'
 
         .col-2.price-range-holder
           .dropdown-btn.filter-title-btn
