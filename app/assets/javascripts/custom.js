@@ -150,6 +150,11 @@ function changeDropdownName() {
 function priceRangeChangeName() {
   $('.price-range-holder').on('change', '#range-slider-price', function(){
     var val = $('#price_min').val();
-    $(this).val();
+    var rangeSliderMin = $('.range-slider').data('min');
+    var rangeSliderMax = $('.range-slider').data('max');
+
+    $(this).val([rangeSliderMin, rangeSliderMax]);
+
+    console.log('test priceRangeChangeName', rangeSliderMin, rangeSliderMax)
   })
 }
