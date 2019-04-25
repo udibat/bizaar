@@ -15,7 +15,7 @@ const actionProps = function actionProps(action) {
     { href: action };
 };
 
-const ProfileActionCard = function ProfileActionCard({ icon, label, action, notificationCount }) {
+const SignupActionCard = function SignupActionCard({ icon, label, action, notificationCount }) {
   const notificationCountInArray = notificationCount > 0 ? [span({ className: css.notificationCount }, notificationCount)] : [];
   return a({ ...actionProps(action), className: css.profileAction }, [
     div({ className: css.profileActionIconWrapper }, [
@@ -30,7 +30,7 @@ const eitherStringOrFunc = PropTypes.oneOfType([
   PropTypes.func,
 ]);
 
-ProfileActionCard.propTypes = {
+SignupActionCard.propTypes = {
   icon: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   action: eitherStringOrFunc.isRequired,
@@ -47,22 +47,22 @@ class SignupButtons extends Component {
       div({ className: css.rootArrowBelow }),
       div({ className: css.box }, [
         div({ className: css.profileActions }, [
-          r(ProfileActionCard, { label: this.props.translations.inbox, icon: inboxEmptyIcon, action: this.props.actions.inboxAction, notificationCount: this.props.notificationCount }),
-          r(ProfileActionCard, { label: this.props.translations.listings, icon: listingsIcon, action: this.props.actions.listingsAction }),
-          r(ProfileActionCard, { label: this.props.translations.profile, icon: profileIcon, action: this.props.actions.profileAction }),
-          r(ProfileActionCard, { label: this.props.translations.settings, icon: settingsIcon, action: this.props.actions.settingsAction }),
+          r(SignupActionCard, { label: this.props.translations.inbox, icon: inboxEmptyIcon, action: this.props.actions.inboxAction, notificationCount: this.props.notificationCount }),
+          r(SignupActionCard, { label: this.props.translations.listings, icon: listingsIcon, action: this.props.actions.listingsAction }),
+          r(SignupActionCard, { label: this.props.translations.profile, icon: profileIcon, action: this.props.actions.profileAction }),
+          r(SignupActionCard, { label: this.props.translations.settings, icon: settingsIcon, action: this.props.actions.settingsAction }),
         ]),
-        div({ className: css.logoutArea }, [
-          this.props.isAdmin ? a({
-            className: css.adminLink,
-            style: { color: this.props.customColor },
-            ...actionProps(this.props.actions.adminDashboardAction),
-          }, this.props.translations.adminDashboard) : null,
-          a({
-            className: css.logoutLink,
-            ...actionProps(this.props.actions.logoutAction),
-          }, this.props.translations.logout),
-        ]),
+        // div({ className: css.logoutArea }, [
+        //   this.props.isAdmin ? a({
+        //     className: css.adminLink,
+        //     style: { color: this.props.customColor },
+        //     ...actionProps(this.props.actions.adminDashboardAction),
+        //   }, this.props.translations.adminDashboard) : null,
+        //   a({
+        //     className: css.logoutLink,
+        //     ...actionProps(this.props.actions.logoutAction),
+        //   }, this.props.translations.logout),
+        // ]),
       ]),
     ]);
   }
@@ -74,8 +74,8 @@ SignupButtons.propTypes = {
     listingsAction: eitherStringOrFunc.isRequired,
     profileAction: eitherStringOrFunc.isRequired,
     settingsAction: eitherStringOrFunc.isRequired,
-    adminDashboardAction: eitherStringOrFunc.isRequired,
-    logoutAction: eitherStringOrFunc.isRequired,
+    // adminDashboardAction: eitherStringOrFunc.isRequired,
+    // logoutAction: eitherStringOrFunc.isRequired,
   }).isRequired,
   translations: PropTypes.shape({
     inbox: PropTypes.string.isRequired,

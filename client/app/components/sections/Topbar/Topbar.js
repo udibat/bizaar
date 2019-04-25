@@ -21,6 +21,8 @@ import Menu from '../../composites/Menu/Menu';
 import MenuMobile from '../../composites/MenuMobile/MenuMobile';
 import MenuPriority from '../../composites/MenuPriority/MenuPriority';
 import SearchBar from '../../composites/SearchBar/SearchBar';
+import SignupDropdown from '../../composites/SignupDropdown/SignupDropdown';
+
 
 const LABEL_TYPE_MENU = 'menu';
 const LABEL_TYPE_DROPDOWN = 'dropdown';
