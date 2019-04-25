@@ -1,0 +1,9 @@
+.links {
+  display: none;
+}
+
+.open {
+  & .links {
+    display: block;
+  }
+}
