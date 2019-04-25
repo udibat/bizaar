@@ -47,12 +47,23 @@ $(document).ready(function() {
     }
   });
 
-    $('.change_mark').on('change', function(){
-        var url = $(this).data('url'),
-            member_id = $(this).data('member-id'),
-            value = $(this).val();
-        $.post(url, {mark: value, person_id: member_id});
-    });
+  $('.change_mark').on('change', function(){
+      var url = $(this).data('url'),
+          member_id = $(this).data('member-id'),
+          value = $(this).val();
+      $.post(url, {mark: value, person_id: member_id});
+  });
+
+  $('#homepage-filters').on('click', '#clear_btn', function(event) {
+    event.preventDefault();
+    var form = $(this).parents('#homepage-filters');
+    form.find('input:text, input:password, input:file, select, textarea').val('');
+    form.find('input:radio, input:checkbox')
+         .removeAttr('checked').removeAttr('selected');
+    form.get(0).submit();
+  });
+
+  addNewOption();
 
 });
 
@@ -88,3 +99,28 @@ $(window).on('scroll', function() {
     }
   })();
 });
+
+function addNewOption() {
+  $('.filter-dropdown').on('click', '#add_new_option', function(event) {
+    event.preventDefault();
+    var parent = $(this).parents('.filter-dropdown');
+    var optionItem = parent.find('.option-item');
+    var clonedEl = optionItem.first().clone();
+    var optionContainer = parent.find('.option-container');
+    var count = optionItem.length + 1;
+
+    optionContainer.append(clonedEl);
+    
+    clonedEl.find('.checkbox-item').each(function(i, el) {
+      var input = $(el).find('input');
+      var label = $(el).find('label');
+
+      var id = input.attr('id');
+      var labelFor = label.attr('for');
+      
+      input.attr('id', id + count);
+      label.attr('for', labelFor + count);
+      input.prop('checked', false);
+    })
+  });
+}
