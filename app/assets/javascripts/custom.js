@@ -168,10 +168,12 @@ function priceRangeChangeName() {
     var defaultText = toggleBtn.data('default');
     var selectedText = toggleBtn.data('selected');
 
+    var textToSelect = '$' + minPrice + '- $' + maxPrice; 
+
     if(minPrice === rangeSliderMin && maxPrice === rangeSliderMax) {
       toggleBtn.text(defaultText).removeClass('selected');
     } else {
-      toggleBtn.text(`$${minPrice} - $${maxPrice}`).addClass('selected');
+      toggleBtn.text(textToSelect).addClass('selected');
     }
   })
 }
