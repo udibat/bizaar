@@ -42,7 +42,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9;
+  z-index: 21;
   height: 0;
   width: 100vw;
   background-color: #000;
@@ -76,7 +76,7 @@
   top: 0;
   left: 0;
   right: auto;
-  z-index: 10;
+  z-index: 22;
   overflow-x: hidden;
   overflow-y: auto;
   will-change: transform;

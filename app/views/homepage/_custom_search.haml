@@ -4,20 +4,23 @@
 
 = form_tag search_without_locale_path, method: :get do
   .row
-    .col-4
+    .col-4.search-item
       .input-icon-holder
         = label_tag :name_field, class: 'label-icon' do
           %i.icon-search
         = text_field_tag :name_field, '', placeholder: 'Any', class: 'input'
-    .col-3
-      = text_field_tag :lq, params[:lq], id: 'search_location', placeholder: 'Where are you?', class: 'input'
+    .col-3.search-item
+      .input-icon-holder
+        = label_tag 'location[name]', class: 'label-icon' do
+          %i.icon-map-marker
+        = text_field_tag :lq, params[:lq], id: 'search_location', placeholder: 'Where are you?', class: 'input'
       -#= hidden_field_tag 'lc', params[:lc]
       -#= hidden_field_tag 'ls', ''
       -#= hidden_field_tag 'boundingbox', params[:boundingbox]
       -#= hidden_field_tag 'distance_max', ''
       -#= hidden_field_tag "view", "grid"
 
-    .col-2
+    .col-2.search-item
       .input-icon-holder.search
         = label_tag :name_field, class: 'label-icon' do
           %i.icon-search.search-btn-icon

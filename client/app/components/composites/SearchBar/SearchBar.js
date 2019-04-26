@@ -202,7 +202,7 @@ class SearchBar extends Component {
         span({
           className: css.mobileToggleArrow,
           style: {
-            borderBottomColor: this.state.mobileSearchOpen ? bgColor : 'transparent',
+            borderBottomColor: this.state.mobileSearchOpen ? '#232c33' : 'transparent',
           },
         }),
       ]),
@@ -213,7 +213,7 @@ class SearchBar extends Component {
           this.handleSubmit();
         },
         style: {
-          backgroundColor: this.state.mobileSearchOpen ? bgColor : 'transparent',
+          backgroundColor: this.state.mobileSearchOpen ? '#232c33' : 'transparent',
         },
       }, [
         hasKeywordInput ? keywordInput : null,
@@ -223,7 +223,7 @@ class SearchBar extends Component {
           className: css.searchButton,
           dangerouslySetInnerHTML: { __html: icon },
           style: {
-            backgroundColor: this.state.mobileSearchOpen ? bgColorDarkened : 'transparent',
+            backgroundColor: this.state.mobileSearchOpen ? '#232c33' : 'transparent',
           },
         }),
         span({ className: css.focusContainer }),

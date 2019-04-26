@@ -12,7 +12,12 @@
   .wrapper-inner {
     padding-left: 45px;
     padding-right: 45px;
-    .row {
+  }
+}
+
+.search-result-container {
+  .wrapper-inner {
+    > .row {
       margin-bottom: 0;
     }
   }
@@ -271,6 +276,7 @@
   position: relative;
   .filter-action-holder {
     border-bottom: 1px solid #d0d0d0;
+    margin-bottom: 10px;
   }
 }
 
@@ -365,6 +371,14 @@
       top: 13px;
       left: 10px;
     }
+    &.selected {
+      background-color: $cust-green;
+      color: #fff;
+      &::before {
+        border-left-color: #fff;
+        border-right-color: #fff;
+      }
+    }
   }
 }
 
@@ -427,6 +441,9 @@ input[type="text"].location-input {
 .filter-btns-holder {
   margin: 15px 0;
   position: relative;
+  @media (min-width: 1125px) {
+    margin-bottom: 0;
+  }
   .btn {
     font-weight: normal;
     text-transform: capitalize;
@@ -436,6 +453,20 @@ input[type="text"].location-input {
   .more-options-btn {
     .btn {
       text-transform: uppercase;
+    }
+  }
+  & > .checkbox-item, 
+  .filters-holder, 
+  .price-range-holder, 
+  .more-options-holder {
+    min-width: 172px;
+    @media (min-width: 768px) and (max-width: 959px) {
+      width: 50%;
+      padding-left: 0;
+      margin-bottom: 10px;
+    }
+    @media (min-width: 1441px) {
+      max-width: 210px;
     }
   }
 }
@@ -560,18 +591,24 @@ input[type="text"].location-input {
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  background-color: #fff;
+  background-color: #fbfbfb;
   width: 100%;
   @include media(tablet) {
-    top: 52px;
+    top: 230px;
     left: -45px;
     transform: translateX(0);
+  }
+  @include media(mid-desktop) {
+    top: 52px;
   }
   @media (min-width: 1125px) {
     width: calc(67% + 45px);
   }
   @media (min-width: 1441px) {
     width: calc(75% + 45px);
+  }
+  .filter-data-item {
+    padding-bottom: 26px;
   }
 }
 
@@ -595,7 +632,7 @@ input[type="text"].location-input {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  margin-bottom: 10px;
+  margin-top: 10px;
   .link {
     background-color: transparent;
     color: $cust-violet;
@@ -607,6 +644,7 @@ input[type="text"].location-input {
     padding: 0;
     margin: 0;
     text-decoration: none;
+    text-transform: uppercase;
     &:hover, &:focus, &:active {
       outline: none;
     }
@@ -618,4 +656,24 @@ input[type="text"].location-input {
 
 .option-item {
   margin-bottom: 30px;
+}
+
+.search-holder {
+  &:not(.home-search) {
+    @include media(tablet) {
+      .search-item {
+        min-width: 50%;
+        padding-left: 0;
+        margin-bottom: 10px;
+      }
+    }
+    @include media(mid-desktop) {
+      .search-item {
+        min-width: 33.33%;
+      }
+    }
+    @media (min-width: 1221px) {
+      min-width: 1px;
+    }
+  }
 }

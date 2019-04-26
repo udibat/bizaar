@@ -6,7 +6,7 @@ var i = 0,
 
 // Typerwrite text content. Use a pipe to indicate the start of the second line "|".  
 var textArray = [
-  "Learn to play guitar Teach fishing|Peer-to-peer learning where you can teach/learn anything!"
+  "Learn to play guitar Teach fishing|A peer-to-peer marketplace for learning and teaching anything you can think of"
 ];
 
 // Speed (in milliseconds) of typing.

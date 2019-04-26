@@ -139,12 +139,15 @@
     background-color: $cust-violet;
     border: 1px solid $cust-violet;
     display: block;
-    padding: 9px 26px;
-    width: 126px;
+    padding: 12px 26px;
+    width: 100%;
+    max-width: 170px;
   }
   input[type='text'] {
     border-color: #fff;
     box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.17);
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }
 
@@ -263,6 +266,11 @@
   .item-inner {
     margin-left: -10px;
   }
+  &:not(.become) {
+    .link-holder {
+      margin-top: 35px;
+    }
+  }
 }
 
 // END: ways
@@ -330,6 +338,12 @@
   background-color: #fff;
   padding: 17px 0;
   min-height: 200px;
+}
+
+.homepage-listings-list {
+  .home-fluid-thumbnail-grid-author {
+    min-height: 160px;
+  }
 }
 
 .fluid-thumbnail-grid-image-image-container {
@@ -450,6 +464,7 @@
 @include media(desktop) {
   .home-fluid-thumbnail-grid-wide.homepage-listings-list {
     .home-fluid-thumbnail-grid-item {
+      width: 33.33%;
       &:first-of-type {
         width: 45%;
       }

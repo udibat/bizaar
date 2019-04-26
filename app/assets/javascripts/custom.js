@@ -66,10 +66,14 @@ $(document).ready(function() {
     form.find('input:text, input:password, input:file, select, textarea').val('');
     form.find('input:radio, input:checkbox')
          .removeAttr('checked').removeAttr('selected');
+    resetPriceRange(); 
     form.get(0).submit();
   });
 
   addNewOption();
+
+  changeDropdownName();
+  priceRangeChangeName();
 
 });
 
@@ -123,10 +127,57 @@ function addNewOption() {
 
       var id = input.attr('id');
       var labelFor = label.attr('for');
-      
+
       input.attr('id', id + count);
       label.attr('for', labelFor + count);
       input.prop('checked', false);
     })
   });
+}
+
+// TODO: call this function when form submit
+function changeDropdownName() {
+  $('.filters-holder').on('change', 'input', function(){
+    var $this = $(this);
+    var parent = $this.parents('.filters-holder');
+    var checkLength = parent.find('input:checked').length;
+
+    var toggleBtn = parent.find('.toggle-btn');
+    var defaultText = toggleBtn.data('default');
+    var selectedText = toggleBtn.data('selected');
+
+    if(checkLength) {
+      toggleBtn.text(selectedText).addClass('selected');
+    } else {
+      toggleBtn.text(defaultText).removeClass('selected');
+    }
+  })
+}
+
+
+function priceRangeChangeName() {
+  $('.price-range-holder').on('change', '#range-slider-price', function(){
+    var minPrice = parseInt($('#price_min').val());
+    var maxPrice = parseInt($('#price_max').val());
+    var rangeSliderMin = parseInt($('.range-slider').data('min'));
+    var rangeSliderMax = parseInt($('.range-slider').data('max'));
+
+    var $this = $(this);
+    var parent = $this.parents('.price-range-holder');
+    var toggleBtn = parent.find('.toggle-btn');
+    var defaultText = toggleBtn.data('default');
+    var selectedText = toggleBtn.data('selected');
+
+    if(minPrice === rangeSliderMin && maxPrice === rangeSliderMax) {
+      toggleBtn.text(defaultText).removeClass('selected');
+    } else {
+      toggleBtn.text(`$${minPrice} - $${maxPrice}`).addClass('selected');
+    }
+  })
+}
+
+function resetPriceRange() {
+  var rangeSliderMin = $('.range-slider').data('min');
+  var rangeSliderMax = $('.range-slider').data('max');
+  $('#range-slider-price').val([rangeSliderMin, rangeSliderMax]);
 }
