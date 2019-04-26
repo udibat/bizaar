@@ -6,6 +6,7 @@ function display_rating(dom) {
         var opts = {
             readOnly: !$(this).data('target'),
             half: true,
+            path: '',
             score: parseFloat($(this).data('rating')),
             starOn: starOn,
             starOff: starOff,
