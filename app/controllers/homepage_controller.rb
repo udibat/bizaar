@@ -145,7 +145,7 @@ class HomepageController < ApplicationController
   end
 
   def homepage
-    @homepage_listings = Listing.all.limit(6)
+    @homepage_listings = Listing.currently_open.all.limit(6)
   end
 
   private
