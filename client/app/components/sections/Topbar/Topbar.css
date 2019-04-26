@@ -63,14 +63,21 @@
   /* End of base style overrides. */
 
   & .topbarLogo {
-    max-height: var(--Topbar_logoMaxHeightMobile);
-    max-width: 70%;
+    /*max-height: var(--Topbar_logoMaxHeightMobile);
+    max-width: 70%;*/
     position: absolute;
     top: 0;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 20;
     margin-right: 0;
+    max-height: 100%;
+    min-height: 64px;
+    width: 202px;
+
+    @media (min-width: 660px) and (max-width: 1008px) {
+      left: 180px;
+    }
 
     & span {
       @media (max-width: 320px) {
