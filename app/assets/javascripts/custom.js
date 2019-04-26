@@ -60,6 +60,7 @@ $(document).ready(function() {
     form.find('input:text, input:password, input:file, select, textarea').val('');
     form.find('input:radio, input:checkbox')
          .removeAttr('checked').removeAttr('selected');
+    resetPriceRange(); 
     form.get(0).submit();
   });
 
@@ -140,21 +141,37 @@ function changeDropdownName() {
     var selectedText = toggleBtn.data('selected');
 
     if(checkLength) {
-      toggleBtn.text(selectedText);
+      toggleBtn.text(selectedText).addClass('selected');
     } else {
-      toggleBtn.text(defaultText);
+      toggleBtn.text(defaultText).removeClass('selected');
     }
   })
 }
 
+
 function priceRangeChangeName() {
   $('.price-range-holder').on('change', '#range-slider-price', function(){
-    var val = $('#price_min').val();
-    var rangeSliderMin = $('.range-slider').data('min');
-    var rangeSliderMax = $('.range-slider').data('max');
+    var minPrice = parseInt($('#price_min').val());
+    var maxPrice = parseInt($('#price_max').val());
+    var rangeSliderMin = parseInt($('.range-slider').data('min'));
+    var rangeSliderMax = parseInt($('.range-slider').data('max'));
 
-    $(this).val([rangeSliderMin, rangeSliderMax]);
+    var $this = $(this);
+    var parent = $this.parents('.price-range-holder');
+    var toggleBtn = parent.find('.toggle-btn');
+    var defaultText = toggleBtn.data('default');
+    var selectedText = toggleBtn.data('selected');
 
-    console.log('test priceRangeChangeName', rangeSliderMin, rangeSliderMax)
+    if(minPrice === rangeSliderMin && maxPrice === rangeSliderMax) {
+      toggleBtn.text(defaultText).removeClass('selected');
+    } else {
+      toggleBtn.text(`$${minPrice} - $${maxPrice}`).addClass('selected');
+    }
   })
+}
+
+function resetPriceRange() {
+  var rangeSliderMin = $('.range-slider').data('min');
+  var rangeSliderMax = $('.range-slider').data('max');
+  $('#range-slider-price').val([rangeSliderMin, rangeSliderMax]);
 }

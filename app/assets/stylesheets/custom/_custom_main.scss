@@ -78,7 +78,9 @@ body {
 .input-icon-holder {
   position: relative;
   &.search {
-    display: inline-block;
+    .label-icon {
+      left: 23px;
+    }
   }
 }
 

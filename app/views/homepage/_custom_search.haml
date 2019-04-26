@@ -10,7 +10,10 @@
           %i.icon-search
         = text_field_tag :name_field, '', placeholder: 'Any', class: 'input'
     .col-3
-      = text_field_tag :lq, params[:lq], id: 'search_location', placeholder: 'Where are you?', class: 'input'
+      .input-icon-holder
+        = label_tag 'location[name]', class: 'label-icon' do
+          %i.icon-map-marker
+        = text_field_tag :lq, params[:lq], id: 'search_location', placeholder: 'Where are you?', class: 'input'
       -#= hidden_field_tag 'lc', params[:lc]
       -#= hidden_field_tag 'ls', ''
       -#= hidden_field_tag 'boundingbox', params[:boundingbox]

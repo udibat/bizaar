@@ -366,6 +366,14 @@
       top: 13px;
       left: 10px;
     }
+    &.selected {
+      background-color: $cust-green;
+      color: #fff;
+      &::before {
+        border-left-color: #fff;
+        border-right-color: #fff;
+      }
+    }
   }
 }
 
@@ -437,6 +445,14 @@ input[type="text"].location-input {
   .more-options-btn {
     .btn {
       text-transform: uppercase;
+    }
+  }
+  @media (min-width: 1441px) {
+    .checkbox-item, 
+    .filters-holder, 
+    .price-range-holder, 
+    .more-options-holder {
+      max-width: 210px;
     }
   }
 }
@@ -573,6 +589,9 @@ input[type="text"].location-input {
   }
   @media (min-width: 1441px) {
     width: calc(75% + 45px);
+  }
+  .filter-data-item {
+    padding-bottom: 26px;
   }
 }
 
