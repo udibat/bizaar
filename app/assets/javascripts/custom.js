@@ -1,9 +1,15 @@
 function display_rating(dom) {
     dom.find(".stars[data-rating]").each(function(){
+        var starOn = $('#raty_star_on').data('url'),
+            starOff = $('#raty_star_off').data('url'),
+            starHalf = $('#raty_star_half').data('url');
         var opts = {
             readOnly: !$(this).data('target'),
             half: true,
-            score: parseFloat($(this).data('rating'))
+            score: parseFloat($(this).data('rating')),
+            starOn: starOn,
+            starOff: starOff,
+            starHalf: starHalf,
         };
 
         if (!opts.readOnly) {
@@ -11,7 +17,6 @@ function display_rating(dom) {
             opts.targetType = 'number';
             opts.targetKeep = true;
         }
-        console.log(opts);
         $(this).raty(opts);
     });
 }
