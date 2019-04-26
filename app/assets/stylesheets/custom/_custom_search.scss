@@ -455,11 +455,16 @@ input[type="text"].location-input {
       text-transform: uppercase;
     }
   }
-  .checkbox-item, 
+  & > .checkbox-item, 
   .filters-holder, 
   .price-range-holder, 
   .more-options-holder {
     min-width: 172px;
+    @media (min-width: 768px) and (max-width: 959px) {
+      width: 50%;
+      padding-left: 0;
+      margin-bottom: 10px;
+    }
     @media (min-width: 1441px) {
       max-width: 210px;
     }
@@ -589,9 +594,12 @@ input[type="text"].location-input {
   background-color: #fbfbfb;
   width: 100%;
   @include media(tablet) {
-    top: 52px;
+    top: 230px;
     left: -45px;
     transform: translateX(0);
+  }
+  @include media(mid-desktop) {
+    top: 52px;
   }
   @media (min-width: 1125px) {
     width: calc(67% + 45px);
@@ -648,4 +656,24 @@ input[type="text"].location-input {
 
 .option-item {
   margin-bottom: 30px;
+}
+
+.search-holder {
+  &:not(.home-search) {
+    @include media(tablet) {
+      .search-item {
+        min-width: 50%;
+        padding-left: 0;
+        margin-bottom: 10px;
+      }
+    }
+    @include media(mid-desktop) {
+      .search-item {
+        min-width: 33.33%;
+      }
+    }
+    @media (min-width: 1221px) {
+      min-width: 1px;
+    }
+  }
 }
