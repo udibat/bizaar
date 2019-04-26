@@ -340,6 +340,12 @@
   min-height: 200px;
 }
 
+.homepage-listings-list {
+  .home-fluid-thumbnail-grid-author {
+    min-height: 160px;
+  }
+}
+
 .fluid-thumbnail-grid-image-image-container {
   padding-bottom: 268px;
 }
@@ -458,6 +464,7 @@
 @include media(desktop) {
   .home-fluid-thumbnail-grid-wide.homepage-listings-list {
     .home-fluid-thumbnail-grid-item {
+      width: 33.33%;
       &:first-of-type {
         width: 45%;
       }

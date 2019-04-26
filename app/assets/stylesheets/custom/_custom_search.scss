@@ -12,7 +12,12 @@
   .wrapper-inner {
     padding-left: 45px;
     padding-right: 45px;
-    .row {
+  }
+}
+
+.search-result-container {
+  .wrapper-inner {
+    > .row {
       margin-bottom: 0;
     }
   }
@@ -436,6 +441,9 @@ input[type="text"].location-input {
 .filter-btns-holder {
   margin: 15px 0;
   position: relative;
+  @media (min-width: 1125px) {
+    margin-bottom: 0;
+  }
   .btn {
     font-weight: normal;
     text-transform: capitalize;
@@ -447,11 +455,12 @@ input[type="text"].location-input {
       text-transform: uppercase;
     }
   }
-  @media (min-width: 1441px) {
-    .checkbox-item, 
-    .filters-holder, 
-    .price-range-holder, 
-    .more-options-holder {
+  .checkbox-item, 
+  .filters-holder, 
+  .price-range-holder, 
+  .more-options-holder {
+    min-width: 172px;
+    @media (min-width: 1441px) {
       max-width: 210px;
     }
   }
@@ -577,7 +586,7 @@ input[type="text"].location-input {
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  background-color: #fff;
+  background-color: #fbfbfb;
   width: 100%;
   @include media(tablet) {
     top: 52px;
