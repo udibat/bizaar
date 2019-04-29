@@ -45,6 +45,23 @@ const profileActions = function profileActions(routes, username) {
   } : null;
 };
 
+const signupDropdownProps = () => {
+  return {
+    links: [
+      {
+        image: 'http://devjournal.ru/wp-content/uploads/2015/07/ReactJS.png',
+        href: '#',
+        text: 'text1'
+      },
+      {
+        image: 'http://codewinds.com/assets/article/reactjs-conf-logo-dsc_5109-800.jpg',
+        href: '#',
+        text: 'text2'
+      }
+    ]
+  }
+};
+
 const avatarDropdownProps = (avatarDropdown, customColor, username, isAdmin, notificationCount, routes) => {
   const color = customColor || styleVariables['--customColorFallback'];
   const actions = {
@@ -247,7 +264,10 @@ class Topbar extends Component {
         null),
       r(Logo, { ...this.props.logo, className: classNames(css.topbarLogo, textLogo), color: marketplaceColor1 }),
       div({ className: css.topbarMediumSpacer }),
-      r(SignupDropdown),
+      r(SignupDropdown, {
+        ...signupDropdownProps(),
+        className: css.topbarSignupDropdown
+      }),
       this.props.avatarDropdown && loggedInUsername ?
         r(AvatarDropdown, {
           ...avatarDropdownProps(this.props.avatarDropdown, marketplaceColor1,

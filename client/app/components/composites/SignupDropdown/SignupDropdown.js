@@ -9,6 +9,14 @@ import css from './SignupDropdown.css';
 
 const HOVER_TIMEOUT = 250;
 
+function SignupLinks(props) {
+  return div({
+    className: className,
+    href: this.props.href
+  });
+}
+
+
 class SignupDropdown extends Component {
   state = {
     isOpen: false
@@ -20,20 +28,29 @@ class SignupDropdown extends Component {
   render () {
     const openClass = this.state.isOpen ? css.open : '';
 
+    const signUpLinksTemplate = this.props.links.map(link => {
+      return r.a({href: link.href}, [
+        link.text,
+        r.img({src: link.image})
+      ])
+    })
+
     const signUp = div({
       onMouseOver: this.handleMouseOver,
       onMouseLeave: this.handleMouseLeave,
-    }, ['initials']);
+    }, ['Sign Up']);
 
     const links = div({
-      className: classNames(css.links)
-    }, ['links']);
+      className: classNames(css.links),
+      onMouseOver: this.handleMouseOver,
+      onMouseLeave: this.handleMouseLeave,
+    }, [signUpLinksTemplate]);
 
 
     let resultTemplate = [signUp, links];
 
     return div({
-      className: classNames('SignupDropdown', openClass),
+      className: classNames('SignupDropdown', this.props.className, css.signupDropdown, openClass),
     }, resultTemplate)
   }
 
