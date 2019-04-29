@@ -16,7 +16,6 @@ body {
     }
   }
   &.opened {
-    overflow: hidden;
     &::after {
       content: '';
       position: absolute;
@@ -79,7 +78,9 @@ body {
 .input-icon-holder {
   position: relative;
   &.search {
-    display: inline-block;
+    .label-icon {
+      left: 23px;
+    }
   }
 }
 
@@ -191,6 +192,11 @@ img {
   &--violet {
     background-color: $cust-violet;
     color: #fff;
+    border: 2px solid $cust-violet;
+    &:hover, &:focus, &:active {
+      background-color: #fff;
+      color: $cust-violet;
+    }
   }
   &--green {
     background-color: $cust-green;
@@ -241,6 +247,9 @@ img {
     }
     .btn--right {
       margin-left: 15px;
+    }
+    .btn {
+      width: auto;
     }
   }
 }
@@ -454,5 +463,12 @@ input:checked + .slider:before {
 .text-right {
   @include media(tablet) {
     text-align: right;
+  }
+}
+
+.home-toolbar-button-group-button.selected, 
+.home-toolbar-show-filters-button.selected {
+  .home-toolbar-button-text {
+    color: #fff;
   }
 }

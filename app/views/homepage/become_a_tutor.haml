@@ -85,64 +85,81 @@
       %p.section-subtitle.text-right Come join a community that values your skills and talents 
     .text.text-right
       At Bizaar you can teach literally anything as long as the subject isn't inappropriate or particularly dangerous for either yourself or our members. We focus on fostering a safe environment where both our members and instructors feel free to practice their trades and passions whatever those may be. The most important restriction is that the experience should be fun!
-.ways
+.ways.become
   .title-holder
     %h2.section-title-big Different ways to help you reach your Members
     %p.section-subtitle We have 3 types of classes to accomodate your teaching style and scheduling.
   .container
     .row
       .col-4
-        .image-block
-          = image_tag 'homepage/ways1.png'
-        .text
-          %h3.small-title One and Done Class
-          %p Got a skill or talent that only takes a single session to learn? One and Done’s are just that!
-          %ul.list
-            %li.item
-              %span Your Class always consists of One session.
-            %li.item
-              %span This class is ideal for simple skills, such as “How to Make a Spaghetti Dinner”, or as an Introductory Class for a Pay as You Go Class.
-            %li.item
-              %span Paid 2 hours after each session.
-            %li.item
-              = link_to "Bizaar Service Fee", "#", class: 'link'
-              %span is 15%
+        .ways-item
+          .image-block
+            = image_tag 'homepage/ways1.png'
+          .text
+            %h3.small-title One and Done Class
+            %p Got a skill or talent that only takes a single session to learn? One and Done’s are just that!
+            %ul.list
+              %li.item
+                %span.item-inner
+                  %span Your Class always consists of One session.
+              %li.item
+                %span.item-inner
+                  %span This class is ideal for simple skills, such as “How to Make a Spaghetti Dinner”, or as an Introductory Class for a Pay as You Go Class.
+              %li.item
+                %span.item-inner
+                  %span Paid 2 hours after each session.
+              %li.item
+                %span.item-inner
+                  = link_to "Bizaar Service Fee", "#", class: 'link'
+                %span is 15%
       .col-4
-        .image-block
-          = image_tag 'homepage/ways2.png'
-        .text
-          %h3.small-title Pay as You Go Class
-          %p A Pay As You Go Class is more flexible for both you and the Members, but requires more ongoing management. 
-          %ul.list
-            %li.item
-              %span Your class dates are adjustable.
-            %li.item
-              %span You decide how much to charge for how many Sessions.
-            %li.item
-              %span Flexible class structure.
-            %li.item
-              %span Paid 2 hours after each session.
-            %li.item
-              = link_to "Bizaar Service Fee", "#", class: 'link'
-              %span is 10% - 15% 
+        .ways-item
+          .image-block
+            = image_tag 'homepage/ways2.png'
+          .text
+            %h3.small-title Pay as You Go Class
+            %p A Pay As You Go Class is more flexible for both you and the Members, but requires more ongoing management. 
+            %ul.list
+              %li.item
+                %span.item-inner
+                  %span Your class dates are adjustable.
+              %li.item
+                %span.item-inner
+                  %span You decide how much to charge for how many Sessions.
+              %li.item
+                %span.item-inner
+                  %span Flexible class structure.
+              %li.item
+                %span.item-inner
+                  %span Paid 2 hours after each session.
+              %li.item
+                %span.item-inner
+                  = link_to "Bizaar Service Fee", "#", class: 'link'
+                  %span is 10% - 15% 
       .col-4
-        .image-block
-          = image_tag 'homepage/ways3.png'
-        .text
-          %h3.small-title Committed Class
-          %p A Committed Class class is ideal for Instructors who have a planned class structure, and can commit to a set weekly schedule.
-          %ul.list
-            %li.item 
-              %span The Class starts and ends on a defined date.
-            %li.item 
-              %span Your weekly class dates are not adjustable.
-            %li.item 
-              %span You can create a class that lasts from between 2 weeks to 6 months.
-            %li.item 
-              %span Paid every 2 weeks.
-            %li.item 
-              = link_to 'Bizaar Service Fee', '#', class: 'link'
-              %span  is 8% to 12%
+        .ways-item
+          .image-block
+            = image_tag 'homepage/ways3.png'
+          .text
+            %h3.small-title Committed Class
+            %p A Committed Class class is ideal for Instructors who have a planned class structure, and can commit to a set weekly schedule.
+            %ul.list
+              %li.item
+                %span.item-inner 
+                  %span The Class starts and ends on a defined date.
+              %li.item
+                %span.item-inner 
+                  %span Your weekly class dates are not adjustable.
+              %li.item
+                %span.item-inner 
+                  %span You can create a class that lasts from between 2 weeks to 6 months.
+              %li.item
+                %span.item-inner 
+                  %span Paid every 2 weeks.
+              %li.item
+                %span.item-inner 
+                  = link_to 'Bizaar Service Fee', '#', class: 'link'
+                  %span  is 8% to 12%
     = link_to 'Learn more about how to start creating classes', '#', class: 'btn btn--violet-transp single-btn'
 .ready-to-tutor
   .container

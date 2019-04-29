@@ -31,7 +31,7 @@
   right: 0;
   top: auto;
   padding-left: var(--SearchBar_sidePaddingMobile);
-  z-index: var(--SearchBar_formZIndex);
+  z-index: 20;
   transition: height 1s ease-in;
   font-size: 16px;
 
@@ -137,39 +137,47 @@
   }
 
   &::placeholder {
-    color: var(--SearchBar_mobilePlaceholderColor);
+    /*color: var(--SearchBar_mobilePlaceholderColor);*/
+    color: #888888;
   }
 
   @media (--large-viewport) {
-    color: var(--SearchBar_textColor);
+    /*color: var(--SearchBar_textColor);*/
+    color: #888888;
     margin: var(--SearchBar_textPadding) 0;
     border: none;
 
     &::placeholder {
-      color: var(--SearchBar_textColor);
+      /*color: var(--SearchBar_textColor);*/
       transition: color 0.1s ease-in;
+      color: #888888;
     }
 
     @nest .form:hover & {
-      color: var(--SearchBar_textColorActive);
+      /*color: var(--SearchBar_textColorActive);*/
+      color: #888888;
 
       &::placeholder {
-        color: var(--SearchBar_textColorActive);
+        /*color: var(--SearchBar_textColorActive);*/
+        color: #888888;
       }
 
       &:focus {
         /* focus color should override the active color */
-        color: var(--SearchBar_textColorFocus);
+        /*color: var(--SearchBar_textColorFocus);*/
+        color: #888888;
       }
     }
 
     &:focus {
       outline: none;
-      color: var(--SearchBar_textColorFocus);
+      /*color: var(--SearchBar_textColorFocus);*/
+      color: #888888;
 
       /* Trigger focus styles for the search icon SVG when these inputs have focus. */
       & ~ .searchButton svg {
-        stroke: var(--SearchBar_iconColorActive);
+        /*stroke: var(--SearchBar_iconColorActive);*/
+        stroke: #888888;
       }
     }
   }
@@ -225,6 +233,7 @@
 }
 
 .locationInput {
+  display: none;
   @media (--large-viewport) {
     width: calc(100% - var(--SearchBar_keywordInputWidthNarrow));
   }
@@ -311,7 +320,8 @@
     transition: stroke 0.1s ease-in;
 
     @media (--large-viewport) {
-      stroke: var(--SearchBar_iconColor);
+      /*stroke: var(--SearchBar_iconColor);*/
+      stroke: #888888;
       top: calc(var(--SearchBar_height) / 2 - var(--SearchBar_iconSize) / 2);
       left: calc(var(--SearchBar_height) / 2 - var(--SearchBar_iconSize) / 2);
     }

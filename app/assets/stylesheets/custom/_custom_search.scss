@@ -12,7 +12,12 @@
   .wrapper-inner {
     padding-left: 45px;
     padding-right: 45px;
-    .row {
+  }
+}
+
+.search-result-container {
+  .wrapper-inner {
+    > .row {
       margin-bottom: 0;
     }
   }
@@ -44,16 +49,6 @@
   }
   @media (min-width: 1441px) {
     width: 75%;
-  }
-}
-
-.filter-data {
-  width: 100%;
-  @media (min-width: 1125px) {
-    width: calc(67% + 45px);
-  }
-  @media (min-width: 1441px) {
-    width: calc(75% + 45px);
   }
 }
 
@@ -199,8 +194,12 @@
     }
     .label {
       font-size: 17px;
-      padding: 10px 8px;
-      min-width: 41px;
+      padding: 10px 5px;
+      min-width: 37px;
+      @include media(large-mobile) {
+        min-width: 41px;
+        padding: 10px 8px;
+      }
     }
   }
 }
@@ -265,16 +264,53 @@
 }
 
 .schedule-data,
-.price-data {
+.price-data,
+.class-type-data {
   font-size: 15px;
   padding: 20px 10px;
   width: 342px;
   background-color: #fff;
-  border: 2px solid $cust-green;
+}
+
+.class-type-holder {
+  position: relative;
+  .filter-action-holder {
+    border-bottom: 1px solid #d0d0d0;
+    margin-bottom: 10px;
+  }
+}
+
+.class-type-data {
+  width: 275px;
+  .checkbox-holder {
+    flex-wrap: wrap;
+  }
+  .checkbox-item {
+    width: 100%;
+  }
+  .label {
+    text-align: left;
+    font-weight: normal;
+    font-family: 'Sintony', sans-serif;
+  }
+  .default-checkbox input[type="checkbox"] + .label {
+    font-size: 13px;
+    padding-left: 23px;
+  }
+  .link {
+    text-decoration: underline;
+    font-size: 13px;
+    font-family: 'Sintony', sans-serif;
+    font-weight: bold;
+  }
 }
 
 .price-data {
-  width: 250px;
+  width: 370px;
+}
+
+.filter-price-text {
+  margin-top: 15px;
 }
 
 .day-time {
@@ -332,8 +368,16 @@
       transform: rotate(-45deg);
       display: inline-block;
       position: absolute;
-      top: 9;
+      top: 13px;
       left: 10px;
+    }
+    &.selected {
+      background-color: $cust-green;
+      color: #fff;
+      &::before {
+        border-left-color: #fff;
+        border-bottom-color: #fff;
+      }
     }
   }
 }
@@ -366,7 +410,7 @@ input[type="text"].location-input {
   margin: 0 10px;
   border: none;
   border-radius: 0;
-  box-shadow: 2px 2px 1px rgba(1, 1, 1, 0.17);
+  box-shadow: 0.5px 0.866px 1px rgba(1, 1, 1, 0.17);
 }
 
 input[type="text"].distance-input {
@@ -397,6 +441,34 @@ input[type="text"].location-input {
 .filter-btns-holder {
   margin: 15px 0;
   position: relative;
+  @media (min-width: 1125px) {
+    margin-bottom: 0;
+  }
+  .btn {
+    font-weight: normal;
+    text-transform: capitalize;
+    padding: 12.5px 20px;
+    box-shadow: 0.5px 0.866px 1px rgba(1, 1, 1, 0.17);
+  }
+  .more-options-btn {
+    .btn {
+      text-transform: uppercase;
+    }
+  }
+  & > .checkbox-item, 
+  .filters-holder, 
+  .price-range-holder, 
+  .more-options-holder {
+    min-width: 172px;
+    @media (min-width: 768px) and (max-width: 959px) {
+      width: 50%;
+      padding-left: 0;
+      margin-bottom: 10px;
+    }
+    @media (min-width: 1441px) {
+      max-width: 210px;
+    }
+  }
 }
 
 .price-range-holder, 
@@ -407,7 +479,8 @@ input[type="text"].location-input {
 }
 
 .price-range-holder, 
-.schedule-holder {
+.schedule-holder,
+.class-type-holder {
   &.active {
     .filter-title-btn {
       z-index: 10;
@@ -415,6 +488,17 @@ input[type="text"].location-input {
     }
     .filter-dropdown {
       display: block;
+    }
+    .dropdown-btn {
+      .btn {
+        background-color: $cust-green;
+        color: #fff;
+        &::before {
+          border-color: #fff;
+          top: 18px;
+          transform: rotate(135deg);
+        }
+      }
     }
   }
 }
@@ -465,6 +549,12 @@ input[type="text"].location-input {
       height: 100%;
       width: calc(33% - 2.6em);
     }
+    @media (min-width: 1441px) {
+      &.absolute,
+      &.fixed {
+        width: calc(25% - 2.2em);
+      }
+    }
   }
 }
 
@@ -481,19 +571,45 @@ input[type="text"].location-input {
 }
 
 .schedule-data,
-.price-data {
-  top: 37px;
-  left: 0.75em;
+.price-data,
+.class-type-data {
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
+  max-width: calc(100vw - 2%);
+  @include media(small-tablet) {
+    left: 0.75em;
+    transform: translateX(0);
+  }
 }
 
 .filter-data {
   padding: 70px 20px 50px 20px;
   position: absolute;
-  top: 52px;
-  left: -45px;
+  top: 326px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
-  background-color: #fff;
+  background-color: #fbfbfb;
+  width: 100%;
+  @include media(tablet) {
+    top: 230px;
+    left: -45px;
+    transform: translateX(0);
+  }
+  @include media(mid-desktop) {
+    top: 52px;
+  }
+  @media (min-width: 1125px) {
+    width: calc(67% + 45px);
+  }
+  @media (min-width: 1441px) {
+    width: calc(75% + 45px);
+  }
+  .filter-data-item {
+    padding-bottom: 26px;
+  }
 }
 
 .search-result-container {
@@ -508,6 +624,56 @@ input[type="text"].location-input {
       bottom: 0;
       background-color: rgba(#171717, 0.2);
       z-index: 9;
+    }
+  }
+}
+
+.filter-action-holder {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  margin-top: 10px;
+  .link {
+    background-color: transparent;
+    color: $cust-violet;
+    font-size: 13px;
+    font-family: 'Sintony', sans-serif;
+    font-weight: bold;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    &:hover, &:focus, &:active {
+      outline: none;
+    }
+    &.gray {
+      color: #c6c6c6;
+    }
+  }
+}
+
+.option-item {
+  margin-bottom: 30px;
+}
+
+.search-holder {
+  &:not(.home-search) {
+    @include media(tablet) {
+      .search-item {
+        min-width: 50%;
+        padding-left: 0;
+        margin-bottom: 10px;
+      }
+    }
+    @include media(mid-desktop) {
+      .search-item {
+        min-width: 33.33%;
+      }
+    }
+    @media (min-width: 1221px) {
+      min-width: 1px;
     }
   }
 }

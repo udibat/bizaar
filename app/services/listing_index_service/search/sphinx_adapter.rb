@@ -61,6 +61,15 @@ module ListingIndexService::Search
         DatabaseSearchHelper.success_result(0, [], nil)
       else
 
+        geo_search = parse_geo_search_params(search)
+
+        coords = Maybe(search[:boundingbox]).split(',').or_else(nil)
+        if coords
+          sw_lat, sw_lng, ne_lat, ne_lng = coords
+          @latitude = radians(sw_lat.to_f)..radians(ne_lat.to_f)
+          @longitude = radians(sw_lng.to_f)..radians(ne_lng.to_f)
+        end
+
         with = HashUtils.compact(
           {
             community_id: community_id,
@@ -68,6 +77,9 @@ module ListingIndexService::Search
             listing_shape_id: search[:listing_shape_id],
             price_cents: search[:price_cents],
             listing_id: numeric_search_match_listing_ids,
+            geodist: geo_search[:distance_max],
+            latitude: @latitude,
+            longitude: @longitude
           })
 
         selection_groups = search[:fields].select { |v| v[:type] == :selection_group }
@@ -89,16 +101,41 @@ module ListingIndexService::Search
           with: with,
           with_all: with_all,
           order: 'sort_date DESC',
+          geo: geo_search[:origin],
           max_query_time: 1000 # Timeout and fail after 1s
         )
 
         begin
-          DatabaseSearchHelper.success_result(models.total_entries, models, includes)
+          distances_hash = geo_search[:origin] ? collect_geo_distances(models, search[:distance_unit]) : {}
+          DatabaseSearchHelper.success_result(models.total_entries, models, includes, distances_hash)
         rescue ThinkingSphinx::SphinxError => e
           Result::Error.new(e)
         end
       end
 
+    end
+
+    DISTANCE_UNIT_FACTORS = { miles: 1609.0, km: 1000.0 }
+
+    def parse_geo_search_params(search)
+      return {} unless search[:latitude].present? && search[:longitude].present?
+      geo_params = { order: (search[:sort] == :distance ? 'geodist ASC' : nil), origin: [radians(search[:latitude]), radians(search[:longitude])] }
+      if search[:distance_max].present?
+        max_distance_meters = search[:distance_max] * DISTANCE_UNIT_FACTORS[search[:distance_unit]]
+        geo_params[:distance_max] = 0.0..max_distance_meters.to_f
+      end
+      geo_params
+    end
+
+    def radians(degrees)
+      degrees * Math::PI / 180
+    end
+
+    def collect_geo_distances(models, geo_unit)
+      models.each_with_object({}) do |listing, result|
+        distance = listing.distance / DISTANCE_UNIT_FACTORS[geo_unit]
+        result[listing.id] = { distance_unit: geo_unit, distance: distance }
+      end
     end
 
     def search_out_of_bounds?(per_page, page)

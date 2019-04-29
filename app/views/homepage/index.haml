@@ -22,7 +22,7 @@
     - hidden_description = !@current_community.show_description? ? "hidden-title-part" : ""
     %h1.marketplace-lander-content-title{class: hidden_slogan}= community_slogan.html_safe
     %p.marketplace-lander-content-description{class: hidden_description}= community_description.html_safe
-    - unless (is_homepage && !@current_community.private? && FeatureFlagHelper.feature_enabled?(:topbar_v1))
+    - unless is_homepage && !@current_community.private? && FeatureFlagHelper.feature_enabled?(:topbar_v1)
       .search-form
         - if @current_community.private?
           %a.inline-big-button{href: sign_up_path}
@@ -63,51 +63,82 @@
         .col-2.book-immediately.checkbox-item.no-pseudo
           = check_box_tag :book_immed, nil, false, class: 'input'
           = label_tag :book_immed, 'Book Immediately', class: 'btn btn--green-transp label'
-        .col-2.schedule-holder
+        .col-2.schedule-holder.filters-holder
           .schedule-btn.dropdown-btn.filter-title-btn
-            .btn.btn--green-transp Schedule - Any
+            .btn.btn--green-transp.toggle-btn{'data-default'=>'Schedule - Any', 'data-selected' => 'Schedule Selected' } Schedule - Any
           .schedule-data.filter-dropdown
             .chosen Monday and Wednesday Evenings
-            .checkbox-holder
-              .checkbox-item.no-pseudo.days
-                = check_box_tag :mon, nil, false, class: 'input'
-                = label_tag :mon, 'M', class: 'btn btn--green-transp label'
-              .checkbox-item.no-pseudo.days
-                = check_box_tag :tus, nil, false, class: 'input'
-                = label_tag :tus, 'Tu', class: 'btn btn--green-transp label'
-              .checkbox-item.no-pseudo.days
-                = check_box_tag :wed, nil, false, class: 'input'
-                = label_tag :wed, 'W', class: 'btn btn--green-transp label'
-              .checkbox-item.no-pseudo.days
-                = check_box_tag :thur, nil, false, class: 'input'
-                = label_tag :thur, 'Th', class: 'btn btn--green-transp label'
-              .checkbox-item.no-pseudo.days
-                = check_box_tag :fr, nil, false, class: 'input'
-                = label_tag :fr, 'F', class: 'btn btn--green-transp label'
-              .checkbox-item.no-pseudo.days
-                = check_box_tag :sat, nil, false, class: 'input'
-                = label_tag :sat, 'Sa', class: 'btn btn--green-transp label'
-              .checkbox-item.no-pseudo.days
-                = check_box_tag :sun, nil, false, class: 'input'
-                = label_tag :sun, 'Su', class: 'btn btn--green-transp label'
-            .checkbox-holder
-              .checkbox-item.day-time.default-checkbox
-                = check_box_tag :mornings, nil, false, class: 'input'
-                = label_tag :mornings, 'Mornings', class: 'label'
-              .checkbox-item.day-time.default-checkbox
-                = check_box_tag :afternoons, nil, false, class: 'input'
-                = label_tag :afternoons, 'Afternoons', class: 'label'
-              .checkbox-item.day-time.default-checkbox
-                = check_box_tag :evenings, nil, false, class: 'input'
-                = label_tag :evenings, 'Evenings', class: 'label'
+            .option-container
+              .option-item
+                .checkbox-holder
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :mon, :mon, false, class: 'input'
+                    = label_tag :mon, 'M', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :tus, :tus, false, class: 'input'
+                    = label_tag :tus, 'Tu', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :wed, :wed, false, class: 'input'
+                    = label_tag :wed, 'W', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :thur, :thur, false, class: 'input'
+                    = label_tag :thur, 'Th', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :fr, :fr, false, class: 'input'
+                    = label_tag :fr, 'F', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :sat, :sat, false, class: 'input'
+                    = label_tag :sat, 'Sa', class: 'btn btn--green-transp label'
+                  .checkbox-item.no-pseudo.days
+                    = check_box_tag :sun, :sun, false, class: 'input'
+                    = label_tag :sun, 'Su', class: 'btn btn--green-transp label'
+                .checkbox-holder
+                  .checkbox-item.day-time.default-checkbox
+                    = check_box_tag :mornings, :mornings, false, class: 'input'
+                    = label_tag :mornings, 'Mornings', class: 'label'
+                  .checkbox-item.day-time.default-checkbox
+                    = check_box_tag :afternoons, :afternoons, false, class: 'input'
+                    = label_tag :afternoons, 'Afternoons', class: 'label'
+                  .checkbox-item.day-time.default-checkbox
+                    = check_box_tag :evenings, :evenings, false, class: 'input'
+                    = label_tag :evenings, 'Evenings', class: 'label'
             .another-option-block
-              = button_tag '+ Add another option', type: 'button', class: 'another-btn'
+              = button_tag '+ Add another option', type: 'button', class: 'another-btn', id: 'add_new_option'
+            .filter-action-holder
+              = submit_tag 'Apply', id: 'apply_btn', class: 'link'
+              = button_tag 'Clear', id: 'clear_btn', type: 'button', class: 'link gray'
 
         .col-2.price-range-holder
           .dropdown-btn.filter-title-btn
-            .btn.btn--green-transp Price Range - Any
+            .btn.btn--green-transp.toggle-btn{'data-default'=>'Price Range - Any', 'data-selected' => ''} Price Range - Any
           .price-data.filter-dropdown
             = render :partial => "price_filter"
+            .filter-action-holder
+              = submit_tag 'Apply', id: 'apply_btn', class: 'link'
+              = button_tag 'Clear', id: 'clear_btn', type: 'button', class: 'link gray'
+
+        .col-2.class-type-holder.filters-holder
+          .class-type-btn.dropdown-btn.filter-title-btn
+            .btn.btn--green-transp.toggle-btn{'data-default'=>'Class Type - Any', 'data-selected' => 'Class Type Selected' } Class Type - Any
+          .class-type-data.filter-dropdown
+            .checkbox-holder
+              .checkbox-item.default-checkbox
+                = check_box_tag :one_done, nil, false, class: 'input'
+                = label_tag :one_done, 'One and Done', class: 'label'
+              .checkbox-item.default-checkbox
+                = check_box_tag :pay_you_go, nil, false, class: 'input'
+                = label_tag :pay_you_go, 'Pay as You Go', class: 'label'
+              .checkbox-item.default-checkbox
+                = check_box_tag :committed, nil, false, class: 'input'
+                = label_tag :committed, 'Committed', class: 'label'
+              .checkbox-item.default-checkbox
+                = check_box_tag :any, nil, false, class: 'input'
+                = label_tag :any, 'Any', class: 'label'
+            .filter-action-holder
+              = submit_tag 'Apply', id: 'apply_btn', class: 'link'
+              = button_tag 'Clear', id: 'clear_btn', type: 'button', class: 'link gray'
+            = link_to 'I’d like to know more about Class Types', '#', class: 'link'
+
 
         .col-2.more-options-holder
           .more-options-btn
@@ -118,16 +149,13 @@
             .custom-filter-title Location
             .location-item
               Whithin 
-              = text_field :distance_from, '', class: 'distance-input'
+              = text_field_tag :distance_from, '', class: 'distance-input'
               km of
-              = text_field :location_city, '', class: 'location-input'
+              = text_field_tag :location_city, '', class: 'location-input'
           = render :partial => "filters", :locals => { show_price_filter: show_price_filter, show_custom_fields: @show_custom_fields, filters: filters }
-          .one-session.filter-data-item
-            .custom-filter-title One-session Class
-            = label_tag :switcher, class: 'switch' do
-              = check_box_tag :switcher, nil, false
-              %span.slider.round
-
+          .filter-action-holder
+            = submit_tag 'Apply', id: 'apply_btn', class: 'link'
+            = button_tag 'Clear', id: 'clear_btn', type: 'button', class: 'link gray'
 
       .home-toolbar-button-group{:class => listing_shape_menu_enabled || @category_menu_enabled ? "filters-enabled" : ""}
         - ["grid", "map"].each do |view_type|
