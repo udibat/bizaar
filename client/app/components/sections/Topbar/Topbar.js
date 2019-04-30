@@ -51,12 +51,14 @@ const signupDropdownProps = () => {
       {
         image: 'http://devjournal.ru/wp-content/uploads/2015/07/ReactJS.png',
         href: '#',
-        text: 'text1'
+        text: 'Member',
+        subtext: 'Learn'
       },
       {
         image: 'http://codewinds.com/assets/article/reactjs-conf-logo-dsc_5109-800.jpg',
         href: '#',
-        text: 'text2'
+        text: 'Instructor',
+        subtext: 'Teach'
       }
     ]
   }
@@ -264,10 +266,12 @@ class Topbar extends Component {
         null),
       r(Logo, { ...this.props.logo, className: classNames(css.topbarLogo, textLogo), color: marketplaceColor1 }),
       div({ className: css.topbarMediumSpacer }),
-      r(SignupDropdown, {
-        ...signupDropdownProps(),
-        className: css.topbarSignupDropdown
-      }),
+      loggedInUsername ?
+        null:
+        r(SignupDropdown, {
+          ...signupDropdownProps(),
+          className: css.topbarSignupDropdown
+        }),
       this.props.avatarDropdown && loggedInUsername ?
         r(AvatarDropdown, {
           ...avatarDropdownProps(this.props.avatarDropdown, marketplaceColor1,

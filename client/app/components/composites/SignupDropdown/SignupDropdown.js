@@ -29,16 +29,18 @@ class SignupDropdown extends Component {
     const openClass = this.state.isOpen ? css.open : '';
 
     const signUpLinksTemplate = this.props.links.map(link => {
-      return r.a({href: link.href}, [
-        link.text,
+      return r.a({href: link.href, className: classNames(css.item)}, [
+        r.span(link.text),
+        r.span(link.subtext),
         r.img({src: link.image})
       ])
     })
 
     const signUp = div({
+      className: classNames(css.text),
       onMouseOver: this.handleMouseOver,
       onMouseLeave: this.handleMouseLeave,
-    }, ['Sign Up']);
+    }, ['Sign up']);
 
     const links = div({
       className: classNames(css.links),
