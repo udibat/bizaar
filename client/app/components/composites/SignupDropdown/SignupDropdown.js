@@ -30,9 +30,11 @@ class SignupDropdown extends Component {
 
     const signUpLinksTemplate = this.props.links.map(link => {
       return r.a({href: link.href, className: classNames(css.item)}, [
+        r.div({className: css.imageBlock}, [
+          r.img({src: link.image})
+        ]),
         r.span(link.text),
         r.span(link.subtext),
-        r.img({src: link.image})
       ])
     })
 
