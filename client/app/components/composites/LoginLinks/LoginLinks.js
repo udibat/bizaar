@@ -11,11 +11,11 @@ export default function LoginLinks({ loginUrl, signupUrl, customColor, className
   return div({
     className: classNames('LoginLinks', css.links, className),
   }, [
-    r(Link, {
-      className: css.link,
-      href: signupUrl,
-      customColor,
-    }, t('web.topbar.signup')),
+    // r(Link, {
+    //   className: css.link,
+    //   href: signupUrl,
+    //   customColor,
+    // }, t('web.topbar.signup')),
     r(Link, {
       className: css.link,
       href: loginUrl,
@@ -26,7 +26,7 @@ export default function LoginLinks({ loginUrl, signupUrl, customColor, className
 
 LoginLinks.propTypes = {
   loginUrl: PropTypes.string.isRequired,
-  signupUrl: PropTypes.string.isRequired,
+  // signupUrl: PropTypes.string.isRequired,
   customColor: PropTypes.string,
   className: classNameProp,
 };

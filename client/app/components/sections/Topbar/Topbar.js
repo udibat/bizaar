@@ -23,6 +23,9 @@ import MenuPriority from '../../composites/MenuPriority/MenuPriority';
 import SearchBar from '../../composites/SearchBar/SearchBar';
 import SignupDropdown from '../../composites/SignupDropdown/SignupDropdown';
 
+import iconMember from './images/light-bulb.svg';
+import iconSignup from './images/iconSignup.svg';
+
 
 const LABEL_TYPE_MENU = 'menu';
 const LABEL_TYPE_DROPDOWN = 'dropdown';
@@ -49,13 +52,13 @@ const signupDropdownProps = () => {
   return {
     links: [
       {
-        image: 'http://devjournal.ru/wp-content/uploads/2015/07/ReactJS.png',
+        image: iconMember,
         href: '#',
         text: 'Member',
         subtext: 'Learn'
       },
       {
-        image: 'http://codewinds.com/assets/article/reactjs-conf-logo-dsc_5109-800.jpg',
+        image: iconSignup,
         href: '#',
         text: 'Instructor',
         subtext: 'Teach'
@@ -248,7 +251,7 @@ class Topbar extends Component {
           null,
         loginLinks: {
           loginUrl: loginRoute,
-          signupUrl: signupRoute,
+          // signupUrl: signupRoute,
           customColor: marketplaceColor1,
         },
         notificationCount: this.props.unReadMessagesCount,
@@ -280,8 +283,7 @@ class Topbar extends Component {
         }) :
         r(LoginLinks, {
           loginUrl: loginRoute,
-          signupUrl: signupRoute,
-          customColor: marketplaceColor1,
+          customColor: '#333333',
           className: css.topbarLinks,
         }),
       this.props.search ?
