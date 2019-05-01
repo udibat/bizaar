@@ -6,8 +6,6 @@ import classNames from 'classnames';
 import { className as classNameProp } from '../../../utils/PropTypes';
 import css from './SignupDropdown.css';
 
-const HOVER_TIMEOUT = 250;
-
 function SignupLinks(props) {
   return div({
     className: className,

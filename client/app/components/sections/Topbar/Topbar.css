@@ -186,7 +186,10 @@
   }
 
   & .topbarSignupDropdown {
-    display: block;
+    display: none;
+    @media (--large-viewport) {
+      display: block;
+    }
   }
 }
 

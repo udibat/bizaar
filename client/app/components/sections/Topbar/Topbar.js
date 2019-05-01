@@ -17,6 +17,7 @@ import NotificationBadge from '../../elements/NotificationBadge/NotificationBadg
 // composites
 import AvatarDropdown from '../../composites/AvatarDropdown/AvatarDropdown';
 import LoginLinks from '../../composites/LoginLinks/LoginLinks';
+import SignupLinks from '../../composites/SignupLinks/SignupLinks';
 import Menu from '../../composites/Menu/Menu';
 import MenuMobile from '../../composites/MenuMobile/MenuMobile';
 import MenuPriority from '../../composites/MenuPriority/MenuPriority';
@@ -249,6 +250,11 @@ class Topbar extends Component {
         newListingButton: this.props.newListingButton ?
           { ...this.props.newListingButton, url: newListingRoute, mobileLayoutOnly: true } :
           null,
+        signupLinks: {
+          loginUrl: loginRoute,
+          signupUrl: signupRoute,
+          customColor: marketplaceColor1,
+        },
         loginLinks: {
           loginUrl: loginRoute,
           // signupUrl: signupRoute,

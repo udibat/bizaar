@@ -107,12 +107,13 @@
   display: flex;
   margin: var(--MenuItem_paddingOffScreenVertical) var(--MenuItem_paddingTopbarHorizontalMin) var(--MenuItem_paddingOffScreenVertical) var(--MenuItem_paddingOffScreenHorizontal);
   flex-shrink: 0;
+  flex-wrap: wrap;
 
   @media (--medium-viewport) {
     margin-left: var(--MenuItem_paddingOffScreenHorizontalTablet);
   }
 
-  & a:first-child {
+  & a {
     padding-left: 0;
   }
 }
