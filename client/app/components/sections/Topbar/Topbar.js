@@ -49,18 +49,20 @@ const profileActions = function profileActions(routes, username) {
   } : null;
 };
 
-const signupDropdownProps = () => {
+const signupDropdownProps = (routes) => {
+  const signupRouteStudent = routes.sign_up_path();
+  const signupRouteInstructor = routes.sign_up_path();
   return {
     links: [
       {
         image: iconMember,
-        href: '#',
+        href: signupRouteStudent,
         text: 'Member',
         subtext: 'Learn'
       },
       {
         image: iconSignup,
-        href: '#',
+        href: signupRouteInstructor,
         text: 'Instructor',
         subtext: 'Teach'
       }
@@ -278,7 +280,7 @@ class Topbar extends Component {
       loggedInUsername ?
         null:
         r(SignupDropdown, {
-          ...signupDropdownProps(),
+          ...signupDropdownProps(this.props.routes),
           className: css.topbarSignupDropdown
         }),
       this.props.avatarDropdown && loggedInUsername ?
