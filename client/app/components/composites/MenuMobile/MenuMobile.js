@@ -72,6 +72,7 @@ class MenuMobile extends Component {
         avatar: this.props.avatar,
         newListingButton: this.props.newListingButton,
         loginLinks: this.props.loginLinks,
+        signupLinks: this.props.signupLinks,
       }),
     ]);
   }
@@ -123,6 +124,7 @@ MenuMobile.propTypes = {
   avatar: object, // eslint-disable-line react/forbid-prop-types
   newListingButton: object, // eslint-disable-line react/forbid-prop-types
   loginLinks: object, // eslint-disable-line react/forbid-prop-types
+  signupLinks: object, // eslint-disable-line react/forbid-prop-types
   notificationCount: number,
 };
 

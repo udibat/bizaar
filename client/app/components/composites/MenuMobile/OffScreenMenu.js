@@ -9,6 +9,7 @@ import LanguagesMobile from './LanguagesMobile';
 import Avatar from '../../elements/Avatar/Avatar';
 import AddNewListingButton from '../../elements/AddNewListingButton/AddNewListingButton';
 import LoginLinks from '../../composites/LoginLinks/LoginLinks';
+import SignupLinks from '../../composites/SignupLinks/SignupLinks';
 
 class OffScreenMenu extends Component {
 
@@ -21,6 +22,7 @@ class OffScreenMenu extends Component {
       this.props.avatar ? div({ className: css.avatarSpacer }, r(Avatar, { ...this.props.avatar, ...avatarExtras })) : null,
       this.props.newListingButton ? r(AddNewListingButton, { ...this.props.newListingButton, ...buttonExtras }) : null,
     ] : [
+      r(SignupLinks, this.props.signupLinks),
       r(LoginLinks, this.props.loginLinks),
     ];
     const languagesMobile = this.props.languages ?
@@ -98,6 +100,7 @@ OffScreenMenu.propTypes = {
   avatar: object, // eslint-disable-line react/forbid-prop-types
   newListingButton: object, // eslint-disable-line react/forbid-prop-types
   loginLinks: object, // eslint-disable-line react/forbid-prop-types
+  signupLinks: object, // eslint-disable-line react/forbid-prop-types
 };
 
 export default OffScreenMenu;

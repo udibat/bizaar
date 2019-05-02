@@ -1,0 +1,70 @@
+.signupDropdown {
+  position: relative;
+}
+
+.links {
+  display: none;
+  position: absolute;
+  top: 57px;
+  left: -39px;
+  background-color: #fff;
+  z-index: 10;
+  box-shadow: 0 0 25px rgba(53,152,219,0.1);
+  color: #333333;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 73px;
+    background-color: #ededed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+  }
+  
+}
+
+.open {
+  & .links {
+    display: flex;
+  }
+}
+
+.text {
+  padding: 17px 0;
+  cursor: pointer;
+}
+
+.item {
+  display: inline-block;
+  padding: 15px 0;
+  min-width: 96px;
+  & span {
+    font-size: 13px;
+    display: block;
+    text-align: center;
+    line-height: 1;
+    font-family: 'Sintony', sans-serif;
+    &:first-of-type {
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  }
+  & img {
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+  }
+  & .imageBlock {
+    display: block;
+    text-align: center;
+    height: 25px;
+    margin-bottom: 15px;
+  }
+  & svg {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}

@@ -1,7 +1,6 @@
 .links {
   height: 100%;
-  /*font-family: var(--Topbar_fontFamily);*/
-  font-family: 'Sintony', sans-serif;
+  font-family: var(--Topbar_fontFamily);
 }
 
 .link {

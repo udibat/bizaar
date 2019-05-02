@@ -5,28 +5,28 @@ import classNames from 'classnames';
 
 import { className as classNameProp } from '../../../utils/PropTypes';
 import Link from '../../elements/Link/Link';
-import css from './LoginLinks.css';
+import css from './SignupLinks.css';
 
-export default function LoginLinks({ loginUrl, signupUrl, customColor, className }) {
+export default function SignupLinks({ loginUrl, signupUrl, customColor, className }) {
   return div({
-    className: classNames('LoginLinks', css.links, className),
+    className: classNames('SignupLinks', css.links, className),
   }, [
-    // r(Link, {
-    //   className: css.link,
-    //   href: signupUrl,
-    //   customColor,
-    // }, t('web.topbar.signup')),
     r(Link, {
       className: css.link,
-      href: loginUrl,
+      href: signupUrl,
       customColor,
-    }, t('web.topbar.login')),
+    }, 'Signup as Student'),
+    r(Link, {
+      className: css.link,
+      href: signupUrl,
+      customColor,
+    }, 'Signup as Instructor'),
   ]);
 }
 
-LoginLinks.propTypes = {
+SignupLinks.propTypes = {
   loginUrl: PropTypes.string.isRequired,
-  // signupUrl: PropTypes.string.isRequired,
+  signupUrl: PropTypes.string.isRequired,
   customColor: PropTypes.string,
   className: classNameProp,
 };

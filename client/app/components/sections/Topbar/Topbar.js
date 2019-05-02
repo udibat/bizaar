@@ -17,10 +17,16 @@ import NotificationBadge from '../../elements/NotificationBadge/NotificationBadg
 // composites
 import AvatarDropdown from '../../composites/AvatarDropdown/AvatarDropdown';
 import LoginLinks from '../../composites/LoginLinks/LoginLinks';
+import SignupLinks from '../../composites/SignupLinks/SignupLinks';
 import Menu from '../../composites/Menu/Menu';
 import MenuMobile from '../../composites/MenuMobile/MenuMobile';
 import MenuPriority from '../../composites/MenuPriority/MenuPriority';
 import SearchBar from '../../composites/SearchBar/SearchBar';
+import SignupDropdown from '../../composites/SignupDropdown/SignupDropdown';
+
+import iconMember from './images/lightbulb-solid.svg';
+import iconSignup from './images/chalkboard-teacher-solid.svg';
+
 
 const LABEL_TYPE_MENU = 'menu';
 const LABEL_TYPE_DROPDOWN = 'dropdown';
@@ -41,6 +47,27 @@ const profileActions = function profileActions(routes, username) {
     adminDashboardAction: routes.admin_path(),
     logoutAction: routes.logout_path(),
   } : null;
+};
+
+const signupDropdownProps = (routes) => {
+  const signupRouteStudent = routes.sign_up_path();
+  const signupRouteInstructor = routes.sign_up_path();
+  return {
+    links: [
+      {
+        image: iconMember,
+        href: signupRouteStudent,
+        text: 'Member',
+        subtext: 'Learn'
+      },
+      {
+        image: iconSignup,
+        href: signupRouteInstructor,
+        text: 'Instructor',
+        subtext: 'Teach'
+      }
+    ]
+  }
 };
 
 const avatarDropdownProps = (avatarDropdown, customColor, username, isAdmin, notificationCount, routes) => {
@@ -225,9 +252,14 @@ class Topbar extends Component {
         newListingButton: this.props.newListingButton ?
           { ...this.props.newListingButton, url: newListingRoute, mobileLayoutOnly: true } :
           null,
-        loginLinks: {
+        signupLinks: {
           loginUrl: loginRoute,
           signupUrl: signupRoute,
+          customColor: marketplaceColor1,
+        },
+        loginLinks: {
+          loginUrl: loginRoute,
+          // signupUrl: signupRoute,
           customColor: marketplaceColor1,
         },
         notificationCount: this.props.unReadMessagesCount,
@@ -245,6 +277,12 @@ class Topbar extends Component {
         null),
       r(Logo, { ...this.props.logo, className: classNames(css.topbarLogo, textLogo), color: marketplaceColor1 }),
       div({ className: css.topbarMediumSpacer }),
+      loggedInUsername ?
+        null:
+        r(SignupDropdown, {
+          ...signupDropdownProps(this.props.routes),
+          className: css.topbarSignupDropdown
+        }),
       this.props.avatarDropdown && loggedInUsername ?
         r(AvatarDropdown, {
           ...avatarDropdownProps(this.props.avatarDropdown, marketplaceColor1,
@@ -253,8 +291,7 @@ class Topbar extends Component {
         }) :
         r(LoginLinks, {
           loginUrl: loginRoute,
-          signupUrl: signupRoute,
-          customColor: marketplaceColor1,
+          customColor: '#333333',
           className: css.topbarLinks,
         }),
       this.props.search ?

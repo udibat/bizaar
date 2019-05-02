@@ -18,9 +18,9 @@
 
 .menuLabelMobile {
   display: inline-block;
-  padding: var(--MobileMenu_labelPaddingVertical) var(--MobileMenu_labelPaddingHorizontal);
   cursor: pointer;
   position: relative;
+  padding: 10px var(--MobileMenu_labelPaddingHorizontal);;
 
   & .notificationBadge {
     position: absolute;
@@ -33,6 +33,10 @@
     @media (--medium-viewport) {
       display: none;
     }
+  }
+
+  @media (--medium-viewport) {
+    padding: var(--MobileMenu_labelPaddingVertical) var(--MobileMenu_labelPaddingHorizontal);
   }
 }
 
@@ -107,12 +111,13 @@
   display: flex;
   margin: var(--MenuItem_paddingOffScreenVertical) var(--MenuItem_paddingTopbarHorizontalMin) var(--MenuItem_paddingOffScreenVertical) var(--MenuItem_paddingOffScreenHorizontal);
   flex-shrink: 0;
+  flex-wrap: wrap;
 
   @media (--medium-viewport) {
     margin-left: var(--MenuItem_paddingOffScreenHorizontalTablet);
   }
 
-  & a:first-child {
+  & a {
     padding-left: 0;
   }
 }
