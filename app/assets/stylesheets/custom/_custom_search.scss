@@ -20,6 +20,9 @@
     > .row {
       margin-bottom: 0;
     }
+    @media (min-width: 1125px) {
+      padding-right: 0;
+    }
   }
 }
 
@@ -75,6 +78,11 @@
   }
   .fluid-thumbnail-grid-image-image-container {
     padding-bottom: 378px;
+    &:hover, &:focus {
+      .fluid-thumbnail-grid-listing-schedule {
+        display: block;
+      }
+    }
   }
 }
 
@@ -124,6 +132,7 @@
   background-color: #fff;
   padding: 20px 34px;
   border: 1px solid #f4f6f3;
+  display: none;
   .title {
     font-size: 20px;
     margin-bottom: 5px;
@@ -535,8 +544,8 @@ input[type="text"].location-input {
       position: absolute;
       top: auto;
       bottom: 0;
-      right: 45px;
-      width: calc(33% - 2.6em);
+      right: 0;
+      width: calc(33% - 1.7em);
       > .map {
         height: 100%;
       }
@@ -545,14 +554,14 @@ input[type="text"].location-input {
       position: fixed;
       top: 0;
       bottom: 0;
-      right: 45px;
+      right: 0;
       height: 100%;
-      width: calc(33% - 2.6em);
+      width: calc(33% - 1.7em);
     }
     @media (min-width: 1441px) {
       &.absolute,
       &.fixed {
-        width: calc(25% - 2.2em);
+        width: calc(25% - 1.5em);
       }
     }
   }

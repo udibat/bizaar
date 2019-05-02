@@ -476,7 +476,6 @@
       &:nth-of-type(3) {
         width: 27.5%;
       }
-      
     }
   }
 }
@@ -487,4 +486,10 @@
     display: table;
     clear: both;
   }
+}
+
+.fluid-thumbnail-grid-image-image {
+  border-radius: 0;
+  height: 100%;
+  object-fit: cover;
 }
