@@ -35,7 +35,7 @@ module TopbarHelper
         ),
         text: community.name(I18n.locale),
         image: community.wide_logo.present? ? community.stable_image_url(:wide_logo, :original) : nil,
-        image_highres: community.wide_logo.present? ? community.stable_image_url(:wide_logo, :header_highres) : nil
+        image_highres: community.wide_logo.present? ? community.stable_image_url(:wide_logo, :original) : nil
       },
       search: landing_page ? nil : {
         search_placeholder: search_placeholder,

@@ -18,9 +18,9 @@
 
 .menuLabelMobile {
   display: inline-block;
-  padding: var(--MobileMenu_labelPaddingVertical) var(--MobileMenu_labelPaddingHorizontal);
   cursor: pointer;
   position: relative;
+  padding: 10px var(--MobileMenu_labelPaddingHorizontal);;
 
   & .notificationBadge {
     position: absolute;
@@ -33,6 +33,10 @@
     @media (--medium-viewport) {
       display: none;
     }
+  }
+
+  @media (--medium-viewport) {
+    padding: var(--MobileMenu_labelPaddingVertical) var(--MobileMenu_labelPaddingHorizontal);
   }
 }
 

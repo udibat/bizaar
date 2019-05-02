@@ -200,6 +200,10 @@
     p {
       margin-bottom: 0;
       color: #fff;
+      line-height: 1.6;
+      @include media(tablet) {
+        line-height: 1.2;
+      }
     }
   }
 }

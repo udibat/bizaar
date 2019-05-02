@@ -6,14 +6,6 @@ import classNames from 'classnames';
 import { className as classNameProp } from '../../../utils/PropTypes';
 import css from './SignupDropdown.css';
 
-function SignupLinks(props) {
-  return div({
-    className: className,
-    href: this.props.href
-  });
-}
-
-
 class SignupDropdown extends Component {
   state = {
     isOpen: false

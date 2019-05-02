@@ -1,11 +1,12 @@
 .button {
   position: relative;
   display: inline-block;
-  font-family: var(--Topbar_fontFamily);
+  /*font-family: var(--Topbar_fontFamily);*/
   font-weight: 600;
   letter-spacing: 0.35px;
   border-radius: 0;
   overflow: hidden;
+  font-family: 'Source Sans Pro', helvetica, sans-serif;
 
   &:hover .backgroundContainer {
     filter: brightness(80%);

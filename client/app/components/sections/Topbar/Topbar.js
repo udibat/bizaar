@@ -24,8 +24,8 @@ import MenuPriority from '../../composites/MenuPriority/MenuPriority';
 import SearchBar from '../../composites/SearchBar/SearchBar';
 import SignupDropdown from '../../composites/SignupDropdown/SignupDropdown';
 
-import iconMember from './images/light-bulb.svg';
-import iconSignup from './images/iconSignup.svg';
+import iconMember from './images/lightbulb-solid.svg';
+import iconSignup from './images/chalkboard-teacher-solid.svg';
 
 
 const LABEL_TYPE_MENU = 'menu';

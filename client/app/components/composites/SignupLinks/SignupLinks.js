@@ -15,7 +15,7 @@ export default function SignupLinks({ loginUrl, signupUrl, customColor, classNam
       className: css.link,
       href: signupUrl,
       customColor,
-    }, 'Signup as Member'),
+    }, 'Signup as Student'),
     r(Link, {
       className: css.link,
       href: signupUrl,

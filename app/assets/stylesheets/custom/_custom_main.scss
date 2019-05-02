@@ -4,6 +4,10 @@ h1, h2, h3, h4, h5, h6, p, span, div {
   color: $cust-text;
 }
 
+.page-content p {
+  hyphens: none;
+}
+
 body {
   &.homepage_homepage,
   &.homepage_become_a_tutor {
@@ -49,6 +53,7 @@ body {
 
 .section-title {
   font-size: 32px;
+  line-height: 1.2em;
   font-weight: bold;
 }
 
@@ -470,5 +475,12 @@ input:checked + .slider:before {
 .home-toolbar-show-filters-button.selected {
   .home-toolbar-button-text {
     color: #fff;
+  }
+}
+
+.col-4 {
+  margin-bottom: 2.75em;
+  @include media(tablet) {
+    margin-bottom: 0;
   }
 }

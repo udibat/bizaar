@@ -26,7 +26,6 @@
 }
 
 .open {
-
   & .links {
     display: flex;
   }
@@ -46,6 +45,7 @@
     display: block;
     text-align: center;
     line-height: 1;
+    font-family: 'Sintony', sans-serif;
     &:first-of-type {
       text-transform: uppercase;
       font-weight: bold;

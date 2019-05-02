@@ -10,7 +10,7 @@
   padding: 0 0.5em;
 
   @media (--medium-viewport) {
-    line-height: var(--Topbar_tabletHeight);
+    /*line-height: var(--Topbar_tabletHeight);*/
   }
 
   @media (--large-viewport) {
