@@ -46,10 +46,10 @@ $testimonial-icon-width: 40;
 .testimonial-icon {
   position: absolute;
   right: 0;
-  top: 0;
-  width: em($testimonial-icon-width, 26);
+  top: 4px;
+  // width: em($testimonial-icon-width, 26);
 
-  @include large-type;
+  // @include large-type;
 
   &.positive {
     color: $green;
