@@ -148,10 +148,12 @@
           .location-holder.filter-data-item
             .custom-filter-title Location
             .location-item
-              Whithin 
-              = text_field_tag :distance_from, '', class: 'distance-input'
-              km of
-              = text_field_tag :location_city, '', class: 'location-input'
+              %div
+                Whithin 
+                = text_field_tag :distance_from, '', class: 'distance-input'
+              %div
+                km of
+                = text_field_tag :location_city, '', class: 'location-input'
           = render :partial => "filters", :locals => { show_price_filter: show_price_filter, show_custom_fields: @show_custom_fields, filters: filters }
           .filter-action-holder
             = submit_tag 'Apply', id: 'apply_btn', class: 'link'
