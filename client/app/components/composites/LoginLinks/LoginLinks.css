@@ -1,12 +1,12 @@
 .links {
-  height: 100%;
+  /*height: 100%;*/
   /*font-family: var(--Topbar_fontFamily);*/
   font-family: 'Sintony', sans-serif;
 }
 
 .link {
   display: inline-block;
-  height: 100%;
+  height: auto;
   line-height: var(--Topbar_mobileHeight);
   padding: 0 0.5em;
 

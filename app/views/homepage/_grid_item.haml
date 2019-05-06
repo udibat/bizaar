@@ -61,5 +61,5 @@
                 %span.stars{ data: { rating: listing[:rating][:avg] } }
                 -#%span.count= "(#{listing[:rating][:count]})"
               .reviews
-                = link_to "#{listing[:rating][:count]} reviews", '#', class: 'reviews-link'
+                = link_to "#{listing[:rating][:count]} reviews", person_path(username: listing.author.username), class: 'reviews-link'
 
