@@ -1,0 +1,83 @@
+@import 'mixins/all';
+
+.people_new {
+  background-color: $cust-violet;
+  .marketplace-lander {
+    display: none;
+  }
+  .page-content {
+    padding: 70px 0;
+  }
+  .wrapper {
+    background-color: transparent;
+  }
+  a.fb-connect,
+  a.google-login-button {
+    margin-top: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    height: auto;
+    min-height: 1px;
+    .google-icon {
+      display: inline-block;
+      padding-top: 0;
+    }
+  }
+  a.fb-connect {
+    border: 1px solid #365899;
+    .fb-text {
+      color: #fff;
+    }
+  }
+  .fb-text, .google-text {
+    line-height: 1;
+  }
+}
+
+.signup-form {
+  background-color: #fff;
+  width: 780px;
+  max-width: 100%;
+  padding: 64px 80px 50px;
+  .section-title {
+    margin-bottom: 10px;
+  }
+  .section-subtitle {
+    margin-bottom: 30px;
+  }
+  .new_person {
+    padding-bottom: 20px;
+  }
+
+}
+
+.signup-btn {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  .input-holder {
+    width: 100%;
+    margin-bottom: 25px;
+    &:first-child:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+}
+
+.socials-signup {
+  display: flex;
+}
+
+.google-login-button {
+  background-color: #fff;
+  border: 1px solid #000;
+  margin-right: 20px;
+  &:hover, &:focus, &:active {
+    background-color: #fff;
+  }
+}

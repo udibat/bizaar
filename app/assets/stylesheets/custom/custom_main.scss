@@ -78,6 +78,9 @@ body {
   text-align: center;
   font-size: 18px;
   font-family: 'Sintony', sans-serif;
+  &--regular {
+    font-weight: normal;
+  }
 }
 
 .input-icon-holder {
@@ -483,4 +486,10 @@ input:checked + .slider:before {
   @include media(tablet) {
     margin-bottom: 0;
   }
+}
+
+input[type=text], input[type=password], input[type=number], textarea {
+  border-radius: 0;
+  box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.24);
+  border-width: 1px;
 }
