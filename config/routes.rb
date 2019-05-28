@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     mount MailPreview => 'mail_view'
   end
 
+  resources :wizard
+
   # Some non-RESTful mappings
   post '/webhooks/paypal_ipn' => 'paypal_ipn#ipn_hook', as: :paypal_ipn_hook
   post '/webhooks/plans' => 'plans#create'
