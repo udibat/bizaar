@@ -98,7 +98,16 @@
     -#     %input{:type => "checkbox", :id => "person_admin_emails_consent", :name => "person[admin_emails_consent]"}
     -#     = form.label :admin_emails_consent, t('.admin_emails_consent'), :class => 'checkbox'
 
-
+    .birthday-holder
+      %h3.section-subtitle.section-subtitle--regular Birthday
+      %p Your birthday is confidential. You do have to be 19 and older to sign up with us
+      .input-container
+        %select#select_month.select-month.custom-select{:name => ""}
+          %option Month
+        %select#select_day.select-day.custom-select{:name => ""}
+          %option Day
+        %select#select_year.select-year.custom-select{:name => ""}
+          %option Year
     = button_tag t('sessions.new.sign_up_now'), class: 'btn btn--violet btn--left signup-btn'
 
   .socials-signup
@@ -112,7 +121,7 @@
           
     - unless !facebook_connect_in_use? || params[:no_fb]
       = render :partial => "layouts/facebook_connect_button", :locals => { :button_text => t(".create_account_with_provider", provider: 'Facebook') }
-      
+
     - if linkedin_connect_in_use?
       = link_to person_linkedin_omniauth_authorize_path, id: 'linkedin-login',
         class: 'linkedin-login-button' do

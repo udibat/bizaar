@@ -47,7 +47,12 @@
   .new_person {
     padding-bottom: 20px;
   }
-
+  input {
+    font-size: 14px;
+    line-height: 1;
+    min-height: 34px; 
+    font-family: 'Sintony', sans-serif;
+  }
 }
 
 .signup-btn {
@@ -80,4 +85,12 @@
   &:hover, &:focus, &:active {
     background-color: #fff;
   }
+}
+
+.birthday-holder {
+  margin-bottom: 40px;
+  .section-subtitle {
+    text-align: left;
+    margin-bottom: 0;
+  }  
 }

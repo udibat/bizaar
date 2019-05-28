@@ -75,6 +75,10 @@ $(document).ready(function() {
   changeDropdownName();
   priceRangeChangeName();
 
+  $('.custom-select').select2({
+    minimumResultsForSearch: -1,
+  });
+
 });
 
 $(window).on('scroll', function() {

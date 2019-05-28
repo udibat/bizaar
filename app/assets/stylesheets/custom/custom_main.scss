@@ -488,8 +488,47 @@ input:checked + .slider:before {
   }
 }
 
-input[type=text], input[type=password], input[type=number], textarea {
+input[type=text], input[type=password], input[type=number], textarea, .custom-select {
   border-radius: 0;
   box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.24);
   border-width: 1px;
+}
+
+.custom-select {
+  &:not(:last-of-type) {
+    & + .select2 {
+      &.select2-container--default {
+        margin-right: 20px;
+      }
+    }
+  }
+  &.select-month, &.select-year {
+    & + .select2 {
+      &.select2-container--default {
+        width: 37% !important;
+      }
+    }
+  }
+  &.select-day {
+    & + .select2 {
+      &.select2-container--default {
+        width: 26% !important;
+      }
+    }
+  }
+  & + .select2 {
+    &.select2-container--default {
+      .select2-selection--single {
+        border-radius: 0;
+        box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.24);
+        border-width: 1px;
+        height: 34px;
+        .select2-selection__rendered {
+          line-height: 32px;
+          font-size: 14px;
+          font-family: 'Sintony', sans-serif;
+        }
+      }
+    }
+  }
 }
