@@ -55,6 +55,12 @@ body {
   font-size: 32px;
   line-height: 1.2em;
   font-weight: bold;
+  margin-top: 0;
+  svg {
+    width: 39px;
+    height: 39px;
+    margin-left: 10px;
+  }
 }
 
 .section-title-big {
@@ -75,12 +81,28 @@ body {
 }
 
 .section-subtitle {
-  text-align: center;
   font-size: 18px;
   font-family: 'Sintony', sans-serif;
   &--regular {
     font-weight: normal;
   }
+}
+
+.flex-block {
+  display: flex;
+  align-items: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .input-icon-holder {
@@ -220,6 +242,11 @@ img {
     background-color: transparent;
     border: 2px solid $cust-violet;
     color: $cust-violet;
+    &:hover, &:focus {
+      background-color: $cust-violet;
+      border: 2px solid $cust-violet;
+      color: #fff;
+    }
   }
   &--left {
     margin-right: 15px;

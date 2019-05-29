@@ -1,7 +1,7 @@
 @import 'mixins/all';
 
-.people_new {
-  background-color: $cust-violet;
+.people_new,
+body[class*="wizard"] {
   .marketplace-lander {
     display: none;
   }
@@ -11,6 +11,12 @@
   .wrapper {
     background-color: transparent;
   }
+}
+
+// sighup page
+
+.people_new {
+  background-color: $cust-violet;
   a.fb-connect,
   a.google-login-button {
     margin-top: 0;
@@ -33,11 +39,15 @@
   }
 }
 
-.signup-form {
+.wizard-section {
   background-color: #fff;
   width: 780px;
   max-width: 100%;
   padding: 64px 80px 50px;
+  margin: 0 auto;
+}
+
+.signup-form {
   .section-title {
     margin-bottom: 10px;
   }
@@ -90,7 +100,56 @@
 .birthday-holder {
   margin-bottom: 40px;
   .section-subtitle {
-    text-align: left;
     margin-bottom: 0;
   }  
+}
+
+// pact page
+
+.wizard-content {
+  @include sintony;
+  p {
+    font-size: 13px;
+  }
+  .description {
+    margin-bottom: 35px;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  .default-list {
+    margin-bottom: 45px;
+  }
+  .link-holder {
+    margin-top: 20px;
+    .pact-submit {
+      width: 100%;
+    }
+  }
+}
+
+body[class*="wizard"] {
+  background-color: $cust-violet;
+}
+
+.default-list {
+  font-size: 13px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.small-icon {
+  display: inline-block;
+  svg {
+    width: 9px;
+    height: 9px;
+  }
+}
+
+.pact-submit {
+  &:first-child {
+    @include media(small-tablet) {
+      margin-right: 20px;
+    }
+  }
 }
