@@ -52,7 +52,7 @@ body {
 }
 
 .section-title {
-  font-size: 32px;
+  font-size: 28px;
   line-height: 1.2em;
   font-weight: bold;
   margin-top: 0;
@@ -536,7 +536,7 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   &.select-month, &.select-year {
     & + .select2 {
       &.select2-container--default {
-        width: 100% !important;
+        width: 100% !important; // rewrite select2 styles
         @include media(large-mobile) {
           width: 37% !important;
         }
@@ -546,7 +546,7 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   &.select-day {
     & + .select2 {
       &.select2-container--default {
-        width: 100% !important;
+        width: 100% !important; // rewrite select2 styles
         @include media(large-mobile) {
           width: 26% !important;
         }

@@ -51,13 +51,13 @@ body[class*="wizard"] {
   background-color: #fff;
   width: 780px;
   max-width: 100%;
-  padding: 64px 80px 50px;
+  padding: 54px 25px 50px;
   margin: 0 auto;
   &.signup-form {
-    padding: 64px 25px 50px;
-    @include media(small-tablet) {
-      padding: 64px 80px 50px;
-    }
+    padding-top: 64px;
+  }
+  @include media(small-tablet) {
+    padding: 54px 80px 50px;
   }
 }
 
@@ -180,4 +180,30 @@ body[class*="wizard"] {
       margin-right: 20px;
     }
   }
+}
+
+// verify email
+
+.image-holder {
+  flex-shrink: 0;
+  margin-right: 15px;
+  &-svg {
+    width: 32px;
+    path {
+      fill: $cust-green;
+    }
+    @include media(large-mobile) {
+      width: 60px;
+    }
+  }
+}
+
+.content-holder {
+  display: flex;
+}
+
+.wizard-btn {
+  width: 100%;
+  @include source-sans-pro;
+  font-size: 18px;
 }
