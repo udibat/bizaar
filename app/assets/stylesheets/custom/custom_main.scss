@@ -525,21 +525,31 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   &:not(:last-of-type) {
     & + .select2 {
       &.select2-container--default {
-        margin-right: 20px;
+        margin-bottom: 10px;
+        @include media(large-mobile) {
+          margin-right: 20px;
+          margin-bottom: 0;
+        }
       }
     }
   }
   &.select-month, &.select-year {
     & + .select2 {
       &.select2-container--default {
-        width: 37% !important;
+        width: 100% !important;
+        @include media(large-mobile) {
+          width: 37% !important;
+        }
       }
     }
   }
   &.select-day {
     & + .select2 {
       &.select2-container--default {
-        width: 26% !important;
+        width: 100% !important;
+        @include media(large-mobile) {
+          width: 26% !important;
+        }
       }
     }
   }
@@ -558,4 +568,25 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
       }
     }
   }
+}
+
+.select2-container--default {
+  &.select2-container--open .select2-selection--single .select2-selection__arrow b,
+  .select2-selection--single .select2-selection__arrow b {
+    border: none;
+    border-left: 1px solid #c3c3c3;
+    border-bottom: 1px solid #c3c3c3;
+    border-right: 0;
+    border-top: 0;
+    width: 10px;
+    height: 10px;
+    transform: rotate(315deg);
+  }
+  &.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    transform: rotate(-225deg);
+  }
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  right: 7px;
 }

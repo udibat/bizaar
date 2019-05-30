@@ -23,6 +23,7 @@ body[class*="wizard"] {
     font-family: Helvetica, Arial, sans-serif;
     height: auto;
     min-height: 1px;
+    max-width: 282px;
     .google-icon {
       display: inline-block;
       padding-top: 0;
@@ -30,8 +31,15 @@ body[class*="wizard"] {
   }
   a.fb-connect {
     border: 1px solid #365899;
+    margin-bottom: 0;
     .fb-text {
       color: #fff;
+    }
+    .fb-icon {
+      height: 40px;
+      svg {
+        height: 21px;
+      }
     }
   }
   .fb-text, .google-text {
@@ -45,6 +53,12 @@ body[class*="wizard"] {
   max-width: 100%;
   padding: 64px 80px 50px;
   margin: 0 auto;
+  &.signup-form {
+    padding: 64px 25px 50px;
+    @include media(small-tablet) {
+      padding: 64px 80px 50px;
+    }
+  }
 }
 
 .signup-form {
@@ -86,14 +100,22 @@ body[class*="wizard"] {
 
 .socials-signup {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include media(tablet) {
+    flex-direction: row;
+  }
 }
 
 .google-login-button {
   background-color: #fff;
   border: 1px solid #000;
-  margin-right: 20px;
   &:hover, &:focus, &:active {
     background-color: #fff;
+  }
+  @include media(tablet) {
+    margin-right: 20px;
+    margin-bottom: 0;
   }
 }
 
@@ -102,6 +124,12 @@ body[class*="wizard"] {
   .section-subtitle {
     margin-bottom: 0;
   }  
+  .input-container {
+    flex-wrap: wrap;
+    @include media(large-mobile) {
+      flex-wrap: nowrap;
+    }
+  }
 }
 
 // pact page
