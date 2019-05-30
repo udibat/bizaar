@@ -4,133 +4,136 @@
 - content_for :title_header do
   %h1= t('.sign_up')
 
-.signup-form.centered-section.wizard-section
-  %h2.section-title.text-center Sign up to be an Instructor
-  %h3.section-subtitle.section-subtitle--regular.text-center Earn money with your passions, skills and talents by joining our community.
-  // TODO: sign up student text
-  %h2.section-title.text-center Start learning something new everyday
-  %h3.section-subtitle.section-subtitle--regular.text-center Come explore our strange and wonderful market of classes and activities
+// TODO: needs to add class for different page-content-inner
+// signup-instructor or signup-member
+.page-content-inner.signup-instructor
+  .signup-form.centered-section.wizard-section
+    %h2.section-title.text-center Sign up to be an Instructor
+    %h3.section-subtitle.section-subtitle--regular.text-center Earn money with your passions, skills and talents by joining our community.
+    // TODO: sign up student text
+    %h2.section-title.text-center Start learning something new everyday
+    %h3.section-subtitle.section-subtitle--regular.text-center Come explore our strange and wonderful market of classes and activities
 
-  -# - if @community_customization && @community_customization.signup_info_content
-  -#   %p
-  -#     = @community_customization.signup_info_content.html_safe
-  -# - elsif @current_community.allowed_emails && @current_community.allowed_emails[0] != "/" 
-  -#   %p
-  -#     = t('.email_restriction_instructions',
-  -#           :community_name => @current_community.name(I18n.locale),
-  -#           :allowed_emails => @current_community.allowed_emails,
-  -#           :count => (@current_community.allowed_emails.split(",").count))
+    -# - if @community_customization && @community_customization.signup_info_content
+    -#   %p
+    -#     = @community_customization.signup_info_content.html_safe
+    -# - elsif @current_community.allowed_emails && @current_community.allowed_emails[0] != "/" 
+    -#   %p
+    -#     = t('.email_restriction_instructions',
+    -#           :community_name => @current_community.name(I18n.locale),
+    -#           :allowed_emails => @current_community.allowed_emails,
+    -#           :count => (@current_community.allowed_emails.split(",").count))
 
-  = form_for @service.person, :url => APP_CONFIG.login_domain.to_s + people_path do |form|
+    = form_for @service.person, :url => APP_CONFIG.login_domain.to_s + people_path do |form|
 
-    -# Invite code
-    - if @current_community.join_with_invite_only?
-      .inline-label-container
-        = label_tag :invitation_code, t('.invitation_code'), :class => "inline"
-        = link_to(t('common.what_is_this'), "#", :tabindex => "-1", :id => "help_invitation_code_link", :class => "label-info")
-      = text_field_tag "invitation_code", nil, :class => :text_field, :maxlength => "20", :value => (params[:code] || "")
-    - elsif params[:code]
-      = hidden_field_tag "invitation_code", params[:code]
+      -# Invite code
+      - if @current_community.join_with_invite_only?
+        .inline-label-container
+          = label_tag :invitation_code, t('.invitation_code'), :class => "inline"
+          = link_to(t('common.what_is_this'), "#", :tabindex => "-1", :id => "help_invitation_code_link", :class => "label-info")
+        = text_field_tag "invitation_code", nil, :class => :text_field, :maxlength => "20", :value => (params[:code] || "")
+      - elsif params[:code]
+        = hidden_field_tag "invitation_code", params[:code]
 
-    -# Honey pot: hidden field to detect spammers
-    = form.label :input_again, "You should not see this field, if CSS is working. If you see this, please send feedback!", :class => "unwanted_text_field"
-    = form.text_field :input_again, :class => "unwanted_text_field", :id => "error_regristration_unwanted_email2", :autocomplete => "off"
+      -# Honey pot: hidden field to detect spammers
+      = form.label :input_again, "You should not see this field, if CSS is working. If you see this, please send feedback!", :class => "unwanted_text_field"
+      = form.text_field :input_again, :class => "unwanted_text_field", :id => "error_regristration_unwanted_email2", :autocomplete => "off"
 
-    -# Name
-    .input-container
-      .input-holder
-        -# = form.label :given_name, t('.given_name')
-        = form.text_field :given_name, :class => :text_field, :maxlength => "30", :placeholder => t('.given_name')
-      .input-holder
-        -# = form.label :family_name, t('.family_name')
-        = form.text_field :family_name, :class => :text_field, :maxlength => "30", :placeholder => t('.family_name')
-
-    -# Email
-    .input-container
-      .input-holder
-        -# = form.label :email, t('.email')
-        = form.text_field :email, :class => :text_field, :maxlength => "255", :placeholder => t('.email')
-      .input-holder
-        - if @service.has_person_custom_fields?
-          - @service.custom_field_values.each_with_index do |custom_field_value, index|
-            - custom_field = custom_field_value.question
-            - custom_field.with_type do |field_type|
-              - prefix = "person[custom_field_values_attributes][]"
-              %div
-                -# = label "person_custom_fields", index, custom_field.name(I18n.locale),
-                -#   class: 'inline'
-                - if custom_field.public?
-                  %small= t('.this_field_will_be_publicly_visible')
-              = hidden_field_tag "#{prefix}[id]", custom_field_value.id
-              = hidden_field_tag "#{prefix}[type]", custom_field_value.type
-              = hidden_field_tag "#{prefix}[custom_field_id]", custom_field_value.custom_field_id
-              = render "settings/custom_fields/#{field_type}", :service => @service,
-                :custom_field => custom_field, index: index,
-                :custom_field_value => custom_field_value,
-                :prefix => prefix
-    -# -# Username
-    -# .input-holder
-    -#   = form.label :username, username_label
-    -#   = form.text_field :username, :class => :text_field, :maxlength => "20", :id => "person_username1"
-
-    -# Password
-    .input-container
-      .input-holder
-        -# = form.label :password, t('common.password')
-        = form.password_field :password, :class => :text_field, :maxlength => "255", :id => "person_password1", :placeholder => t('common.password')
-      .input-holder
-        -# = form.label :password2, t('.password_again')
-        = form.password_field :password2, :class => :text_field, :maxlength => "255", :placeholder => t('.password_again')
-
-      .inline-label-container
-
-    -# Terms
-    -# .outer-checkbox-container
-    -#   .checkbox-container
-    -#     - unless @skip_terms_checkbox
-    -#       %input{:type => "checkbox", :id => "person_terms", :name => "person[terms]"}
-    -#       = form.label :terms, :class => "checkbox" do
-    -#         = raw t('.i_accept_the_terms_and_privacy',
-    -#           terms: link_to(t(".terms"), "#", :tabindex => "-1", :id => "terms_link", :class => "form"),
-    -#           privacy: link_to(t(".privacy"), "#", :tabindex => "-1", :id => "privacy_link", :class => "form"),)
-
-    -# = form.hidden_field :consent, :value => @current_community.consent
-
-    -# .outer-checkbox-container
-    -#   .checkbox-container
-    -#     %input{:type => "checkbox", :id => "person_admin_emails_consent", :name => "person[admin_emails_consent]"}
-    -#     = form.label :admin_emails_consent, t('.admin_emails_consent'), :class => 'checkbox'
-
-    .birthday-holder
-      %h3.section-subtitle.section-subtitle--regular Birthday
-      %p Your birthday is confidential. You do have to be 19 and older to sign up with us
+      -# Name
       .input-container
-        %select#select_month.select-month.custom-select{:name => ""}
-          %option Month
-        %select#select_day.select-day.custom-select{:name => ""}
-          %option Day
-        %select#select_year.select-year.custom-select{:name => ""}
-          %option Year
-    = button_tag t('sessions.new.sign_up_now'), class: 'btn btn--violet btn--left signup-btn'
+        .input-holder
+          -# = form.label :given_name, t('.given_name')
+          = form.text_field :given_name, :class => :text_field, :maxlength => "30", :placeholder => t('.given_name')
+        .input-holder
+          -# = form.label :family_name, t('.family_name')
+          = form.text_field :family_name, :class => :text_field, :maxlength => "30", :placeholder => t('.family_name')
 
-  .socials-signup
-    - if google_connect_in_use?
-      = link_to person_google_oauth2_omniauth_authorize_path, id: 'google-oauth2-login',
-        class: 'google-login-button' do
-        %span.google-icon
-          = render :partial => "layouts/google_icon"
-        %span.google-text
-          = t('.create_account_with_provider', provider: 'Google')
-          
-    - unless !facebook_connect_in_use? || params[:no_fb]
-      = render :partial => "layouts/facebook_connect_button", :locals => { :button_text => t(".create_account_with_provider", provider: 'Facebook') }
+      -# Email
+      .input-container
+        .input-holder
+          -# = form.label :email, t('.email')
+          = form.text_field :email, :class => :text_field, :maxlength => "255", :placeholder => t('.email')
+        .input-holder
+          - if @service.has_person_custom_fields?
+            - @service.custom_field_values.each_with_index do |custom_field_value, index|
+              - custom_field = custom_field_value.question
+              - custom_field.with_type do |field_type|
+                - prefix = "person[custom_field_values_attributes][]"
+                %div
+                  -# = label "person_custom_fields", index, custom_field.name(I18n.locale),
+                  -#   class: 'inline'
+                  - if custom_field.public?
+                    %small= t('.this_field_will_be_publicly_visible')
+                = hidden_field_tag "#{prefix}[id]", custom_field_value.id
+                = hidden_field_tag "#{prefix}[type]", custom_field_value.type
+                = hidden_field_tag "#{prefix}[custom_field_id]", custom_field_value.custom_field_id
+                = render "settings/custom_fields/#{field_type}", :service => @service,
+                  :custom_field => custom_field, index: index,
+                  :custom_field_value => custom_field_value,
+                  :prefix => prefix
+      -# -# Username
+      -# .input-holder
+      -#   = form.label :username, username_label
+      -#   = form.text_field :username, :class => :text_field, :maxlength => "20", :id => "person_username1"
 
-    - if linkedin_connect_in_use?
-      = link_to person_linkedin_omniauth_authorize_path, id: 'linkedin-login',
-        class: 'linkedin-login-button' do
-        %span.linkedin-icon
-          = render :partial => "layouts/linkedin_icon"
-        %span.linkedin-text
-          = t('.create_account_with_provider', provider: 'LinkedIn')
+      -# Password
+      .input-container
+        .input-holder
+          -# = form.label :password, t('common.password')
+          = form.password_field :password, :class => :text_field, :maxlength => "255", :id => "person_password1", :placeholder => t('common.password')
+        .input-holder
+          -# = form.label :password2, t('.password_again')
+          = form.password_field :password2, :class => :text_field, :maxlength => "255", :placeholder => t('.password_again')
 
-= render :partial => "help_texts", :collection => ["terms", "help_invitation_code", "privacy"], :as => :field
+        .inline-label-container
+
+      -# Terms
+      -# .outer-checkbox-container
+      -#   .checkbox-container
+      -#     - unless @skip_terms_checkbox
+      -#       %input{:type => "checkbox", :id => "person_terms", :name => "person[terms]"}
+      -#       = form.label :terms, :class => "checkbox" do
+      -#         = raw t('.i_accept_the_terms_and_privacy',
+      -#           terms: link_to(t(".terms"), "#", :tabindex => "-1", :id => "terms_link", :class => "form"),
+      -#           privacy: link_to(t(".privacy"), "#", :tabindex => "-1", :id => "privacy_link", :class => "form"),)
+
+      -# = form.hidden_field :consent, :value => @current_community.consent
+
+      -# .outer-checkbox-container
+      -#   .checkbox-container
+      -#     %input{:type => "checkbox", :id => "person_admin_emails_consent", :name => "person[admin_emails_consent]"}
+      -#     = form.label :admin_emails_consent, t('.admin_emails_consent'), :class => 'checkbox'
+
+      .birthday-holder
+        %h3.section-subtitle.section-subtitle--regular Birthday
+        %p Your birthday is confidential. You do have to be 19 and older to sign up with us
+        .input-container
+          %select#select_month.select-month.custom-select{:name => ""}
+            %option Month
+          %select#select_day.select-day.custom-select{:name => ""}
+            %option Day
+          %select#select_year.select-year.custom-select{:name => ""}
+            %option Year
+      = button_tag t('sessions.new.sign_up_now'), class: 'btn btn--violet btn--left signup-btn'
+
+    .socials-signup
+      - if google_connect_in_use?
+        = link_to person_google_oauth2_omniauth_authorize_path, id: 'google-oauth2-login',
+          class: 'google-login-button' do
+          %span.google-icon
+            = render :partial => "layouts/google_icon"
+          %span.google-text
+            = t('.create_account_with_provider', provider: 'Google')
+            
+      - unless !facebook_connect_in_use? || params[:no_fb]
+        = render :partial => "layouts/facebook_connect_button", :locals => { :button_text => t(".create_account_with_provider", provider: 'Facebook') }
+
+      - if linkedin_connect_in_use?
+        = link_to person_linkedin_omniauth_authorize_path, id: 'linkedin-login',
+          class: 'linkedin-login-button' do
+          %span.linkedin-icon
+            = render :partial => "layouts/linkedin_icon"
+          %span.linkedin-text
+            = t('.create_account_with_provider', provider: 'LinkedIn')
+
+  = render :partial => "help_texts", :collection => ["terms", "help_invitation_code", "privacy"], :as => :field
