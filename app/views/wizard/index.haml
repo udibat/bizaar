@@ -55,6 +55,9 @@
         = submit_tag 'Decline', class: 'btn btn--violet-transp pact-submit wizard-btn'
 
 // head for all steps
+
+// TODO: needs to add class for different page-content-inner
+// wizard-instructor or wizard-member
 .page-content-inner.wizard.wizard-instructor
   .head-section
     %h1.head-section-title Set up your profile
@@ -95,5 +98,13 @@
   
   // verified email
   .wizard-section
-    %h1.section-title.flex-block 
-      The Bizaar Pact
+    %h1.small-title.flex-block 
+      .title-image-holder
+        = image_tag "custom_images/email-verified.png"
+      Your email has been verified!
+    .wizard-content
+      %p 
+        Congradulations Dylan! You are now a 
+        %span.bold Bizaar Instructor!
+        // TODO: Bizaar Member
+      %p Now it’s time to make a profile. A lot of students will look at your profile to get a better sense of you as a tutor, so we recommend that you create a profile that will gain you more students in the long run. Don’t worry though, we’re here to help guide you through the process!
