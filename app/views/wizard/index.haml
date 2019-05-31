@@ -105,7 +105,7 @@
     .wizard-content
       %p Add a payment method and get started exploring Bizaar Classes!
       .add-card-holder
-        = image_tag "custom_images/cards.png"
+        = image_tag "custom_images/cards.png", class: 'image'
         .input-holder
           %span.bold Name on Card
           .row
@@ -114,9 +114,28 @@
             .col-4
               = text_field 'last_name', '', placeholder: 'Last Name'
         .input-holder
-          %span.bold Card information
+          .row
+            .col-6
+              %span.bold Card information
+              .row
+                .col-8
+                  = text_field 'first_name', '', placeholder: 'First Name'
+                .col-4
+                  = text_field 'first_name', '', placeholder: 'First Name'
+            .col-2
+              %span.bold Expiration Date
+              .row
+                .col-12
+                  = text_field 'first_name', '', placeholder: 'First Name'
+        .checkbox-item.default-checkbox
+          = check_box_tag 'make_default_card', '', false, class: 'input'
+          = label_tag 'make_default_card', 'Make Default Card', class: 'label'
+
       .added-card-holder
         %p.uppercase.violet.bold Your card information has been saved.
+
+      = link_to 'Add Card', '#', class: 'btn btn--violet single-btn add-card'
+
 
     .row
       .col-6

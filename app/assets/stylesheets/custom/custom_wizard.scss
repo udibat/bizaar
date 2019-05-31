@@ -400,3 +400,27 @@ p {
     }
   }
 }
+
+.add-card-holder {
+  .image {
+    width: 120px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  .default-checkbox {
+    margin-bottom: 30px;
+    input[type="checkbox"] + .label {
+      font-size: 14px;
+      font-weight: normal;
+    }
+  }
+  .label {
+    text-align: left;
+  }
+}
+
+.add-card {
+  width: 220px;
+  margin-bottom: 80px;
+  text-align: center;
+}
