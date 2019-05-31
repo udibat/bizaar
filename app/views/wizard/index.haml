@@ -96,30 +96,28 @@
           Set up payment
           // TODO: for the members - 'Set up your payment info'
   
-  // verify id
+  // setup payment
   .wizard-section
     %h1.small-title.flex-block 
       .title-image-holder
-        = image_tag "custom_images/id-card.png"
-      Verify your ID
+        = image_tag "custom_images/credit-card.png"
+      Set up your payment info
     .wizard-content
-      .text-content
-        %p Most classes would involve face-to-face meetings, so we strive to ensure the safety of our community members.
-        %p 
-          By verifying your ID, you get this
-          %span.verify-sign
-            = image_tag "custom_images/checked.png", class: 'small-icon'
-            %span.uppercase.green Id verified
-          badge and you will help your students feel safer about signing up for classes. 
-          %b Your ID will not be seen by anyone but us. 
-      .text-content
-        %p 
-          We have the utmost respect for our users personal information and 
-          %b will not share your information 
-          with with any third parties or entities outside of Bizaar management.
-        .link-holder.flex-start.links
-          = link_to 'Have more questions? Learn more here.', '#', class: 'green underline link'
-          = link_to ' Or take a look at our Terms of Agreement', '#', class: 'green underline link'
+      %p Add a payment method and get started exploring Bizaar Classes!
+      .add-card-holder
+        = image_tag "custom_images/cards.png"
+        .input-holder
+          %span.bold Name on Card
+          .row
+            .col-4
+              = text_field 'first_name', '', placeholder: 'First Name'
+            .col-4
+              = text_field 'last_name', '', placeholder: 'Last Name'
+        .input-holder
+          %span.bold Card information
+      .added-card-holder
+        %p.uppercase.violet.bold Your card information has been saved.
+
     .row
       .col-6
         = link_to 'Back', '#', class: 'btn btn--violet-transp block-btn text-center'

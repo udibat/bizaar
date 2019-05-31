@@ -172,8 +172,9 @@ body[class*="wizard"] {
 
 .wizard-content {
   @include sintony;
+  font-size: 14px;
   p {
-    font-size: 13px;
+    font-size: 14px;
   }
   .description {
     margin-bottom: 35px;
@@ -312,6 +313,14 @@ body[class*="wizard"] {
     .small-icon {
       border-color: $cust-green;
       background-color: $cust-green;
+    }
+    .text-part {
+      color: $cust-green;
+    }
+  }
+  &.current {
+    .small-icon {
+      border-color: $cust-green;
     }
     .text-part {
       color: $cust-green;
