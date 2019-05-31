@@ -96,26 +96,32 @@
           Set up payment
           // TODO: for the members - 'Set up your payment info'
   
-  // verified email
-  .wizard-section.verified-email
+  // verify id
+  .wizard-section
     %h1.small-title.flex-block 
       .title-image-holder
-        = image_tag "custom_images/email-verified.png"
-      Your email has been verified!
+        = image_tag "custom_images/id-card.png"
+      Verify your ID
     .wizard-content
-      %p 
-        Congradulations Dylan! You are now a 
-        %span.bold Bizaar Instructor!
-        // TODO: Bizaar Member!
-      // for the instructor
-      %p Now it’s time to make a profile. A lot of students will look at your profile to get a better sense of you as a tutor, so we recommend that you create a profile that will gain you more students in the long run. Don’t worry though, we’re here to help guide you through the process!
-      // for the member
-      %p If you choose to, you can now add a profile photo and write a quick introduction to help your future Instructors and the community get to know you better. Otherwise, feel free to explore our bazaar of skills and talents!
+      .text-content
+        %p Most classes would involve face-to-face meetings, so we strive to ensure the safety of our community members.
+        %p 
+          By verifying your ID, you get this
+          %span.verify-sign
+            = image_tag "custom_images/checked.png", class: 'small-icon'
+            %span.uppercase.green Id verified
+          badge and you will help your students feel safer about signing up for classes. 
+          %b Your ID will not be seen by anyone but us. 
+      .text-content
+        %p 
+          We have the utmost respect for our users personal information and 
+          %b will not share your information 
+          with with any third parties or entities outside of Bizaar management.
+        .link-holder.flex-start.links
+          = link_to 'Have more questions? Learn more here.', '#', class: 'green underline link'
+          = link_to ' Or take a look at our Terms of Agreement', '#', class: 'green underline link'
     .row
       .col-6
-        = link_to 'Make a kickass profile!', '#', class: 'btn btn--violet block-btn text-center'
-    .row
+        = link_to 'Back', '#', class: 'btn btn--violet-transp block-btn text-center'
       .col-6
-        = link_to 'Complete my profile', '#', class: 'btn btn--violet block-btn text-center'
-      .col-6
-        = link_to 'no thank you!', '#', class: 'btn btn--violet-transp block-btn text-center'
+        = link_to 'Next', '#', class: 'btn btn--violet block-btn text-center'

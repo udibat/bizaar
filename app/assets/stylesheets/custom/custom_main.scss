@@ -291,6 +291,9 @@ img {
       width: auto;
     }
   }
+  &.flex-start {
+    justify-content: flex-start;
+  }
 }
 
 // footer
