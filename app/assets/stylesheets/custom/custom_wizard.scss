@@ -246,6 +246,8 @@ body[class*="wizard"] {
 
 .page-content-inner {
   &.wizard {
+    background-color: #f4f6f3;
+    padding-bottom: 60px;
     .wizard-section {
       width: 940px;
     }
@@ -291,6 +293,7 @@ body[class*="wizard"] {
     background-color: #fff;
     border: 3px solid $cust-light-gray;
     overflow: hidden;
+    margin-bottom: 10px;
     svg {
       width: 19px;
       height: 19px;
@@ -321,7 +324,7 @@ body[class*="wizard"] {
       width: 58px;
       height: 1px;
       background-color: #dfdfdf;
-      bottom: 24px;
+      bottom: 34px;
     }
   }
 
@@ -346,5 +349,11 @@ body[class*="wizard"] {
         right: -83%;
       }
     }
+  }
+ }
+
+ .verified-email {
+  .wizard-content {
+    margin-bottom: 30px;
   }
  }
