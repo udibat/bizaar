@@ -1487,6 +1487,19 @@ CREATE TABLE `transactions` (
   KEY `community_starter_state` (`community_id`,`starter_id`,`current_state`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `tutor_signup_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tutor_signup_statuses` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `person_id` bigint(20) DEFAULT NULL,
+  `signup_status` int(11) DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_tutor_signup_statuses_on_person_id` (`person_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -2385,6 +2398,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190422135037'),
 ('20190423130843'),
 ('20190424093004'),
-('20190425105422');
+('20190425105422'),
+('20190603161542');
 
 
