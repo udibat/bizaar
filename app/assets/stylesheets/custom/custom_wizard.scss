@@ -409,6 +409,12 @@ p {
   }
   .default-checkbox {
     margin-bottom: 30px;
+  }
+}
+
+.add-card-holder,
+.added-card-holder {
+  .default-checkbox {
     input[type="checkbox"] + .label {
       font-size: 14px;
       font-weight: normal;
@@ -424,3 +430,36 @@ p {
   margin-bottom: 80px;
   text-align: center;
 }
+
+.exp-date {
+  display: block;
+  padding-right: 41px;
+}
+
+.skip-btn {
+  display: block;
+  text-align: center;
+  text-decoration: underline;
+  color: #8ea1b4;
+  padding: 5px;
+}
+
+.lined {
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.card-info {
+  padding-left: 18px;
+}
+
+.added-card-item {
+  padding: 10px 0 20px;
+}
+
+.add-new-card-link {
+  display: inline-block;
+  margin-bottom: 40px;
+}
+
+
+
