@@ -254,6 +254,15 @@ img {
   &--right {
     margin-left: 15px;
   }
+  &--black {
+    background-color: $cust-text;
+    color: #fff;
+    border: 2px solid $cust-text;
+    &:hover, &:focus {
+      background-color: #fff;
+      color: $cust-text;
+    }
+  }
 }
 
 .single-btn {
@@ -601,4 +610,13 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
 .title-image-holder {
   width: 32px;
   margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.mb-25 {
+  margin-bottom: 25px;
+}
+
+.mb-50 {
+  margin-bottom: 50px;
 }

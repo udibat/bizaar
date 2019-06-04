@@ -77,8 +77,10 @@ $(document).ready(function() {
 
   $('.custom-select').select2({
     minimumResultsForSearch: -1,
+    placeholder: function(){
+      $(this).data('placeholder');
+    }
   });
-
 });
 
 $(window).on('scroll', function() {
