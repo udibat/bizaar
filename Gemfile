@@ -151,6 +151,7 @@ end
 
 group :development, :test do
   # gem 'pry-byebug'
+  gem 'pry'
 end
 
 
@@ -186,3 +187,6 @@ gem 'capistrano-npm'
 gem 'whenever'
 
 gem 'capistrano-rocket-chat'
+gem 'select2-rails', '~> 4.0', '>= 4.0.3'
+
+gem 'st_customization', path: 'lib/st_customization'

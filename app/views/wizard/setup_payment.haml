@@ -1,0 +1,59 @@
+// setup payment
+.wizard-section
+  %h2.small-title.flex-block 
+    .title-image-holder
+      = image_tag "custom_images/credit-card.png"
+    Set up your payment info
+  .wizard-content
+    %p Add a payment method and get started exploring Bizaar Classes!
+    // add new card holder
+    .add-card-holder
+      = image_tag "custom_images/cards.png", class: 'image'
+      .input-holder
+        %span.bold Name on Card
+        .row
+          .col-5
+            = text_field 'first_name', '', placeholder: 'First Name'
+          .col-5
+            = text_field 'last_name', '', placeholder: 'Last Name'
+      .input-holder
+        .row
+          .col-5
+            %span.bold Card information
+            .row
+              .col-12
+                = text_field 'card_num', '', placeholder: 'Card Number'
+          .col-5
+            %span.bold.text-right.exp-date Expiration Date
+            .row
+              .col-6
+                = text_field 'cvv', '', placeholder: 'CVV'
+              .col-6
+                = text_field 'exp_date', '', placeholder: 'MM/YY'
+                
+      .checkbox-item.default-checkbox
+        = check_box_tag 'make_default_card', '', false, class: 'input'
+        = label_tag 'make_default_card', 'Make Default Card', class: 'label'
+
+      = link_to 'Add Card', '#', class: 'btn btn--violet single-btn add-card'
+    
+    .added-card-holder
+      .row
+        .col-7.lined
+          %p.uppercase.violet.bold Your card information has been saved.
+      .row.added-card-list
+        .col-7.lined.added-card-item
+          .checkbox-item.default-checkbox
+            = check_box_tag 'default_card', '', true, class: 'input'
+            = label_tag 'default_card', 'Default Card', class: 'label'
+          .card-info
+            %span.bold Card ending with 4856
+      = link_to 'Add a new card', '#', class: 'add-new-card-link link underline uppercase'
+
+  .row
+    .col-6
+      = link_to 'Back', '#', class: 'btn btn--violet-transp block-btn text-center'
+    // last step
+    .col-6
+      = link_to 'Finish setting up!', '#', class: 'btn btn--violet block-btn text-center'
+      = link_to 'Skip this step', '#', class: 'link skip-btn'

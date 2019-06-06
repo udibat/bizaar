@@ -1,0 +1,10 @@
+- content_for :javascript do
+  initialize_confirmation_pending_form("#{I18n.locale}","#{email_not_accepted_message}");
+
+// - email_to_confirm = @current_user.latest_pending_email_address(@current_community)
+// - contact_support_link = link_to t("sessions.confirmation_pending.contact_support_link_text"), "mailto:#{support_email}"
+// - admin_dashboard_link = link_to t("sessions.confirmation_pending.admin_dashboard_link_text"), admin_getting_started_guide_path
+
+= form_for(Person, :as => "person", :url => confirmation_path(:locale => I18n.locale), :html => { :method => :put, :id => "resend_email_confirmation"} ) do |form|
+  = form.button "resend the email", :class => "btn btn--violet wizard-btnn"
+
