@@ -18,8 +18,16 @@ class TutorWizardController < ApplicationController
 
   end
 
+  # GET:
+  # show page
   def email_verification_finished
-    @current_user.tutor_signup_status.next_step!
+    
+  end
+
+  # POST:
+  # update signup_status
+  def email_verification_finished_update
+    @current_user.tutor_signup_status.signup_status = :qualifications
   end
 
 
@@ -72,7 +80,8 @@ private
     tutor_status = @current_user.tutor_signup_status.signup_status
 
     if tutor_status.to_s != action_name.to_s
-      redirect_to action: tutor_status.to_s
+      # redirect_to action: tutor_status.to_sym
+      redirect_to custom_routes.public_send("tutor_wizard_#{tutor_status}_path")
     end
 
   end

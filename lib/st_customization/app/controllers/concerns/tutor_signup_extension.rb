@@ -37,7 +37,7 @@ private
     user.is_tutor = true
     user.save!
     tutor_signup_status = user.build_tutor_signup_status
-    tutor_signup_status.signup_status = :registered
+    tutor_signup_status.signup_status = :email_verification_sent
     tutor_signup_status.save!
   end
 
