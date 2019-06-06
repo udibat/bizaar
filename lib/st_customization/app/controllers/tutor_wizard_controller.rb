@@ -81,7 +81,7 @@ private
 
     if tutor_status.to_s != action_name.to_s
       # redirect_to action: tutor_status.to_sym
-      redirect_to custom_routes.public_send("tutor_wizard_#{tutor_status}_path")
+      redirect_to public_send("tutor_wizard_#{tutor_status}_path")
     end
 
   end

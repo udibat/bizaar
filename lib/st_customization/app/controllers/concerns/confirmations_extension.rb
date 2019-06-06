@@ -10,7 +10,8 @@ module ConfirmationsExtension
     alias_method :show_before_redef, :show
     def show
       # Override default redirect after successfull confirmation
-      session[:return_to] = custom_routes.tutor_wizard_continue_path
+      # session[:return_to] = custom_routes.tutor_wizard_continue_path
+      session[:return_to] = tutor_wizard_continue_path
       # store target email:
       email = Email.find_by_confirmation_token(params[:confirmation_token])
       params[:processed_email_id] = email.id if email
