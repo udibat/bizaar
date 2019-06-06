@@ -1,0 +1,9 @@
+%h1 ID verification
+
+
+%p
+  = @current_user.inspect
+
+
+%p
+  = link_to "Next", custom_routes.public_send(@next_step_path)

@@ -4,7 +4,9 @@ class TutorSignupStatus < ApplicationRecord
 
   validates_presence_of :person
 
+
   enum signup_status: [
+    :registered_oauth,  # fill up missing fields
     :registered,
     :email_verification_sent,
     :email_verification_finished,
@@ -15,6 +17,7 @@ class TutorSignupStatus < ApplicationRecord
     :social_media, #optional step
     :id_verification,
     :payment_information, #optional step
+    :bizaar_pact,
     :finished
   ], _prefix: true
 
@@ -36,4 +39,9 @@ class TutorSignupStatus < ApplicationRecord
 
   end
 
+  def show
+    puts 'Basic'
+  end
+
 end
+

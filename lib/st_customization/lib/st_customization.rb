@@ -9,3 +9,4 @@ ActionController::Base.view_paths = [
 module StCustomization
   # Your code goes here...
 end
+

@@ -1,6 +1,8 @@
 # coding: utf-8
 Rails.application.routes.draw do
 
+  mount StCustomization::Engine => "/", as: 'custom_routes'
+
   namespace :mercury do
     resources :images
   end
@@ -37,7 +39,8 @@ Rails.application.routes.draw do
     mount MailPreview => 'mail_view'
   end
 
-  resources :wizard
+  # resources :wizard
+  # get 'tutor_wizard/qualifications' => 'tutor_wizard#qualifications', as: :tutor_wizard_qualifications
 
   # Some non-RESTful mappings
   post '/webhooks/paypal_ipn' => 'paypal_ipn#ipn_hook', as: :paypal_ipn_hook
