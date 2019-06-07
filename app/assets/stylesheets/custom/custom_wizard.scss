@@ -2,6 +2,7 @@
 
 .people_new,
 .community_memberships_confirmation_pending,
+.tutor_wizard_email_verification_finished,
 body[class*="wizard"] {
   .marketplace-lander {
     display: none;
@@ -9,6 +10,7 @@ body[class*="wizard"] {
   .page-content {
     padding: 0;
     &-inner {
+      height: 100%;
       &:not(.wizard) {
         padding: 70px 0;
       }
@@ -18,6 +20,7 @@ body[class*="wizard"] {
     max-width: 100%;
     padding: 0;
     background-color: transparent;
+    height: 100vh;
   }
 }
 
@@ -55,7 +58,7 @@ body[class*="wizard"] {
     min-height: 1px;
     max-width: 282px;
     @include media(tablet) {
-      max-width: 100%;
+      max-width: 48.4%;
     }
     .google-icon {
       display: inline-block;
@@ -277,16 +280,19 @@ body[class*="wizard"] {
 
 .wizard-head {
   background-color: #fff;
-  width: 940px;
+  max-width: 940px;
+  width: 100%;
   margin: 0 auto;
   border-bottom: 1px solid #dfdfdf;
   padding: 22px 30px;
   margin-top: -32px;
+  overflow: auto;
 }
 
 .step-list {
   display: flex;
   justify-content: space-between;
+  width: 880px;
 }
 
 .step-item {
@@ -369,6 +375,12 @@ body[class*="wizard"] {
  .verified-email {
   .wizard-content {
     margin-bottom: 30px;
+  }
+}
+
+.col-6.make-profile {
+  @include media(tablet) {
+    padding-right: 0.75em;
   }
 }
 
