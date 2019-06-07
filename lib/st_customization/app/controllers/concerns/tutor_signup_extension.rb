@@ -34,9 +34,9 @@ private
 
   def mark_user_as_tutor
     user = Person.find_by_username(params['person']['username'])
-    user.is_tutor = true
-    user.save!
-    tutor_signup_status = user.build_tutor_signup_status
+    user.mark_as_tutor!
+
+    tutor_signup_status = user.tutor_signup_status
     tutor_signup_status.signup_status = :email_verification_sent
     tutor_signup_status.save!
   end

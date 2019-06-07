@@ -7,7 +7,8 @@ class TutorWizardController < ApplicationController
 
   before_action :ensure_user_is_tutor
   before_action :ensure_correct_step, only: [
-    :continue, :email_verification_finished, :qualifications,
+    :continue, 
+    :registered_oauth, :email_verification_finished, :qualifications,
     :profile_picture, :describe_yourself, :cover_photos,
     :social_media, :id_verification, :payment_information,
     :bizaar_pact,
@@ -16,6 +17,11 @@ class TutorWizardController < ApplicationController
 
   def continue
 
+  end
+
+  # GET:
+  def registered_oauth
+    @service = Person::SettingsService.new(community: @current_community, params: params, current_user: @current_user)
   end
 
   # GET:
