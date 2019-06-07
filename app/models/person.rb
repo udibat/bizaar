@@ -46,6 +46,7 @@
 #  linkedin_id                        :string(255)
 #  mark                               :integer
 #  rating_cache                       :string(255)      default({:count=>0, :avg=>0})
+#  is_tutor                           :boolean          default(FALSE)
 #
 # Indexes
 #

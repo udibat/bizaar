@@ -1,23 +1,62 @@
-// verified email
-.wizard-section.verified-email
-  %h2.small-title.flex-block 
-    .title-image-holder
-      = image_tag "custom_images/email-verified.png"
-    Your email has been verified!
-  .wizard-content
-    %p 
-      Congradulations Dylan! You are now a 
-      %span.bold Bizaar Instructor!
-      // TODO: Bizaar Member!
-    // for the instructor
-    %p Now it’s time to make a profile. A lot of students will look at your profile to get a better sense of you as a tutor, so we recommend that you create a profile that will gain you more students in the long run. Don’t worry though, we’re here to help guide you through the process!
-    // for the member
-    %p If you choose to, you can now add a profile photo and write a quick introduction to help your future Instructors and the community get to know you better. Otherwise, feel free to explore our bazaar of skills and talents!
-  .row
-    .col-6
-      = link_to 'Make a kickass profile!', '#', class: 'btn btn--violet block-btn text-center'
-  .row
-    .col-6
-      = link_to 'Complete my profile', custom_routes.public_send(@next_step_path), class: 'btn btn--violet block-btn text-center'
-    .col-6
-      = link_to 'no thank you!', '#', class: 'btn btn--violet-transp block-btn text-center'
+// main block for all wizard steps
+.page-content-inner.wizard.wizard-instructor
+  .head-section
+    %h1.head-section-title Set up your profile
+  .wizard-head
+    .step-list
+      .step-item.done
+        .small-icon
+          %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+            %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+        .text-part
+          Basic Information
+      .step-item.done
+        .small-icon
+          %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+            %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+        .text-part
+          Email Verification
+      .step-item
+        .small-icon
+          %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+            %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+        .text-part
+          Bolster your profile
+      // TODO: verify id is just for the instructor
+      .step-item
+        .small-icon
+          %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+            %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+        .text-part
+          Verify your ID
+      .step-item
+        .small-icon
+          %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+            %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+        .text-part
+          Set up payment
+
+          
+  // verified email
+  .wizard-section.verified-email
+    %h2.small-title.flex-block 
+      .title-image-holder
+        = image_tag "custom_images/email-verified.png"
+      Your email has been verified!
+    .wizard-content
+      %p 
+        Congradulations Dylan! You are now a 
+        %span.bold Bizaar Instructor!
+        // TODO: Bizaar Member!
+      // for the instructor
+      %p Now it’s time to make a profile. A lot of students will look at your profile to get a better sense of you as a tutor, so we recommend that you create a profile that will gain you more students in the long run. Don’t worry though, we’re here to help guide you through the process!
+      // for the member
+      %p If you choose to, you can now add a profile photo and write a quick introduction to help your future Instructors and the community get to know you better. Otherwise, feel free to explore our bazaar of skills and talents!
+    .row
+      .col-6.make-profile
+        = link_to 'Make a kickass profile!', '#', class: 'btn btn--violet block-btn text-center'
+    .row
+      .col-6
+        = link_to 'Complete my profile', custom_routes.public_send(@next_step_path), class: 'btn btn--violet block-btn text-center'
+      .col-6
+        = link_to 'no thank you!', '#', class: 'btn btn--violet-transp block-btn text-center'
