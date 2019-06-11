@@ -33,12 +33,11 @@ class TutorWizardController < ApplicationController
     tutor_status.save!
   end
 
-
-  def qualifications
-
+  def profile_picture
+    @custom_profile = @current_user.custom_profile
   end
 
-  def profile_picture
+  def qualifications
 
   end
 

@@ -16,6 +16,17 @@ class CustomProfilesController < ApplicationController
 
   end
 
+  def upload_avatar
+    @custom_profile = CustomProfile.find(params[:id])
+    if @custom_profile.update_attributes(custom_profile_update_params)
+      # flash[:notice] = 'Profile was successfully updated.'
+      render json: {image_url: @custom_profile.avatar.url(:thumb)}
+    else
+      # flash[:error] = @custom_profile.errors.first.to_s
+      render json: {error: @custom_profile.errors.first.to_s}
+    end
+  end
+
 private
 
   def custom_profile_update_params

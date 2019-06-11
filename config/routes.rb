@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get '/tutor_wizard/payment_information' => 'tutor_wizard#payment_information', as: :tutor_wizard_payment_information
   get '/tutor_wizard/bizaar_pact' => 'tutor_wizard#bizaar_pact', as: :tutor_wizard_bizaar_pact
 
+  resources :custom_profiles, only: [:update]
+  patch '/custom_profiles/upload_avatar/:id' => 'custom_profiles#upload_avatar', as: :profile_upload_avatar
+
 
   namespace :mercury do
     resources :images
