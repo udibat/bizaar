@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # mount StCustomization::Engine => "/", as: 'custom_routes'
   get '/tutor_wizard/continue' => 'tutor_wizard#continue', as: :tutor_wizard_continue
   get '/tutor_wizard/qualifications' => 'tutor_wizard#qualifications', as: :tutor_wizard_qualifications
-
+  get '/tutor_wizard/registered_oauth' => 'tutor_wizard#registered_oauth', as: :tutor_wizard_registered_oauth
   get '/tutor_wizard/email_verification_finished' => 'tutor_wizard#email_verification_finished', as: :tutor_wizard_email_verification_finished
   get '/tutor_wizard/profile_picture' => 'tutor_wizard#profile_picture', as: :tutor_wizard_profile_picture
   get '/tutor_wizard/describe_yourself' => 'tutor_wizard#describe_yourself', as: :tutor_wizard_describe_yourself

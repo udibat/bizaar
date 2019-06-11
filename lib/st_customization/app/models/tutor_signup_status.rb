@@ -10,16 +10,34 @@ class TutorSignupStatus < ApplicationRecord
     :registered,
     :email_verification_sent,
     :email_verification_finished,
-    :qualifications, #optional step
     :profile_picture,
     :describe_yourself,
     :cover_photos, #optional step
+    :qualifications, #optional step
     :social_media, #optional step
     :id_verification,
     :payment_information, #optional step
     :bizaar_pact,
     :finished
   ], _prefix: true
+
+  def next_step_if_complete!
+    if check_step_completeness(signup_status)
+      self.next_step!
+    end
+  end
+
+  def check_step_completeness(step_name)
+    case step_name.to_sym
+    when :profile_picture
+      person.custom_profile.avatar.present? rescue false
+    when :describe_yourself
+      false
+    else
+      false
+      # raise "unknown step: '#{step_name}'."
+    end
+  end
 
   def next_step!
     if next_step = next_step_name
@@ -37,10 +55,6 @@ class TutorSignupStatus < ApplicationRecord
 
     statuses.select{|k, v| v == next_step_idx }.keys.first
 
-  end
-
-  def show
-    puts 'Basic'
   end
 
 end

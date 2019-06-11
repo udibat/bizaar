@@ -21,19 +21,16 @@ class TutorWizardController < ApplicationController
 
   # GET:
   def registered_oauth
-    @service = Person::SettingsService.new(community: @current_community, params: params, current_user: @current_user)
+    @service = Person::SettingsService.new(community: @current_community, params: params, person: @current_user, current_user: @current_user)
   end
 
   # GET:
   # show page
   def email_verification_finished
-    
-  end
-
-  # POST:
-  # update signup_status
-  def email_verification_finished_update
-    @current_user.tutor_signup_status.signup_status = :qualifications
+    # this page should be displayed only once
+    tutor_status = @current_user.tutor_signup_status
+    tutor_status.signup_status = :profile_picture
+    tutor_status.save!
   end
 
 
@@ -83,11 +80,13 @@ private
     # ToDo: temporary workaround for frontend dev
     return if params['force_display_page']
 
-    tutor_status = @current_user.tutor_signup_status.signup_status
+    tutor_status = @current_user.tutor_signup_status
+    tutor_status.next_step_if_complete!
+    tutor_status_name = tutor_status.signup_status
 
-    if tutor_status.to_s != action_name.to_s
-      # redirect_to action: tutor_status.to_sym
-      redirect_to public_send("tutor_wizard_#{tutor_status}_path")
+    if tutor_status_name.to_s != action_name.to_s
+      # redirect_to action: tutor_status_name.to_sym
+      redirect_to public_send("tutor_wizard_#{tutor_status_name}_path")
     end
 
   end

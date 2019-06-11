@@ -104,12 +104,13 @@
         %h3.section-subtitle.section-subtitle--regular Birthday
         %p Your birthday is confidential. You do have to be 19 and older to sign up with us
         .input-container
-          %select#select_month.select-month.custom-select{:name => ""}
-            %option Month
-          %select#select_day.select-day.custom-select{:name => ""}
-            %option Day
-          %select#select_year.select-year.custom-select{:name => ""}
-            %option Year
+          = form.date_select :birthday, order: [:day, :month, :year], :start_year => (Date.today.year - 100), :end_year => Date.today.year
+          // %select#select_month.select-month.custom-select{:name => ""}
+          //   %option Month
+          // %select#select_day.select-day.custom-select{:name => ""}
+          //   %option Day
+          // %select#select_year.select-year.custom-select{:name => ""}
+          //   %option Year
       = button_tag t('sessions.new.sign_up_now'), class: 'btn btn--violet btn--left signup-btn'
 
     .socials-signup
