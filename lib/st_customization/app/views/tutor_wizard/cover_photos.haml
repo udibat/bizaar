@@ -1,9 +1,46 @@
-%h1 Cover Photos
+// main block for all wizard steps
+.page-content-inner.wizard.wizard-instructor
+  .head-section
+    %h1.head-section-title Cover Photos
+  = render partial: 'wizard_head'
+  .wizard-section
+    %h2.small-title.flex-block 
+      .title-image-holder
+        = image_tag "custom_images/medal.png"
+      Choose your cover photos
+    .wizard-content
+      .wizard-inner
+        .need-upload.lined
+          %p Max #{CustomProfile::MAX_DESCRIPTION_LENGTH} characters
+          = form_for @custom_profile, url: profile_upload_cover_photos_path(@custom_profile), html: { multipart: true, id: "fileupload" } do |f|
+            // = f.text_area :description, cols: 20, rows: 10, maxlength: CustomProfile::MAX_DESCRIPTION_LENGTH
+            - idx = 0
+            = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
+              = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][#{idx}][image]" if photos_fields.object.new_record?
+              - idx += 1
+              // , name: 'custom_profile[cover_photos_attributes][0][id]'
+              = photos_fields.hidden_field :id
+              = photos_fields.hidden_field :_destroy
+              %table.table.table-striped.test-class-test
+                %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
+            // = f.submit 'Next step', class: 'btn btn--violet get-badge'
+          = link_to "Next", public_send(@next_step_path, {free_navigation: @free_navigation_mode}), class: 'btn btn--violet get-badge'
+          = link_to "Back", public_send(@prev_step_path, {free_navigation: true}), class: 'btn btn--green get-badge'
+          = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: ''
+          
 
-
-%p
-  = @current_user.inspect
-
-
-%p
-  = link_to "Next", public_send(@next_step_path)
+:javascript
+  onDocumentReady(function(){
+    $('#fileupload').fileupload({
+      done: function (e, data) {
+          if (data.result.error === undefined) {
+            $('.table-striped .files').html('')
+            data.result.image_urls.forEach(function(item, i){
+              $('.table-striped .files').append($('<img>',{src: item}))
+            })
+          } else {
+            alert(data.result.error);
+          }
+        }
+    });
+  });

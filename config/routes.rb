@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   # mount StCustomization::Engine => "/", as: 'custom_routes'
   get '/tutor_wizard/continue' => 'tutor_wizard#continue', as: :tutor_wizard_continue
+  get '/tutor_wizard/skip_step/:skip_step_name' => 'tutor_wizard#skip_step', as: :tutor_wizard_skip_step
+  get '/tutor_wizard/backward_step/:step_name' => 'tutor_wizard#backward_step', as: :tutor_wizard_backward_step
   get '/tutor_wizard/qualifications' => 'tutor_wizard#qualifications', as: :tutor_wizard_qualifications
   get '/tutor_wizard/registered_oauth' => 'tutor_wizard#registered_oauth', as: :tutor_wizard_registered_oauth
   get '/tutor_wizard/email_verification_finished' => 'tutor_wizard#email_verification_finished', as: :tutor_wizard_email_verification_finished
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :custom_profiles, only: [:update]
   patch '/custom_profiles/upload_avatar/:id' => 'custom_profiles#upload_avatar', as: :profile_upload_avatar
+  patch '/custom_profiles/upload_cover_photos/:id' => 'custom_profiles#upload_cover_photos', as: :profile_upload_cover_photos
 
 
   namespace :mercury do

@@ -432,6 +432,22 @@ CREATE TABLE `conversations` (
   KEY `index_conversations_on_starting_page` (`starting_page`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `cover_photos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cover_photos` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `custom_profile_id` bigint(20) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `image_file_name` varchar(255) DEFAULT NULL,
+  `image_content_type` varchar(255) DEFAULT NULL,
+  `image_file_size` int(11) DEFAULT NULL,
+  `image_updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_cover_photos_on_custom_profile_id` (`custom_profile_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `custom_field_names`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -2440,6 +2456,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190605160622'),
 ('20190605173629'),
 ('20190606115258'),
-('20190610151733');
+('20190610151733'),
+('20190612111657');
 
 
