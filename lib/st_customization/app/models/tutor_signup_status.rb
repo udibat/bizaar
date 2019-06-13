@@ -44,9 +44,9 @@ class TutorSignupStatus < ApplicationRecord
     false
   end
 
-  def next_step_if_complete!
-    if check_step_completeness(signup_status)
-      self.next_step!
+  def next_step_if_complete!(curr_step_name = nil)
+    if check_step_completeness(curr_step_name || signup_status)
+      self.next_step!(curr_step_name || signup_status)
     end
   end
 
@@ -58,14 +58,20 @@ class TutorSignupStatus < ApplicationRecord
       person.custom_profile.description.present? rescue false
     when :cover_photos
       person.custom_profile.cover_photos.count > 0 rescue false
+    when :qualifications
+      # optional step
+      true
+    when :social_media
+      # optional step
+      true
     else
       false
       # raise "unknown step: '#{step_name}'."
     end
   end
 
-  def next_step!
-    if next_step = next_step_name
+  def next_step!(curr_step_name = nil)
+    if next_step = next_step_name(curr_step_name)
       self.signup_status = next_step
       self.save!
     end

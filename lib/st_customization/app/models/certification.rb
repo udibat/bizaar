@@ -3,6 +3,9 @@ class Certification < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   belongs_to :custom_profile
+  belongs_to :category
+
+  validates_presence_of :name, :category
 
 end
 

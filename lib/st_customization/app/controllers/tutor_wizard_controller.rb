@@ -5,7 +5,8 @@ class TutorWizardController < ApplicationController
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_this_page")
   end
 
-  before_action :ensure_user_is_tutor
+  include AllowTutorOnly
+
   before_action :ensure_correct_step, only: [
     :continue, 
     :registered_oauth, :email_verification_finished, :qualifications,
@@ -22,6 +23,18 @@ class TutorWizardController < ApplicationController
 
   def continue
 
+  end
+
+  def confirm_step
+    new_step_name = @current_user.tutor_signup_status.
+      next_step_if_complete!(params['step_name'])
+
+    new_step_url = public_send("tutor_wizard_#{new_step_name}_url") if new_step_name.present?
+
+    render json: {
+      success: new_step_name.present?,
+      new_step_url: new_step_url
+    }
   end
 
   def skip_step
@@ -53,7 +66,8 @@ class TutorWizardController < ApplicationController
   end
 
   def qualifications
-
+    @existing_certifications = @custom_profile.certifications
+    @new_certification = @custom_profile.certifications.build
   end
 
   def describe_yourself
@@ -84,13 +98,6 @@ private
 
   def load_profile
     @custom_profile = @current_user.custom_profile
-  end
-
-  def ensure_user_is_tutor
-    unless @current_user.is_tutor?
-      flash[:error] = 'You should be a tutor to access this page'
-      redirect_to login_path
-    end
   end
 
   def ensure_correct_step
@@ -126,11 +133,14 @@ private
 
   def set_next_step_path
     custom_step = @free_navigation_mode ? action_name : nil
+    curr_step_name = custom_step || @current_user.tutor_signup_status.signup_status
     next_step_name = @current_user.tutor_signup_status.next_step_name(custom_step)
     @next_step_path = next_step_name ? "tutor_wizard_#{next_step_name}_path" : "search_path"
 
     prev_step_name = @current_user.tutor_signup_status.prev_step_name(custom_step)
     @prev_step_path = prev_step_name ? "tutor_wizard_#{prev_step_name}_path" : "search_path"
+
+    @confirm_step_path = tutor_wizard_confirm_step_path(curr_step_name)
   end
 
 end

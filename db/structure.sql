@@ -154,15 +154,17 @@ CREATE TABLE `certifications` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `custom_profile_id` bigint(20) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `category` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `image_file_name` varchar(255) DEFAULT NULL,
   `image_content_type` varchar(255) DEFAULT NULL,
   `image_file_size` int(11) DEFAULT NULL,
   `image_updated_at` datetime DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `index_certifications_on_custom_profile_id` (`custom_profile_id`)
+  KEY `index_certifications_on_custom_profile_id` (`custom_profile_id`),
+  KEY `index_certifications_on_category_id` (`category_id`),
+  CONSTRAINT `fk_rails_bd682da0ba` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `checkout_accounts`;
@@ -2457,6 +2459,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190605173629'),
 ('20190606115258'),
 ('20190610151733'),
-('20190612111657');
+('20190612111657'),
+('20190613124818');
 
 

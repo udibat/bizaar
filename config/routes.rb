@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # mount StCustomization::Engine => "/", as: 'custom_routes'
   get '/tutor_wizard/continue' => 'tutor_wizard#continue', as: :tutor_wizard_continue
   get '/tutor_wizard/skip_step/:skip_step_name' => 'tutor_wizard#skip_step', as: :tutor_wizard_skip_step
+  get '/tutor_wizard/confirm_step/:step_name' => 'tutor_wizard#confirm_step', as: :tutor_wizard_confirm_step
   get '/tutor_wizard/backward_step/:step_name' => 'tutor_wizard#backward_step', as: :tutor_wizard_backward_step
   get '/tutor_wizard/qualifications' => 'tutor_wizard#qualifications', as: :tutor_wizard_qualifications
   get '/tutor_wizard/registered_oauth' => 'tutor_wizard#registered_oauth', as: :tutor_wizard_registered_oauth
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   get '/tutor_wizard/payment_information' => 'tutor_wizard#payment_information', as: :tutor_wizard_payment_information
   get '/tutor_wizard/bizaar_pact' => 'tutor_wizard#bizaar_pact', as: :tutor_wizard_bizaar_pact
 
+  resources :certifications, only: [:create]
   resources :custom_profiles, only: [:update]
   patch '/custom_profiles/upload_avatar/:id' => 'custom_profiles#upload_avatar', as: :profile_upload_avatar
   patch '/custom_profiles/upload_cover_photos/:id' => 'custom_profiles#upload_cover_photos', as: :profile_upload_cover_photos
