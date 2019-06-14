@@ -17,7 +17,9 @@
             // = f.submit 'Next step', class: 'btn btn--violet get-badge'
             %table.table.table-striped.test-class-test
               %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
-        = link_to "Next", public_send(@next_step_path), class: 'btn btn--violet get-badge'
+        = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet get-badge', remote: true
+
+= render partial: 'confirm_step_btn_js'
 
 :javascript
   onDocumentReady(function(){
