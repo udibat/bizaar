@@ -565,6 +565,12 @@ CREATE TABLE `custom_profiles` (
   `avatar_content_type` varchar(255) DEFAULT NULL,
   `avatar_file_size` int(11) DEFAULT NULL,
   `avatar_updated_at` datetime DEFAULT NULL,
+  `social_link_facebook` varchar(255) DEFAULT NULL,
+  `social_link_twitter` varchar(255) DEFAULT NULL,
+  `social_link_instagram` varchar(255) DEFAULT NULL,
+  `social_link_youtube` varchar(255) DEFAULT NULL,
+  `social_link_twitch` varchar(255) DEFAULT NULL,
+  `social_link_vimeo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_custom_profiles_on_person_id` (`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -673,6 +679,22 @@ CREATE TABLE `follower_relationships` (
   UNIQUE KEY `index_follower_relationships_on_person_id_and_follower_id` (`person_id`,`follower_id`) USING BTREE,
   KEY `index_follower_relationships_on_follower_id` (`follower_id`) USING BTREE,
   KEY `index_follower_relationships_on_person_id` (`person_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `id_verifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `id_verifications` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `custom_profile_id` bigint(20) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `image_file_name` varchar(255) DEFAULT NULL,
+  `image_content_type` varchar(255) DEFAULT NULL,
+  `image_file_size` int(11) DEFAULT NULL,
+  `image_updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_id_verifications_on_custom_profile_id` (`custom_profile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `invitation_unsubscribes`;
@@ -2460,6 +2482,8 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190606115258'),
 ('20190610151733'),
 ('20190612111657'),
-('20190613124818');
+('20190613124818'),
+('20190614103615'),
+('20190614123234');
 
 

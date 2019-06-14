@@ -12,13 +12,20 @@ class CustomProfilesController < ApplicationController
       flash[:error] = @custom_profile.errors.first.to_s
     end
 
-    # Get rid of `free_navigation` if present
-    uri = URI.parse(request.referer)
-    h = Rack::Utils.parse_nested_query(uri.query)
-    h.delete('free_navigation')
-    uri.query = h.to_query
+    respond_to do |format|
+      format.html {
+        # Get rid of `free_navigation` if present
+        uri = URI.parse(request.referer)
+        h = Rack::Utils.parse_nested_query(uri.query)
+        h.delete('free_navigation')
+        uri.query = h.to_query
 
-    redirect_to uri.to_s
+        redirect_to uri.to_s
+      }
+      format.json {
+        render json: @custom_profile
+      }
+    end
 
   end
 
@@ -40,6 +47,14 @@ class CustomProfilesController < ApplicationController
     end
   end
 
+  def upload_id_verifications
+    if @custom_profile.update_attributes(custom_profile_update_params)
+      render json: {image_urls: @custom_profile.id_verifications.map{|ph| ph.image.url(:thumb) }}
+    else
+      render json: {error: @custom_profile.errors.first.to_s}
+    end
+  end
+
 private
 
   def load_profile
@@ -52,10 +67,18 @@ private
         params[:custom_profile][:cover_photos_attributes][k.to_s].permit(:id, :_destroy, :image)
       }
     end
+
+    if params[:custom_profile][:id_verifications_attributes].present?
+      params[:custom_profile][:id_verifications_attributes].keys.each{|k|
+        params[:custom_profile][:id_verifications_attributes][k.to_s].permit(:id, :_destroy, :image)
+      }
+    end
     
     params.require(:custom_profile).permit(
         :avatar, :description,
-        cover_photos_attributes: {}
+        :social_link_facebook, :social_link_twitter, :social_link_instagram,
+        :social_link_youtube, :social_link_twitch, :social_link_vimeo,
+        cover_photos_attributes: {}, id_verifications_attributes: {}
       )
   end
 

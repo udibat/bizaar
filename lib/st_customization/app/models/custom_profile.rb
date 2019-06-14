@@ -10,6 +10,9 @@ class CustomProfile < ApplicationRecord
   has_many :cover_photos, dependent: :destroy
   accepts_nested_attributes_for :cover_photos, :allow_destroy => true
 
+  has_many :id_verifications, dependent: :destroy
+  accepts_nested_attributes_for :id_verifications, :allow_destroy => true
+
   validates_length_of :description, maximum: MAX_DESCRIPTION_LENGTH
 
 

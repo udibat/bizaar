@@ -11,7 +11,7 @@
     .wizard-content
       .wizard-inner
         .need-upload.lined
-          %p Max #{CustomProfile::MAX_DESCRIPTION_LENGTH} characters
+          %p Some text...
           = form_for @custom_profile, url: profile_upload_cover_photos_path(@custom_profile), html: { multipart: true, id: "fileupload" } do |f|
             // = f.text_area :description, cols: 20, rows: 10, maxlength: CustomProfile::MAX_DESCRIPTION_LENGTH
             - idx = 0
