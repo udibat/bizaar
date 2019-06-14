@@ -1,9 +1,60 @@
-%h1 Social media
+// main block for all wizard steps
+.page-content-inner.wizard.wizard-instructor
+  .head-section
+    %h1.head-section-title Social media
+  = render partial: 'wizard_head'
+  .wizard-section
+    %h2.small-title.flex-block 
+      .title-image-holder
+        = image_tag "custom_images/medal.png"
+      Share your social media (optional)
+    .wizard-content
+      .wizard-inner
+        .need-upload.lined
+          %p Help your members....
+          = form_for @custom_profile, remote: true, format: :json, html: { id: "social_form" } do |f|
+            = f.text_field :social_link_facebook
+            = f.text_field :social_link_twitter
+            = f.text_field :social_link_instagram
+            = f.text_field :social_link_youtube
+            = f.text_field :social_link_twitch
+            = f.text_field :social_link_vimeo
+            = f.submit 'Next step', class: 'btn btn--violet get-badge'
+        // = link_to "Next", public_send(@next_step_path), class: 'btn btn--violet get-badge'
+        = link_to "Back", public_send(@prev_step_path, {free_navigation: true}), class: 'btn btn--green get-badge'
+      %span.errors
 
+// %p
+//   = link_to "Next", public_send(@next_step_path)
 
-%p
-  = @current_user.inspect
+// %p
+//   = link_to "Confirm Step", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
 
+// = render partial: 'confirm_step_btn_js'
 
-%p
-  = link_to "Next", public_send(@next_step_path)
+:javascript
+  onDocumentReady(function(){
+    $("#social_form").on("ajax:success", function(event, data){
+          console.log(data);
+          console.log("#{@confirm_step_path}");
+          $.get("#{@confirm_step_path}", function(data){
+            if (data.success == true) {
+              document.location = data.new_step_url
+            } else {
+              $(".errors").html('Step is incomplete!')
+            }
+          });
+        }
+      ).on("ajax:error", function(event, data){
+          // console.log(data.responseJSON.error);
+          console.log(data);
+          $(".errors").html('Error:')
+          var err_obj = data.responseJSON.error
+          Object.keys(err_obj).forEach(function (key) { 
+            var value = err_obj[key]
+            $(".errors").append(key + ': ' + value[0]);
+          })
+        }
+      )
+  });
+

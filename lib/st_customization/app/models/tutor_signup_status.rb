@@ -60,10 +60,18 @@ class TutorSignupStatus < ApplicationRecord
       person.custom_profile.cover_photos.count > 0 rescue false
     when :qualifications
       # optional step
-      true
+      person.custom_profile.certifications.count > 0 rescue false
+      # true
     when :social_media
       # optional step
-      true
+      person.custom_profile.attributes.select{|k|
+        [
+          :social_link_facebook, :social_link_twitter, :social_link_instagram,
+          :social_link_youtube, :social_link_twitch, :social_link_vimeo
+        ].include? k.to_sym
+      }.values.map{|v| v.present?}.any?
+    when :id_verification
+      person.custom_profile.id_verifications.count > 0 rescue false
     else
       false
       # raise "unknown step: '#{step_name}'."

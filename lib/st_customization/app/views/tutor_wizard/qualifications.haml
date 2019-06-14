@@ -82,7 +82,7 @@
           })
         }
       ).on("ajax:error", function(event, data){
-          console.log(data.responseJSON.error);
+          // console.log(data.responseJSON.error);
           $(".errors").html('Error:')
           var err_obj = data.responseJSON.error
           Object.keys(err_obj).forEach(function (key) { 
