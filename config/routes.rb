@@ -21,6 +21,12 @@ Rails.application.routes.draw do
   resources :custom_profiles, only: [:update]
   patch '/custom_profiles/upload_avatar/:id' => 'custom_profiles#upload_avatar', as: :profile_upload_avatar
   patch '/custom_profiles/upload_cover_photos/:id' => 'custom_profiles#upload_cover_photos', as: :profile_upload_cover_photos
+  patch '/custom_profiles/upload_id_verifications/:id' => 'custom_profiles#upload_id_verifications', as: :profile_upload_id_verifications
+  get '/:person_id/custom_settings/payments' => 'custom_payment_settings#index', :as => :custom_person_payment_settings
+  post '/:person_id/custom_settings/payments' => 'custom_payment_settings#create', :as => :custom_create_person_payment_settings
+  put '/:person_id/custom_settings/payments' => 'custom_payment_settings#update', :as => :custom_update_person_payment_settings
+  # # get '/:person_id/custom_settings/payments/paypal_account' => 'paypal_accounts#index', :as => :custom_paypal_account_settings_payment
+
 
 
   namespace :mercury do

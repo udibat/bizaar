@@ -1,9 +1,14 @@
-class TutorWizardController < ApplicationController
+class TutorWizardController < PaymentSettingsController
   skip_before_action :ensure_consent_given
 
-  before_action do |controller|
-    controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_this_page")
-  end
+  # this will be inherited from parent class
+  # before_action do |controller|
+  #   controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_this_page")
+  # end
+
+  skip_before_action :ensure_payments_enabled, except: [:payment_information]
+  skip_before_action :warn_about_missing_payment_info, except: [:payment_information]
+  skip_before_action :load_stripe_account, except: [:payment_information]
 
   include AllowTutorOnly
 
@@ -83,11 +88,11 @@ class TutorWizardController < ApplicationController
   end
 
   def id_verification
-
+    @custom_profile.id_verifications.build
   end
 
   def payment_information
-
+    render 'payment_information', locals: {index_view_locals: index_view_locals}
   end
 
   def bizaar_pact
@@ -140,7 +145,7 @@ private
     prev_step_name = @current_user.tutor_signup_status.prev_step_name(custom_step)
     @prev_step_path = prev_step_name ? "tutor_wizard_#{prev_step_name}_path" : "search_path"
 
-    @confirm_step_path = tutor_wizard_confirm_step_path(curr_step_name)
+    @confirm_step_path = tutor_wizard_confirm_step_path(curr_step_name, {nocache: Time.now.to_i})
   end
 
 end
