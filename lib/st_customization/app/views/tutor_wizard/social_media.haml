@@ -21,6 +21,7 @@
             = f.text_field :social_link_vimeo
             = f.submit 'Next', class: 'btn btn--violet get-badge'
         = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--green get-badge', remote: true
+        = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: ''
       %span.errors
 
 = render partial: 'remote_form_submit_handler'

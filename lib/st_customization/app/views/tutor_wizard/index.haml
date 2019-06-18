@@ -23,6 +23,7 @@
         - if stripe_seller_ready
           %p
             = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet get-badge', remote: true
+      = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: ''
       %span.errors
 
 
