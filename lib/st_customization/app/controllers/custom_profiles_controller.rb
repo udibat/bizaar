@@ -78,6 +78,7 @@ private
         :avatar, :description,
         :social_link_facebook, :social_link_twitter, :social_link_instagram,
         :social_link_youtube, :social_link_twitch, :social_link_vimeo,
+        :pact_accepted,
         cover_photos_attributes: {}, id_verifications_attributes: {}
       )
   end

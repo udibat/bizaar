@@ -571,6 +571,7 @@ CREATE TABLE `custom_profiles` (
   `social_link_youtube` varchar(255) DEFAULT NULL,
   `social_link_twitch` varchar(255) DEFAULT NULL,
   `social_link_vimeo` varchar(255) DEFAULT NULL,
+  `pact_accepted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_custom_profiles_on_person_id` (`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2484,6 +2485,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190612111657'),
 ('20190613124818'),
 ('20190614103615'),
-('20190614123234');
+('20190614123234'),
+('20190618142100');
 
 
