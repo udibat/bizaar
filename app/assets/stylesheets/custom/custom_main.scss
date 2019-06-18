@@ -537,7 +537,7 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   border-width: 1px;
 }
 
-.custom-select {
+.custom-select-holder > select {
   &:not(:last-of-type) {
     & + .select2 {
       &.select2-container--default {
@@ -549,7 +549,7 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
       }
     }
   }
-  &.select-month, &.select-year {
+  &:first-of-type, &:last-of-type {
     & + .select2 {
       &.select2-container--default {
         width: 100% !important; // rewrite select2 styles
@@ -559,7 +559,7 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
       }
     }
   }
-  &.select-day {
+  &:nth-of-type(2) {
     & + .select2 {
       &.select2-container--default {
         width: 100% !important; // rewrite select2 styles
