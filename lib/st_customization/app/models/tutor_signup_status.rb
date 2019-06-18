@@ -92,6 +92,15 @@ class TutorSignupStatus < ApplicationRecord
 
   end
 
+  def prev_step!
+    if prev_step = self.prev_step_name
+      self.signup_status = prev_step
+      self.save!
+    end
+
+    prev_step
+  end
+
   def next_step_name(target_step_name = nil)
     statuses = self.class.signup_statuses
     next_step_idx = statuses[target_step_name || signup_status] + 1

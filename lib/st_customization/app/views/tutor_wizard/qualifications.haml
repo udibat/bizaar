@@ -63,11 +63,18 @@
               %span Thank you for uploading your documents! We will review the documents, and notify you when it’s approved.
             %span.errors
             %span Already uploaded certifications:
-            .existing_certifications
+        .existing_certifications
+          - @existing_certifications.each do |certification|
+            %span
+              = certification.name
+            %span
+              = certification.category_name
+            = image_tag certification.image.url(:thumb)
 
-            = link_to '+ Add another qualification', '#', class: 'underline uppercase add-another-qual'
+        = link_to '+ Add another qualification', '#', class: 'underline uppercase add-another-qual'
         %p
-          = link_to "Confirm Step", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
+          = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
+          = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--green get-badge', remote: true
 
 = render partial: 'confirm_step_btn_js'
 

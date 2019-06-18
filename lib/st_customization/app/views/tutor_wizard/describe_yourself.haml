@@ -15,9 +15,10 @@
           %p Max #{CustomProfile::MAX_DESCRIPTION_LENGTH} characters
           = form_for @custom_profile, remote: true, format: :json, authenticity_token: true, html: { id: "custom_profile_form" } do |f|
             = f.text_area :description, cols: 20, rows: 10, maxlength: CustomProfile::MAX_DESCRIPTION_LENGTH
-            = f.submit 'Next step', class: 'btn btn--violet get-badge'
+            = f.submit 'Next', class: 'btn btn--violet get-badge'
         // = link_to "Next", public_send(@next_step_path), class: 'btn btn--violet get-badge'
-        = link_to "Back", public_send(@prev_step_path, {free_navigation: true}), class: 'btn btn--green get-badge'
+        = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--green get-badge', remote: true
 
 = render partial: 'remote_form_submit_handler'
+= render partial: 'confirm_step_btn_js'
 

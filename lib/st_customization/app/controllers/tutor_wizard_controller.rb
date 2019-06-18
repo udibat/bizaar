@@ -49,7 +49,14 @@ class TutorWizardController < PaymentSettingsController
   end
 
   def backward_step
-    # params['step_name']
+    prev_step_name = @current_user.tutor_signup_status.prev_step!
+
+    prev_step_url = public_send("tutor_wizard_#{prev_step_name}_url") if prev_step_name.present?
+
+    render json: {
+      success: prev_step_name.present?,
+      new_step_url: prev_step_url
+    }
   end
 
   # GET:
@@ -71,7 +78,8 @@ class TutorWizardController < PaymentSettingsController
   end
 
   def qualifications
-    @existing_certifications = @custom_profile.certifications
+    @existing_certifications = CertificationWizardDecorator.decorate_collection(
+      @custom_profile.certifications)
     @new_certification = @custom_profile.certifications.build
   end
 
@@ -116,11 +124,17 @@ private
   end
 
   def ensure_correct_step
+    @tutor_status = @current_user.tutor_signup_status
 
     # ToDo: temporary workaround for frontend dev
-    return if params['force_display_page']
-
-    @tutor_status = @current_user.tutor_signup_status
+    if params['force_display_page']
+      if TutorSignupStatus.signup_statuses[action_name.to_s].is_a?(Integer)
+        @tutor_status.signup_status = action_name.to_sym
+        @tutor_status.save!
+      end
+      
+      return
+    end
 
     
     curr_step_idx = TutorSignupStatus.signup_statuses[@tutor_status.signup_status.to_s]
@@ -153,8 +167,7 @@ private
     @next_step_path = next_step_name ? "tutor_wizard_#{next_step_name}_path" : "search_path"
     @next_step_path = public_send(@next_step_path)
 
-    prev_step_name = @current_user.tutor_signup_status.prev_step_name(custom_step)
-    @prev_step_path = prev_step_name ? "tutor_wizard_#{prev_step_name}_path" : "search_path"
+    @prev_step_path = tutor_wizard_backward_step_path
 
     @confirm_step_path = tutor_wizard_confirm_step_path(curr_step_name, {nocache: Time.now.to_i})
   end

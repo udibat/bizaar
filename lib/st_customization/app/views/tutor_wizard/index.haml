@@ -18,11 +18,11 @@
           .payment_container
           = render partial: 'custom_payment_settings/stripe_wizard', locals: index_view_locals
         // = link_to "Next", public_send(@next_step_path), class: 'btn btn--violet get-badge'
-        = link_to "Back", public_send(@prev_step_path, {free_navigation: true}), class: 'btn btn--green get-badge'
+        = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--green get-badge', remote: true
         - stripe_seller_ready = index_view_locals[:stripe_account] && index_view_locals[:stripe_account][:stripe_seller_id].present?
         - if stripe_seller_ready
           %p
-            = link_to "Next Step", @confirm_step_path, class: 'confirm_step_btn btn btn--violet get-badge', remote: true
+            = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet get-badge', remote: true
       %span.errors
 
 

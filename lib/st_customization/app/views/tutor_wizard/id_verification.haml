@@ -29,7 +29,7 @@
                     = image_tag id_verification.image.url(:thumb) unless id_verification.new_record?
             // = f.submit 'Next step', class: 'btn btn--violet get-badge'
           = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet get-badge', remote: true
-          = link_to "Back", public_send(@prev_step_path, {free_navigation: true}), class: 'btn btn--green get-badge'
+          = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--green get-badge', remote: true
           // = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: ''
 
 = render partial: 'confirm_step_btn_js'
