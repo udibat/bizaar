@@ -7,10 +7,10 @@ class TutorSignupStatus < ApplicationRecord
   SKIPPABLE_STEPS = [:cover_photos, :qualifications, :social_media, :index]
 
   enum signup_status: [
-    :registered_oauth,  # fill up missing fields
     :registered,
     :email_verification_sent,
     :email_verification_finished,
+    :registered_oauth,  # fill up missing fields
     :profile_picture,
     :describe_yourself,
     :cover_photos, #optional step

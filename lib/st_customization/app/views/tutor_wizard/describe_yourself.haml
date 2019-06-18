@@ -8,14 +8,16 @@
       .title-image-holder
         = image_tag "custom_images/medal.png"
       Write something about yourself
+    %span.errors
     .wizard-content
       .wizard-inner
         .need-upload.lined
           %p Max #{CustomProfile::MAX_DESCRIPTION_LENGTH} characters
-          = form_for @custom_profile, html: { multipart: true, id: "fileupload" } do |f|
+          = form_for @custom_profile, remote: true, format: :json, authenticity_token: true, html: { id: "custom_profile_form" } do |f|
             = f.text_area :description, cols: 20, rows: 10, maxlength: CustomProfile::MAX_DESCRIPTION_LENGTH
             = f.submit 'Next step', class: 'btn btn--violet get-badge'
         // = link_to "Next", public_send(@next_step_path), class: 'btn btn--violet get-badge'
         = link_to "Back", public_send(@prev_step_path, {free_navigation: true}), class: 'btn btn--green get-badge'
 
+= render partial: 'remote_form_submit_handler'
 

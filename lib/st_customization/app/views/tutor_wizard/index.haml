@@ -11,18 +11,12 @@
     .wizard-content
       .wizard-inner
         .need-upload.lined
+          - if @just_created && @stripe_account_ready
+            %span.stripe_setup_success
+              Stripe account was successfully created!
           %p Payment info..
           .payment_container
           = render partial: 'custom_payment_settings/stripe_wizard', locals: index_view_locals
-          -# = render partial: 'payment_settings/stripe_wizard'
-          -# = form_for @custom_profile, remote: true, format: :json, html: { id: "social_form" } do |f|
-          -#   = f.text_field :social_link_facebook
-          -#   = f.text_field :social_link_twitter
-          -#   = f.text_field :social_link_instagram
-          -#   = f.text_field :social_link_youtube
-          -#   = f.text_field :social_link_twitch
-          -#   = f.text_field :social_link_vimeo
-          -#   = f.submit 'Next step', class: 'btn btn--violet get-badge'
         // = link_to "Next", public_send(@next_step_path), class: 'btn btn--violet get-badge'
         = link_to "Back", public_send(@prev_step_path, {free_navigation: true}), class: 'btn btn--green get-badge'
         - stripe_seller_ready = index_view_locals[:stripe_account] && index_view_locals[:stripe_account][:stripe_seller_id].present?
@@ -38,39 +32,28 @@
 
 = render partial: 'confirm_step_btn_js'
 
-:javascript
-  onDocumentReady(function(){
-    //$.get('/test_test/custom_settings/payments', function(data){
-    //  $('.payment_container').html(data);
-    //});
-    //$("#stripe-account-form").unbind("ajax:success");
-    //$("#stripe-account-form").unbind("ajax:error");
-    //$("#stripe-account-form").unbind("submit");
-    $("#stripe-account-form").on("ajax:success", function(event, data){
-          //event.preventDefault();
-          //event.stopPropagation();
-          console.log(data);
-          console.log("#{@confirm_step_path}");
-          $.get("#{@confirm_step_path}", function(data){
-            if (data.success == true) {
-              document.location = data.new_step_url
-            } else {
-              $(".errors").html('Step is incomplete!')
-            }
-          });
-        }
-      ).on("ajax:error", function(event, data){
-          //event.preventDefault();
-          //event.stopPropagation();
-          // console.log(data.responseJSON.error);
-          console.log(data);
-          $(".errors").html('Error:')
-          var err_obj = data.responseJSON.error
-          Object.keys(err_obj).forEach(function (key) { 
-            var value = err_obj[key]
-            $(".errors").append(key + ': ' + value[0]);
-          })
-        }
-      )
-  });
+-# :javascript
+-#   onDocumentReady(function(){
+-#     $("#stripe-account-form").on("ajax:success", function(event, data){
+-#           //console.log(data);
+-#           //console.log("#{@confirm_step_path}");
+-#           $.get("#{@confirm_step_path}", function(data){
+-#             if (data.success == true) {
+-#               document.location = data.new_step_url
+-#             } else {
+-#               $(".errors").html('Step is incomplete!')
+-#             }
+-#           });
+-#         }
+-#       ).on("ajax:error", function(event, data){
+-#           //console.log(data);
+-#           $(".errors").html('Error:')
+-#           var err_obj = data.responseJSON.error
+-#           Object.keys(err_obj).forEach(function (key) { 
+-#             var value = err_obj[key]
+-#             $(".errors").append(key + ': ' + value[0]);
+-#           })
+-#         }
+-#       )
+-#   });
 

@@ -136,7 +136,7 @@ private
     # allow free navigation to previous steps, but not new steps
     return if @free_navigation_mode && requested_step_idx < curr_step_idx
 
-    @tutor_status.next_step_if_complete!
+    # @tutor_status.next_step_if_complete!
     tutor_status_name = @tutor_status.signup_status
 
     if tutor_status_name.to_s != action_name.to_s

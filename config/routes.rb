@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/tutor_wizard/cover_photos' => 'tutor_wizard#cover_photos', as: :tutor_wizard_cover_photos
   get '/tutor_wizard/social_media' => 'tutor_wizard#social_media', as: :tutor_wizard_social_media
   get '/tutor_wizard/id_verification' => 'tutor_wizard#id_verification', as: :tutor_wizard_id_verification
-  get '/tutor_wizard/payment_information' => 'tutor_wizard#index', as: :tutor_wizard_payment_information
+  get '/tutor_wizard/payment_information' => 'tutor_wizard#index', as: :tutor_wizard_index
   get '/tutor_wizard/bizaar_pact' => 'tutor_wizard#bizaar_pact', as: :tutor_wizard_bizaar_pact
   get '/tutor_wizard/finished' => 'tutor_wizard#finished', as: :tutor_wizard_finished
 
