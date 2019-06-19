@@ -14,17 +14,21 @@ Rails.application.routes.draw do
   get '/tutor_wizard/cover_photos' => 'tutor_wizard#cover_photos', as: :tutor_wizard_cover_photos
   get '/tutor_wizard/social_media' => 'tutor_wizard#social_media', as: :tutor_wizard_social_media
   get '/tutor_wizard/id_verification' => 'tutor_wizard#id_verification', as: :tutor_wizard_id_verification
-  get '/tutor_wizard/payment_information' => 'tutor_wizard#payment_information', as: :tutor_wizard_payment_information
+  get '/tutor_wizard/payment_information' => 'tutor_wizard#index', as: :tutor_wizard_index
   get '/tutor_wizard/bizaar_pact' => 'tutor_wizard#bizaar_pact', as: :tutor_wizard_bizaar_pact
+  get '/tutor_wizard/finished' => 'tutor_wizard#finished', as: :tutor_wizard_finished
 
   resources :certifications, only: [:create]
   resources :custom_profiles, only: [:update]
   patch '/custom_profiles/upload_avatar/:id' => 'custom_profiles#upload_avatar', as: :profile_upload_avatar
   patch '/custom_profiles/upload_cover_photos/:id' => 'custom_profiles#upload_cover_photos', as: :profile_upload_cover_photos
   patch '/custom_profiles/upload_id_verifications/:id' => 'custom_profiles#upload_id_verifications', as: :profile_upload_id_verifications
-  get '/:person_id/custom_settings/payments' => 'custom_payment_settings#index', :as => :custom_person_payment_settings
-  post '/:person_id/custom_settings/payments' => 'custom_payment_settings#create', :as => :custom_create_person_payment_settings
-  put '/:person_id/custom_settings/payments' => 'custom_payment_settings#update', :as => :custom_update_person_payment_settings
+  # get '/:person_id/custom_settings/payments' => 'custom_payment_settings#index', :as => :custom_person_payment_settings
+  # post '/:person_id/custom_settings/payments' => 'custom_payment_settings#create', :as => :custom_create_person_payment_settings
+  # put '/:person_id/custom_settings/payments' => 'custom_payment_settings#update', :as => :custom_update_person_payment_settings
+  # get '/:person_id/wizard/payments' => 'tutor_wizard#index', :as => :wizard_person_payment_settings
+  post '/:person_id/wizard/payments' => 'tutor_wizard#create', :as => :wizard_create_person_payment_settings
+  put '/:person_id/wizard/payments' => 'tutor_wizard#update', :as => :wizard_update_person_payment_settings
   # # get '/:person_id/custom_settings/payments/paypal_account' => 'paypal_accounts#index', :as => :custom_paypal_account_settings_payment
 
 

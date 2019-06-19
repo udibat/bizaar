@@ -4,20 +4,20 @@ class TutorSignupStatus < ApplicationRecord
 
   validates_presence_of :person
 
-  SKIPPABLE_STEPS = [:cover_photos, :qualifications, :social_media, :payment_information]
+  SKIPPABLE_STEPS = [:cover_photos, :qualifications, :social_media, :index]
 
   enum signup_status: [
-    :registered_oauth,  # fill up missing fields
     :registered,
     :email_verification_sent,
     :email_verification_finished,
+    :registered_oauth,  # fill up missing fields
     :profile_picture,
     :describe_yourself,
     :cover_photos, #optional step
     :qualifications, #optional step
     :social_media, #optional step
     :id_verification,
-    :payment_information, #optional step
+    :index, #optional step (payment_information)
     :bizaar_pact,
     :finished
   ], _prefix: true
@@ -72,6 +72,10 @@ class TutorSignupStatus < ApplicationRecord
       }.values.map{|v| v.present?}.any?
     when :id_verification
       person.custom_profile.id_verifications.count > 0 rescue false
+    when :index
+      person.stripe_account.try(:stripe_seller_id).present? rescue false
+    when :bizaar_pact
+      person.custom_profile.pact_accepted? rescue false
     else
       false
       # raise "unknown step: '#{step_name}'."
@@ -86,6 +90,15 @@ class TutorSignupStatus < ApplicationRecord
 
     next_step
 
+  end
+
+  def prev_step!
+    if prev_step = self.prev_step_name
+      self.signup_status = prev_step
+      self.save!
+    end
+
+    prev_step
   end
 
   def next_step_name(target_step_name = nil)

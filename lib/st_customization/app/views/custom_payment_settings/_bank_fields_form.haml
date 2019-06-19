@@ -37,4 +37,7 @@
           = t("stripe_accounts.form_bank.update_also_bank_account")
 - content_for :extra_javascript do
   :javascript
-    window.ST.stripe_form_i18n = #{I18n.t("stripe_accounts.form_bank.messages").to_json.html_safe};
+    onDocumentReady(function() {
+      window.ST.stripe_form_i18n = #{I18n.t("stripe_accounts.form_bank.messages").to_json.html_safe};
+    });
+    
