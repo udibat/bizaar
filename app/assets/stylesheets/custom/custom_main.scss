@@ -620,3 +620,16 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
 .mb-50 {
   margin-bottom: 50px;
 }
+
+.edit_custom_profile {
+  position: relative;
+}
+
+#custom_profile_avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
