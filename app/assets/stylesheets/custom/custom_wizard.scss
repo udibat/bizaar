@@ -511,6 +511,13 @@ p {
   height: 60px;
   border: 1px solid #f5f5f5;
   margin-right: 10px;
+  overflow: hidden;
+  .image, img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .file-action-block {
@@ -572,4 +579,44 @@ p {
 .confirm_step_btn {
   display: block;
   text-align: center;
+}
+
+.existing_certifications {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.certificate-item {
+  width: 33.33%;
+  display: flex;
+  padding-right: 10px;
+}
+
+.edit_custom_profile,
+.uploaded-file-container {
+  position: relative;
+}
+
+#custom_profile_avatar,
+#certification_image,
+.cover-photos-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.uploaded-file-container,
+.after-uploading,
+.added-certifications-holder {
+  display: none;
+}
+
+.profile-upload {
+  tbody tr:nth-child(odd) {
+    background-color: transparent;
+  }
 }

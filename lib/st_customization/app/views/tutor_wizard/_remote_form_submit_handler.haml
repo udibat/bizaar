@@ -1,5 +1,14 @@
 :javascript
   onDocumentReady(function(){
+    $(".submit_remote_form_btn").on('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      //$("#custom_profile_form").attr('action')
+      $("#custom_profile_form").submit();
+
+    });
+
+
     $("#custom_profile_form").on("ajax:success", function(event, data){
           console.log(data);
           console.log("#{@confirm_step_path}");
@@ -23,4 +32,5 @@
         }
       )
   });
+
 

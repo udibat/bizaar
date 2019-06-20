@@ -586,6 +586,24 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   }
 }
 
+.custom-select {
+  & + .select2 {
+    &.select2-container--default {
+      .select2-selection--single {
+        border-radius: 0;
+        box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.24);
+        border-width: 1px;
+        height: 34px;
+        .select2-selection__rendered {
+          line-height: 32px;
+          font-size: 14px;
+          font-family: 'Sintony', sans-serif;
+        }
+      }
+    }
+  }
+}
+
 .select2-container--default {
   &.select2-container--open .select2-selection--single .select2-selection__arrow b,
   .select2-selection--single .select2-selection__arrow b {
@@ -621,15 +639,12 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   margin-bottom: 50px;
 }
 
-.edit_custom_profile {
-  position: relative;
+.errors {
+  color: #ff0000;
+  margin-bottom: 20px;
 }
 
-#custom_profile_avatar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  width: 0;
-  height: 0;
+.block {
+  display: block;
+  text-align: center;
 }
