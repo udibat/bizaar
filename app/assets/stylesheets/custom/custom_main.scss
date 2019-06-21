@@ -232,6 +232,10 @@ img {
     background-color: $cust-green;
     border: 2px solid $cust-green;
     color: #fff;
+    &:hover, &:focus {
+      background-color: #fff;
+      color: $cust-green;
+    }
   }
   &--green-transp {
     background-color: transparent;

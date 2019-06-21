@@ -571,7 +571,7 @@ p {
 
 .add-another-qual {
   text-align: center;
-  display: block;
+  display: inline-block;
   font-weight: bold;
   margin-bottom: 60px;
 }
@@ -612,7 +612,7 @@ p {
 .uploaded-file-container,
 .after-uploading,
 .added-certifications-holder {
-  display: none;
+  // display: none;
 }
 
 .profile-upload {

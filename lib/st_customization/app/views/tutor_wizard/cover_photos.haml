@@ -21,22 +21,23 @@
         .need-upload
           = form_for @custom_profile, url: profile_upload_cover_photos_path(@custom_profile), html: { multipart: true, id: "fileupload" } do |f|
             - idx = 0
-            = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
-              = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][#{idx}][image]" if photos_fields.object.new_record?
-              - idx += 1
-              // , name: 'custom_profile[cover_photos_attributes][0][id]'
-          
-              .uploaded-file
-                = photos_fields.hidden_field :id
-                = photos_fields.hidden_field :_destroy
-                .thumb-block
-                  = image_tag photos_fields.object.image.url(:thumb) unless photos_fields.object.new_record?
-                .file-action-block
-                  .file-name #{photos_fields.object.image.original_filename}
-                  -# = link_to 'Choose another photo', '#', class: 'green link underline'
-                  = link_to 'Remove this photo', '#', class: 'green link underline remove-photo'
+            .uploaded-files-holder#uploaded-files-holder
+              = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
+                = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][#{idx}][image]" if photos_fields.object.new_record?
+                - idx += 1
+                // , name: 'custom_profile[cover_photos_attributes][0][id]'
+            
+                .uploaded-file
+                  = photos_fields.hidden_field :id
+                  = photos_fields.hidden_field :_destroy
+                  .thumb-block
+                    = image_tag photos_fields.object.image.url(:thumb) unless photos_fields.object.new_record?
+                  .file-action-block
+                    .file-name #{photos_fields.object.image.original_filename}
+                    -# = link_to 'Choose another photo', '#', class: 'green link underline'
+                    = link_to 'Remove this photo', '#', class: 'green link underline remove-photo'
             // = f.submit 'Next step', class: 'btn btn--violet get-badge'
-          .uploaded-files-holder#uploaded-files-holder
+          -#.uploaded-files-holder#uploaded-files-holder
           -# = link_to "Next", @next_step_path, class: 'btn btn--violet get-badge'
           .row
             .col-6
@@ -57,7 +58,8 @@
     $('#fileupload').fileupload({
       done: function (e, data) {
         if (data.result.error === undefined) {
-          $('#uploaded-files-holder').html('')
+          $('#uploaded-files-holder').find('.uploaded-file').remove();
+
           data.result.images.forEach(function(item, i){
             var name = item.name;
             var id = item.id;
