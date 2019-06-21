@@ -1322,6 +1322,7 @@ CREATE TABLE `people` (
   `rating_cache` varchar(255) DEFAULT '---\n:count: 0\n:avg: 0\n',
   `is_tutor` tinyint(1) DEFAULT '0',
   `birthday` date DEFAULT NULL,
+  `zip_code` varchar(255) DEFAULT NULL,
   UNIQUE KEY `index_people_on_username_and_community_id` (`username`,`community_id`) USING BTREE,
   UNIQUE KEY `index_people_on_uuid` (`uuid`),
   UNIQUE KEY `index_people_on_email` (`email`) USING BTREE,
@@ -2486,6 +2487,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190613124818'),
 ('20190614103615'),
 ('20190614123234'),
-('20190618142100');
+('20190618142100'),
+('20190621143358');
 
 

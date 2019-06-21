@@ -1,0 +1,10 @@
+%form{:action => sign_up_path, :method => 'GET', :id => 'become_instructor', :class => 'become-instructor-form'}
+  = text_field 'person[given_name]', '', placeholder: 'First Name', class: 'input'
+  = text_field 'person[family_name]', '', placeholder: 'Last Name', class: 'input'
+  = text_field 'person[email]', '', placeholder: 'Your Email Address', class: 'input'
+  = text_field 'person[zip_code]', '', placeholder: 'Your Zip Code', class: 'input'
+  = submit_tag 'become an Instructor', class: 'submit-btn btn btn--transparent'
+  .link-holder.socials-signup
+    = link_to 'Sign up with Facebook', person_facebook_omniauth_authorize_path, class: 'link'
+    = link_to 'Sign up with Google', person_google_oauth2_omniauth_authorize_path, class: 'link'
+  
