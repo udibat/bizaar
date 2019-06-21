@@ -1,34 +1,10 @@
 .wizard-head
   .step-list
-    .step-item.done
-      .small-icon
-        %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
-          %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
-      .text-part
-        Basic Information
-    .step-item.done
-      .small-icon
-        %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
-          %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
-      .text-part
-        Email Verification
-    .step-item
-      .small-icon
-        %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
-          %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
-      .text-part
-        Bolster your profile
-    // TODO: verify id is just for the instructor
-    .step-item
-      .small-icon
-        %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
-          %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
-      .text-part
-        Verify your ID
-    .step-item
-      .small-icon
-        %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
-          %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
-      .text-part
-        Set up payment
+    - wizard_header_steps(@current_user.tutor_signup_status).each do |step_item|
+      .step-item{class: "#{'done' if step_item[:step_passed]}"}
+        .small-icon
+          %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+            %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+        .text-part
+          = step_item[:display_name]
 
