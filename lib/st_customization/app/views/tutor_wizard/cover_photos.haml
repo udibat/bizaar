@@ -29,21 +29,23 @@
               = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
                 - unless photos_fields.object.new_record?
                   .fields_cont.existing_photo_record
-                    = image_tag photos_fields.object.image.url(:thumb)
-                    %div
+                    .thumb-block
+                      = image_tag photos_fields.object.image.url(:thumb)
+                    %div.image_descr
                       %div= photos_fields.object.image.original_filename
                       = photos_fields.hidden_field :id
-                      = photos_fields.label :_destroy, 'Delete', class:'remove-photo'
-                      -# %label.remove-photo Delete
+                      = photos_fields.label :_destroy, 'Remove this photo', class: 'remove-photo'
                       = photos_fields.check_box :_destroy, {class: 'delete_record_chbx'}
+                      -# = photos_fields.label :_remove, 'Make primary photo', class: 'make-primary'
+                      -# = photos_fields.radio_button :_remove, {class: 'make_primary_radio'}
           %table.table.table-striped.test-class-test
             %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
           .row
             .col-6
-              = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
+              = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--violet-transp', remote: true
             .col-6
-              = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--green', remote: true
-              = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: ''
+              = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
+              = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: 'block'
 
 = render partial: 'confirm_step_btn_js'
 
@@ -55,9 +57,7 @@
     items.forEach(function(item, i){
       idx = i + 1
       var img_cont = $('<div>', {class: 'image_spot'})
-      $(img_cont).append($('<img>',{src: item.url}))
-      $(img_cont).append($('<div>').html(item.name));
-      
+
       var id_field = $('<input type="hidden">')
       $(id_field).attr('name', 'custom_profile[cover_photos_attributes][' + idx + '][id]')
       $(id_field).attr('id', 'custom_profile_cover_photos_attributes_' + idx + '_id')
@@ -72,9 +72,17 @@
         $('#fileupload').trigger('submit.rails');
       });
 
-      $(img_cont).append(id_field);
-      $(img_cont).append($('<label class="remove-photo" for="custom_profile_cover_photos_attributes_' + idx + '__destroy">').html('Delete'));
-      $(img_cont).append(destroy_field);
+      var descr_cont = $('<div>', {class: 'image_descr'});
+      var img_holder = $('<div>', {class: 'thumb-block'})
+      var idField = id_field;
+      var destroyBtn = $('<label class="remove-photo" for="custom_profile_cover_photos_attributes_' + idx + '__destroy">').html('Remove this photo')
+      var destroyField = destroy_field;
+      var imageTag = $('<img>',{src: item.url});
+      var imageName = $('<div>').html(item.name);
+
+      descr_cont.append(imageName, idField, destroyBtn, destroyField);
+      img_holder.append(imageTag);
+      img_cont.append(img_holder, descr_cont);
 
       $('.existing_cover_photos').append(img_cont);
 

@@ -638,3 +638,21 @@ p {
   height: 0;
   opacity: 0;
 }
+
+.existing_cover_photos {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image_spot, 
+.fields_cont {
+  display: flex;
+  width: 33.33%;
+}
+
+.remove-photo {
+  text-decoration: underline;
+  color: $cust-green;
+  font-weight: normal;
+  cursor: pointer;
+}
