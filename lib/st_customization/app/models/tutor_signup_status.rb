@@ -22,6 +22,14 @@ class TutorSignupStatus < ApplicationRecord
     :finished
   ], _prefix: true
 
+  def step_marked_as_passed?(step_name)
+    current_step_idx = self.class.signup_statuses[signup_status]
+    step_idx = self.class.signup_statuses[step_name]
+
+    step_idx < current_step_idx
+    
+  end
+
   def try_skip_step!(step_name)
     return false unless SKIPPABLE_STEPS.include?(step_name.to_sym)
 
