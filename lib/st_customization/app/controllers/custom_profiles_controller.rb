@@ -41,7 +41,13 @@ class CustomProfilesController < ApplicationController
 
   def upload_cover_photos
     if @custom_profile.update_attributes(custom_profile_update_params)
-      render json: {image_urls: @custom_profile.cover_photos.map{|ph| ph.image.url(:thumb) }}
+      render json: {images: @custom_profile.cover_photos.map{|ph| 
+          {
+            id: ph.id,
+            url: ph.image.url(:thumb),
+            name: 'filename',
+          } 
+        }}
     else
       render json: {error: @custom_profile.errors.first.to_s}
     end
