@@ -34,10 +34,9 @@
                 .file-action-block
                   .file-name #{photos_fields.object.image.original_filename}
                   -# = link_to 'Choose another photo', '#', class: 'green link underline'
-                  = link_to 'Remove this photo', '#', class: 'green link underline remove-photo dlete'
+                  = link_to 'Remove this photo', '#', class: 'green link underline remove-photo'
             // = f.submit 'Next step', class: 'btn btn--violet get-badge'
-          %table.table.table-striped
-            %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
+          .uploaded-files-holder#uploaded-files-holder
           -# = link_to "Next", @next_step_path, class: 'btn btn--violet get-badge'
           .row
             .col-6
@@ -58,15 +57,17 @@
     $('#fileupload').fileupload({
       done: function (e, data) {
         if (data.result.error === undefined) {
-          $('.table-striped .files').html('')
-          console.log('gftfyufgyutyutyugu');
-          data.result.image_urls.forEach(function(item, i){
-            var file = data.files[0];
-            var name = file.name;
-            console.log(file)
-            // console.log(name)
-            $('.table-striped .files').append($('<img>',{src: item}))
-            $('.table-striped .files').find('.file-name').text(name);
+          $('#uploaded-files-holder').html('')
+          data.result.images.forEach(function(item, i){
+            var name = item.name;
+            var id = item.id;
+            var url = item.url;
+
+            var template = '<div class="uploaded-file"><input type="hidden" name="custom_profile[cover_photos_attributes]['+ id + '][id]" id="custom_profile_cover_photos_attributes_' + id + '_id"><input type="hidden" value="false" name="custom_profile[cover_photos_attributes]['+ id + '][_destroy]" id="custom_profile_cover_photos_attributes_' + id + '__destroy"><div class="thumb-block"><img src="' + url +'"/></div><div class="file-action-block"><div class="file-name">'+ name +'</div><a href="#" class="green link underline remove-photo">Remove this photo</a></div></div>'
+            
+            $('#uploaded-files-holder').html(template);
+            // $('.table-striped .files').append($('<img>',{src: item}))
+            // $('.table-striped .files').find('.file-name').text(name);
             // $('.table-striped .files').find('.thumb-block').append($('<img>',{src: item}));
           })
         } else {
@@ -74,4 +75,12 @@
         }
       }
     });
+    $('.uploaded-file').on('click', '.remove-photo', function(e) {
+      e.preventDefault();
+      var input = $(this).parents('.uploaded-file').find('input[id*="_destroy"]');
+      input.val('true');
+      // $(this).parents('.uploaded-file').remove();
+      // $(this).parents('form').serializeArray();
+      $(this).parents('form').submit();
+    })
   });
