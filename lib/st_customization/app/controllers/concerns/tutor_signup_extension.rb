@@ -22,13 +22,23 @@ module TutorSignupExtension
 
     end
 
+    alias_method :new_before_redef, :new
+    def new
+      new_before_redef
+      @service.person.zip_code = params[:person][:zip_code] if params[:person] && params[:person][:zip_code]
+    end
+
     private
 
     alias_method :person_create_params_before_redef, :person_create_params
     def person_create_params(params)
       birthday_permitted = parsed_birthday_params(params)
+      custom_params = parsed_custom_params(params)
       params_before_redef = person_create_params_before_redef(params)
       birthday_permitted.each{|key, val|
+        params_before_redef[key] = val
+      }
+      custom_params.each{|key, val|
         params_before_redef[key] = val
       }
 
@@ -38,9 +48,13 @@ module TutorSignupExtension
     alias_method :person_update_params_before_redef, :person_update_params
     def person_update_params(params, target_user)
       birthday_permitted = parsed_birthday_params(params)
+      custom_params = parsed_custom_params(params)
       params_before_redef = person_update_params_before_redef(params, target_user)
 
       birthday_permitted.each{|key, val|
+        params_before_redef[key] = val
+      }
+      custom_params.each{|key, val|
         params_before_redef[key] = val
       }
 
@@ -82,6 +96,12 @@ private
       tutor_signup_status.signup_status = :profile_picture
       tutor_signup_status.save!
     end
+  end
+
+  def parsed_custom_params(params)
+    {
+      zip_code: params[:person].delete(:zip_code)
+    }
   end
 
   def parsed_birthday_params(params)
