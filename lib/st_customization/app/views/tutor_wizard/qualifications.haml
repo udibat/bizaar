@@ -110,10 +110,39 @@
       }
     )
 
+    document.getElementById('certification_image').addEventListener('change', function (e) {
+      var file = this.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        var img = new Image();
+        img.src = reader.result;
+
+        $('.thumb-block').append(img);
+      }
+      
+      reader.readAsDataURL(file);
+
+    });
+
     $('.submit_remote_form_btn').on('click', function(event) {
       event.preventDefault();
       event.stopPropagation();
-      $('#new_certification_form').submit();
+
+      $("#new_certification_form").trigger('submit')
+    });
+      
+    $("#new_certification_form").on('submit', function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+          type: "POST",
+          url: $(this).attr('action'),
+          data: formData,
+          processData: false,
+          contentType: false,
+        })
     });
   });
 
