@@ -6,22 +6,59 @@
   .wizard-section
     %h2.small-title.flex-block 
       .title-image-holder
-        = image_tag "custom_images/medal.png"
-      Share your social media (optional)
+        = image_tag "custom_images/social-media.png"
+      Share your social media accounts
     .wizard-content
       .wizard-inner
-        .need-upload.lined
-          %p Help your members....
-          = form_for @custom_profile, remote: true, format: :json, html: { id: "custom_profile_form" } do |f|
-            = f.text_field :social_link_facebook
-            = f.text_field :social_link_twitter
-            = f.text_field :social_link_instagram
-            = f.text_field :social_link_youtube
-            = f.text_field :social_link_twitch
-            = f.text_field :social_link_vimeo
-            = f.submit 'Next', class: 'btn btn--violet get-badge'
-        = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--green get-badge', remote: true
-        = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: ''
+        %p.mb-25 You can help your clientele get to know you as an Instructor better by providing links to your social media accounts. 
+        %p.mb-25 
+          Keep in mind solicitations and product advertisements are against the 
+          = link_to 'Bizaar Pact, ', '#', class: 'link underline'
+          as well as our 
+          = link_to 'Terms and Conditions,', '#', class: 'link underline'
+          so please don’t create links that lead to any such page, as they will be removed, and your membership may be forfeit. 
+        .socials-holder
+          = form_for @custom_profile, remote: true, format: :json, html: { id: "custom_profile_form", class: 'socials-holder-form' } do |f|
+            .row
+              .col-6
+                .social-media-item
+                  .social-icon
+                    = image_tag 'custom_images/facebook.png'
+                  = f.text_field :social_link_facebook, :placeholder => 'Link to your Facebook'
+              .col-6
+                .social-media-item
+                  .social-icon
+                    = image_tag 'custom_images/twitter.png'
+                  = f.text_field :social_link_twitter, :placeholder => 'Link to your Twitter '
+            .row
+              .col-6
+                .social-media-item
+                  .social-icon
+                    = image_tag 'custom_images/instagram.png'
+                  = f.text_field :social_link_instagram, :placeholder => 'Link to your instagram'
+              .col-6
+                .social-media-item
+                  .social-icon
+                    = image_tag 'custom_images/youtube.png'
+                  = f.text_field :social_link_youtube, :placeholder => 'Link to your Youtube'
+            .row
+              .col-6
+                .social-media-item
+                  .social-icon
+                    = image_tag 'custom_images/tumblr.png'
+                  = f.text_field :social_link_twitch, :placeholder => 'Link to your Twitch'
+              .col-6
+                .social-media-item
+                  .social-icon
+                    = image_tag 'custom_images/tumblr.png'
+                  = f.text_field :social_link_vimeo, :placeholder => 'Link to your Tumblr'
+            -# = f.submit 'Next', class: 'btn btn--violet get-badge'
+        .row
+          .col-6
+            = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--violet-transp', remote: true
+          .col-6
+            = link_to "Next", "#", class: 'submit_remote_form_btn btn btn--violet block'
+            = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: 'block'
       %span.errors
 
 = render partial: 'remote_form_submit_handler'

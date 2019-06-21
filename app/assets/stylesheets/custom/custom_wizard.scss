@@ -656,3 +656,33 @@ p {
   font-weight: normal;
   cursor: pointer;
 }
+
+.social-media-item {
+  position: relative;
+  input {
+    padding-left: 50px;
+  }
+}
+
+.social-icon {
+  padding: 0 5px;
+  margin: 5px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 38px;
+  border-right: 1px solid #c3c3c3;
+  img {
+    width: 23px;
+    height: 23px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.socials-holder-form {
+  margin-bottom: 40px;
+}
