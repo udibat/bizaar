@@ -45,7 +45,7 @@ class CustomProfilesController < ApplicationController
           {
             id: ph.id,
             url: ph.image.url(:thumb),
-            name: 'filename',
+            name: ph.image.try(:original_filename),
           } 
         }}
     else

@@ -12,19 +12,22 @@
       .wizard-inner
         .need-upload.lined
           %p Some text...
-          = form_for @custom_profile, url: profile_upload_cover_photos_path(@custom_profile), html: { multipart: true, id: "fileupload" } do |f|
+          = form_for @custom_profile, url: profile_upload_cover_photos_path(@custom_profile), remote: true, html: { multipart: true, id: "fileupload" } do |f|
             - idx = 0
-            = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
+            = f.fields_for :cover_photos, @custom_profile.cover_photos.build do |photos_fields|
               = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][#{idx}][image]" if photos_fields.object.new_record?
               - idx += 1
-              // , name: 'custom_profile[cover_photos_attributes][0][id]'
-              = image_tag photos_fields.object.image.url(:thumb) unless photos_fields.object.new_record?
-              = photos_fields.hidden_field :id
-              = photos_fields.hidden_field :_destroy
-              %table.table.table-striped.test-class-test
-                %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
-            // = f.submit 'Next step', class: 'btn btn--violet get-badge'
-          -# = link_to "Next", @next_step_path, class: 'btn btn--violet get-badge'
+              - existing_record_class = 'existing_photo_record' unless photos_fields.object.new_record?
+            .existing_cover_photos
+              = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
+                - unless photos_fields.object.new_record?
+                  .fields_cont.existing_photo_record
+                    = image_tag photos_fields.object.image.url(:thumb)
+                    = photos_fields.hidden_field :id
+                    %label Delete
+                    = photos_fields.check_box :_destroy, {class: 'delete_record_chbx'}
+          %table.table.table-striped.test-class-test
+            %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
           = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet get-badge', remote: true
           = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--green get-badge', remote: true
           = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: ''
@@ -32,17 +35,69 @@
 = render partial: 'confirm_step_btn_js'
 
 :javascript
+  function build_photo_spots(items) {
+
+    $('.existing_cover_photos').html('');
+
+    items.forEach(function(item, i){
+      idx = i + 1
+      var img_cont = $('<div>', {class: 'image_spot'})
+      $(img_cont).append($('<img>',{src: item.url}))
+      $(img_cont).append($('<label>').html(item.name));
+      var id_field = $('<input type="hidden">')
+      $(id_field).attr('name', 'custom_profile[cover_photos_attributes][' + idx + '][id]')
+      $(id_field).attr('id', 'custom_profile_cover_photos_attributes_' + idx + '_id')
+      $(id_field).val(item.id)
+
+      var destroy_field = $('<input type="checkbox">')
+      $(destroy_field).attr('name', 'custom_profile[cover_photos_attributes][' + idx + '][_destroy]')
+      $(destroy_field).attr('id', 'custom_profile_cover_photos_attributes_' + idx + '__destroy')
+      //$(destroy_field).addClass('delete_record_chbx');
+      $(destroy_field).val(1)
+      $(destroy_field).on('click', function(){
+        $('#fileupload').trigger('submit.rails');
+      });
+
+      $(img_cont).append(id_field);
+      $(img_cont).append($('<label>').html('Delete'));
+      $(img_cont).append(destroy_field);
+
+      $('.existing_cover_photos').append(img_cont);
+
+    })
+  }
+
   onDocumentReady(function(){
+
+    $('#fileupload').on('click', '.delete_record_chbx', function(){
+      $('#fileupload').trigger('submit.rails');
+    });
+
+    $("#fileupload").on("ajax:success", function(event, data){
+            console.log(data);
+            
+            build_photo_spots(data.images);
+          }
+        ).on("ajax:error", function(event, data){
+            // console.log(data.responseJSON.error);
+            console.log(data);
+            $(".errors").html('Error:')
+            var err_obj = data.responseJSON.error
+            Object.keys(err_obj).forEach(function (key) { 
+              var value = err_obj[key]
+              $(".errors").append(key + ': ' + value[0]);
+            })
+          }
+        )
+
     $('#fileupload').fileupload({
       done: function (e, data) {
           if (data.result.error === undefined) {
-            $('.table-striped .files').html('')
-            data.result.image_urls.forEach(function(item, i){
-              $('.table-striped .files').append($('<img>',{src: item}))
-            })
+            build_photo_spots(data.result.images);
           } else {
             alert(data.result.error);
           }
         }
     });
   });
+
