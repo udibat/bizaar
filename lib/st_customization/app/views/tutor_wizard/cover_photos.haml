@@ -11,6 +11,13 @@
     .wizard-content
       .wizard-inner
         %p.mb-25 Help your students get a feel of who you are and what you can do. Upload up to 10 images that showcase your abilities, or your teaching style.
+        .row
+          .col-6
+            = link_to '#', class: 'btn btn--black upload-link trigger_upload' do
+              .small-icon
+                %svg.svg-inline--fa.fa-file-upload.fa-w-12{"aria-hidden" => "true", "data-icon" => "file-upload", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 384 512", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z", :fill => "currentColor"}
+              Upload Files from computer
         .need-upload
           = form_for @custom_profile, url: profile_upload_cover_photos_path(@custom_profile), html: { multipart: true, id: "fileupload" } do |f|
             - idx = 0
@@ -18,18 +25,19 @@
               = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][#{idx}][image]" if photos_fields.object.new_record?
               - idx += 1
               // , name: 'custom_profile[cover_photos_attributes][0][id]'
-              = photos_fields.hidden_field :id
-              = photos_fields.hidden_field :_destroy
-              %table.table.table-striped.test-class-test
-                %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
-                  .uploaded-file
-                    .thumb-block
-                      = image_tag photos_fields.object.image.url(:thumb) unless photos_fields.object.new_record?
-                    .file-action-block
-                      .file-name #{@custom_profile.avatar.original_filename}
-                      -# = link_to 'Choose another photo', '#', class: 'green link underline'
-                      = link_to 'Remove this photo', '#', class: 'green link underline remove-photo'
+          
+              .uploaded-file
+                = photos_fields.hidden_field :id
+                = photos_fields.hidden_field :_destroy
+                .thumb-block
+                  = image_tag photos_fields.object.image.url(:thumb) unless photos_fields.object.new_record?
+                .file-action-block
+                  .file-name #{photos_fields.object.image.original_filename}
+                  -# = link_to 'Choose another photo', '#', class: 'green link underline'
+                  = link_to 'Remove this photo', '#', class: 'green link underline remove-photo dlete'
             // = f.submit 'Next step', class: 'btn btn--violet get-badge'
+          %table.table.table-striped
+            %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
           -# = link_to "Next", @next_step_path, class: 'btn btn--violet get-badge'
           .row
             .col-6
@@ -42,21 +50,28 @@
 
 :javascript
   onDocumentReady(function(){
+    $('.trigger_upload').on('click', function(e) {
+      e.preventDefault();
+      var fileInput = $(this).parents('div').find('input[type="file"]');
+      fileInput.trigger('click');
+    })
     $('#fileupload').fileupload({
       done: function (e, data) {
-          if (data.result.error === undefined) {
-            $('.table-striped .files').html('')
-            data.result.image_urls.forEach(function(item, i){
-              // var file = data.files[0];
-              var name = item[i].name;
-              console.log(data)
-              // $('.table-striped .files').append($('<img>',{src: item}))
-              $('.table-striped .files').find('.file-name').text(name);
-              $('.table-striped .files').find('.thumb-block img').attr('src', item);
-            })
-          } else {
-            alert(data.result.error);
-          }
+        if (data.result.error === undefined) {
+          $('.table-striped .files').html('')
+          console.log('gftfyufgyutyutyugu');
+          data.result.image_urls.forEach(function(item, i){
+            var file = data.files[0];
+            var name = file.name;
+            console.log(file)
+            // console.log(name)
+            $('.table-striped .files').append($('<img>',{src: item}))
+            $('.table-striped .files').find('.file-name').text(name);
+            // $('.table-striped .files').find('.thumb-block').append($('<img>',{src: item}));
+          })
+        } else {
+          alert(data.result.error);
         }
+      }
     });
   });
