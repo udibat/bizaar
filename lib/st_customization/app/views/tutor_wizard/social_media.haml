@@ -18,6 +18,7 @@
           = link_to 'Terms and Conditions,', '#', class: 'link underline'
           so please don’t create links that lead to any such page, as they will be removed, and your membership may be forfeit. 
         .socials-holder
+          .errors
           = form_for @custom_profile, remote: true, format: :json, html: { id: "custom_profile_form", class: 'socials-holder-form' } do |f|
             .row
               .col-6
@@ -45,7 +46,7 @@
               .col-6
                 .social-media-item
                   .social-icon
-                    = image_tag 'custom_images/tumblr.png'
+                    = image_tag 'custom_images/twitch.png'
                   = f.text_field :social_link_twitch, :placeholder => 'Link to your Twitch'
               .col-6
                 .social-media-item
@@ -58,8 +59,7 @@
             = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--violet-transp', remote: true
           .col-6
             = link_to "Next", "#", class: 'submit_remote_form_btn btn btn--violet block'
-            = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: 'block'
-      %span.errors
+            = link_to "Skip this step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: 'block skip-btn'
 
 = render partial: 'remote_form_submit_handler'
 = render partial: 'confirm_step_btn_js'

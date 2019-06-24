@@ -45,7 +45,7 @@
               = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--violet-transp', remote: true
             .col-6
               = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
-              = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: 'block'
+              = link_to "Skip this step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: 'block skip-btn'
 
 = render partial: 'confirm_step_btn_js'
 

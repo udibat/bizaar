@@ -530,10 +530,26 @@ p {
 }
 
 .get-badge {
-  max-width: 378px;
-  display: block;
-  margin: 30px auto 30px; 
-  text-align: center;
+  margin: 30px auto; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  svg {
+    width: 19px;
+    height: 17px;
+    margin-right: 4px;
+    path {
+      fill: #fff;
+    }
+  }
+  &:hover, &:focus {
+    svg {
+      path {
+        fill: $cust-green;
+      }
+    }
+  }
 }
 
 .wizard-inner {
@@ -550,6 +566,7 @@ p {
 }
 
 .after-uploading {
+  display: none;
   .small-title {
     align-items: flex-start;
     background-color: $cust-green;
@@ -633,7 +650,8 @@ p {
 }
 
 .remove-photo + input,
-.delete_record_chbx {
+.delete_record_chbx, 
+.remove-checkbox {
   width: 0;
   height: 0;
   opacity: 0;
@@ -659,6 +677,7 @@ p {
 
 .social-media-item {
   position: relative;
+  margin-bottom: 25px;
   input {
     padding-left: 50px;
   }
@@ -685,4 +704,17 @@ p {
 
 .socials-holder-form {
   margin-bottom: 40px;
+}
+
+.upload-files-holder {
+  position: relative;
+}
+
+.error-item {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.added-certifications-holder {
+  margin-top: 30px;
 }
