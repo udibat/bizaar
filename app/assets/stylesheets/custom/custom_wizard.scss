@@ -530,10 +530,26 @@ p {
 }
 
 .get-badge {
-  max-width: 378px;
-  display: block;
-  margin: 30px auto 30px; 
-  text-align: center;
+  margin: 30px auto; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  svg {
+    width: 19px;
+    height: 17px;
+    margin-right: 4px;
+    path {
+      fill: #fff;
+    }
+  }
+  &:hover, &:focus {
+    svg {
+      path {
+        fill: $cust-green;
+      }
+    }
+  }
 }
 
 .wizard-inner {
