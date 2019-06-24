@@ -206,3 +206,13 @@ function wordsCounter(textarea) {
     });
   }
 }
+
+function clickOutside(element) {
+  $(document).mouseup(function(e) {
+    var container = $(element);
+
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+        container.fadeOut();
+    }
+  });
+}

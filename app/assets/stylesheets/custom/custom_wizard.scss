@@ -550,6 +550,7 @@ p {
 }
 
 .after-uploading {
+  display: none;
   .small-title {
     align-items: flex-start;
     background-color: $cust-green;
@@ -633,7 +634,8 @@ p {
 }
 
 .remove-photo + input,
-.delete_record_chbx {
+.delete_record_chbx, 
+.remove-checkbox {
   width: 0;
   height: 0;
   opacity: 0;
@@ -685,4 +687,17 @@ p {
 
 .socials-holder-form {
   margin-bottom: 40px;
+}
+
+.upload-files-holder {
+  position: relative;
+}
+
+.error-item {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.added-certifications-holder {
+  margin-top: 30px;
 }
