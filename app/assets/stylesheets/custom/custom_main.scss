@@ -535,7 +535,7 @@ input:checked + .slider:before {
   }
 }
 
-input[type=text], input[type=password], input[type=number], textarea, .custom-select {
+input[type=text], input[type=password], input[type=number], textarea, .custom-select, select {
   border-radius: 0;
   box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.24);
   border-width: 1px;

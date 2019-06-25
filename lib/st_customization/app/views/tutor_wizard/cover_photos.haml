@@ -36,8 +36,8 @@
                       = photos_fields.hidden_field :id
                       = photos_fields.label :_destroy, 'Remove this photo', class: 'remove-photo'
                       = photos_fields.check_box :_destroy, {class: 'delete_record_chbx'}
-                      -# = photos_fields.label :_remove, 'Make primary photo', class: 'make-primary'
-                      -# = photos_fields.radio_button :_remove, {class: 'make_primary_radio'}
+                      -# = photos_fields.label :_primary, 'Make primary photo', class: 'make-primary'
+                      -# = photos_fields.radio_button :_primary, {class: 'make_primary_radio'}
           %table.table.table-striped.test-class-test
             %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
           .row
