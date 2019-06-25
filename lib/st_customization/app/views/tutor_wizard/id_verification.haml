@@ -69,16 +69,14 @@
     
     $('#fileupload').fileupload({
       done: function (e, data) {
-        if (data.result.error === undefined) {
-          var file = data.files[0];
-          var name = file.name;
-
-          $('.table-striped .files').find('.file-name').text(name);
-          $('.table-striped .files').find('.thumb-block img').attr('src', data.result.image_url);
-          $('.uploaded-file-container.profile-upload').css('display', 'block');
-        } else {
-          alert(data.result.error);
+          if (data.result.error === undefined) {
+            $('.table-striped .files').html('')
+            data.result.image_urls.forEach(function(item, i){
+              $('.table-striped .files').append($('<img>',{src: item}))
+            })
+          } else {
+            alert(data.result.error);
+          }
         }
-      }
     });
   });
