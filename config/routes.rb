@@ -32,6 +32,39 @@ Rails.application.routes.draw do
   # # get '/:person_id/custom_settings/payments/paypal_account' => 'paypal_accounts#index', :as => :custom_paypal_account_settings_payment
 
 
+  
+  devise_scope :person do
+
+    get ":locale/member_signup" => "people#new_member", :as => :member_sign_up
+
+    # # these matches need to be before the general resources to have more priority
+    # get "/people/confirmation" => "confirmations#show", :as => :confirmation
+    # put "/people/confirmation" => "confirmations#create"
+    # get "/people/sign_up" => redirect("/%{locale}/login")
+
+    # # List few specific routes here for Devise to understand those
+    # get "/signup" => "people#new", :as => :sign_up
+    # get '/people/auth/:provider/setup' => 'omniauth#auth_setup' #needed for devise setup phase hook to work
+
+  end
+
+  get '/member_wizard/continue' => 'member_wizard#continue', as: :member_wizard_continue
+  get '/member_wizard/skip_step/:skip_step_name' => 'member_wizard#skip_step', as: :member_wizard_skip_step
+  get '/member_wizard/confirm_step/:step_name' => 'member_wizard#confirm_step', as: :member_wizard_confirm_step
+  get '/member_wizard/backward_step' => 'member_wizard#backward_step', as: :member_wizard_backward_step
+  # get '/member_wizard/qualifications' => 'member_wizard#qualifications', as: :member_wizard_qualifications
+  get '/member_wizard/registered_oauth' => 'member_wizard#registered_oauth', as: :member_wizard_registered_oauth
+  get '/member_wizard/email_verification_finished' => 'member_wizard#email_verification_finished', as: :member_wizard_email_verification_finished
+  get '/member_wizard/setup_profile' => 'member_wizard#setup_profile', as: :member_wizard_setup_profile
+  get '/member_wizard/describe_yourself' => 'member_wizard#describe_yourself', as: :member_wizard_describe_yourself
+  get '/member_wizard/cover_photos' => 'member_wizard#cover_photos', as: :member_wizard_cover_photos
+  get '/member_wizard/social_media' => 'member_wizard#social_media', as: :member_wizard_social_media
+  get '/member_wizard/id_verification' => 'member_wizard#id_verification', as: :member_wizard_id_verification
+  get '/member_wizard/payment_information' => 'member_wizard#index', as: :member_wizard_index
+  get '/member_wizard/bizaar_pact' => 'member_wizard#bizaar_pact', as: :member_wizard_bizaar_pact
+  get '/member_wizard/finished' => 'member_wizard#finished', as: :member_wizard_finished
+
+
 
   namespace :mercury do
     resources :images

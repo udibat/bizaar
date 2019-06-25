@@ -5,8 +5,10 @@ module TutorSignupExtension
 
   included do
 
-    after_action :mark_user_as_tutor, only: [:create]
-    after_action :generate_validation_errors, only: [:create]
+    after_action :mark_user_as_tutor_or_member, only: [:create]
+    # after_action :mark_user_as_tutor, only: [:create]
+    # after_action :mark_user_as_member, only: [:create_member]
+    after_action :generate_validation_errors, only: [:create, :create_member]
     after_action :update_signup_step_after_oauth_signup, only: [:update]
 
     alias_method :create_before_redef, :create
@@ -22,8 +24,25 @@ module TutorSignupExtension
 
     end
 
+    def create_member
+
+      # build username by first_name and last_name:
+      username = "#{params['person']['given_name']}_#{params['person']['family_name']}".gsub(/[^0-9a-z_]/i, '')
+      existing_cnt = Person.where("username LIKE ?", "#{username}%").count
+      username = "#{username}_#{existing_cnt}" if existing_cnt > 0
+      params['person']['username'] = username
+
+      create_before_redef
+
+    end
+
     alias_method :new_before_redef, :new
     def new
+      new_before_redef
+      @service.person.zip_code = params[:person][:zip_code] if params[:person] && params[:person][:zip_code]
+    end
+
+    def new_member
       new_before_redef
       @service.person.zip_code = params[:person][:zip_code] if params[:person] && params[:person][:zip_code]
     end
@@ -78,7 +97,24 @@ private
   end
 
 
+  def mark_user_as_tutor_or_member
+    # return unless params['tutor_signup']
+    user = Person.find_by_username(params['person']['username'])
+    return unless user.present?
+    signup_status = if params['tutor_signup']
+      user.mark_as_tutor!
+      user.tutor_signup_status
+    else
+      user.mark_as_member!
+      user.member_signup_status
+    end
+    
+    signup_status.signup_status = :email_verification_sent
+    signup_status.save!
+  end
+
   def mark_user_as_tutor
+    # return unless params['tutor_signup']
     user = Person.find_by_username(params['person']['username'])
     return unless user.present?
     user.mark_as_tutor!
@@ -91,10 +127,16 @@ private
   def update_signup_step_after_oauth_signup
     # don't update signup status if error happened
     if params['update_after_social_signup'] && !(flash[:error].present?)
-      tutor_signup_status = @current_user.tutor_signup_status
-      return if tutor_signup_status.signup_status.to_sym != :registered_oauth
-      tutor_signup_status.signup_status = :profile_picture
-      tutor_signup_status.save!
+
+      signup_status = if @current_user.is_tutor?
+        @current_user.tutor_signup_status
+      else
+        @current_user.member_signup_status
+      end
+
+      return if signup_status.signup_status.to_sym != :registered_oauth
+      signup_status.signup_status = :profile_picture
+      signup_status.save!
     end
   end
 

@@ -1,0 +1,36 @@
+:javascript
+  onDocumentReady(function(){
+    $(".submit_remote_form_btn").on('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      //$("#custom_profile_form").attr('action')
+      $("#custom_profile_form").submit();
+
+    });
+
+
+    $("#custom_profile_form").on("ajax:success", function(event, data){
+          console.log(data);
+          console.log("#{@confirm_step_path}");
+          $.get("#{@confirm_step_path}", function(data){
+            if (data.success == true) {
+              document.location = data.new_step_url
+            } else {
+              $(".errors").html('Step is incomplete!')
+            }
+          });
+        }
+      ).on("ajax:error", function(event, data){
+          // console.log(data.responseJSON.error);
+          console.log(data);
+          $(".errors").html('Error:')
+          var err_obj = data.responseJSON.error
+          Object.keys(err_obj).forEach(function (key) { 
+            var value = err_obj[key]
+            $(".errors").append(key + ': ' + value[0]);
+          })
+        }
+      )
+  });
+
+
