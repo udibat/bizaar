@@ -718,3 +718,14 @@ p {
 .added-certifications-holder {
   margin-top: 30px;
 }
+
+.uploaded-file.id-verification {
+  display: none;
+}
+
+.paypal-wizard {
+  padding-bottom: 20px;
+  button {
+    border-radius: 0;
+  }
+}
