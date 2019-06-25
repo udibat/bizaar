@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get '/tutor_wizard/bizaar_pact' => 'tutor_wizard#bizaar_pact', as: :tutor_wizard_bizaar_pact
   get '/tutor_wizard/finished' => 'tutor_wizard#finished', as: :tutor_wizard_finished
 
-  resources :certifications, only: [:create]
+  resources :certifications, only: [:create, :destroy]
   resources :custom_profiles, only: [:update]
   patch '/custom_profiles/upload_avatar/:id' => 'custom_profiles#upload_avatar', as: :profile_upload_avatar
   patch '/custom_profiles/upload_cover_photos/:id' => 'custom_profiles#upload_cover_photos', as: :profile_upload_cover_photos

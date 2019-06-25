@@ -78,15 +78,14 @@
             - @existing_certifications.each do |certification|
               .certificate-item
                 .thumb-block
-                  = image_tag certification.image.url(:thumb), class: 'image'
+                  = image_tag certification.attachment_thumb_url, class: 'image'
                 .certificate-description
                   .file-name.qualification-name
                     = certification.name
                   .file-name.category-name
                     = certification.category_name
                   = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
-                  = check_box :_destroy, '', class: 'remove-checkbox'
-
+                  = check_box :_destroy, '', class: 'remove-checkbox', data: {'cert_id' => certification.id}
           = link_to '+ Add another qualification', '#', class: 'underline uppercase add-another-qual'
         .row
           .col-6
@@ -99,6 +98,23 @@
 
 :javascript
   onDocumentReady(function() {
+
+    $('.existing_certifications').on('click', '.remove-photo', function(e){
+      var cert_conainer = $(e.target).parent().parent()[0];
+      var cert_id = $($(e.target).parent().children('input.remove-checkbox').first()[0]).data('certId')
+
+      $.ajax({
+          url: "#{certifications_path.split('?').first}" + "/" + cert_id + "",
+          type: 'DELETE',
+          success: function(data){            
+            $(cert_conainer).remove();
+          },
+          error: function(data){
+            $(".errors").append('<div class="error-item">Can\'t delete item (' + data.status + ')</div>');
+          }
+      });
+    });
+
     var uploadedImageTemplate = '<div class="uploaded-file"><div class="thumb-block uploaded-thumb-block"></div><div class="file-action-block"><div class="name"></div><a href="#" class="green link underline remove-preview">Remove this photo</a></div></div>'
 
     document.getElementById('certification_image').addEventListener('change', function (e) {
@@ -158,6 +174,7 @@
             var category = $('<div class="category-name">' + item.category_name + '</div>')
 
             var destroyCheckbox = $('<input type="checkbox" class="remove-checkbox">');
+            $(destroyCheckbox).data('certId', item.id);
             var destroyLabel = $('<label class="remove-photo" for="__destroy">').html('Remove this photo')
             
             certificateDescription.append(qualification, category, destroyLabel, destroyCheckbox);

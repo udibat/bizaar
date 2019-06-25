@@ -21,6 +21,13 @@ class CertificationsController < ApplicationController
 
   end
 
+  def destroy
+    @cert = @current_user.custom_profile.certifications.find(params[:id])
+    res = @cert.destroy
+
+    render json: {success: true, data: res}, status: 200
+  end
+
 private
 
   def certification_params

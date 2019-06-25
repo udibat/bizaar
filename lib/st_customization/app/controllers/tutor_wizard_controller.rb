@@ -80,7 +80,7 @@ class TutorWizardController < PaymentSettingsController
 
   def qualifications
     @existing_certifications = CertificationWizardDecorator.decorate_collection(
-      @custom_profile.certifications)
+      @custom_profile.certifications).to_a
     @new_certification = @custom_profile.certifications.build
   end
 
