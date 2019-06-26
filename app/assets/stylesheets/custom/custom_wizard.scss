@@ -604,9 +604,15 @@ p {
 }
 
 .certificate-item {
-  width: 33.33%;
+  width: 100%;
   display: flex;
   padding-right: 10px;
+  @include media(large-mobile) {
+    width: 50%;
+  }
+  @include media(tablet) {
+    width: 33.33%;
+  }
 }
 
 .edit_custom_profile,
