@@ -12,13 +12,12 @@ class CertificationWizardDecorator < Draper::Decorator
   end
 
   def image_thumb_url
-    image.url(:thumb)
+    attachment_thumb_url
   end
-
 
   def as_json(options = {})
     object.as_json({
-      only: [:name]
+      only: [:id, :name]
     }.merge(options)).merge({
       category_name: category_name,
       image_thumb_url: image_thumb_url

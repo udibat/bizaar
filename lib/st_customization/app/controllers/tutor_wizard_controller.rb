@@ -20,10 +20,11 @@ class TutorWizardController < PaymentSettingsController
     :bizaar_pact, :finished
   ]
   before_action :set_next_step_path
-  before_action :load_profile, only: [
+  before_action :load_profile, :load_signup_status, only: [
     :qualifications,
     :profile_picture, :describe_yourself, :cover_photos,
-    :social_media, :id_verification, :index, :bizaar_pact
+    :social_media, :id_verification, 
+    :index, :update, :create, :bizaar_pact
   ]
 
   def continue
@@ -79,7 +80,7 @@ class TutorWizardController < PaymentSettingsController
 
   def qualifications
     @existing_certifications = CertificationWizardDecorator.decorate_collection(
-      @custom_profile.certifications)
+      @custom_profile.certifications).to_a
     @new_certification = @custom_profile.certifications.build
   end
 
@@ -121,6 +122,10 @@ private
 
   def load_profile
     @custom_profile = @current_user.custom_profile
+  end
+
+  def load_signup_status
+    @tutor_status ||= @current_user.tutor_signup_status
   end
 
   def ensure_correct_step
