@@ -1,3 +1,4 @@
+# ToDo: Refcator to avoid member_*/tutor_* copy-paste
 class MemberWizardController < PaymentSettingsController
   skip_before_action :ensure_consent_given
 
@@ -12,13 +13,13 @@ class MemberWizardController < PaymentSettingsController
 
   # include AllowTutorOnly
 
-  # before_action :ensure_correct_step, only: [
-  #   :continue, 
-  #   :registered_oauth, :email_verification_finished, :qualifications,
-  #   :profile_picture, :describe_yourself, :cover_photos,
-  #   :social_media, :id_verification, :index,
-  #   :bizaar_pact, :finished
-  # ]
+  before_action :ensure_correct_step, only: [
+    :continue, 
+    :registered_oauth, :email_verification_finished, :qualifications,
+    :profile_picture, :describe_yourself, :cover_photos,
+    :social_media, :id_verification, :index,
+    :bizaar_pact, :finished
+  ]
   # before_action :set_next_step_path
   before_action :load_profile, :load_signup_status, only: [
     # :qualifications,
@@ -34,10 +35,10 @@ class MemberWizardController < PaymentSettingsController
   end
 
   def confirm_step
-    new_step_name = @current_user.tutor_signup_status.
+    new_step_name = @current_user.member_signup_status.
       next_step_if_complete!(params['step_name'])
 
-    new_step_url = public_send("tutor_wizard_#{new_step_name}_url") if new_step_name.present?
+    new_step_url = public_send("member_wizard_#{new_step_name}_url") if new_step_name.present?
 
     render json: {
       success: new_step_name.present?,
@@ -46,15 +47,15 @@ class MemberWizardController < PaymentSettingsController
   end
 
   def skip_step
-    @current_user.tutor_signup_status.try_skip_step!(params['skip_step_name'])
+    @current_user.member_signup_status.try_skip_step!(params['skip_step_name'])
 
-    redirect_to tutor_wizard_continue_path
+    redirect_to member_wizard_continue_path
   end
 
   def backward_step
-    prev_step_name = @current_user.tutor_signup_status.prev_step!
+    prev_step_name = @current_user.member_signup_status.prev_step!
 
-    prev_step_url = public_send("tutor_wizard_#{prev_step_name}_url") if prev_step_name.present?
+    prev_step_url = public_send("member_wizard_#{prev_step_name}_url") if prev_step_name.present?
 
     render json: {
       success: prev_step_name.present?,
@@ -146,16 +147,6 @@ private
     
     curr_step_idx = MemberSignupStatus.signup_statuses[@member_status.signup_status.to_s]
     requested_step_idx = MemberSignupStatus.signup_statuses[action_name.to_s]
-    # after reaching the current step page, `free_navigation` param should disappear
-    if params['free_navigation'] == 'true' && requested_step_idx == curr_step_idx
-      params.delete('free_navigation')
-      return
-    end
-
-    @free_navigation_mode = params['free_navigation'] == 'true'
-    
-    # allow free navigation to previous steps, but not new steps
-    return if @free_navigation_mode && requested_step_idx < curr_step_idx
 
     # @tutor_status.next_step_if_complete!
     member_status_name = @member_status.signup_status
@@ -168,15 +159,14 @@ private
   end
 
   def set_next_step_path
-    custom_step = @free_navigation_mode ? action_name : nil
-    curr_step_name = custom_step || @current_user.tutor_signup_status.signup_status
-    next_step_name = @current_user.tutor_signup_status.next_step_name(custom_step)
-    @next_step_path = next_step_name ? "tutor_wizard_#{next_step_name}_path" : "search_path"
+    curr_step_name = @current_user.member_signup_status.signup_status
+    next_step_name = @current_user.member_signup_status.next_step_name
+    @next_step_path = next_step_name ? "member_wizard_#{next_step_name}_path" : "search_path"
     @next_step_path = public_send(@next_step_path)
 
-    @prev_step_path = tutor_wizard_backward_step_path
+    @prev_step_path = member_wizard_backward_step_path
 
-    @confirm_step_path = tutor_wizard_confirm_step_path(curr_step_name, {nocache: Time.now.to_i})
+    @confirm_step_path = member_wizard_confirm_step_path(curr_step_name, {nocache: Time.now.to_i})
   end
 
 end
