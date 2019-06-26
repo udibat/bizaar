@@ -13,6 +13,10 @@
 
 .wrapper {
   @include wrapper;
+
+  .people_show & {
+    background: $medium-gray;
+  }
 }
 
 .undo-mobile-wrapper-margin {

@@ -21,6 +21,8 @@
     .examples
       %pre
         = @custom_profile.pretty_inspect
+      %span
+        = @custom_profile.person_id
       = image_tag @custom_profile.avatar.url(:medium)
     .row.profile-about-me
       - if person.description && !person.description.blank?
