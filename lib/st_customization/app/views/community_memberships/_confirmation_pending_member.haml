@@ -1,14 +1,14 @@
 // Verify email
 - email_to_confirm = @current_user.latest_pending_email_address(@current_community)
 
-.page-content-inner.signup-instructor
+.page-content-inner.signup-member
   .wizard-section
     .content-holder
       .image-holder
         %svg.svg-inline--fa.fa-check.fa-w-16.image-holder-svg{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
           %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
       .text-holder
-        %h1.section-title Verify your email (member)
+        %h1.section-title Verify your email
         .wizard-content
           .description
             %p We've sent an email to #{email_to_confirm}.

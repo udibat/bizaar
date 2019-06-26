@@ -6,5 +6,5 @@
 // - admin_dashboard_link = link_to t("sessions.confirmation_pending.admin_dashboard_link_text"), admin_getting_started_guide_path
 
 = form_for(Person, :as => "person", :url => confirmation_path(:locale => I18n.locale), :html => { :method => :put, :id => "resend_email_confirmation"} ) do |form|
-  = form.button "resend the email", :class => "btn btn--violet wizard-btnn"
+  = form.button "resend the email", :class => "btn btn--violet wizard-btn"
 

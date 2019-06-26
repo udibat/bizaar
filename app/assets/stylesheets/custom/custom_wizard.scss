@@ -1,6 +1,7 @@
 @import 'mixins/all';
 
 .people_new,
+.people_new_member,
 .community_memberships_confirmation_pending,
 .tutor_wizard_email_verification_finished,
 body[class*="wizard"] {
@@ -49,7 +50,8 @@ body[class*="wizard"] {
 
 // sighup page
 
-.people_new {
+.people_new,
+.people_new_member {
   background-color: $cust-violet;
   a.fb-connect,
   a.google-login-button {
