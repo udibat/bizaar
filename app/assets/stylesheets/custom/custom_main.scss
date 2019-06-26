@@ -267,6 +267,11 @@ img {
       color: $cust-text;
     }
   }
+  &.disabled {
+    pointer-events: none;
+    background-color: #dae0e6;
+    border-color: #dae0e6;
+  }
 }
 
 .single-btn {
