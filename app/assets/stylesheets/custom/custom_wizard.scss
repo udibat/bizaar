@@ -756,3 +756,27 @@ p {
 .next-btn {
   display: none;
 }
+
+.checkbox-item .label.pact-label {
+  text-align: left;
+}
+
+.default-checkbox input[type="checkbox"] + .label.pact-label {
+  padding-left: 30px;
+  &::before {
+    top: 3px;
+  }
+  &::after {
+    top: 5px;
+  }
+}
+
+.pact-list {
+  padding-left: 30px;
+}
+
+.pact-submit {
+  width: 290px;
+  display: block;
+  margin: 30px auto 0;
+}
