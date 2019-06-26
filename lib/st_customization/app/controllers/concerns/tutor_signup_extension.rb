@@ -11,6 +11,21 @@ module TutorSignupExtension
     after_action :generate_validation_errors, only: [:create, :create_member]
     after_action :update_signup_step_after_oauth_signup, only: [:update]
 
+
+    alias_method :show_before_redef, :show
+    def show
+      show_before_redef
+
+      @custom_profile = @service.person.custom_profile
+      @custom_profile.certifications.build
+      if @service.person.is_tutor?
+        render 'people/show'
+      else
+        render 'people/show_tutor'
+      end
+      
+    end
+
     alias_method :create_before_redef, :create
     def create
 
