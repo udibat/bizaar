@@ -48,13 +48,8 @@
                       Upload Files from computer
                 = f.file_field :image
                 .uploaded-file-container
-                  -# .uploaded-file
-                  -#   .thumb-block.uploaded-thumb-block
-                  -#   .file-action-block
-                  -#     .name File name
-                  -#     = link_to 'Choose another photo', '#', class: 'green link underline'
-                  -#     = link_to 'Remove this photo', '#', class: 'green link underline remove-preview'
-                  -# = f.submit 'Get my badge!', class: "btn btn--violet get-badge"
+                  .pdfPreview.hidden-preview
+                    = image_tag 'custom_images/pdf.png', class: 'image'
           .row
             .col-6
               = link_to '#', class: 'btn btn--green block submit_remote_form_btn get-badge' do
@@ -91,7 +86,8 @@
           .col-6
             = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--violet-transp', remote: true
           .col-6
-            = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
+            = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet next-btn', remote: true
+            = link_to "Skip this step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: 'btn btn--violet block skip-qual-btn'
           -# = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: ''
 
 = render partial: 'confirm_step_btn_js'
@@ -102,12 +98,24 @@
     $('.existing_certifications').on('click', '.remove-photo', function(e){
       var cert_conainer = $(e.target).parent().parent()[0];
       var cert_id = $($(e.target).parent().children('input.remove-checkbox').first()[0]).data('certId')
-
+      // console.log(cert_conainer)
+  
       $.ajax({
           url: "#{certifications_path.split('?').first}" + "/" + cert_id + "",
           type: 'DELETE',
           success: function(data){            
             $(cert_conainer).remove();
+            console.log($('.certificate-item').length);
+
+            if($('.certificate-item').length === 0) {
+              $('.added-certifications-holder').hide();
+              $('.uploading-form').show();
+
+              clearForm();
+              
+              $('.skip-qual-btn').css('display', 'block');
+              $('.next-btn').hide();
+            } 
           },
           error: function(data){
             $(".errors").append('<div class="error-item">Can\'t delete item (' + data.status + ')</div>');
@@ -124,12 +132,23 @@
       var file = this.files[0];
       var reader = new FileReader();
 
+      var extension = file.name.split('.').pop().toLowerCase();
+      var pdfPreview = $('.pdfPreview');
+
       reader.onload = function(e) {
         var img = new Image();
         img.src = reader.result;
+
         
         $('.uploaded-file-container').append(uploadedImageTemplate)
         $('.uploaded-thumb-block').html(img);
+
+        if(extension == 'pdf') {
+          $('.uploaded-thumb-block').parents('div').find(pdfPreview).removeClass('hidden-preview');
+        } else {
+          $('.uploaded-thumb-block').parents('div').find(pdfPreview).addClass('hidden-preview');
+        }
+
         $('.get-badge').css('display', 'flex');
       }
       
@@ -141,6 +160,7 @@
       event.preventDefault();
       $('#certification_image').val('');
       $(this).parents('div').find('.uploaded-file').remove();
+      $('.get-badge').hide();
     });
 
     $('.submit_remote_form_btn').on('click', function(event) {
@@ -185,9 +205,13 @@
 
             $('.uploading-form').hide();
             clickOutside('.after-uploading');
+            $('.added-certifications-holder').show();
           })
+          $('.skip-qual-btn').hide();
+          $('.next-btn').css('display', 'block');
         },
         error: function(error) {
+          $(".errors").html('').fadeIn();
           var err_obj = error.responseJSON.error
           Object.keys(err_obj).forEach(function (key) { 
             var value = err_obj[key]
@@ -202,23 +226,24 @@
     $('.add-another-qual').on('click', function(event) {
       event.preventDefault();
       $('.uploading-form').show();
+
+      clearForm();
     });
-    // $("#new_certification_form").on("ajax:success", function(event, data){
-    //   $('.existing_certifications').html('')
-    //   data.existing_certifications.forEach(function(item, i){
-    //     $('.existing_certifications').find('.thumb-block').html($('<img>',{src: item.image_thumb_url, alt: item.name}))
-    //     $('.existing_certifications').append($('<div>'+ item.name + '</div>'))
-    //     $('.existing_certifications').append($('<div>'+ item.category_name + '</div>'))
-    //   })
-    // }).on("ajax:error", function(event, data){
-    //     console.log(data.responseJSON.error);
-    //     $(".errors").html('Error:')
-    //     var err_obj = data.responseJSON.error
-    //     Object.keys(err_obj).forEach(function (key) { 
-    //       var value = err_obj[key]
-    //       $(".errors").append(key + ': ' + value[0]);
-    //     })
-    //   }
-    // )
+
+    if ($('.certificate-item').length !== 0) {
+      $('.added-certifications-holder').show();
+      $('.skip-qual-btn').hide();
+      $('.next-btn').css('display', 'block');
+    } else {
+      $('.added-certifications-holder').hide();
+      $('.skip-qual-btn').css('display', 'block');
+      $('.next-btn').hide();
+    }
+
+    function clearForm() {
+      $('#certification_image').val('');
+      $('#certification_name').val('');
+      $('#category-select').val(null).trigger('change');
+    }
   });
 

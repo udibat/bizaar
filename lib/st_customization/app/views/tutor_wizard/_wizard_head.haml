@@ -1,6 +1,6 @@
 .wizard-head
   .step-list
-    - wizard_header_steps(@current_user.tutor_signup_status).each do |step_item|
+    - wizard_header_steps(@current_user).each do |step_item|
       .step-item{class: "#{'done' if step_item[:step_passed]}"}
         .small-icon
           %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
