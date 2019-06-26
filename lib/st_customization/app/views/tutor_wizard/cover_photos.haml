@@ -37,6 +37,7 @@
                       = photos_fields.hidden_field :id
                       = photos_fields.label :_destroy, 'Remove this photo', class: 'remove-photo'
                       = photos_fields.check_box :_destroy, {class: 'delete_record_chbx'}
+                      = photos_fields.check_box :is_primary_photo, {class: 'set_primary_record_chbx'}
                       -# = photos_fields.label :_primary, 'Make primary photo', class: 'make-primary'
                       -# = photos_fields.radio_button :_primary, {class: 'make_primary_radio'}
           %table.table.table-striped.test-class-test
@@ -73,6 +74,13 @@
         $('#fileupload').trigger('submit.rails');
       });
 
+      var set_primary_field = $('<input type="checkbox">')
+      $(set_primary_field).attr('name', 'custom_profile[cover_photos_attributes][' + idx + '][is_primary_photo]')
+      $(set_primary_field).attr('id', 'custom_profile_cover_photos_attributes_' + idx + '_is_primary_photo')
+      $(set_primary_field).addClass('set_primary_record_chbx');
+      $(set_primary_field).val(1)
+      $(set_primary_field).prop('checked', item.is_primary_photo);
+
       var descr_cont = $('<div>', {class: 'image_descr'});
       var img_holder = $('<div>', {class: 'thumb-block'})
       var idField = id_field;
@@ -81,7 +89,7 @@
       var imageTag = $('<img>',{src: item.url});
       var imageName = $('<div>').html(item.name);
 
-      descr_cont.append(imageName, idField, destroyBtn, destroyField);
+      descr_cont.append(imageName, idField, destroyBtn, destroyField, set_primary_field);
       img_holder.append(imageTag);
       img_cont.append(img_holder, descr_cont);
 
@@ -98,6 +106,11 @@
     });
 
     $('#fileupload').on('click', '.delete_record_chbx', function(){
+      $('#fileupload').trigger('submit.rails');
+    });
+
+    $('#fileupload').on('click', '.set_primary_record_chbx', function(e){
+      $('.set_primary_record_chbx:not(#' + e.target.id + ')').val(0);
       $('#fileupload').trigger('submit.rails');
     });
 

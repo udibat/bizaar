@@ -446,6 +446,7 @@ CREATE TABLE `cover_photos` (
   `image_content_type` varchar(255) DEFAULT NULL,
   `image_file_size` int(11) DEFAULT NULL,
   `image_updated_at` datetime DEFAULT NULL,
+  `is_primary_photo` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `index_cover_photos_on_custom_profile_id` (`custom_profile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2502,6 +2503,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190614123234'),
 ('20190618142100'),
 ('20190621143358'),
-('20190625160338');
+('20190625160338'),
+('20190626160526');
 
 

@@ -15,6 +15,13 @@ class CustomProfile < ApplicationRecord
 
   validates_length_of :description, maximum: MAX_DESCRIPTION_LENGTH
 
+  after_commit :ensure_primary_photo_set
+
+  def ensure_primary_photo_set
+    if cover_photos.where(is_primary_photo: true).count == 0
+      cover_photos.where(is_primary_photo: false).limit(1).update(is_primary_photo: true)
+    end
+  end
 
 end
 
