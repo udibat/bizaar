@@ -509,7 +509,6 @@ p {
 .thumb-block {
   width: 60px;
   height: 60px;
-  border: 1px solid #f5f5f5;
   margin-right: 10px;
   overflow: hidden;
   .image, img {
@@ -626,12 +625,6 @@ p {
   height: 0;
 }
 
-.uploaded-file-container,
-.after-uploading,
-.added-certifications-holder {
-  // display: none;
-}
-
 .profile-upload {
   tbody tr:nth-child(odd) {
     background-color: transparent;
@@ -710,6 +703,10 @@ p {
   position: relative;
 }
 
+.errors {
+  display: block;
+}
+
 .error-item {
   color: #ff0000;
   font-weight: bold;
@@ -717,6 +714,7 @@ p {
 
 .added-certifications-holder {
   margin-top: 30px;
+  display: none;
 }
 
 .uploaded-file.id-verification {
@@ -728,4 +726,27 @@ p {
   button {
     border-radius: 0;
   }
+}
+
+.hidden-preview {
+  display: none;
+}
+
+.uploaded-thumb-block {
+  position: relative;
+}
+
+.pdfPreview {
+  width: 60px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.btn-hide,
+.next-btn {
+  display: none;
 }
