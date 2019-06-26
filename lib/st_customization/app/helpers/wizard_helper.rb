@@ -1,7 +1,8 @@
 module WizardHelper
 
-  def wizard_header_steps(tutor_signup_status)
+  def wizard_header_steps(user)
 
+    signup_status = user.is_tutor? ? user.tutor_signup_status : user.member_signup_status
     # step_marked_as_passed?(step_name)
     [
       {
@@ -27,7 +28,7 @@ module WizardHelper
       }
 
     ].map{|h|
-      h[:step_passed] = tutor_signup_status.step_marked_as_passed?(h[:key_name])
+      h[:step_passed] = signup_status.step_marked_as_passed?(h[:key_name])
       h
     }
 

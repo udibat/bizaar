@@ -8,6 +8,7 @@ module PersonExtension
   included do
 
     has_one :tutor_signup_status, dependent: :destroy
+    has_one :member_signup_status, dependent: :destroy
     has_one :custom_profile, dependent: :destroy
     after_create :create_custom_profile
 
@@ -31,6 +32,14 @@ module PersonExtension
       self.save!
       unless self.tutor_signup_status
         self.create_tutor_signup_status
+      end
+    end
+
+    def mark_as_member!
+      self.is_tutor = false
+      self.save!
+      unless self.member_signup_status
+        self.create_member_signup_status
       end
     end
 

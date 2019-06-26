@@ -6,7 +6,7 @@
 
 .page-content-inner.signup-instructor
   .signup-form.centered-section.wizard-section
-    %h2.section-title.text-center Sign up to be an Instructor
+    %h2.section-title.text-center Sign up to be a Member
     %h3.section-subtitle.section-subtitle--regular.text-center Earn money with your passions, skills and talents by joining our community.
     
 
@@ -21,8 +21,8 @@
     -#           :count => (@current_community.allowed_emails.split(",").count))
 
     = form_for @service.person, :url => APP_CONFIG.login_domain.to_s + people_path do |form|
-
-      = hidden_field_tag "tutor_signup", true
+      
+      = hidden_field_tag "member_signup", true
       -# Invite code
       - if @current_community.join_with_invite_only?
         .inline-label-container

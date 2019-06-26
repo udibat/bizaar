@@ -1,0 +1,73 @@
+// main block for all wizard steps
+.page-content-inner.wizard.wizard-instructor
+  .head-section
+    %h1.head-section-title Set up your profile
+  = render partial: 'wizard_head'
+  .wizard-section
+    .errors
+    %h2.small-title.flex-block 
+      .title-image-holder
+        = image_tag "custom_images/choose-profile-pic.png"
+      Upload your profile picture
+    .wizard-content
+      %p.mb-25 This will be your profile picture-and what your clientele will see, so keep that in mind when you pick your photo.
+      %p.mb-25 The most important thing is to choose a photo that most resembles you that is recognizable. So pick a recent a photo of yourself as possible. Also keep in mind that the photo needs to clearly show your face, so it’s best to choose a photo where you’re not wearing sunglasses, overly large hats or anything that obstructs your face. 
+      .wizard-inner
+        .upload-files-holder
+          .row
+            .col-5
+        .row
+          .col-6
+            .need-upload
+              = form_for @custom_profile, url: profile_upload_avatar_path(@custom_profile), html: { multipart: true, id: "fileupload" } do |f|
+                = f.file_field :avatar
+                -# = link_to '#', class: 'btn btn--black upload-link' do
+                = label_tag :custom_profile_avatar, class: 'btn btn--black upload-link' do
+                  .small-icon
+                    %svg.svg-inline--fa.fa-file-upload.fa-w-12{"aria-hidden" => "true", "data-icon" => "file-upload", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 384 512", :xmlns => "http://www.w3.org/2000/svg"}
+                      %path{:d => "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z", :fill => "currentColor"}
+                  Upload Files from computer
+                // = f.submit 'Next step', class: 'btn btn--violet get-badge'
+              %table.table.table-striped.uploaded-file-container.profile-upload
+                %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
+                  %tr
+                    %td
+                      .uploaded-file
+                        .thumb-block
+                          = image_tag @custom_profile.avatar.url(:thumb) if @custom_profile.avatar
+                        .file-action-block
+                          .file-name #{@custom_profile.avatar.original_filename}
+                          -# = link_to 'Choose another photo', '#', class: 'green link underline'
+                          = link_to 'Remove this photo', '#', class: 'green link underline remove-photo'
+        .row
+          .col-6
+            = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
+
+= render partial: 'confirm_step_btn_js'
+
+:javascript
+  onDocumentReady(function(){
+    $('#fileupload').fileupload({
+      done: function (e, data) {
+        if (data.result.error === undefined) {
+          var file = data.files[0];
+          var name = file.name;
+
+          $('.table-striped .files').find('.file-name').text(name);
+          $('.table-striped .files').find('.thumb-block img').attr('src', data.result.image_url);
+          $('.uploaded-file-container.profile-upload').css('display', 'block');
+        } else {
+          alert(data.result.error);
+        }
+      }
+    });
+
+    if('.uploaded-file') {
+      $('.uploaded-file-container.profile-upload').css('display', 'block');
+    }
+    // $('.remove-photo').on('click', function(event) {
+    //   event.preventDefault();
+    //   $(this).parents('div').find('.uploaded-file').remove();
+    // });
+  });
+  

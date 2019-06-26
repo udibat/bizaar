@@ -1019,6 +1019,19 @@ CREATE TABLE `marketplace_trials` (
   KEY `index_marketplace_trials_on_created_at` (`created_at`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `member_signup_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `member_signup_statuses` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `person_id` varchar(255) NOT NULL,
+  `signup_status` int(11) DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_member_signup_statuses_on_person_id` (`person_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `menu_link_translations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -2488,6 +2501,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190614103615'),
 ('20190614123234'),
 ('20190618142100'),
-('20190621143358');
+('20190621143358'),
+('20190625160338');
 
 
