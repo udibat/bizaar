@@ -24,8 +24,6 @@
             - idx = 0
             = f.fields_for :cover_photos, @custom_profile.cover_photos.build do |photos_fields|
               = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][#{idx}][image]" if photos_fields.object.new_record?
-              - idx += 1
-              - existing_record_class = 'existing_photo_record' unless photos_fields.object.new_record?
             .existing_cover_photos
               = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
                 - unless photos_fields.object.new_record?
@@ -115,8 +113,6 @@
     });
 
     $("#fileupload").on("ajax:success", function(event, data){
-            console.log(data);
-            
             build_photo_spots(data.images);
           }
         ).on("ajax:error", function(event, data){
