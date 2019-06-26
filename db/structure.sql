@@ -154,15 +154,17 @@ CREATE TABLE `certifications` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `custom_profile_id` bigint(20) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `category` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `image_file_name` varchar(255) DEFAULT NULL,
   `image_content_type` varchar(255) DEFAULT NULL,
   `image_file_size` int(11) DEFAULT NULL,
   `image_updated_at` datetime DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `index_certifications_on_custom_profile_id` (`custom_profile_id`)
+  KEY `index_certifications_on_custom_profile_id` (`custom_profile_id`),
+  KEY `index_certifications_on_category_id` (`category_id`),
+  CONSTRAINT `fk_rails_bd682da0ba` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `checkout_accounts`;
@@ -432,6 +434,22 @@ CREATE TABLE `conversations` (
   KEY `index_conversations_on_starting_page` (`starting_page`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `cover_photos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cover_photos` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `custom_profile_id` bigint(20) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `image_file_name` varchar(255) DEFAULT NULL,
+  `image_content_type` varchar(255) DEFAULT NULL,
+  `image_file_size` int(11) DEFAULT NULL,
+  `image_updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_cover_photos_on_custom_profile_id` (`custom_profile_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `custom_field_names`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -547,6 +565,13 @@ CREATE TABLE `custom_profiles` (
   `avatar_content_type` varchar(255) DEFAULT NULL,
   `avatar_file_size` int(11) DEFAULT NULL,
   `avatar_updated_at` datetime DEFAULT NULL,
+  `social_link_facebook` varchar(255) DEFAULT NULL,
+  `social_link_twitter` varchar(255) DEFAULT NULL,
+  `social_link_instagram` varchar(255) DEFAULT NULL,
+  `social_link_youtube` varchar(255) DEFAULT NULL,
+  `social_link_twitch` varchar(255) DEFAULT NULL,
+  `social_link_vimeo` varchar(255) DEFAULT NULL,
+  `pact_accepted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_custom_profiles_on_person_id` (`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -655,6 +680,22 @@ CREATE TABLE `follower_relationships` (
   UNIQUE KEY `index_follower_relationships_on_person_id_and_follower_id` (`person_id`,`follower_id`) USING BTREE,
   KEY `index_follower_relationships_on_follower_id` (`follower_id`) USING BTREE,
   KEY `index_follower_relationships_on_person_id` (`person_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `id_verifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `id_verifications` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `custom_profile_id` bigint(20) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `image_file_name` varchar(255) DEFAULT NULL,
+  `image_content_type` varchar(255) DEFAULT NULL,
+  `image_file_size` int(11) DEFAULT NULL,
+  `image_updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_id_verifications_on_custom_profile_id` (`custom_profile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `invitation_unsubscribes`;
@@ -978,6 +1019,19 @@ CREATE TABLE `marketplace_trials` (
   KEY `index_marketplace_trials_on_created_at` (`created_at`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `member_signup_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `member_signup_statuses` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `person_id` varchar(255) NOT NULL,
+  `signup_status` int(11) DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_member_signup_statuses_on_person_id` (`person_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `menu_link_translations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1280,6 +1334,8 @@ CREATE TABLE `people` (
   `mark` int(11) DEFAULT NULL,
   `rating_cache` varchar(255) DEFAULT '---\n:count: 0\n:avg: 0\n',
   `is_tutor` tinyint(1) DEFAULT '0',
+  `birthday` date DEFAULT NULL,
+  `zip_code` varchar(255) DEFAULT NULL,
   UNIQUE KEY `index_people_on_username_and_community_id` (`username`,`community_id`) USING BTREE,
   UNIQUE KEY `index_people_on_uuid` (`uuid`),
   UNIQUE KEY `index_people_on_email` (`email`) USING BTREE,
@@ -2438,6 +2494,14 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190603161542'),
 ('20190605160622'),
 ('20190605173629'),
-('20190606115258');
+('20190606115258'),
+('20190610151733'),
+('20190612111657'),
+('20190613124818'),
+('20190614103615'),
+('20190614123234'),
+('20190618142100'),
+('20190621143358'),
+('20190625160338');
 
 

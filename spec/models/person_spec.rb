@@ -47,6 +47,8 @@
 #  mark                               :integer
 #  rating_cache                       :string(255)      default({:count=>0, :avg=>0})
 #  is_tutor                           :boolean          default(FALSE)
+#  birthday                           :date
+#  zip_code                           :string(255)
 #
 # Indexes
 #

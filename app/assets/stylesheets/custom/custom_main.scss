@@ -232,6 +232,10 @@ img {
     background-color: $cust-green;
     border: 2px solid $cust-green;
     color: #fff;
+    &:hover, &:focus {
+      background-color: #fff;
+      color: $cust-green;
+    }
   }
   &--green-transp {
     background-color: transparent;
@@ -531,13 +535,13 @@ input:checked + .slider:before {
   }
 }
 
-input[type=text], input[type=password], input[type=number], textarea, .custom-select {
+input[type=text], input[type=password], input[type=number], textarea, .custom-select, select {
   border-radius: 0;
   box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.24);
   border-width: 1px;
 }
 
-.custom-select {
+.custom-select-holder > select {
   &:not(:last-of-type) {
     & + .select2 {
       &.select2-container--default {
@@ -549,7 +553,7 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
       }
     }
   }
-  &.select-month, &.select-year {
+  &:first-of-type, &:last-of-type {
     & + .select2 {
       &.select2-container--default {
         width: 100% !important; // rewrite select2 styles
@@ -559,7 +563,7 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
       }
     }
   }
-  &.select-day {
+  &:nth-of-type(2) {
     & + .select2 {
       &.select2-container--default {
         width: 100% !important; // rewrite select2 styles
@@ -569,6 +573,24 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
       }
     }
   }
+  & + .select2 {
+    &.select2-container--default {
+      .select2-selection--single {
+        border-radius: 0;
+        box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.24);
+        border-width: 1px;
+        height: 34px;
+        .select2-selection__rendered {
+          line-height: 32px;
+          font-size: 14px;
+          font-family: 'Sintony', sans-serif;
+        }
+      }
+    }
+  }
+}
+
+.custom-select {
   & + .select2 {
     &.select2-container--default {
       .select2-selection--single {
@@ -619,4 +641,14 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
 
 .mb-50 {
   margin-bottom: 50px;
+}
+
+.errors {
+  color: #ff0000;
+  margin-bottom: 20px;
+}
+
+.block {
+  display: block;
+  text-align: center;
 }

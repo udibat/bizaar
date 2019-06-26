@@ -22,6 +22,7 @@
 
     = form_for @service.person, :url => APP_CONFIG.login_domain.to_s + people_path do |form|
 
+      = hidden_field_tag "tutor_signup", true
       -# Invite code
       - if @current_community.join_with_invite_only?
         .inline-label-container
@@ -50,23 +51,7 @@
           -# = form.label :email, t('.email')
           = form.text_field :email, :class => :text_field, :maxlength => "255", :placeholder => t('.email')
         .input-holder
-          - if @service.has_person_custom_fields?
-            - @service.custom_field_values.each_with_index do |custom_field_value, index|
-              - custom_field = custom_field_value.question
-              - custom_field.with_type do |field_type|
-                - prefix = "person[custom_field_values_attributes][]"
-                %div
-                  -# = label "person_custom_fields", index, custom_field.name(I18n.locale),
-                  -#   class: 'inline'
-                  - if custom_field.public?
-                    %small= t('.this_field_will_be_publicly_visible')
-                = hidden_field_tag "#{prefix}[id]", custom_field_value.id
-                = hidden_field_tag "#{prefix}[type]", custom_field_value.type
-                = hidden_field_tag "#{prefix}[custom_field_id]", custom_field_value.custom_field_id
-                = render "settings/custom_fields/#{field_type}", :service => @service,
-                  :custom_field => custom_field, index: index,
-                  :custom_field_value => custom_field_value,
-                  :prefix => prefix
+          = form.text_field :zip_code, :class => :text_field, :maxlength => "255", :placeholder => t('.zip_code')
       -# -# Username
       -# .input-holder
       -#   = form.label :username, username_label
@@ -103,13 +88,14 @@
       .birthday-holder
         %h3.section-subtitle.section-subtitle--regular Birthday
         %p Your birthday is confidential. You do have to be 19 and older to sign up with us
-        .input-container
-          %select#select_month.select-month.custom-select{:name => ""}
-            %option Month
-          %select#select_day.select-day.custom-select{:name => ""}
-            %option Day
-          %select#select_year.select-year.custom-select{:name => ""}
-            %option Year
+        .input-container.custom-select-holder
+          = form.date_select :birthday, order: [:month, :day, :year], :start_year => (Date.today.year - 100), :end_year => Date.today.year
+          // %select#select_month.select-month.custom-select{:name => ""}
+          //   %option Month
+          // %select#select_day.select-day.custom-select{:name => ""}
+          //   %option Day
+          // %select#select_year.select-year.custom-select{:name => ""}
+          //   %option Year
       = button_tag t('sessions.new.sign_up_now'), class: 'btn btn--violet btn--left signup-btn'
 
     .socials-signup

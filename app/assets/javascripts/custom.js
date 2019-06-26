@@ -75,12 +75,15 @@ $(document).ready(function() {
   changeDropdownName();
   priceRangeChangeName();
 
-  $('.custom-select').select2({
+  $('.custom-select-holder > select, .custom-select').select2({
     minimumResultsForSearch: -1,
     placeholder: function(){
       $(this).data('placeholder');
     }
   });
+
+  wordsCounter('#custom_profile_description');
+
 });
 
 $(window).on('scroll', function() {
@@ -188,4 +191,28 @@ function resetPriceRange() {
   var rangeSliderMin = $('.range-slider').data('min');
   var rangeSliderMax = $('.range-slider').data('max');
   $('#range-slider-price').val([rangeSliderMin, rangeSliderMax]);
+}
+
+function wordsCounter(textarea) {
+  var textarea = $(textarea);
+  var countBlock = $('.written-char');
+
+  if(textarea.length !== 0) {
+    var textCount = textarea.val().length;
+    countBlock.text(textCount);
+    textarea.on('keyup', function(event) {
+      var countVal = $(this).val().length;
+      $(this).parents('div').find(countBlock).text(countVal);
+    });
+  }
+}
+
+function clickOutside(element) {
+  $(document).mouseup(function(e) {
+    var container = $(element);
+
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+        container.fadeOut();
+    }
+  });
 }

@@ -10,6 +10,7 @@ module StCustomization
       PeopleController.send(:include, ::TutorSignupExtension)
       ConfirmationsController.send(:include, ::ConfirmationsExtension)
       Person.send(:include, PersonExtension)
+      OmniauthController.send(:include, OmniauthTutorExtension)
 
       # the following is unstable (causing routes drawing fails on `reload!`), 
       # additional ivestigating required

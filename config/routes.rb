@@ -3,16 +3,67 @@ Rails.application.routes.draw do
 
   # mount StCustomization::Engine => "/", as: 'custom_routes'
   get '/tutor_wizard/continue' => 'tutor_wizard#continue', as: :tutor_wizard_continue
+  get '/tutor_wizard/skip_step/:skip_step_name' => 'tutor_wizard#skip_step', as: :tutor_wizard_skip_step
+  get '/tutor_wizard/confirm_step/:step_name' => 'tutor_wizard#confirm_step', as: :tutor_wizard_confirm_step
+  get '/tutor_wizard/backward_step' => 'tutor_wizard#backward_step', as: :tutor_wizard_backward_step
   get '/tutor_wizard/qualifications' => 'tutor_wizard#qualifications', as: :tutor_wizard_qualifications
-
+  get '/tutor_wizard/registered_oauth' => 'tutor_wizard#registered_oauth', as: :tutor_wizard_registered_oauth
   get '/tutor_wizard/email_verification_finished' => 'tutor_wizard#email_verification_finished', as: :tutor_wizard_email_verification_finished
   get '/tutor_wizard/profile_picture' => 'tutor_wizard#profile_picture', as: :tutor_wizard_profile_picture
   get '/tutor_wizard/describe_yourself' => 'tutor_wizard#describe_yourself', as: :tutor_wizard_describe_yourself
   get '/tutor_wizard/cover_photos' => 'tutor_wizard#cover_photos', as: :tutor_wizard_cover_photos
   get '/tutor_wizard/social_media' => 'tutor_wizard#social_media', as: :tutor_wizard_social_media
   get '/tutor_wizard/id_verification' => 'tutor_wizard#id_verification', as: :tutor_wizard_id_verification
-  get '/tutor_wizard/payment_information' => 'tutor_wizard#payment_information', as: :tutor_wizard_payment_information
+  get '/tutor_wizard/payment_information' => 'tutor_wizard#index', as: :tutor_wizard_index
   get '/tutor_wizard/bizaar_pact' => 'tutor_wizard#bizaar_pact', as: :tutor_wizard_bizaar_pact
+  get '/tutor_wizard/finished' => 'tutor_wizard#finished', as: :tutor_wizard_finished
+
+  resources :certifications, only: [:create, :destroy]
+  resources :custom_profiles, only: [:update]
+  patch '/custom_profiles/upload_avatar/:id' => 'custom_profiles#upload_avatar', as: :profile_upload_avatar
+  patch '/custom_profiles/upload_cover_photos/:id' => 'custom_profiles#upload_cover_photos', as: :profile_upload_cover_photos
+  patch '/custom_profiles/upload_id_verifications/:id' => 'custom_profiles#upload_id_verifications', as: :profile_upload_id_verifications
+  # get '/:person_id/custom_settings/payments' => 'custom_payment_settings#index', :as => :custom_person_payment_settings
+  # post '/:person_id/custom_settings/payments' => 'custom_payment_settings#create', :as => :custom_create_person_payment_settings
+  # put '/:person_id/custom_settings/payments' => 'custom_payment_settings#update', :as => :custom_update_person_payment_settings
+  # get '/:person_id/wizard/payments' => 'tutor_wizard#index', :as => :wizard_person_payment_settings
+  post '/:person_id/wizard/payments' => 'tutor_wizard#create', :as => :wizard_create_person_payment_settings
+  put '/:person_id/wizard/payments' => 'tutor_wizard#update', :as => :wizard_update_person_payment_settings
+  # # get '/:person_id/custom_settings/payments/paypal_account' => 'paypal_accounts#index', :as => :custom_paypal_account_settings_payment
+
+
+  
+  devise_scope :person do
+
+    get ":locale/member_signup" => "people#new_member", :as => :member_sign_up
+
+    # # these matches need to be before the general resources to have more priority
+    # get "/people/confirmation" => "confirmations#show", :as => :confirmation
+    # put "/people/confirmation" => "confirmations#create"
+    # get "/people/sign_up" => redirect("/%{locale}/login")
+
+    # # List few specific routes here for Devise to understand those
+    # get "/signup" => "people#new", :as => :sign_up
+    # get '/people/auth/:provider/setup' => 'omniauth#auth_setup' #needed for devise setup phase hook to work
+
+  end
+
+  get '/member_wizard/continue' => 'member_wizard#continue', as: :member_wizard_continue
+  get '/member_wizard/skip_step/:skip_step_name' => 'member_wizard#skip_step', as: :member_wizard_skip_step
+  get '/member_wizard/confirm_step/:step_name' => 'member_wizard#confirm_step', as: :member_wizard_confirm_step
+  get '/member_wizard/backward_step' => 'member_wizard#backward_step', as: :member_wizard_backward_step
+  # get '/member_wizard/qualifications' => 'member_wizard#qualifications', as: :member_wizard_qualifications
+  get '/member_wizard/registered_oauth' => 'member_wizard#registered_oauth', as: :member_wizard_registered_oauth
+  get '/member_wizard/email_verification_finished' => 'member_wizard#email_verification_finished', as: :member_wizard_email_verification_finished
+  get '/member_wizard/setup_profile' => 'member_wizard#setup_profile', as: :member_wizard_setup_profile
+  get '/member_wizard/describe_yourself' => 'member_wizard#describe_yourself', as: :member_wizard_describe_yourself
+  get '/member_wizard/cover_photos' => 'member_wizard#cover_photos', as: :member_wizard_cover_photos
+  get '/member_wizard/social_media' => 'member_wizard#social_media', as: :member_wizard_social_media
+  get '/member_wizard/id_verification' => 'member_wizard#id_verification', as: :member_wizard_id_verification
+  get '/member_wizard/payment_information' => 'member_wizard#index', as: :member_wizard_index
+  get '/member_wizard/bizaar_pact' => 'member_wizard#bizaar_pact', as: :member_wizard_bizaar_pact
+  get '/member_wizard/finished' => 'member_wizard#finished', as: :member_wizard_finished
+
 
 
   namespace :mercury do

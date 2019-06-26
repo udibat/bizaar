@@ -32,6 +32,10 @@ private
       tutor_stat = @current_user.tutor_signup_status
       tutor_stat.signup_status = :email_verification_finished
       tutor_stat.save!
+
+      # we'll use our own less strict consent logic
+      @current_user.skip_st_consent!
+
     end
   end
 

@@ -493,7 +493,7 @@ p {
       fill: #fff;
     }
   }
-  &:hover {
+  &:hover, &:focus {
     .small-icon svg {
       path {
         fill: $cust-text;
@@ -511,6 +511,13 @@ p {
   height: 60px;
   border: 1px solid #f5f5f5;
   margin-right: 10px;
+  overflow: hidden;
+  .image, img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .file-action-block {
@@ -523,10 +530,26 @@ p {
 }
 
 .get-badge {
-  max-width: 378px;
-  display: block;
-  margin: 30px auto 30px; 
-  text-align: center;
+  margin: 30px auto; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  svg {
+    width: 19px;
+    height: 17px;
+    margin-right: 4px;
+    path {
+      fill: #fff;
+    }
+  }
+  &:hover, &:focus {
+    svg {
+      path {
+        fill: $cust-green;
+      }
+    }
+  }
 }
 
 .wizard-inner {
@@ -543,6 +566,7 @@ p {
 }
 
 .after-uploading {
+  display: none;
   .small-title {
     align-items: flex-start;
     background-color: $cust-green;
@@ -564,7 +588,144 @@ p {
 
 .add-another-qual {
   text-align: center;
-  display: block;
+  display: inline-block;
   font-weight: bold;
   margin-bottom: 60px;
+}
+
+.confirm_step_btn {
+  display: block;
+  text-align: center;
+}
+
+.existing_certifications {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.certificate-item {
+  width: 33.33%;
+  display: flex;
+  padding-right: 10px;
+}
+
+.edit_custom_profile,
+.uploaded-file-container {
+  position: relative;
+}
+
+#custom_profile_avatar,
+#certification_image,
+.cover-photos-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.uploaded-file-container,
+.after-uploading,
+.added-certifications-holder {
+  // display: none;
+}
+
+.profile-upload {
+  tbody tr:nth-child(odd) {
+    background-color: transparent;
+  }
+}
+
+.edit_custom_profile {
+  input[type="file"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.remove-photo + input,
+.delete_record_chbx, 
+.remove-checkbox {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.existing_cover_photos {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image_spot, 
+.fields_cont {
+  display: flex;
+  width: 33.33%;
+}
+
+.remove-photo {
+  text-decoration: underline;
+  color: $cust-green;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.social-media-item {
+  position: relative;
+  margin-bottom: 25px;
+  input {
+    padding-left: 50px;
+  }
+}
+
+.social-icon {
+  padding: 0 5px;
+  margin: 5px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 38px;
+  border-right: 1px solid #c3c3c3;
+  img {
+    width: 23px;
+    height: 23px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.socials-holder-form {
+  margin-bottom: 40px;
+}
+
+.upload-files-holder {
+  position: relative;
+}
+
+.error-item {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.added-certifications-holder {
+  margin-top: 30px;
+}
+
+.uploaded-file.id-verification {
+  display: none;
+}
+
+.paypal-wizard {
+  padding-bottom: 20px;
+  button {
+    border-radius: 0;
+  }
 }
