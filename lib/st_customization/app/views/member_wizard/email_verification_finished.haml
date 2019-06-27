@@ -1,8 +1,8 @@
 // main block for all wizard steps
-.page-content-inner.wizard.wizard-instructor
+.page-content-inner.wizard.wizard-member
   .head-section
     %h1.head-section-title Set up your profile
-  = render partial: 'wizard_head'
+  = render partial: 'tutor_wizard/wizard_head'
 
   // verified email
   .wizard-section.verified-email
@@ -11,19 +11,15 @@
         = image_tag "custom_images/email-verified.png"
       Your email has been verified!
     .wizard-content
-      %p 
-        Congratulations Dylan! You are now a 
-        %span.bold Bizaar Instructor!
-        // TODO: Bizaar Member!
-      // for the instructor
-      %p Now it’s time to make a profile. A lot of students will look at your profile to get a better sense of you as a tutor, so we recommend that you create a profile that will gain you more students in the long run. Don’t worry though, we’re here to help guide you through the process!
-      // for the member
-      -# %p If you choose to, you can now add a profile photo and write a quick introduction to help your future Instructors and the community get to know you better. Otherwise, feel free to explore our bazaar of skills and talents!
+      %p
+        Congratulations #{PersonViewUtils.person_display_name(@current_user, @current_community)}! You are now a 
+        %span.bold Bizaar Member!
+      %p If you choose to, you can now add a profile photo and write a quick introduction to help your future Instructors and the community get to know you better. Otherwise, feel free to explore our bazaar of skills and talents!
     // .row
     //   .col-6.make-profile
     //     = link_to 'Make a kickass profile!', '#', class: 'btn btn--violet block-btn text-center'
     .row
       .col-6
-      = link_to 'Complete my profile', @next_step_path, class: 'btn btn--violet block-btn text-center'
-      // .col-6
-      //   = link_to 'no thank you!', '#', class: 'btn btn--violet-transp block-btn text-center'
+        = link_to 'Complete my profile', @next_step_path, class: 'btn btn--violet block-btn text-center'
+      .col-6
+        = link_to 'no thank you!', homepage_with_locale_path, class: 'btn btn--violet-transp block-btn text-center'

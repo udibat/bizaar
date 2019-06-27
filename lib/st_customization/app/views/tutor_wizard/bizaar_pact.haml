@@ -8,54 +8,81 @@
       .description
         %p.bold Before we move on, here's a brief community message:
         %p Without users like yourself, the Instructors and Members, Bizaar is just a fun and silly name. You are a valued content provider and deserve a pleasant and enjoyable experience while contributing to Bizaar.
-        %p With that in mind we're asking all of our users to take the Bizaar Pact. We want to provide the kind of environment that's not only dedicated to self improvement and gaining experience, but also to celebrate the obscure and often overlooked skill sets that everyone has. Bizaar is meant for everybody basically, so we ask that you agree to be respectful to all of your fellow users. 
-      %h4.section-subtitle.uppercase 
-        I agree to the 
-        = link_to 'Bizaar Community Pact', '#', class: 'link underline'
-      %ul.default-list
-        %li
-          %span.small-icon
-            %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
-              %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+        %p With that in mind we're asking all of our users to take the Bizaar Pact. We want to provide the kind of environment that's not only dedicated to self improvement and gaining experience, but also to celebrate the obscure and often overlooked skill sets that everyone has. Bizaar is meant for everybody basically, so we ask that you agree to be respectful to all of your fellow users.
+      = form_for @custom_profile, remote: true, format: :json, authenticity_token: true, html: { id: "custom_profile_form" } do |f|
+        .checkbox-item.default-checkbox
+          = check_box_tag :community_pact, '', nil, class: 'input pact-agree-input'
+          = label_tag :community_pact, '', class: 'section-subtitle uppercase label pact-label' do 
+            I agree to the 
+            = link_to 'Bizaar Community Pact', '#', class: 'link underline'
+        %ul.default-list.pact-list
+          %li
+            %span.small-icon
+              %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
 
-          I will be respectful to all other Bizaar Members and Instructor.
-        %li
-          %span.small-icon
-            %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
-              %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+            I will be respectful to all other Bizaar Members and Instructor.
+          %li
+            %span.small-icon
+              %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
 
-          I will not use Bizaar as a dating site.
-        %li
-          %span.small-icon
-            %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
-              %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+            I will not use Bizaar as a dating site.
+          %li
+            %span.small-icon
+              %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
 
-          I will be respectful of other users property.
-        %li
-          %span.small-icon
-            %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
-              %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+            I will be respectful of other users property.
+          %li
+            %span.small-icon
+              %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
 
-          I will not advertise or solicite on Bizaar.
-        %li
-          %span.small-icon
-            %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
-              %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
+            I will not advertise or solicite on Bizaar.
+          %li
+            %span.small-icon
+              %svg.svg-inline--fa.fa-check.fa-w-16{"aria-hidden" => "true", "data-icon" => "check", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z", :fill => "currentColor"}
 
-          I will not engage in criminal activity on the site, or when meeting other users for Classes.
-      %h4.section-subtitle.uppercase
-        I accept Bizaar’s 
-        = link_to 'Terms of Use', '#', class: 'link underline'
-        and 
-        = link_to 'Privacy Agreement', '#', class: 'link underline'
-      .link-holder
-        = form_for @custom_profile, remote: true, format: :json, authenticity_token: true, html: { id: "custom_profile_form" } do |f|
-          = f.hidden_field :pact_accepted, value: true
-          = f.submit 'I accept', class: 'btn btn--violet pact-submit wizard-btn'
+            I will not engage in criminal activity on the site, or when meeting other users for Classes.
+        .checkbox-item.default-checkbox
+          = check_box_tag :terms, '', nil, class: 'input pact-agree-input'
+          = label_tag :terms, '', class: 'section-subtitle uppercase label pact-label' do 
+            I accept Bizaar’s 
+            = link_to 'Terms of Use', '#', class: 'link underline'
+            and 
+            = link_to 'Privacy Agreement', '#', class: 'link underline'
+        = f.hidden_field :pact_accepted, value: true
+        = f.submit 'Continue', class: 'btn btn--violet pact-submit wizard-btn disabled'
         -# = submit_tag 'I accept', class: 'btn btn--violet pact-submit wizard-btn'
         -# = link_to "Next Step", @confirm_step_path, class: 'confirm_step_btn btn btn--violet get-badge', remote: true
-        = submit_tag 'Decline', class: 'btn btn--violet-transp pact-submit wizard-btn'
-      %span.errors
+        -# = submit_tag 'Decline', class: 'btn btn--violet-transp pact-submit wizard-btn'
+      .errors
 
 = render partial: 'remote_form_submit_handler'
 
+:javascript
+  onDocumentReady(function() {
+    function agreementChecking() {
+      var ifAllCheck = true;
+      $('#custom_profile_form .pact-agree-input').each(function(){
+        if(!$(this).prop("checked")) {
+          ifAllCheck = false;
+        };
+      });
+      if(ifAllCheck) {
+        $('.pact-submit').each(function(){
+          $(this).removeClass("disabled");
+        });
+      } else {
+        $('.pact-submit').each(function(){
+          $(this).addClass("disabled");
+        });
+      }
+    };
+    agreementChecking();
+    $('.pact-agree-input').on("change", function(e){
+      agreementChecking();
+    });
+  });

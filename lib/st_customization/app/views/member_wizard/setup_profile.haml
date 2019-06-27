@@ -1,8 +1,8 @@
 // main block for all wizard steps
-.page-content-inner.wizard.wizard-instructor
+.page-content-inner.wizard.wizard-member
   .head-section
     %h1.head-section-title Set up your profile
-  = render partial: 'wizard_head'
+  = render partial: 'tutor_wizard/wizard_head'
   .wizard-section
     .errors
     %h2.small-title.flex-block 
@@ -10,7 +10,7 @@
         = image_tag "custom_images/choose-profile-pic.png"
       Upload your profile picture
     .wizard-content
-      %p.mb-25 This will be your profile picture-and what your clientele will see, so keep that in mind when you pick your photo.
+      %p.mb-25 This will be your profile picture - and what your clientele will see, so keep that in mind when you pick your photo.
       %p.mb-25 The most important thing is to choose a photo that most resembles you that is recognizable. So pick a recent a photo of yourself as possible. Also keep in mind that the photo needs to clearly show your face, so it’s best to choose a photo where you’re not wearing sunglasses, overly large hats or anything that obstructs your face. 
       .wizard-inner
         .upload-files-holder
@@ -37,16 +37,39 @@
                           = image_tag @custom_profile.avatar.url(:thumb) if @custom_profile.avatar
                         .file-action-block
                           .file-name #{@custom_profile.avatar.original_filename}
-                          -# = link_to 'Choose another photo', '#', class: 'green link underline'
-                          = link_to 'Remove this photo', '#', class: 'green link underline remove-photo'
-        .row
-          .col-6
-            = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
+                          = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload'
+                          -# = link_to 'Remove this photo', '#', class: 'green link underline remove-photo'
+  
+    %h2.small-title.flex-block 
+      .title-image-holder
+        = image_tag "custom_images/edit.png"
+      Write something about yourself (optional)
+    .errors
+    .wizard-content
+      .wizard-inner
+        %p.mb-25 Writing a short introduction will help your clientele get to know you better. Be personable and let them know why they should take your class.
+        %p 
+          Max #{CustomProfile::MAX_DESCRIPTION_LENGTH} characters / 
+          %span.written-char 0
+        = form_for @custom_profile, remote: true, format: :json, authenticity_token: true, html: { id: "custom_profile_form" } do |f|
+          = f.text_area :description, cols: 20, rows: 10, maxlength: CustomProfile::MAX_DESCRIPTION_LENGTH
 
+    .row
+      .col-6
+        = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
+      .col-6
+        = link_to "Skip this step", tutor_wizard_skip_step_path(@member_status.signup_status), class: 'block skip-btn'
+
+= render partial: 'remote_form_submit_handler'
 = render partial: 'confirm_step_btn_js'
 
 :javascript
   onDocumentReady(function(){
+    $('.trigger_upload').on('click', function(event) {
+      event.preventDefault();
+      $('input[type="file"]').trigger('click');
+    });
+
     $('#fileupload').fileupload({
       done: function (e, data) {
         if (data.result.error === undefined) {
@@ -65,9 +88,5 @@
     if('.uploaded-file') {
       $('.uploaded-file-container.profile-upload').css('display', 'block');
     }
-    // $('.remove-photo').on('click', function(event) {
-    //   event.preventDefault();
-    //   $(this).parents('div').find('.uploaded-file').remove();
-    // });
   });
   

@@ -24,8 +24,6 @@
             - idx = 0
             = f.fields_for :cover_photos, @custom_profile.cover_photos.build do |photos_fields|
               = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][#{idx}][image]" if photos_fields.object.new_record?
-              - idx += 1
-              - existing_record_class = 'existing_photo_record' unless photos_fields.object.new_record?
             .existing_cover_photos
               = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
                 - unless photos_fields.object.new_record?
@@ -37,11 +35,13 @@
                       = photos_fields.hidden_field :id
                       = photos_fields.label :_destroy, 'Remove this photo', class: 'remove-photo'
                       = photos_fields.check_box :_destroy, {class: 'delete_record_chbx'}
-                      -# = photos_fields.label :_primary, 'Make primary photo', class: 'make-primary'
-                      -# = photos_fields.radio_button :_primary, {class: 'make_primary_radio'}
+                      = photos_fields.check_box :is_primary_photo, {class: 'set_primary_record_chbx'}
+                      .primary-holder
+                        = photos_fields.label :is_primary_photo, 'Make primary photo', class: 'remove-photo make-primary'
+                        .primary-photo Primary photo
           %table.table.table-striped.test-class-test
             %tbody.files{data: {toggle: "modal-gallery", target: "#modal-gallery"}}
-          .row
+          .row.step-buttons
             .col-6
               = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--violet-transp', remote: true
             .col-6
@@ -73,6 +73,21 @@
         $('#fileupload').trigger('submit.rails');
       });
 
+      var set_primary_field = $('<input type="checkbox">')
+      $(set_primary_field).attr('name', 'custom_profile[cover_photos_attributes][' + idx + '][is_primary_photo]')
+      $(set_primary_field).attr('id', 'custom_profile_cover_photos_attributes_' + idx + '_is_primary_photo')
+      $(set_primary_field).addClass('set_primary_record_chbx');
+      $(set_primary_field).val(1)
+      $(set_primary_field).prop('checked', item.is_primary_photo);
+      
+      var set_primary_label;
+
+      if(item.is_primary_photo === true) {
+        set_primary_label = $('<div class="primary-photo">').html('Primary photo') 
+      } else {
+        set_primary_label = $('<label class="remove-photo" for="custom_profile_cover_photos_attributes_' + idx + '_is_primary_photo">').html('Make primary photo') 
+      }
+
       var descr_cont = $('<div>', {class: 'image_descr'});
       var img_holder = $('<div>', {class: 'thumb-block'})
       var idField = id_field;
@@ -81,7 +96,7 @@
       var imageTag = $('<img>',{src: item.url});
       var imageName = $('<div>').html(item.name);
 
-      descr_cont.append(imageName, idField, destroyBtn, destroyField);
+      descr_cont.append(imageName, idField, destroyBtn, destroyField, set_primary_label, set_primary_field);
       img_holder.append(imageTag);
       img_cont.append(img_holder, descr_cont);
 
@@ -101,9 +116,12 @@
       $('#fileupload').trigger('submit.rails');
     });
 
+    $('#fileupload').on('click', '.set_primary_record_chbx', function(e){
+      $('.set_primary_record_chbx:not(#' + e.target.id + ')').val(0);
+      $('#fileupload').trigger('submit.rails');
+    });
+
     $("#fileupload").on("ajax:success", function(event, data){
-            console.log(data);
-            
             build_photo_spots(data.images);
           }
         ).on("ajax:error", function(event, data){
