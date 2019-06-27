@@ -25,3 +25,37 @@
           %span.text Saturdays
           %span.text 2pm - 3pm
       = link_to 'Book immediately', listing_path(listing.url), class: 'btn btn--violet action-btn'
+
+
+
+-# Listing author details
+.home-fluid-thumbnail-grid-author
+  .listing-details.ooo
+    .fluid-thumbnail-grid-image-title{:class => ""}
+      = listing.title
+    .author-item.author-item--price
+      .fluid-thumbnail-grid-image-price-container{:class => ""}
+        - if listing.price
+          %span.fluid-thumbnail-grid-image-price
+            From
+            = MoneyViewUtils.to_humanized(listing.price)
+            - price_unit = price_quantity_slash_unit(listing)
+          - if !price_unit.blank?
+            - price_text = " "
+            %span.fluid-thumbnail-grid-image-quantity{:title => price_text}
+              = price_text
+              a class
+        -# - else
+        -#   %span.fluid-thumbnail-grid-image-type{:class => ""}
+        -#     = shape_name(listing)
+      .name
+        - name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type)
+        = link_to name, person_path(username: listing.author.username), class: 'name-link'
+    .author-item
+      -# rating stars
+      - if listing[:rating][:count].positive?
+        %span.rating-container
+          %span.stars{ data: { rating: listing[:rating][:avg] } }
+          -#%span.count= "(#{listing[:rating][:count]})"
+        .reviews
+          = link_to "#{listing[:rating][:count]} reviews", listing_path(listing.url), class: 'reviews-link'

@@ -16,12 +16,20 @@
 }
 
 .follow-button {
-  @include grey-button;
+  @include button($cust-violet);
   width: 100%;
 
   &.unfollow:hover:not(.button-disable-hover) {
-    background: $red;
-    color: white;
+    background: $white;
+    color: $cust-violet;
+  }
+
+  .content {
+    color: $white;
+
+    &.hover-content {
+      color: $cust-violet;
+    }
   }
 
 }
