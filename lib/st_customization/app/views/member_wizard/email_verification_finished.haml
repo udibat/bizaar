@@ -2,7 +2,7 @@
 .page-content-inner.wizard.wizard-member
   .head-section
     %h1.head-section-title Set up your profile
-  = render partial: 'wizard_head'
+  = render partial: 'tutor_wizard/wizard_head'
 
   // verified email
   .wizard-section.verified-email
@@ -11,8 +11,8 @@
         = image_tag "custom_images/email-verified.png"
       Your email has been verified!
     .wizard-content
-      %p 
-        Congratulations Dylan! You are now a 
+      %p
+        Congratulations #{PersonViewUtils.person_display_name(@current_user, @current_community)}! You are now a 
         %span.bold Bizaar Member!
       %p If you choose to, you can now add a profile photo and write a quick introduction to help your future Instructors and the community get to know you better. Otherwise, feel free to explore our bazaar of skills and talents!
     // .row
