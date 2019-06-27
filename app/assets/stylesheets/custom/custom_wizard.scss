@@ -670,7 +670,15 @@ p {
 .image_spot, 
 .fields_cont {
   display: flex;
-  width: 33.33%;
+  width: 100%;
+  margin-bottom: 20px;
+  @include media(large-mobile) {
+    width: 50%;
+
+  } 
+  @include media(tablet) {
+    width: 33.33%;
+  }
 }
 
 .remove-photo {
@@ -813,4 +821,23 @@ p {
 
 .image_descr {
   position: relative;
+}
+
+.set_primary_record_chbx {
+  & + .primary-holder {
+    .primary-photo {
+      display: none;
+    }
+    .make-primary {
+      display: block;
+    }
+  }
+  &:checked + .primary-holder {
+    .primary-photo {
+      display: block;
+    }
+    .make-primary {
+      display: none;
+    }
+  }
 }
