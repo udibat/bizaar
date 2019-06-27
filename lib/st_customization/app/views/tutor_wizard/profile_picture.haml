@@ -10,7 +10,7 @@
         = image_tag "custom_images/choose-profile-pic.png"
       Upload your profile picture
     .wizard-content
-      %p.mb-25 This will be your profile picture-and what your clientele will see, so keep that in mind when you pick your photo.
+      %p.mb-25 This will be your profile picture - and what your clientele will see, so keep that in mind when you pick your photo.
       %p.mb-25 The most important thing is to choose a photo that most resembles you that is recognizable. So pick a recent a photo of yourself as possible. Also keep in mind that the photo needs to clearly show your face, so it’s best to choose a photo where you’re not wearing sunglasses, overly large hats or anything that obstructs your face. 
       .wizard-inner
         .upload-files-holder
@@ -37,8 +37,8 @@
                           = image_tag @custom_profile.avatar.url(:thumb) if @custom_profile.avatar
                         .file-action-block
                           .file-name #{@custom_profile.avatar.original_filename}
-                          -# = link_to 'Choose another photo', '#', class: 'green link underline'
-                          = link_to 'Remove this photo', '#', class: 'green link underline remove-photo'
+                          = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload'
+                          -# = link_to 'Remove this photo', '#', class: 'green link underline remove-photo'
         .row
           .col-6
             = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
@@ -47,6 +47,11 @@
 
 :javascript
   onDocumentReady(function(){
+    $('.trigger_upload').on('click', function(event) {
+      event.preventDefault();
+      $('input[type="file"]').trigger('click');
+    });
+
     $('#fileupload').fileupload({
       done: function (e, data) {
         if (data.result.error === undefined) {
@@ -65,9 +70,5 @@
     if('.uploaded-file') {
       $('.uploaded-file-container.profile-upload').css('display', 'block');
     }
-    // $('.remove-photo').on('click', function(event) {
-    //   event.preventDefault();
-    //   $(this).parents('div').find('.uploaded-file').remove();
-    // });
   });
   

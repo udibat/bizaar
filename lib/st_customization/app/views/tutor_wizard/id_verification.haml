@@ -31,6 +31,13 @@
               = link_to ' Or take a look at our Terms of Agreement', '#', class: 'green underline link'
           = form_for @custom_profile, url: profile_upload_id_verifications_path(@custom_profile), remote: true, html: { multipart: true, id: "fileupload" } do |f|
             // = f.text_area :description, cols: 20, rows: 10, maxlength: CustomProfile::MAX_DESCRIPTION_LENGTH
+            .row
+              .col-5
+                = link_to '#', class: 'btn btn--black upload-link trigger_upload' do
+                  .small-icon
+                    %svg.svg-inline--fa.fa-file-upload.fa-w-12{"aria-hidden" => "true", "data-icon" => "file-upload", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 384 512", :xmlns => "http://www.w3.org/2000/svg"}
+                      %path{:d => "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z", :fill => "currentColor"}
+                  Choose File
             - idx = 0
             = f.fields_for :id_verifications, @custom_profile.id_verifications.build do |photos_fields|
               = photos_fields.file_field :image, multiple: false, name: "custom_profile[id_verifications_attributes][#{idx}][image]" if photos_fields.object.new_record?
@@ -45,14 +52,7 @@
                       = photos_fields.hidden_field :id
                       = photos_fields.label :_destroy, 'Remove this photo', class: 'remove-photo'
                       = photos_fields.check_box :_destroy, {class: 'delete_record_chbx'}
-            .row
-              .col-5
-                = link_to '#', class: 'btn btn--black upload-link trigger_upload' do
-                  .small-icon
-                    %svg.svg-inline--fa.fa-file-upload.fa-w-12{"aria-hidden" => "true", "data-icon" => "file-upload", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 384 512", :xmlns => "http://www.w3.org/2000/svg"}
-                      %path{:d => "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z", :fill => "currentColor"}
-                  Choose File
-          .row
+          .row.step-buttons
             .col-6
               = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--violet-transp', remote: true
             .col-6
