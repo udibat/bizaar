@@ -60,7 +60,7 @@ Rails.application.routes.draw do
   get '/member_wizard/cover_photos' => 'member_wizard#cover_photos', as: :member_wizard_cover_photos
   get '/member_wizard/social_media' => 'member_wizard#social_media', as: :member_wizard_social_media
   get '/member_wizard/id_verification' => 'member_wizard#id_verification', as: :member_wizard_id_verification
-  get '/member_wizard/payment_information' => 'member_wizard#index', as: :member_wizard_index
+  get '/member_wizard/payment_information' => 'member_wizard#payment_information', as: :member_wizard_payment_information
   get '/member_wizard/bizaar_pact' => 'member_wizard#bizaar_pact', as: :member_wizard_bizaar_pact
   get '/member_wizard/finished' => 'member_wizard#finished', as: :member_wizard_finished
 

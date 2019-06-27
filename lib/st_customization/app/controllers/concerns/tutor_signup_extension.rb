@@ -19,9 +19,9 @@ module TutorSignupExtension
       @custom_profile = @service.person.custom_profile
       @custom_profile.certifications.build
       if @service.person.is_tutor?
-        render 'people/show'
-      else
         render 'people/show_tutor'
+      else
+        render 'people/show'
       end
       
     end
