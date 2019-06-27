@@ -814,3 +814,22 @@ p {
 .image_descr {
   position: relative;
 }
+
+.set_primary_record_chbx {
+  & + .primary-holder {
+    .primary-photo {
+      display: none;
+    }
+    .make-primary {
+      display: block;
+    }
+  }
+  &:checked + .primary-holder {
+    .primary-photo {
+      display: block;
+    }
+    .make-primary {
+      display: none;
+    }
+  }
+}
