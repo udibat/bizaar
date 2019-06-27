@@ -670,7 +670,15 @@ p {
 .image_spot, 
 .fields_cont {
   display: flex;
-  width: 33.33%;
+  width: 100%;
+  margin-bottom: 20px;
+  @include media(large-mobile) {
+    width: 50%;
+
+  } 
+  @include media(tablet) {
+    width: 33.33%;
+  }
 }
 
 .remove-photo {
