@@ -1,6 +1,7 @@
 @import 'mixins/all';
 
 .people_new,
+.people_new_member,
 .community_memberships_confirmation_pending,
 .tutor_wizard_email_verification_finished,
 body[class*="wizard"] {
@@ -49,7 +50,8 @@ body[class*="wizard"] {
 
 // sighup page
 
-.people_new {
+.people_new,
+.people_new_member {
   background-color: $cust-violet;
   a.fb-connect,
   a.google-login-button {
@@ -650,10 +652,14 @@ p {
 
 .remove-photo + input,
 .delete_record_chbx, 
-.remove-checkbox {
+.remove-checkbox,
+.set_primary_record_chbx {
   width: 0;
   height: 0;
   opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .existing_cover_photos {
@@ -672,6 +678,26 @@ p {
   color: $cust-green;
   font-weight: normal;
   cursor: pointer;
+  line-height: 1;
+}
+
+.primary-photo {
+  position: relative;
+  padding-left: 17px;
+  line-height: 1;
+  margin-top: 0.75em;
+  margin-bottom: 0.1875em;
+  font-weight: 600;
+  &::before {
+    content: '';
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url(image-path('custom_images/check-circle-regular.svg'));
+    background-size: cover;
+  }
 }
 
 .social-media-item {
@@ -755,4 +781,36 @@ p {
 .btn-hide,
 .next-btn {
   display: none;
+}
+
+.checkbox-item .label.pact-label {
+  text-align: left;
+}
+
+.default-checkbox input[type="checkbox"] + .label.pact-label {
+  padding-left: 30px;
+  &::before {
+    top: 3px;
+  }
+  &::after {
+    top: 5px;
+  }
+}
+
+.pact-list {
+  padding-left: 30px;
+}
+
+.pact-submit {
+  width: 290px;
+  display: block;
+  margin: 30px auto 0;
+}
+
+.step-buttons {
+  margin-top: 30px;
+}
+
+.image_descr {
+  position: relative;
 }

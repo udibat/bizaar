@@ -44,6 +44,7 @@ class CustomProfilesController < ApplicationController
       render json: {images: @custom_profile.cover_photos.map{|ph| 
           {
             id: ph.id,
+            is_primary_photo: ph.is_primary_photo,
             url: ph.image.url(:thumb),
             name: ph.image.try(:original_filename),
           } 
@@ -55,7 +56,13 @@ class CustomProfilesController < ApplicationController
 
   def upload_id_verifications
     if @custom_profile.update_attributes(custom_profile_update_params)
-      render json: {image_urls: @custom_profile.id_verifications.map{|ph| ph.image.url(:thumb) }}
+      render json: {images: @custom_profile.id_verifications.map{|ph| 
+          {
+            id: ph.id,
+            url: ph.image.url(:thumb),
+            name: ph.image.try(:original_filename),
+          } 
+        }}
     else
       render json: {error: @custom_profile.errors.first.to_s}
     end
@@ -70,7 +77,7 @@ private
   def custom_profile_update_params
     if params[:custom_profile][:cover_photos_attributes].present?
       params[:custom_profile][:cover_photos_attributes].keys.each{|k|
-        params[:custom_profile][:cover_photos_attributes][k.to_s].permit(:id, :_destroy, :image)
+        params[:custom_profile][:cover_photos_attributes][k.to_s].permit(:id, :_destroy, :image, :is_primary_photo)
       }
     end
 
