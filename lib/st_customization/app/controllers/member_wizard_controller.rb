@@ -1,32 +1,37 @@
 # ToDo: Refcator to avoid member_*/tutor_* copy-paste
-class MemberWizardController < PaymentSettingsController
+class MemberWizardController < ApplicationController
+   #< PaymentSettingsController
   skip_before_action :ensure_consent_given
 
   # this will be inherited from parent class
-  # before_action do |controller|
-  #   controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_this_page")
-  # end
+  before_action do |controller|
+    controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_this_page")
+  end
 
-  skip_before_action :ensure_payments_enabled, except: [:index, :create, :update]
-  skip_before_action :warn_about_missing_payment_info, except: [:index, :update]
-  skip_before_action :load_stripe_account, except: [:index, :create, :update]
+  # skip_before_action :ensure_payments_enabled, except: [:index, :create, :update]
+  # skip_before_action :warn_about_missing_payment_info, except: [:index, :update]
+  # skip_before_action :load_stripe_account, except: [:index, :create, :update]
 
   # include AllowTutorOnly
 
   before_action :ensure_correct_step, only: [
     :continue, 
-    :registered_oauth, :email_verification_finished, :qualifications,
-    :profile_picture, :describe_yourself, :cover_photos,
-    :social_media, :id_verification, :index,
+    :registered_oauth, :email_verification_finished,
+    # :qualifications,
+    :setup_profile,
+    # :describe_yourself, :cover_photos,
+    # :social_media, :id_verification, 
+    :payment_information,
     :bizaar_pact, :finished
   ]
   # before_action :set_next_step_path
   before_action :load_profile, :load_signup_status, only: [
     # :qualifications,
-    :setup_profile, 
+    :setup_profile,
+    :payment_information,
     # :describe_yourself, :cover_photos,
     # :social_media, :id_verification, 
-    :index, :update, :create, 
+    # :index, :update, :create, 
     :bizaar_pact
   ]
 
@@ -73,7 +78,7 @@ class MemberWizardController < PaymentSettingsController
   def email_verification_finished
     # this page should be displayed only once
     member_status = @current_user.member_signup_status
-    member_status.signup_status = :profile_picture
+    member_status.signup_status = :setup_profile
     member_status.save!
   end
 
@@ -81,32 +86,9 @@ class MemberWizardController < PaymentSettingsController
 
   end
 
-  def qualifications
-    @existing_certifications = CertificationWizardDecorator.decorate_collection(
-      @custom_profile.certifications).to_a
-    @new_certification = @custom_profile.certifications.build
+  def payment_information
+    # render 'payment_information', locals: {index_view_locals: index_view_locals}
   end
-
-  def describe_yourself
-
-  end
-
-  def cover_photos
-    @custom_profile.cover_photos.build
-  end
-
-  def social_media
-
-  end
-
-  def id_verification
-    @custom_profile.id_verifications.build
-  end
-
-  # use inherited `index` action from payments controller
-  # def payment_information
-  #   render 'payment_information', locals: {index_view_locals: index_view_locals}
-  # end
 
   def bizaar_pact
 

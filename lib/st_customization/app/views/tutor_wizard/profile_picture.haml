@@ -34,7 +34,7 @@
                     %td
                       .uploaded-file
                         .thumb-block
-                          = image_tag @custom_profile.avatar.url(:thumb) if @custom_profile.avatar
+                          = image_tag @custom_profile.avatar.url(:thumb) if @custom_profile.avatar.present?
                         .file-action-block
                           .file-name #{@custom_profile.avatar.original_filename}
                           = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload'
