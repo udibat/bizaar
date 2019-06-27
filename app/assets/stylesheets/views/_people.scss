@@ -23,12 +23,14 @@ $profile-pic-gutter-mobile: lines(0.5);
 
 .people-header {
   padding-bottom: lines(0.25);
-  border-bottom: 1px solid $border;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0;
 }
 
 .people-load-more-listings-container {
   clear: both;
-  margin-bottom: lines(1);
+  margin-bottom: 7rem;
 }
 
 .people-show-closed-link {
@@ -57,7 +59,7 @@ $profile-pic-gutter-mobile: lines(0.5);
 }
 
 .profile-edit-link, .profile-contact-link {
-  @include grey-button;
+  @include button($cust-violet);
   width: 100%;
 }
 
@@ -82,12 +84,12 @@ $profile-pic-gutter-mobile: lines(0.5);
   @include create-fluid-thumbnail-grid(people, 1, 1, 2, 3, 2, 2, 3, 3);
 }
 
-.people-listings {
-  &.fluid-thumbnail-grid-image-overlay,
-  &.fluid-thumbnail-grid-image-image {
-    @include border-radius($default-border-radius);
-  }
-}
+//.people-listings {
+//  &.fluid-thumbnail-grid-image-overlay,
+//  &.fluid-thumbnail-grid-image-image {
+//    @include border-radius($default-border-radius);
+//  }
+//}
 
 #profile-followed-people-list {
   .fluid-thumbnail-grid-image-image-container {
@@ -98,6 +100,15 @@ $profile-pic-gutter-mobile: lines(0.5);
 .people-custom-fields-title {
   font-weight: bold;
   margin-right: 5px;
+}
+
+.profile-container {
+  max-width: 60.375rem;
+  margin: 0 auto;
+  top: -5.4375rem;
+  position: relative;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
 }
 
 .profile-about-me {
@@ -116,30 +127,72 @@ $profile-pic-gutter-mobile: lines(0.5);
 .profile-data-holder {
   display: flex;
   max-width: 48.8125rem;
-  margin: 0 auto;
+  margin: 0 auto 22px;
   background: white;
   padding-bottom: 3.125rem;
+  flex-wrap: wrap;
+
+  @include media(tablet) {
+    flex-wrap: nowrap;
+  }
 }
 
 .profile-data-ava {
   display: flex;
   flex-direction: column;
-  flex: 0 0 31%;
-  max-width: 31%;
+  flex: 0 0 100%;
+  max-width: 100%;
   padding-right: 1.25rem;
+  order: 2;
+
+  @include media(tablet) {
+    order: 1;
+    flex: 0 0 31%;
+    max-width: 31%;
+    //padding: 0.625rem;
+  }
+}
+
+.profile-cover-photo-holder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 7rem;
+}
+
+.profile-cover-photo-item {
+  flex: 0 0 100%;
+  max-width: 100%;
+
+  @include media(large-mobile){
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  @include media(small-tablet){
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+  }
 }
 
 .profile-data-info {
-  flex: 0 0 calc(69% - 1.25rem);
-  max-width: calc(69% - 1.25rem);
-  padding-top: 1.75rem;
-  padding-top: 1.75rem;
-  padding-right: 1.5625rem;
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 2.1875rem 0.625rem 0 2.0625rem;
+
+  @include media(tablet) {
+    flex: 0 0 calc(69% - 1.25rem);
+    max-width: calc(69% - 1.25rem);
+    padding-left: 0;
+    padding-top: 1.75rem;
+    padding-right: 1.5625rem;
+    order: 2;
+  }
 }
 
 .profile-title {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 6px;
 }
 
@@ -156,7 +209,11 @@ $profile-pic-gutter-mobile: lines(0.5);
 }
 
 .people-progress-holder {
-  padding: 0.3125rem 1.5rem;
+  padding: 1.875rem 1.875rem 0 2.1875rem;
+
+  @include media(tablet) {
+    padding: 0.3125rem 1.5rem;
+  }
 }
 
 .people-progress {
@@ -169,7 +226,7 @@ $profile-pic-gutter-mobile: lines(0.5);
   font-weight: 600;
   color: $cust-green;
   font-size: 0.9375rem;
-  padding-left: 1.625rem;
+  padding-left: 0.5rem;
 }
 
 .people-progress-title {

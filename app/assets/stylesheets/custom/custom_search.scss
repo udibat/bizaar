@@ -76,12 +76,13 @@
       width: 100%;
     }
   }
-  .fluid-thumbnail-grid-image-image-container {
-    padding-bottom: 378px;
-    &:hover, &:focus {
-      .fluid-thumbnail-grid-listing-schedule {
-        display: block;
-      }
+}
+
+.fluid-thumbnail-grid-image-image-container {
+  padding-bottom: 378px;
+  &:hover, &:focus {
+    .fluid-thumbnail-grid-listing-schedule {
+      display: block;
     }
   }
 }
@@ -122,6 +123,10 @@
     color: $cust-violet;
     font-weight: bold;
     font-family: 'Sintony', sans-serif;
+  }
+
+  .people_show & {
+    background: $white;
   }
 }
 

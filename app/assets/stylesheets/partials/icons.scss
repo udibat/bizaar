@@ -1,0 +1,38 @@
+.icon {
+  background-image: image_url('icons/icons-sprite.png');
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+}
+
+.icon-verified {
+  background-position: 0 0;
+}
+
+.icon-competitor {
+  background-position: 0px -20px;
+  height: 19px;
+}
+
+.icon-soc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.icon-faceb {
+  background-position: -30px 0px;
+}
+
+.icon-youtube {
+  background-position: -60px 0px;
+}
+
+.icon-twit {
+  background-position: -93px 0px;
+}
+.icon-google {
+  background-position: -123px 0px;
+}

@@ -72,6 +72,7 @@ body {
 
   .people_show & {
     background: $medium-gray;
+    padding-top: 0;
   }
 
 }
@@ -319,8 +320,10 @@ ul {
     top: em(2);
   }
   .text-part {
-    padding-left: em(23);
     min-height: em(30);
+    color: $cust-violet;
+    text-decoration: underline;
+    cursor: pointer;
   }
 }
 
@@ -422,7 +425,7 @@ label.radiobutton {
 }
 
 button, .button {
-  @include button($link);
+  @include button($cust-violet);
   padding-top: lines(0.375);
   padding-bottom: lines(0.375);
   height: auto;
@@ -1936,6 +1939,10 @@ $network-green: #00a26c;
   position: relative;
   margin-left: auto;
   margin-right: auto;
+
+  .people_show & {
+    display: none;
+  }
 }
 
 figure.fluidratio {
@@ -2239,4 +2246,27 @@ figure.fluidratio {
 
 .stars_for_raty {
   display: none;
+}
+
+
+// social list
+
+.soc-list {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.soc-item {
+  flex: 0 0 30px;
+  max-width: 30px;
+  position: relative;
+
+  & ~ .soc-item {
+    margin-left: 0.5rem;
+  }
+}
+
+.soc-link {
+  opacity: 0;
 }

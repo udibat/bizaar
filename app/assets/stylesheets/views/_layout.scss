@@ -16,6 +16,10 @@
 
   .people_show & {
     background: $medium-gray;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    overflow: hidden;
   }
 }
 

@@ -2386,6 +2386,42 @@ en:
       show_all_reviews: "Show all reviews"
       admin_actions: "Admin actions"
       post_listing_as: "Post listing as"
+    show_tutor:
+      contact: "Contact %{person}"
+      about_me: "About me:"
+      add_description: "Share something about yourself"
+      add_location: "Add location"
+      add_phone_number: "Add phone number"
+      address: "Location:"
+      as_expected: "As expected"
+      edit_profile_info: "Edit profile"
+      exceeded_expectations: "Exceeded expectations"
+      positive: positive
+      hide_description: "Show less"
+      less_than_expected: "Worse than expected"
+      phone_number: "Phone number:"
+      show_all_feedback: "Show all feedback"
+      show_all_testimonials: "Show all feedback"
+      show_full_description: "Show more"
+      slightly_better_than_expected: "Exceeded expectations"
+      slightly_less_than_expected: "Worse than expected"
+      what_are_these: "What are these?"
+      review: "received review"
+      reviews: "received reviews"
+      listing: listing
+      listings: listings
+      open_listing: "open listing"
+      open_listings: "open listings"
+      no_listings: "No listings"
+      no_open_listings: "No open listings"
+      no_reviews: "No reviews"
+      show_all_listings: "Show all listings"
+      show_all_open_listings: "Show all open listings"
+      show_all_reviews: "Show all reviews"
+      admin_actions: "Admin actions"
+      post_listing_as: "Post listing as"
+      open_classes: '<Tutors> Classes'
+      cover_photos_title: 'Cover Photos'
     followed_people:
       you_follow_plural: "You follow %{count} people"
       you_follow_singular: "You follow %{count} person"

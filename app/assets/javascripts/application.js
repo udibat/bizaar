@@ -104,5 +104,6 @@
 //= require typewriter
 //= require custom
 //= require jquery.raty.min
+//= require lightslider
 //= require st_customization/st_customization
 //= require_self
