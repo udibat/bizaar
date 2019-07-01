@@ -5,21 +5,21 @@
       = render :partial => "layouts/grid_item_listing_image", :locals => {:listing => listing, :modifier_class => ""}
 
       -# Listing author details
-      .home-fluid-thumbnail-grid-author
-        .home-fluid-thumbnail-grid-author-avatar
-          = link_to(person_path(username: listing.author.username), class: 'author-avatar-link') do
-            = image_tag(listing.author.avatar.thumb || missing_avatar(:thumb), :class => "home-fluid-thumbnail-grid-author-avatar-image")
-
-          - if listing.author.mark == 'competitor'
-            .competitor.small-block
-              .image-block
-                = image_tag 'homepage/medal.png', class: 'image'
-              .text Competitor
-          - elsif listing.author.mark == 'certified_instructor'
-            .certified.small-block
-              .image-block
-                = image_tag 'homepage/certificate.png', class: 'image'
-              .text Certified Instructor
+      -#.home-fluid-thumbnail-grid-author
+      -#  .home-fluid-thumbnail-grid-author-avatar
+      -#    = link_to(person_path(username: listing.author.username), class: 'author-avatar-link') do
+      -#      = image_tag(listing.author.avatar.thumb || missing_avatar(:thumb), :class => "home-fluid-thumbnail-grid-author-avatar-image")
+      -#
+      -#    - if listing.author.mark == 'competitor'
+      -#      .competitor.small-block
+      -#        .image-block
+      -#          = image_tag 'homepage/medal.png', class: 'image'
+      -#        .text Competitor
+      -#    - elsif listing.author.mark == 'certified_instructor'
+      -#      .certified.small-block
+      -#        .image-block
+      -#          = image_tag 'homepage/certificate.png', class: 'image'
+      -#        .text Certified Instructor
         -# - distance = Maybe(listing.distance).or_else(nil)
         -# - name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type)
         -# - if(!show_distance || distance.blank?)
@@ -33,33 +33,33 @@
         -#     - dist_string = "#{dist} #{listing.distance_unit}"
         -#     .home-fluid-thumbnail-grid-details-distance{title: dist_string}
         -#       = dist_string
-        .listing-details
-          .fluid-thumbnail-grid-image-title{:class => ""}
-            = listing.title
-          .author-item.author-item--price
-            .fluid-thumbnail-grid-image-price-container{:class => ""}
-              - if listing.price
-                %span.fluid-thumbnail-grid-image-price 
-                  From 
-                  = MoneyViewUtils.to_humanized(listing.price)
-                  - price_unit = price_quantity_slash_unit(listing)
-                - if !price_unit.blank?
-                  - price_text = " "
-                  %span.fluid-thumbnail-grid-image-quantity{:title => price_text}
-                    = price_text
-                    a class
-              -# - else
-              -#   %span.fluid-thumbnail-grid-image-type{:class => ""}
-              -#     = shape_name(listing)
-            .name
-              - name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type)
-              = link_to name, person_path(username: listing.author.username), class: 'name-link'
-          .author-item
-            -# rating stars
-            - if listing[:rating][:count].positive?
-              %span.rating-container
-                %span.stars{ data: { rating: listing[:rating][:avg] } }
-                -#%span.count= "(#{listing[:rating][:count]})"
-              .reviews
-                = link_to "#{listing[:rating][:count]} reviews", listing_path(listing.url), class: 'reviews-link'
+        -#.listing-details.ooo
+        -#  .fluid-thumbnail-grid-image-title{:class => ""}
+        -#    = listing.title
+        -#  .author-item.author-item--price
+        -#    .fluid-thumbnail-grid-image-price-container{:class => ""}
+        -#      - if listing.price
+        -#        %span.fluid-thumbnail-grid-image-price
+        -#          From
+        -#          = MoneyViewUtils.to_humanized(listing.price)
+        -#          - price_unit = price_quantity_slash_unit(listing)
+        -#        - if !price_unit.blank?
+        -#          - price_text = " "
+        -#          %span.fluid-thumbnail-grid-image-quantity{:title => price_text}
+        -#            = price_text
+        -#            a class
+        -#      -# - else
+        -#      -#   %span.fluid-thumbnail-grid-image-type{:class => ""}
+        -#      -#     = shape_name(listing)
+        -#    .name
+        -#      - name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type)
+        -#      = link_to name, person_path(username: listing.author.username), class: 'name-link'
+        -#  .author-item
+        -#    -# rating stars
+        -#    - if listing[:rating][:count].positive?
+        -#      %span.rating-container
+        -#        %span.stars{ data: { rating: listing[:rating][:avg] } }
+        -#        -#%span.count= "(#{listing[:rating][:count]})"
+        -#      .reviews
+        -#        = link_to "#{listing[:rating][:count]} reviews", listing_path(listing.url), class: 'reviews-link'
 

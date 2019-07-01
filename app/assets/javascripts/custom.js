@@ -216,3 +216,15 @@ function clickOutside(element) {
     }
   });
 }
+
+$(function() {
+
+    $(".light-slider").lightSlider({
+        item: 1,
+        loop: true,
+        pager: false,
+        enableDrag: false,
+    });
+
+
+});

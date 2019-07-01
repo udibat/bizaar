@@ -47,8 +47,10 @@ $emphasis:    hsl($primary-hue, 0%, 9%);
 $link:         #4a90e2;
 $link2:        #2ab865;
 
-$slogancolor:      #ffffff;
-$descriptioncolor: #ffffff;
+$white:            #ffffff;
+
+$slogancolor:      $white;
+$descriptioncolor: $white;
 
 $success-green: #19b400;
 
@@ -79,3 +81,4 @@ $cust-green: #8ccc8e;
 $cust-violet: #5f499e;
 $cust-text: #232c33;
 $cust-light-gray: #E4EAE3;
+$medium-gray: #f4f6f3;
