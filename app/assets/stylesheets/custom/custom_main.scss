@@ -655,3 +655,48 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   display: block;
   text-align: center;
 }
+
+// settings
+
+[class*="settings_"] {
+  .marketplace-lander .coverimage-fade,
+  .page-content {
+    background-color: #f4f6f3;
+    padding-top: 0;
+    & > .wrapper {
+      box-shadow: 0 0 25px rgba(53,152,219,0.1);
+    }
+  }
+  .title-header-wrapper,
+  .page-content > .wrapper {
+    max-width: 940px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .left-navi {
+    margin-top: 0;
+    & a.selected::after {
+      display: none;
+    }
+  }
+  .left-navi-section {
+    margin-top: 0;
+    padding: 25px 15px 25px 0;
+  }
+  .left-navi-link {
+    line-height: 1;
+    min-height: 1px;
+    padding: 16px 0;
+    @include sintony;
+    font-weight: bold;
+    font-size: 15px;
+    .left-navi-link-icon {
+      display: none;
+    }
+  }
+  .left-navi-link-text {
+    padding: 0;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+}

@@ -1678,7 +1678,7 @@ en:
       learn_more: "Learn more"
     no_tribe:
       inbox: Inbox
-      settings: Settings
+      settings: Account Settings
       feedback: "Contact the %{service_name} team"
     application:
       join_this_community: "Join marketplace"
