@@ -284,10 +284,8 @@ body[class*="wizard"] {
 .wizard-head {
   background-color: #fff;
   max-width: 940px;
-  width: 100%;
   margin: 0 auto;
   border-bottom: 1px solid #dfdfdf;
-  padding: 22px 30px;
   margin-top: -32px;
   overflow: auto;
 }
@@ -295,7 +293,8 @@ body[class*="wizard"] {
 .step-list {
   display: flex;
   justify-content: space-between;
-  width: 880px;
+  width: 940px;
+  padding: 22px 30px;
 }
 
 .step-item {
@@ -513,6 +512,7 @@ p {
   height: 60px;
   margin-right: 10px;
   overflow: hidden;
+  flex-shrink: 0;
   .image, img {
     display: block;
     width: 100%;
@@ -672,6 +672,7 @@ p {
   display: flex;
   width: 100%;
   margin-bottom: 20px;
+  padding-right: 10px;
   @include media(large-mobile) {
     width: 50%;
 
@@ -839,5 +840,25 @@ p {
     .make-primary {
       display: none;
     }
+  }
+}
+
+.certificate-description, 
+.image_descr,
+.file-action-block {
+  width: calc(100% - 70px);
+}
+
+.file-name,
+.image_descr div {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.uploaded-file-container > .uploaded-file {
+  width: 100%;
+  @include media(small-tablet) {
+    width: 33.33%;
   }
 }
