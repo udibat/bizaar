@@ -2,8 +2,20 @@
   - is_homepage = params[:controller] == "homepage" && params[:action] == "index"
   - hidden_slogan = !@current_community.show_slogan? ? "hidden-title-part" : ""
   - hidden_description = !@current_community.show_description? ? "hidden-title-part" : ""
-  %h1.marketplace-lander-content-title.cursor{class: hidden_slogan}
-  %p.marketplace-lander-content-description{class: hidden_description}
+  %h1.marketplace-lander-content-title.cursor
+    Learn
+    %span.typewrite.semultaniously{"data-period" => "2000", "data-type" => "[ \"to play guitar\", \"to do smth\"]"}
+      %span.wrap
+
+  %h2.marketplace-lander-content-title.cursor
+    Teach
+    %span.typewrite.semultaniously{"data-period" => "2000", "data-type" => "[ \"fishing\", \"painting\"]"}
+      %span.wrap
+
+  %p.marketplace-lander-content-description.cursor{class: hidden_description}
+    %span.typewrite{"data-period" => "2000", "data-type" => "[ \"#{community_description}\" ]"}
+      %span.wrap
+
 
 .home-tutors
   .container

@@ -135,26 +135,24 @@ body {
 
 .output {
   .cursor::after {
-    content:'';
-    display:inline-block;
-    margin-left:3px;
-    background-color:white;
-    animation-name:blink;
-    animation-duration:0.5s;
+    content: '';
+    display: inline-block;
+    margin-left: 3px;
+    background-color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
     animation-iteration-count: infinite;
   }
 
-  h1.cursor::after {
-    height: 33px;
-    width: 13px;
-    @include media(mid-desktop) {
-      height: 51px;
-    }
+  .marketplace-lander-content-title.cursor::after {
+    height: 0.8em;
+    width: 6px;
   }
 
-  p.cursor::after {
-    height: 16px;
-    width: 6px;
+  .marketplace-lander-content-description.cursor::after {
+    // height: 16px;
+    height: 0.8em;
+    width: 3px;
   }
 }
 

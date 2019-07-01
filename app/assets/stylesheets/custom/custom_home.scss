@@ -8,21 +8,18 @@
   background-position: center -3px;
   .marketplace-lander-content-title {
     padding: 0;
-    min-height: 85px;
-    max-width: 315px;
+    // min-height: 85px;
+    // max-width: 315px;
     font-size: 35px;
     line-height: 1.2;
     margin-bottom: 10px;
     @include media(mid-desktop) {
       font-size: 55px;
-      width: 490px;
       max-width: 100%;
-      min-height: 139px;
     }
   }
   .marketplace-lander-content-description {
     margin: 0;
-    min-height: 58px;
     font-size: 18px;
     font-family: 'Sintony', sans-serif;
     width: 100%;
@@ -33,6 +30,19 @@
       min-height: 25px;
     }
   }
+}
+
+.marketplace-lander-content-title {
+  .typewrite > .wrap {
+    color: $cust-green;
+  }
+}
+
+.marketplace-lander-content-description {
+  .typewrite > .wrap {
+    color: #fff;
+  }
+
 }
 
 .output {
