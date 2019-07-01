@@ -2415,6 +2415,7 @@ en:
       no_listings: "No listings"
       no_open_listings: "No open listings"
       no_reviews: "No reviews"
+      has_reviews: "Reviews"
       show_all_listings: "Show all listings"
       show_all_open_listings: "Show all open listings"
       show_all_reviews: "Show all reviews"

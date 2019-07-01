@@ -509,10 +509,10 @@ development:
   # Skip email confirmation
   skip_email_confirmation: false
 
-  secret_key_base: "fd1af50b59b5e27776941b3205f92aca0f704c2252225cf93e3d97ae53f4774d25736cbdb19c1580839a2f68e15009209227e966003f53932c1bcc5d65616948"
+  secret_key_base: "ee9bda6a268863f3b63a10c719e8562a0d99aab7a8683fb9b242754786c35d3a31bedd24fc995092acc846b1983521c6b8fce9f37891f058359e1fb0de1b8bda"
 
   # Used to encrypt Stripe api keys
-  app_encryption_key: "2617463e32b65ec6645b3cb661f9686f2ab608c18ac930ee1295a1c1170504ed"
+  app_encryption_key: "7200ac2bb8d7daf3181d86f0cf8ba5d83020e26bf75f870b7d71aad94bce3d57"
 
   log_level: DEBUG
 

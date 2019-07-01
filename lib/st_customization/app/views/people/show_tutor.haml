@@ -8,112 +8,12 @@
 -#    %span.profile-title= PersonViewUtils.person_display_name(person, @service.community)
 
 .row
-  %ul.light-slider.light-slider--profile
-    %li
-      %img{:alt => "Siema image", :src => "https://pawelgrzybek.com/siema/assets/siema--pink.svg"}/
-    %li
-      %img{:alt => "Siema image", :src => "https://pawelgrzybek.com/siema/assets/siema--yellow.svg"}/
-    %li
-      %img{:alt => "Siema image", :src => "https://pawelgrzybek.com/siema/assets/siema--pink.svg"}/
-    %li
-      %img{:alt => "Siema image", :src => "https://pawelgrzybek.com/siema/assets/siema--yellow.svg"}/
-
+  = render "profile_slider"
 
 .profile-container
   .row
     .col-12
-      .profile-data-holder
-        .profile-data-ava
-          .people-image
-            = image_tag @custom_profile.avatar.url(:medium)
-
-          .people-progress-holder
-            .people-progress
-              %i.icon.icon-verified
-              %span.people-progress-text Id Verified
-
-            %h3.people-progress-title Games and recreation
-
-            .people-progress
-              %i.icon.icon-competitor
-              %span.people-progress-text Competitor
-
-            .people-progress
-              %i.icon.icon-awards
-              %span.people-progress-text Awards verified
-
-
-            .profile-action-buttons-desktop
-              = render "profile_action_buttons", service: @service
-
-        .profile-data-info
-          %h2.profile-title
-            Hi I'm
-            %span= PersonViewUtils.person_display_name(person, @service.community)
-
-          %span.rating-container.profile-rating
-            %span.rating-container
-              %span.stars{"data-rating" => "2.28", :style => "width: 100px;", :title => "poor"}
-                %img{:alt => "1", :src => "/assets/star-on-fd26bf0ea0990cfd808f7540f958eed324b86fc609bf56ec2b3a5612cdfde5f5.png", :title => "poor"}>/
-                 
-                %img{:alt => "2", :src => "/assets/star-on-fd26bf0ea0990cfd808f7540f958eed324b86fc609bf56ec2b3a5612cdfde5f5.png", :title => "poor"}>/
-                 
-                %img{:alt => "3", :src => "/assets/star-half-db15fb9b3561d5c741d8aea9ef4f0957bd9bc51aa1caa6d7a5c316e083c1abd5.png", :title => "poor"}>/
-                 
-                %img{:alt => "4", :src => "/assets/star-off-6aaeebdaab93d594c005d366ce0d94fba02e7a07fd03557dbee8482f04a91c22.png", :title => "poor"}>/
-                 
-                %img{:alt => "5", :src => "/assets/star-off-6aaeebdaab93d594c005d366ce0d94fba02e7a07fd03557dbee8482f04a91c22.png", :title => "poor"}/
-              %span.count (9)
-
-
-          %h3.profile-subtitle International Table Soccer Federation Finalist
-          %h3.profile-subtitle Official Co-founder of Vancouver Foosball Club
-
-          .row.profile-about-me
-            - if person.description && !person.description.blank?
-              = markdown(person.description)
-            - elsif current_user?(person)
-              %a{href: person_settings_path(person)}
-                .icon-with-text-container
-                  .ss.text-part= t(".add_description")
-
-          - if @service.community_person_custom_fields.any?
-            -  @service.community_person_custom_fields.each do |custom_field|
-              - custom_field_value = person.custom_field_value_for(custom_field)
-              - if custom_field_value
-                - if custom_field.required? || custom_field_value.display_value.to_s.present?
-                  .row
-                    .col-12
-                      %span.people-custom-fields-title
-                        = "#{custom_field.name(I18n.locale)}:"
-                      - if custom_field.is_a?(CheckboxField)
-                        = render 'people/custom_fields/checkbox', custom_field: custom_field,
-                        custom_field_value: custom_field_value
-                      - elsif custom_field.iconcons_a?(TextField)
-                        - text_with_url_links do
-                          = custom_field_value.display_value
-                      - else
-                        %span.people-custom-fields-value
-                          = custom_field_value.display_value
-
-          %p
-            = @custom_profile.description
-
-          .soc-list
-            .soc-item
-              %i.icon.icon-soc.icon-faceb
-              = link_to 'faceb', @custom_profile.social_link_facebook, :class => 'soc-link', :target => '_blank'
-            .soc-item
-              %i.icon.icon-soc.icon-youtube
-              = link_to 'twit', @custom_profile.social_link_youtube, :class => 'soc-link', :target => '_blank'
-            .soc-item
-              %i.icon.icon-soc.icon-twit
-              = link_to 'faceb', @custom_profile.social_link_twitter, :class => 'soc-link', :target => '_blank'
-            .soc-item
-              %i.icon.icon-soc.icon-google
-              = link_to 'faceb', '#', :class => 'soc-link', :target => '_blank'
-
-
+      = render "profile_data_holder", person: person
 
     .col-12
       .row.relative
@@ -161,19 +61,21 @@
       -#- if @service.community.follow_in_use?
       -#  = render :partial => "followed_people", :locals => { person: person, followed_people: @service.followed_people, limit: 6 }
 
-
-      %h2.people-header=t('.cover_photos_title')
-      .profile-cover-photo-holder
-        - @custom_profile.cover_photos.each do |c_photo|
-          = image_tag(c_photo.image.url(:medium), :class => "profile-cover-photo-item")
+      - if @custom_profile.cover_photos.count > 0
+        %h2.people-header=t('.cover_photos_title')
+        .profile-cover-photo-holder
+          - @custom_profile.cover_photos.each do |c_photo|
+            = image_tag(c_photo.image.url(:medium), :class => "profile-cover-photo-item")
 
 
       #people-testimonials.listing-main
         .row
           %h2.people-header
             - if @service.received_testimonials?
-              = pluralize(@service.received_testimonials.size, t(".review"), t(".reviews"))
-              = "(#{@service.feedback_positive_percentage.to_s}% #{t("people.show.positive")}, #{@service.received_positive_testimonials.size}/#{@service.received_testimonials.size})"
+              = t(".has_reviews")
+
+              -#= pluralize(@service.received_testimonials.size, t(".review"), t(".reviews"))
+              -#= "(#{@service.feedback_positive_percentage.to_s}% #{t("people.show.positive")}, #{@service.received_positive_testimonials.size}/#{@service.received_testimonials.size})"
             - else
               = t(".no_reviews")
           - if @service.received_testimonials?

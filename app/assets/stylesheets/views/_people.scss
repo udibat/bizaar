@@ -60,7 +60,10 @@ $profile-pic-gutter-mobile: lines(0.5);
 
 .profile-edit-link, .profile-contact-link {
   @include button($cust-violet);
+  border: 2px solid $cust-violet;
   width: 100%;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .people-image-mobile {
@@ -109,7 +112,13 @@ $profile-pic-gutter-mobile: lines(0.5);
   position: relative;
   padding-left: 0.75em;
   padding-right: 0.75em;
+
+  &.profile-container--member {
+    top: em(60);
+  }
 }
+
+
 
 .profile-about-me {
   margin-top: 0.6875rem;
@@ -156,7 +165,6 @@ $profile-pic-gutter-mobile: lines(0.5);
 .profile-cover-photo-holder {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin-bottom: 7rem;
 }
 
@@ -188,6 +196,28 @@ $profile-pic-gutter-mobile: lines(0.5);
     padding-right: 1.5625rem;
     order: 2;
   }
+}
+
+.profile-title-holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-report-title {
+  display: flex;
+  align-items: center;
+
+  span {
+    color: $cust-violet;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: em(14);
+  }
+}
+
+.profile-report-text {
+  margin-left: em(5);
 }
 
 .profile-title {
