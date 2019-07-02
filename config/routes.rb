@@ -20,6 +20,11 @@ Rails.application.routes.draw do
 
   resources :certifications, only: [:create, :destroy]
   resources :custom_profiles, only: [:update]
+
+  get '/payment_cards' => 'payment_cards_wizard#index', as: :payment_cards
+  post '/payment_cards' => 'payment_cards_wizard#create', as: :create_payment_card
+  delete '/payment_cards/:id' => 'payment_cards_wizard#destroy', as: :destroy_payment_card
+
   patch '/custom_profiles/upload_avatar/:id' => 'custom_profiles#upload_avatar', as: :profile_upload_avatar
   patch '/custom_profiles/upload_cover_photos/:id' => 'custom_profiles#upload_cover_photos', as: :profile_upload_cover_photos
   patch '/custom_profiles/upload_id_verifications/:id' => 'custom_profiles#upload_id_verifications', as: :profile_upload_id_verifications
@@ -34,18 +39,7 @@ Rails.application.routes.draw do
 
   
   devise_scope :person do
-
     get ":locale/member_signup" => "people#new_member", :as => :member_sign_up
-
-    # # these matches need to be before the general resources to have more priority
-    # get "/people/confirmation" => "confirmations#show", :as => :confirmation
-    # put "/people/confirmation" => "confirmations#create"
-    # get "/people/sign_up" => redirect("/%{locale}/login")
-
-    # # List few specific routes here for Devise to understand those
-    # get "/signup" => "people#new", :as => :sign_up
-    # get '/people/auth/:provider/setup' => 'omniauth#auth_setup' #needed for devise setup phase hook to work
-
   end
 
   get '/member_wizard/continue' => 'member_wizard#continue', as: :member_wizard_continue
@@ -56,13 +50,15 @@ Rails.application.routes.draw do
   get '/member_wizard/registered_oauth' => 'member_wizard#registered_oauth', as: :member_wizard_registered_oauth
   get '/member_wizard/email_verification_finished' => 'member_wizard#email_verification_finished', as: :member_wizard_email_verification_finished
   get '/member_wizard/setup_profile' => 'member_wizard#setup_profile', as: :member_wizard_setup_profile
-  get '/member_wizard/describe_yourself' => 'member_wizard#describe_yourself', as: :member_wizard_describe_yourself
-  get '/member_wizard/cover_photos' => 'member_wizard#cover_photos', as: :member_wizard_cover_photos
-  get '/member_wizard/social_media' => 'member_wizard#social_media', as: :member_wizard_social_media
-  get '/member_wizard/id_verification' => 'member_wizard#id_verification', as: :member_wizard_id_verification
+  # get '/member_wizard/describe_yourself' => 'member_wizard#describe_yourself', as: :member_wizard_describe_yourself
+  # get '/member_wizard/cover_photos' => 'member_wizard#cover_photos', as: :member_wizard_cover_photos
+  # get '/member_wizard/social_media' => 'member_wizard#social_media', as: :member_wizard_social_media
+  # get '/member_wizard/id_verification' => 'member_wizard#id_verification', as: :member_wizard_id_verification
   get '/member_wizard/payment_information' => 'member_wizard#payment_information', as: :member_wizard_payment_information
   get '/member_wizard/bizaar_pact' => 'member_wizard#bizaar_pact', as: :member_wizard_bizaar_pact
   get '/member_wizard/finished' => 'member_wizard#finished', as: :member_wizard_finished
+
+
 
 
 
