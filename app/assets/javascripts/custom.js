@@ -82,7 +82,19 @@ $(document).ready(function() {
     }
   });
 
-  wordsCounter('#custom_profile_description');
+  wordsCounter('#custom_profile_description, #person_description');
+
+
+  $('.settings-form form').find('textarea, input, select').attr('disabled', 'disabled');
+  $('.settings-form form').find('button, a').addClass('disabled');
+
+  $('.settings-form').on('click', '.edit-settings-button', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var parent = $this.parents('div');
+    parent.find('textarea, input, select').attr('disabled', false)
+    parent.find('button, a').removeClass('disabled')
+  })
 
 });
 
