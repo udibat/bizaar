@@ -720,6 +720,41 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
     text-transform: uppercase;
     line-height: 1;
   }
+  .left-navi-dropdown,
+  .left-navi-menu {
+    background-color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    .icon-file-alt,
+    .icon-with-text {
+      display: none;
+    }
+  }
+  
+  .text-with-icon {
+    color: #8ea1b4;
+  }
+
+  .left-navi-dropdown {
+    border-bottom: 1px solid #edf0f2;
+    .text-with-icon {
+      color: $cust-text;
+    }
+    &.toggled {
+      .text-with-icon {
+        color: #fff;
+      }
+    }
+  }
+
+  a {
+    &:hover, &:focus {
+      .text-with-icon {
+        color: #fff;
+      }
+    }
+  }
+
 }
 
 .settings-title {
