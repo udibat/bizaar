@@ -293,6 +293,7 @@ en:
         cancel: Cancel
         user_didnt_complete_the_signup_process: "This user signed up through Facebook but didn't complete the signup process. After connecting a Facebook account, users still need to accept your terms of use and fill any mandatory user fields."
         pending_user: "Pending: %{name}"
+        city: City
       new_layout:
         new_layout: "New layout"
         description_roadmap_new: "When new layout components are made available for your marketplace, you can choose whether you want to start using the new component or continue using the old one. You can toggle the selection at any point from this page. It's recommended to always be using the new version, as the old components might be phased out at some point. In case a component you're currently using is going to be phased out, you will be contacted in advance."
@@ -1866,7 +1867,7 @@ en:
     settings:
       account: Account
       notifications: Notifications
-      profile: "Profile info"
+      profile: "My main info"
       settings: Settings
       paypal_payments: "PayPal Payments"
       stripe_payments: "Stripe Payments"
@@ -2550,6 +2551,7 @@ en:
       image_is_processing: "Hang on tight. We are processing your profile picture. It will be ready in a minute or two."
       shown_in_your_public_profile: "(shown in your public profile)"
       editing_profile_of: "You are now editing the profile of %{name}"
+      profile_title: "Profile"
     save_information: "Save information"
   shipping_address:
     shipping_address: "Shipping address"

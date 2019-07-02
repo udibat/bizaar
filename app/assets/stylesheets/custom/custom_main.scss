@@ -542,6 +542,7 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   border-radius: 0;
   box-shadow: 0.5px 0.866px 1px rgba(1,1,1,0.24);
   border-width: 1px;
+  min-height: 34px;
 }
 
 .custom-select-holder > select {
@@ -665,6 +666,7 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
     padding-top: 0;
     & > .wrapper {
       box-shadow: 0 0 25px rgba(53,152,219,0.1);
+      position: relative;
     }
   }
   .title-header-wrapper,
@@ -675,6 +677,9 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   }
   .left-navi {
     margin-top: 0;
+    padding-top: 10px;
+    height: 100%;
+    border-right: 1px solid #edf0f2;
     & a.selected::after {
       display: none;
     }
@@ -686,17 +691,39 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   .left-navi-link {
     line-height: 1;
     min-height: 1px;
-    padding: 16px 0;
+    padding: 16px 15px;
     @include sintony;
     font-weight: bold;
     font-size: 15px;
+    &.selected {
+      background-color: transparent;
+      .left-navi-link-text {
+        color: $cust-text;
+      }
+    }
     .left-navi-link-icon {
       display: none;
     }
   }
   .left-navi-link-text {
+    color: #8ea1b4;
     padding: 0;
     text-transform: uppercase;
     line-height: 1;
   }
+}
+
+.settings-title {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #edf0f2;
+}
+
+.input-holder .label {
+  margin-top: 0;
+}
+
+.extra-text {
+  flex-shrink: 0;
 }
