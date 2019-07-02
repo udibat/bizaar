@@ -757,4 +757,20 @@ button {
   button, .button {
     font-weight: bold;
   }
+  .file-action-block {
+    font-size: 15px;
+  }
+}
+
+.avatar-file {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  top: 0;
+  left: 0;
+}
+
+.disabled {
+  pointer-events: none;
 }
