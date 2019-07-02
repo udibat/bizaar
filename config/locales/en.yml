@@ -2486,6 +2486,7 @@ en:
       only_admin: "Your account can't be deleted because you are the only administrator of the marketplace."
       new_password: "New password"
       save: Save
+      change_password: "Change password"
       these_fields_are_shown_only_to_you: "Username is shown in your profile unless you have given your name. Other information is only shown to you."
       email_already_confirmed: "Your email address is already confirmed."
       email:
@@ -2495,7 +2496,7 @@ en:
         receive_notifications_title_desktop: "Receive notifications"
         receive_notifications_title_mobile: "Receive notifications"
         receive_notifications_new_title_mobile: "Receive notifications"
-        add_new_with_plus: "+ Add new email address"
+        add_new_with_plus: "+ Add another email"
         add_new_cancel: Cancel
         confirmation_title_mobile: "Confirmation:"
         confirmation_title_desktop: Confirmation
@@ -2552,6 +2553,8 @@ en:
       shown_in_your_public_profile: "(shown in your public profile)"
       editing_profile_of: "You are now editing the profile of %{name}"
       profile_title: "Profile"
+      change_password: "Change Password"
+      email_title: "Email"
     save_information: "Save information"
   shipping_address:
     shipping_address: "Shipping address"

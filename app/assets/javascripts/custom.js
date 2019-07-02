@@ -84,6 +84,16 @@ $(document).ready(function() {
 
   wordsCounter('#custom_profile_description');
 
+
+  $('.settings-form form').find('textarea, input, select').attr('disabled', 'disabled');
+
+  $('.settings-form').on('click', '.edit-settings-button', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var parent = $this.parents('div');
+    parent.find('textarea, input, select').attr('disabled', false)
+  })
+
 });
 
 $(window).on('scroll', function() {

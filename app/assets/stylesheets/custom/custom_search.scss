@@ -263,6 +263,9 @@
       top: 6px;
       font-size: 12px;
       font-weight: normal;
+      width: 15px;
+      height: 15px;
+      line-height: 1;
     }
   }
   input[type="checkbox"]:checked + .label {
