@@ -30,7 +30,7 @@
 
 -# Listing author details
 .home-fluid-thumbnail-grid-author
-  .listing-details.ooo
+  .listing-details
     .fluid-thumbnail-grid-image-title{:class => ""}
       = listing.title
     .author-item.author-item--price
@@ -59,3 +59,5 @@
           -#%span.count= "(#{listing[:rating][:count]})"
         .reviews
           = link_to "#{listing[:rating][:count]} reviews", listing_path(listing.url), class: 'reviews-link'
+
+

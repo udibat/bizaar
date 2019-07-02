@@ -1,21 +1,15 @@
 @import "compass/utilities/general/clearfix";
 @import "mixins/all";
 
-$testimonial-avatar-width: em(48);
+$testimonial-avatar-width: em(56);
 $testimonial-avatar-height: $testimonial-avatar-width;
 $testimonial-gutter: lines(0.5);
-$testimonial-icon-width: 40;
+$testimonial-icon-width: 50;
 
 .testimonial {
   position: relative;
   @include clearfix;
   min-height: $testimonial-avatar-height;
-
-  border-bottom: 1px solid $background;
-
-  &:last-child {
-    border-bottom: 1px solid $background;
-  }
 }
 
 .testimonial-avatar {
@@ -23,8 +17,10 @@ $testimonial-icon-width: 40;
   left: 0;
   top: 0;
   float: left;
-  width: em(48);
-  height: em(48);
+  width: em(56);
+  height: em(56);
+  border-radius: 50%;
+  overflow: hidden;
 
   // Set size to 100%, so the image shrinks when font-size is reduced
   // for smaller devices
@@ -39,8 +35,31 @@ $testimonial-icon-width: 40;
   padding-left: $testimonial-avatar-width + $testimonial-gutter;
   padding-right: em($testimonial-icon-width) + $testimonial-gutter;
   padding-bottom: lines(0.5);
-  border-bottom: 1px solid $border;
   margin-bottom: lines(0.5);
+}
+
+.testimonial-author {
+  line-height: 1rem;
+}
+
+.testimonial-author-name {
+  font-size: 17px;
+  color: black;
+  text-transform: capitalize;
+  font-weight: 600;
+  display: block;
+}
+
+.testimonial-author-time {
+  font-size: em(15);
+}
+
+.testimonial-message {
+  margin-top: em(19);
+  p {
+    line-height: em(17);
+    font-size: em(15);
+  }
 }
 
 .testimonial-icon {

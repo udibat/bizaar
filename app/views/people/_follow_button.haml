@@ -6,7 +6,7 @@
       .content.default-content
         = t(".following")
   - else
-    = link_to [ person, :followers ], :method => "post", :remote => true, :class => "follow-button" do
+    = link_to [ person, :followers ], :method => "post", :remote => true, :class => "btn btn--violet follow-button" do
       = t(".follow")
 
 
