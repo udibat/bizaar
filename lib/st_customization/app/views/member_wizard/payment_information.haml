@@ -14,39 +14,41 @@
       // add new card holder
       .add-card-holder
         = image_tag "custom_images/cards.png", class: 'image'
-        .input-holder
-          %span.bold Name on Card
-          .row
-            .col-5
-              = text_field 'first_name', '', placeholder: 'First Name'
-            .col-5
-              = text_field 'last_name', '', placeholder: 'Last Name'
-        .input-holder
-          .row
-            .col-5
-              %span.bold Card information
-              .row
-                .col-12
-                  = text_field 'card_num', '', placeholder: 'Card Number'
-            .col-5
-              %span.bold.text-right.exp-date Expiration Date
-              .row
-                .col-6
-                  = text_field 'cvv', '', placeholder: 'CVV'
-                .col-6
-                  = text_field 'exp_date', '', placeholder: 'MM/YY'
-                  
-        .checkbox-item.default-checkbox
-          = check_box_tag 'make_default_card', '', false, class: 'input'
-          = label_tag 'make_default_card', 'Make Default Card', class: 'label'
+        = form_tag create_payment_card_path, method: 'post', remote: true, id: 'payment_card_form' do |f|
+          .input-holder
+            %span.bold Name on Card
+            .row
+              .col-5
+                = text_field_tag 'first_name', '', placeholder: 'First Name'
+              .col-5
+                = text_field_tag 'last_name', '', placeholder: 'Last Name'
+          .input-holder
+            .row
+              .col-5
+                %span.bold Card information
+                .row
+                  .col-12
+                    = text_field_tag 'number', '', placeholder: 'Card Number'
+              .col-5
+                %span.bold.text-right.exp-date Expiration Date
+                .row
+                  .col-6
+                    = text_field_tag 'cvc', '', placeholder: 'CVC'
+                  .col-6
+                    = text_field_tag 'exp_date', '', placeholder: 'MM/YY'
+                    
+          .checkbox-item.default-checkbox
+            = check_box_tag 'make_card_default', '', false, class: 'input'
+            = label_tag 'make_default_card', 'Make Default Card', class: 'label'
 
-        = link_to 'Add Card', '#', class: 'btn btn--violet single-btn add-card'
-      
-      .added-card-holder
+          = submit_tag 'Add Card', class: 'btn btn--violet single-btn add-card'
+          -# = link_to 'Add Card', '#', class: 'btn btn--violet single-btn add-card'
+      .added-card-holder.card-added-message-holder
         .row
           .col-7.lined
             %p.uppercase.violet.bold Your card information has been saved.
-        .row.added-card-list
+      .added-card-holder.existing-cards-holder.existing_gallery
+        .row.added-card-list.existing_gallery_item
           .col-7.lined.added-card-item
             .checkbox-item.default-checkbox
               = check_box_tag 'default_card', '', true, class: 'input'
@@ -58,9 +60,99 @@
         .col-6
           = link_to "Back", @prev_step_path, class: 'confirm_step_btn btn btn--violet-transp', remote: true
         .col-6
-          = link_to "Finish setting up!", "#", class: 'submit_remote_form_btn btn btn--violet block'
+          = link_to "Finish setting up!", @confirm_step_path, class: 'confirm_step_btn btn btn--violet block', remote: true
 
 
-= render partial: 'remote_form_submit_handler'
+-# = render partial: 'remote_form_submit_handler'
 = render partial: 'confirm_step_btn_js'
+
+:javascript
+
+  function build_single_galley_spot(item, idx) {
+    var item_cont = $('<div>', {class: 'row added-card-list existing_gallery_item'})
+    var item_inner_cont = $('<div>', {class: 'col-7 lined added-card-item'})
+
+    var defaul_card_chbx_cont = $('<div>', {class: 'checkbox-item default-checkbox'})
+
+    var defaul_card_chbx_field = $('<input type="checkbox">', {class: 'input'})
+    $(defaul_card_chbx_field).attr('name', 'make_card_default[' + idx + ']')
+    //$(defaul_card_chbx_field).attr('id', 'custom_profile_cover_photos_attributes_' + idx + '_is_primary_photo')
+    //$(defaul_card_chbx_field).addClass('set_primary_record_chbx');
+    $(defaul_card_chbx_field).val(item.id)
+    $(defaul_card_chbx_field).prop('checked', item.is_default_source);
+
+    var default_card_label = $('<label>', {class: 'label', for: 'default_card'});
+    $(default_card_label).html('Default Card');
+
+    var card_info_cont = $('<div>', {class: '.card-info'});
+    //%span.bold Card ending with 4856
+    var card_info_span = $('<span>', {class: '.bold'});
+    $(card_info_span).html('Card ending with ' + item.last4 + '')
+    
+    card_info_cont.append(card_info_span);
+    
+    
+    defaul_card_chbx_cont.append(defaul_card_chbx_field);
+    defaul_card_chbx_cont.append(default_card_label);
+    item_inner_cont.append(defaul_card_chbx_cont);
+    item_inner_cont.append(card_info_cont);
+    
+    item_cont.append(item_inner_cont);
+
+    return item_cont;
+  }
+
+  function build_gallery_spots(items) {
+
+    $('.existing_gallery').html('');
+
+    items.forEach(function(item, i){
+      idx = i + 1
+      var item_cont = $('<div>', {class: 'row added-card-list existing_gallery_item'})
+
+      item_cont = build_single_galley_spot(item, idx)
+
+      $('.existing_gallery').append(item_cont);
+    })
+  }
+
+
+  onDocumentReady(function(){
+    $(".submit_remote_form_btn").on('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      $("#payment_card_form").submit();
+    });
+
+
+    $("#payment_card_form").on("ajax:success", function(event, data){
+          console.log(data);
+          console.log("#{@confirm_step_path}");
+
+          //$('.add-card-holder').hide();
+          $('.added-card-holder').show();
+          
+
+          
+
+          if (data.errors === undefined) {
+            build_gallery_spots(data.cards);
+            //document.location = data.new_step_url
+          } else {
+            $(".errors").html(data.errors)
+          }
+        }
+      ).on("ajax:error", function(event, data){
+          // console.log(data.responseJSON.error);
+          console.log(data);
+          $(".errors").html('Error:')
+          var err_obj = data.responseJSON.error
+          console.log(err_obj);
+          Object.keys(err_obj).forEach(function (key) { 
+            var value = err_obj[key]
+            $(".errors").append(key + ': ' + value[0]);
+          })
+        }
+      )
+  });
 
