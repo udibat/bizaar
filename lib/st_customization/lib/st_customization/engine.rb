@@ -8,11 +8,13 @@ module StCustomization
 
       # require_dependency Rails.root.to_s + '/lib/st_customization/app/controllers/concerns/signup_extension'
       # ToDo: automate this
+      ApplicationController.send(:include, ApplicationControllerExtension)
       PeopleController.send(:include, ::TutorSignupExtension)
       ConfirmationsController.send(:include, ::ConfirmationsExtension)
       Person.send(:include, PersonExtension)
       OmniauthController.send(:include, OmniauthTutorExtension)
       SettingsController.send(:include, SettingsControllerExtension)
+      HomepageController.send(:include, HomepageControllerExtension)
 
       # the following is unstable (causing routes drawing fails on `reload!`), 
       # additional ivestigating required

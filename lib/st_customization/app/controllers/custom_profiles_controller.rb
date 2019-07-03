@@ -3,6 +3,8 @@ class CustomProfilesController < ApplicationController
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_this_page")
   end
 
+  skip_before_action :ensure_consent_given
+
   before_action :load_profile
 
   def update
