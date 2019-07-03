@@ -5,6 +5,22 @@ class PaymentCardsWizardController < ApplicationController
 
   include AllowMemberOnly
 
+  def set_default
+    stripe_customer_id = @current_user.stripe_account.stripe_customer_id
+      
+    CustomStripeUtils.set_customer_default_source(stripe_customer_id, params['id'])
+
+    cards = CustomStripeUtils.list_customer_payment_cards(@current_user, @current_community)
+    
+    if cards
+      render json: {
+        cards: cards.map{|h| h.to_h.slice(:id, :name, :last4, :is_default_source) }
+      }, status: 200
+    else
+      render json: { error: '' }, status: 422
+    end
+  end
+
   def index
     cards = CustomStripeUtils.list_customer_payment_cards(@current_user, @current_community)
     
