@@ -38,7 +38,14 @@ Rails.application.routes.draw do
   # # get '/:person_id/custom_settings/payments/paypal_account' => 'paypal_accounts#index', :as => :custom_paypal_account_settings_payment
 
 
-  
+  locale_regex_string = Sharetribe::AVAILABLE_LOCALES.map { |l| l[:ident] }.concat(Sharetribe::REMOVED_LOCALES.to_a).join("|")
+  locale_matcher = Regexp.new(locale_regex_string)
+
+  scope "(/:locale)", :constraints => { :locale => locale_matcher } do
+    get '/:person_id/settings/qualifications' => 'settings#qualifications', :as => :person_qualifications_settings
+    get '/:person_id/settings/id_verification' => 'settings#id_verification', :as => :person_id_verification_settings
+  end
+
   devise_scope :person do
     get ":locale/member_signup" => "people#new_member", :as => :member_sign_up
   end
