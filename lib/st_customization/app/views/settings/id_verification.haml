@@ -1,0 +1,15 @@
+- content_for :title_header do
+  %h1
+    = t("layouts.settings.id_verification")
+    = "-"
+    = t("layouts.settings.id_verification")
+
+= render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
+
+.left-navi-section
+  %h2= t("admin.communities.listings.id_verification")
+
+- @existing_id_verifications.each do |id_vfc|
+  .row
+    = id_vfc.pretty_inspect
+  -# = render partial: 'admin/community_listings/table', locals: {placeholder: t('layouts.settings.listings_search_placeholder')}
