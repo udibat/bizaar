@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get '/payment_cards' => 'payment_cards_wizard#index', as: :payment_cards
   post '/payment_cards' => 'payment_cards_wizard#create', as: :create_payment_card
+  post '/payment_cards/set_default/:id' => 'payment_cards_wizard#set_default', as: :set_default_payment_card
   delete '/payment_cards/:id' => 'payment_cards_wizard#destroy', as: :destroy_payment_card
 
   patch '/custom_profiles/upload_avatar/:id' => 'custom_profiles#upload_avatar', as: :profile_upload_avatar

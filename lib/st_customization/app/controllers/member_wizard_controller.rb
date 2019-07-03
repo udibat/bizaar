@@ -24,7 +24,9 @@ class MemberWizardController < ApplicationController
     :payment_information,
     :bizaar_pact, :finished
   ]
-  # before_action :set_next_step_path
+  before_action :set_next_step_path, only: [
+    :setup_profile, :payment_information, :bizaar_pact
+  ]
   before_action :load_profile, :load_signup_status, only: [
     # :qualifications,
     :setup_profile,
@@ -87,7 +89,7 @@ class MemberWizardController < ApplicationController
   end
 
   def payment_information
-    # render 'payment_information', locals: {index_view_locals: index_view_locals}
+    @existing_cards = CustomStripeUtils.list_customer_payment_cards(@current_user, @current_community)
   end
 
   def bizaar_pact
