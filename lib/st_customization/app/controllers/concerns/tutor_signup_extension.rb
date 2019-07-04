@@ -18,8 +18,7 @@ module TutorSignupExtension
     def show
       show_before_redef
 
-      @custom_profile = @service.person.custom_profile
-      @custom_profile.certifications.build
+      @custom_profile = @service.person.custom_profile || @service.person.create_custom_profile
       if @service.person.is_tutor?
         render 'people/show_tutor'
       else
