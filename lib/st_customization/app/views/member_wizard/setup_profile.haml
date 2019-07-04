@@ -44,7 +44,7 @@
       .title-image-holder
         = image_tag "custom_images/edit.png"
       Write something about yourself (optional)
-    .errors
+    -# .errors
     .wizard-content
       .wizard-inner
         %p.mb-25 Writing a short introduction will help your clientele get to know you better. Be personable and let them know why they should take your class.
@@ -54,11 +54,11 @@
         = form_for @custom_profile, remote: true, format: :json, authenticity_token: true, html: { id: "custom_profile_form" } do |f|
           = f.text_area :description, cols: 20, rows: 10, maxlength: CustomProfile::MAX_DESCRIPTION_LENGTH
 
-    .row
-      .col-6
-        = link_to "Next", @confirm_step_path, class: 'confirm_step_btn btn btn--violet', remote: true
-      .col-6
-        = link_to "Skip this step", tutor_wizard_skip_step_path(@member_status.signup_status), class: 'block skip-btn'
+          .row
+            .col-6
+              = link_to "Next", "#", class: 'submit_remote_form_btn btn btn--violet', remote: true
+            -# .col-6
+            -#   = link_to "Skip this step", member_wizard_skip_step_path(@member_status.signup_status), class: 'block skip-btn'
 
 = render partial: 'remote_form_submit_handler'
 = render partial: 'confirm_step_btn_js'

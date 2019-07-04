@@ -48,13 +48,14 @@
           .col-7.lined
             %p.uppercase.violet.bold Your card information has been saved.
       .added-card-holder.existing-cards-holder.existing_gallery
-        .row.added-card-list.existing_gallery_item
-          .col-7.lined.added-card-item
-            .checkbox-item.default-checkbox
-              = check_box_tag 'default_card', '', true, class: 'input'
-              = label_tag 'default_card', 'Default Card', class: 'label'
-            .card-info
-              %span.bold Card ending with 4856
+        - @existing_cards.to_a.each_with_index do |card, idx|
+          .row.added-card-list.existing_gallery_item
+            .col-7.lined.added-card-item
+              .checkbox-item.default-checkbox
+                = check_box_tag "default_card[#{idx}]", card.id, card[:is_default_source], class: 'input set_default_card_chbx'
+                = label_tag "default_card[#{idx}]", 'Default Card', class: 'label'
+              .card-info
+                %span.bold Card ending with #{card.last4}
         = link_to '+ Add a new card', '#', class: 'add-new-card-link link underline uppercase'
       .row
         .col-6
@@ -74,14 +75,16 @@
 
     var defaul_card_chbx_cont = $('<div>', {class: 'checkbox-item default-checkbox'})
 
-    var defaul_card_chbx_field = $('<input type="checkbox">', {class: 'input'})
+    var defaul_card_chbx_field = $('<input type="checkbox">', {class: 'input set_default_card_chbx'})
     $(defaul_card_chbx_field).attr('name', 'make_card_default[' + idx + ']')
+    $(defaul_card_chbx_field).attr('id', 'make_card_default_' + idx + '')
     //$(defaul_card_chbx_field).attr('id', 'custom_profile_cover_photos_attributes_' + idx + '_is_primary_photo')
-    //$(defaul_card_chbx_field).addClass('set_primary_record_chbx');
+    $(defaul_card_chbx_field).addClass('input');
+    $(defaul_card_chbx_field).addClass('set_default_card_chbx');
     $(defaul_card_chbx_field).val(item.id)
     $(defaul_card_chbx_field).prop('checked', item.is_default_source);
 
-    var default_card_label = $('<label>', {class: 'label', for: 'default_card'});
+    var default_card_label = $('<label>', {class: 'label', for: 'make_card_default_' + idx + ''});
     $(default_card_label).html('Default Card');
 
     var card_info_cont = $('<div>', {class: '.card-info'});
@@ -118,6 +121,21 @@
 
 
   onDocumentReady(function(){
+
+    $(".existing_gallery").on('click', '.set_default_card_chbx', function(e){
+
+        console.log($(e.target).val())
+        $.post("#{set_default_payment_card_path('').split('?').first}/" + $(e.target).val() + "", function(data){
+          if (data.errors === undefined) {
+            build_gallery_spots(data.cards);
+            //document.location = data.new_step_url
+          } else {
+            $(".errors").html(data.errors)
+          }
+        });
+    });
+
+
     $(".submit_remote_form_btn").on('click', function(e){
       e.preventDefault();
       e.stopPropagation();

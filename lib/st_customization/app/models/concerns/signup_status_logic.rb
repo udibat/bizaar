@@ -24,7 +24,7 @@ module SignupStatusLogic
   end
 
   def try_skip_step!(step_name)
-    return false unless SKIPPABLE_STEPS.include?(step_name.to_sym)
+    return false unless self.class::SKIPPABLE_STEPS.include?(step_name.to_sym)
 
     sorted_steps = []
     self.class.signup_statuses.each{|k, v| sorted_steps[v] = k }

@@ -8,7 +8,8 @@ module TutorSignupExtension
     after_action :mark_user_as_tutor_or_member, only: [:create]
     # after_action :mark_user_as_tutor, only: [:create]
     # after_action :mark_user_as_member, only: [:create_member]
-    after_action :generate_validation_errors, only: [:create, :create_member]
+    # after_action :generate_validation_errors, only: [:create, :create_member]
+    after_action :generate_validation_errors, only: [:create]
     after_action :update_signup_step_after_oauth_signup, only: [:update]
 
 
@@ -39,17 +40,17 @@ module TutorSignupExtension
 
     end
 
-    def create_member
+    # def create_member
 
-      # build username by first_name and last_name:
-      username = "#{params['person']['given_name']}_#{params['person']['family_name']}".gsub(/[^0-9a-z_]/i, '')
-      existing_cnt = Person.where("username LIKE ?", "#{username}%").count
-      username = "#{username}_#{existing_cnt}" if existing_cnt > 0
-      params['person']['username'] = username
+    #   # build username by first_name and last_name:
+    #   username = "#{params['person']['given_name']}_#{params['person']['family_name']}".gsub(/[^0-9a-z_]/i, '')
+    #   existing_cnt = Person.where("username LIKE ?", "#{username}%").count
+    #   username = "#{username}_#{existing_cnt}" if existing_cnt > 0
+    #   params['person']['username'] = username
 
-      create_before_redef
+    #   create_before_redef
 
-    end
+    # end
 
     alias_method :new_before_redef, :new
     def new

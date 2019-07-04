@@ -2,6 +2,7 @@ require 'active_support/concern'
 
 module AllowTutorOnly
   extend ActiveSupport::Concern
+  include TutorChecker
 
   included do
 
@@ -13,13 +14,7 @@ module AllowTutorOnly
 
   # end
 
-private
-  def ensure_user_is_tutor
-    unless @current_user.is_tutor?
-      flash[:error] = 'You should be a tutor to access this page'
-      redirect_to login_path
-    end
-  end
+# private
 
 end
 

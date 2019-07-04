@@ -45,6 +45,18 @@ module PersonExtension
 
   end
 
+  def signup_process_complete?
+    signup_status.signup_status_finished?
+  end
+
+  def signup_status
+    if is_tutor?
+      tutor_signup_status
+    else
+      member_signup_status
+    end
+  end
+
   # class_methods do
 
   # end

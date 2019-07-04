@@ -2,6 +2,7 @@ require 'active_support/concern'
 
 module AllowMemberOnly
   extend ActiveSupport::Concern
+  include MemberChecker
 
   included do
 
@@ -13,13 +14,7 @@ module AllowMemberOnly
 
   # end
 
-private
-  def ensure_user_is_member
-    if @current_user.is_tutor?
-      flash[:error] = 'You should be a member (not a tutor) to access this page'
-      redirect_to login_path
-    end
-  end
+# private
 
 end
 
