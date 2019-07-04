@@ -4,9 +4,38 @@
 = render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
 
 .left-navi-section.settings-section.id-verification-section
-  %h2= t(".title")
+  .settings-form
+    .settings-title
+      %h3.section-subtitle.violet= t(".title")
+      = link_to '#', class: 'edit-settings-button' do
+        .icon-edit
+    // if user has been verified by admin - show verified-holder
+    .verified-holder
+      .bold.uppercase Your Id has been verified. You have the following badge:
+      .verify-sign.badge-holder
+        = image_tag "custom_images/checked.png", class: 'small-icon'
+        %span.uppercase.green.text Id verified
 
-- @existing_id_verifications.each do |id_vfc|
-  .row
-    = id_vfc.pretty_inspect
+    // if user remove id verification block, this block should be shown
+    .row
+      .col-6
+        = link_to 'Choose file', '#', class: 'btn btn--black upload-link trigger_upload'
+    .row.identification-type
+      .col-6
+        = label_tag :identification_type
+        = text_field_tag :identification_type, '', class: 'input', :placeholder => "Identification Type"
+    - @existing_id_verifications.each do |id_vfc|
+      .row
+        .col-12
+          -# = id_vfc.pretty_inspect
+      .existing_cover_photos.id-settings
+        .fields_cont.existing_photo_record
+          .thumb-block
+            = image_tag id_vfc.image.url(:thumb)
+          %div.image_descr
+            %div= id_vfc.image_file_name
+            = label_tag :_destroy, 'Remove this photo', class: 'remove-photo'
+            = check_box_tag :_destroy, '', {class: 'delete_record_chbx'}
+            = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload choose-photo'
+
   -# = render partial: 'admin/community_listings/table', locals: {placeholder: t('layouts.settings.listings_search_placeholder')}

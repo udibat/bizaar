@@ -874,3 +874,35 @@ p {
   margin-bottom: 40px;
 }
 
+.verify-sign.badge-holder {
+  margin: 0;
+  .small-icon {
+    width: 17px;
+    height: 17px;
+    vertical-align: middle;
+  }
+  .text {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.verified-holder {
+  margin-bottom: 40px;
+}
+
+.identification-type {
+  margin-bottom: 30px;
+}
+
+.id-settings {
+  .image_descr {
+    width: auto;
+  }
+  .choose-photo {
+    display: block;
+  }
+  .image_spot, .fields_cont {
+    width: auto;
+  }
+}

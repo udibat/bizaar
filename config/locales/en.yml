@@ -2558,7 +2558,7 @@ en:
       email_title: "Email"
       change_profile_picture: "Change your Profile Picture here:"
     id_verification:
-      title: "Id verification"
+      title: "Your Identification"
     qualifications:
       title: "Qualifications"
     save_information: "Save information"
