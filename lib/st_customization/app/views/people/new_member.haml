@@ -67,35 +67,11 @@
           = form.password_field :password2, :class => :text_field, :maxlength => "255", :placeholder => t('.password_again')
 
         .inline-label-container
+      
+      // Birthday holder
 
-      -# Terms
-      -# .outer-checkbox-container
-      -#   .checkbox-container
-      -#     - unless @skip_terms_checkbox
-      -#       %input{:type => "checkbox", :id => "person_terms", :name => "person[terms]"}
-      -#       = form.label :terms, :class => "checkbox" do
-      -#         = raw t('.i_accept_the_terms_and_privacy',
-      -#           terms: link_to(t(".terms"), "#", :tabindex => "-1", :id => "terms_link", :class => "form"),
-      -#           privacy: link_to(t(".privacy"), "#", :tabindex => "-1", :id => "privacy_link", :class => "form"),)
-
-      -# = form.hidden_field :consent, :value => @current_community.consent
-
-      -# .outer-checkbox-container
-      -#   .checkbox-container
-      -#     %input{:type => "checkbox", :id => "person_admin_emails_consent", :name => "person[admin_emails_consent]"}
-      -#     = form.label :admin_emails_consent, t('.admin_emails_consent'), :class => 'checkbox'
-
-      .birthday-holder
-        %h3.section-subtitle.section-subtitle--regular Birthday
-        %p Your birthday is confidential. You do have to be 19 and older to sign up with us
-        .input-container.custom-select-holder
-          = form.date_select :birthday, order: [:month, :day, :year], :start_year => (Date.today.year - 100), :end_year => Date.today.year
-          // %select#select_month.select-month.custom-select{:name => ""}
-          //   %option Month
-          // %select#select_day.select-day.custom-select{:name => ""}
-          //   %option Day
-          // %select#select_year.select-year.custom-select{:name => ""}
-          //   %option Year
+      = render :partial => "signup_date_fields", locals: {form: form}
+      
       = button_tag t('sessions.new.sign_up_now'), class: 'btn btn--violet btn--left signup-btn'
 
     .socials-signup
