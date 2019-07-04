@@ -59,8 +59,8 @@
             -# .col-6
             -#   = link_to "Skip this step", member_wizard_skip_step_path(@member_status.signup_status), class: 'block skip-btn'
 
-= render partial: 'remote_form_submit_handler'
-= render partial: 'confirm_step_btn_js'
+= render partial: 'view_tools/remote_form_submit_handler'
+= render partial: 'view_tools/confirm_step_btn_js'
 
 :javascript
   onDocumentReady(function(){

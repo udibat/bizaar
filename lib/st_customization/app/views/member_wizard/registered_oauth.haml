@@ -1,6 +1,7 @@
 
 .page-content-inner.signup-member
   .signup-form.centered-section.wizard-section
+    .errors
     %h2.section-title.text-center Start learning something new everyday
     %h3.section-subtitle.section-subtitle--regular.text-center Come explore our strange and wonderful market of classes and activities
     
@@ -15,7 +16,7 @@
     -#           :allowed_emails => @current_community.allowed_emails,
     -#           :count => (@current_community.allowed_emails.split(",").count))
 
-    = form_for @service.person do |form|
+    = form_for @service.person, remote: true, format: :json, authenticity_token: true, html: { id: "custom_profile_form" }  do |form|
       = hidden_field_tag :update_after_social_signup, true
       -# Name
       .input-container
@@ -49,7 +50,9 @@
           //   %option Day
           // %select#select_year.select-year.custom-select{:name => ""}
           //   %option Year
-      = button_tag t('settings.account.save'), class: 'btn btn--violet btn--left signup-btn'
+      = button_tag t('settings.account.save'), class: 'submit_remote_form_btn btn btn--violet btn--left signup-btn'
 
   // = render :partial => "help_texts", :collection => ["terms", "help_invitation_code", "privacy"], :as => :field
+
+= render partial: 'view_tools/remote_form_submit_handler'
 

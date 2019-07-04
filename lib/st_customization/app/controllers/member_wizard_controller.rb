@@ -25,7 +25,7 @@ class MemberWizardController < ApplicationController
     :bizaar_pact, :finished
   ]
   before_action :set_next_step_path, only: [
-    :setup_profile, :payment_information, :bizaar_pact
+    :registered_oauth, :setup_profile, :payment_information, :bizaar_pact
   ]
   before_action :load_profile, :load_signup_status, only: [
     # :qualifications,

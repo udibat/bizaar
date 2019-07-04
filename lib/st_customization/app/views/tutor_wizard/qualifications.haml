@@ -90,7 +90,7 @@
             = link_to "Skip this step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: 'btn btn--violet block skip-qual-btn'
           -# = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: ''
 
-= render partial: 'confirm_step_btn_js'
+= render partial: 'view_tools/confirm_step_btn_js'
 
 :javascript
   onDocumentReady(function() {

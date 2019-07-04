@@ -17,6 +17,8 @@ class MemberSignupStatus < ApplicationRecord
 
   def check_step_completeness(step_name)
     case step_name.to_sym
+    when :registered_oauth
+      person.valid?
     when :setup_profile
       (person.custom_profile.avatar.present? &&
         person.custom_profile.description.present?) rescue false

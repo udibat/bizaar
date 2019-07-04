@@ -13,6 +13,8 @@ module PersonExtension
     after_create :create_custom_profile
 
     validate :validate_age
+    validates_presence_of :birthday, unless: :is_admin?
+    validates_presence_of :zip_code, unless: :is_admin?
 
     def validate_age
       if birthday.present? && birthday > MIN_PERSON_AGE.years.ago.to_date
