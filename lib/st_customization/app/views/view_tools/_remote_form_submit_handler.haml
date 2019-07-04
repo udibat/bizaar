@@ -22,13 +22,19 @@
         }
       ).on("ajax:error", function(event, data){
           // console.log(data.responseJSON.error);
-          console.log(data);
-          $(".errors").html('Error:')
+          //console.log(data);
+          $(".errors").html('');
+
           var err_obj = data.responseJSON.error
           Object.keys(err_obj).forEach(function (key) { 
             var value = err_obj[key]
             $(".errors").append(key + ': ' + value[0]);
-          })
+          });
+
+          setTimeout(function(){
+            $(".errors").html('');
+          }, 3000);
+
         }
       )
   });

@@ -100,7 +100,7 @@
 
     .socials-signup
       - if google_connect_in_use?
-        = link_to person_google_oauth2_omniauth_authorize_path, id: 'google-oauth2-login',
+        = link_to person_google_oauth2_omniauth_authorize_path(oauth_new_user_type: 'tutor'), id: 'google-oauth2-login',
           class: 'google-login-button' do
           %span.google-icon
             = render :partial => "layouts/google_icon"
@@ -108,7 +108,7 @@
             = t('.create_account_with_provider', provider: 'Google')
             
       - unless !facebook_connect_in_use? || params[:no_fb]
-        = render :partial => "layouts/facebook_connect_button", :locals => { :button_text => t(".create_account_with_provider", provider: 'Facebook') }
+        = render :partial => "layouts/facebook_connect_button", :locals => { :button_text => t(".create_account_with_provider", provider: 'Facebook'), oauth_new_user_type: 'tutor' }
 
       - if linkedin_connect_in_use?
         = link_to person_linkedin_omniauth_authorize_path, id: 'linkedin-login',

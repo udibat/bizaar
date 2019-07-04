@@ -11,6 +11,7 @@ module TutorSignupExtension
     # after_action :generate_validation_errors, only: [:create, :create_member]
     after_action :generate_validation_errors, only: [:create]
     after_action :update_signup_step_after_oauth_signup, only: [:update]
+    skip_before_action :ensure_consent_given, only: [:update]
 
 
     alias_method :show_before_redef, :show
@@ -141,18 +142,44 @@ private
   end
 
   def update_signup_step_after_oauth_signup
-    # don't update signup status if error happened
-    if params['update_after_social_signup'] && !(flash[:error].present?)
+    if params['update_after_social_signup']
 
-      signup_status = if @current_user.is_tutor?
-        @current_user.tutor_signup_status
+      # don't update signup status if error happened
+      if flash[:error].present?
+        # error messages broken by translation attempt, so..
+        err_str_res = begin
+          err_str = flash[:error].to_s
+          if err_str.index('translation missing: en.layouts.notifications.')
+            errors_arr = err_str.
+              gsub('translation missing: en.layouts.notifications.[', '').
+              gsub(/]$/,'').split(',')
+            err_str = {errors_arr.first.squish.to_s => [errors_arr.last.squish.gsub(/^"/, '').gsub(/"$/, '')]}
+          end
+          err_str
+        rescue => e
+          flash[:error].to_s
+        end
+        response.body = {error: err_str_res}.to_json
+        response.status = 422
+        response.headers["Content-Type"] = 'application/json'
+        flash.discard
+
       else
-        @current_user.member_signup_status
+        signup_status = @current_user.signup_status
+        return if signup_status.signup_status.to_sym != :registered_oauth
+        signup_status.next_step!
+
+        response.body = {success: true}.to_json
+        response.status = 200
+        response.headers["Content-Type"] = 'application/json'
       end
 
-      return if signup_status.signup_status.to_sym != :registered_oauth
-      signup_status.signup_status = :profile_picture
-      signup_status.save!
+      # drop redirects
+      if response.status.between?(300,399)
+        response.body = {success: true}.to_json
+        response.status = 200
+        response.headers["Content-Type"] = 'application/json'
+      end
     end
   end
 

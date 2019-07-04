@@ -61,6 +61,6 @@
             = link_to "Next", "#", class: 'submit_remote_form_btn btn btn--violet block'
             = link_to "Skip this step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: 'block skip-btn'
 
-= render partial: 'remote_form_submit_handler'
-= render partial: 'confirm_step_btn_js'
+= render partial: 'view_tools/remote_form_submit_handler'
+= render partial: 'view_tools/confirm_step_btn_js'
 

@@ -5,6 +5,17 @@ module OmniauthTutorExtension
 
   included do
 
+    alias_method :auth_setup_before_redef, :auth_setup
+    def auth_setup
+      # store requested user type for ongoing oauth callback:
+      user_type = params['oauth_new_user_type'].to_s
+      if ['tutor', 'member'].include?(user_type)
+        session['oauth_new_user_type'] = user_type
+      end
+
+      auth_setup_before_redef
+    end
+
     private
 
     def create_omniauth
@@ -25,18 +36,29 @@ module OmniauthTutorExtension
         redirect_to sign_up_path and return
       elsif service.person_email_unconfirmed
         flash[:error] = t("layouts.notifications.social_network_email_unconfirmed", email: service.email, provider: service.provider_name)
-        redirect_to tutor_wizard_continue_path and return
+        if session['oauth_new_user_type'].to_s == 'member'
+          redirect_to member_wizard_continue_path and return
+        else
+          redirect_to tutor_wizard_continue_path and return
+        end
       else
         @new_person = service.create_person
 
-        # Mark newly created person as Tutor:
-        @new_person.mark_as_tutor!
+        path_for_redirect = nil
+        if session['oauth_new_user_type'].to_s == 'member'
+          @new_person.mark_as_member!
+          path_for_redirect = member_wizard_continue_path
+        else
+          @new_person.mark_as_tutor!
+          path_for_redirect = tutor_wizard_continue_path
+        end
 
-        tutor_signup_status = @new_person.tutor_signup_status
-        tutor_signup_status.signup_status = :registered_oauth
-        tutor_signup_status.save!
+        session['oauth_new_user_type'] = nil
 
-        
+        signup_status = @new_person.signup_status
+        signup_status.signup_status = :registered_oauth
+        signup_status.save!
+
         # we'll use our own less strict consent logic
         @new_person.skip_st_consent!
   
@@ -48,7 +70,7 @@ module OmniauthTutorExtension
   
         record_event(flash, "SignUp", method: service.provider.to_sym)
   
-        redirect_to tutor_wizard_continue_path
+        redirect_to path_for_redirect
       end
     end
   end
