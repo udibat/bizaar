@@ -58,7 +58,7 @@
       .birthday-holder
         %h3.section-subtitle.section-subtitle--regular Birthday
         %p Your birthday is confidential. You do have to be 19 and older to sign up with us
-        .input-container
+        .input-container.custom-select-holder
           = form.date_select :birthday, order: [:day, :month, :year], :start_year => (Date.today.year - 100), :end_year => Date.today.year
           // %select#select_month.select-month.custom-select{:name => ""}
           //   %option Month

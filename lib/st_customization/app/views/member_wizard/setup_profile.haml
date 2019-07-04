@@ -38,7 +38,6 @@
                         .file-action-block
                           .file-name #{@custom_profile.avatar.original_filename}
                           = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload'
-                          -# = link_to 'Remove this photo', '#', class: 'green link underline remove-photo'
   
     %h2.small-title.flex-block 
       .title-image-holder
@@ -56,7 +55,7 @@
 
           .row
             .col-6
-              = link_to "Next", "#", class: 'submit_remote_form_btn btn btn--violet', remote: true
+              = link_to "Next", "#", class: 'submit_remote_form_btn btn btn--violet block', remote: true
             -# .col-6
             -#   = link_to "Skip this step", member_wizard_skip_step_path(@member_status.signup_status), class: 'block skip-btn'
 
