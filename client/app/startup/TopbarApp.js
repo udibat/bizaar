@@ -21,6 +21,7 @@ export default (props) => {
     'admin',
     'login',
     'sign_up',
+    'member_sign_up',
     'listings_person_settings',
   ], { locale });
 
