@@ -1,5 +1,5 @@
 // main block for all wizard steps
-.page-content-inner.wizard.wizard-instructor
+.page-content-inner.wizard.wizard-member
   .head-section
     %h1.head-section-title Payment information
   = render partial: 'tutor_wizard/wizard_head'
@@ -8,7 +8,7 @@
       .title-image-holder
         = image_tag "custom_images/credit-card.png"
       Set up your payment info
-    %span.errors
+    .errors
     .wizard-content
       %p Add a payment method and get started exploring Bizaar Classes!
       // add new card holder
@@ -39,23 +39,23 @@
                     
           .checkbox-item.default-checkbox
             = check_box_tag 'make_card_default', '', false, class: 'input'
-            = label_tag 'make_default_card', 'Make Default Card', class: 'label'
+            = label_tag 'make_card_default', 'Make Default Card', class: 'label'
 
           = submit_tag 'Add Card', class: 'btn btn--violet single-btn add-card'
-          -# = link_to 'Add Card', '#', class: 'btn btn--violet single-btn add-card'
-      .added-card-holder.card-added-message-holder
+      .card-added-message-holder
         .row
-          .col-7.lined
+          .col-7.lined.success-text
             %p.uppercase.violet.bold Your card information has been saved.
-      .added-card-holder.existing-cards-holder.existing_gallery
-        - @existing_cards.to_a.each_with_index do |card, idx|
-          .row.added-card-list.existing_gallery_item
-            .col-7.lined.added-card-item
-              .checkbox-item.default-checkbox
-                = check_box_tag "default_card[#{idx}]", card.id, card[:is_default_source], class: 'input set_default_card_chbx'
-                = label_tag "default_card[#{idx}]", 'Default Card', class: 'label'
-              .card-info
-                %span.bold Card ending with #{card.last4}
+      .added-card-holder.existing-cards-holder
+        .existing_gallery
+          - @existing_cards.to_a.each_with_index do |card, idx|
+            .row.added-card-list.existing_gallery_item
+              .col-7.lined.added-card-item
+                .checkbox-item.default-checkbox
+                  = check_box_tag "default_card[#{idx}]", card.id, card[:is_default_source], class: 'input set_default_card_chbx'
+                  = label_tag "default_card[#{idx}]", 'Default Card', class: 'label'
+                .card-info
+                  %span.bold Card ending with #{card.last4}
         = link_to '+ Add a new card', '#', class: 'add-new-card-link link underline uppercase'
       .row
         .col-6
@@ -87,9 +87,9 @@
     var default_card_label = $('<label>', {class: 'label', for: 'make_card_default_' + idx + ''});
     $(default_card_label).html('Default Card');
 
-    var card_info_cont = $('<div>', {class: '.card-info'});
+    var card_info_cont = $('<div>', {class: 'card-info'});
     //%span.bold Card ending with 4856
-    var card_info_span = $('<span>', {class: '.bold'});
+    var card_info_span = $('<span>', {class: 'bold'});
     $(card_info_span).html('Card ending with ' + item.last4 + '')
     
     card_info_cont.append(card_info_span);
@@ -147,12 +147,10 @@
           console.log(data);
           console.log("#{@confirm_step_path}");
 
-          //$('.add-card-holder').hide();
+          $('.add-card-holder').hide();
+          $('.card-added-message-holder').show();
           $('.added-card-holder').show();
           
-
-          
-
           if (data.errors === undefined) {
             build_gallery_spots(data.cards);
             //document.location = data.new_step_url
@@ -172,5 +170,22 @@
           })
         }
       )
+
+      $('.add-new-card-link').on('click', function(event) {
+        event.preventDefault();
+        clearForm();
+        $('.add-card-holder').show();
+      });
+
+      function clearForm() {
+        $('#payment_card_form').find('input[type="text"]').val('');
+        $('#payment_card_form').find('#make_card_default').prop('checked', false);
+      }
+
+      clickOutside('.errors, .card-added-message-holder');
+
+      if($('.existing_gallery_item').length !== 0) {
+        $('.added-card-holder').show();
+      }
   });
 

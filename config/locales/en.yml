@@ -2557,6 +2557,10 @@ en:
       change_password: "Change Password"
       email_title: "Email"
       change_profile_picture: "Change your Profile Picture here:"
+    id_verification:
+      title: "Your Identification"
+    qualifications:
+      title: "Your Qualifications"
     save_information: "Save information"
   shipping_address:
     shipping_address: "Shipping address"

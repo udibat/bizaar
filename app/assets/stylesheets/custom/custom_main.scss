@@ -693,6 +693,7 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   .left-navi-section {
     margin-top: 0;
     padding: 25px 15px;
+    min-height: 500px;
     @include media(tablet) {
       padding: 25px 15px 25px 0;
     }

@@ -50,7 +50,7 @@ const profileActions = function profileActions(routes, username) {
 };
 
 const signupDropdownProps = (routes) => {
-  const signupRouteStudent = routes.sign_up_path();
+  const signupRouteStudent = routes.member_sign_up_path();
   const signupRouteInstructor = routes.sign_up_path();
   return {
     links: [

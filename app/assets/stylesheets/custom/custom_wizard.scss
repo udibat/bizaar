@@ -437,6 +437,7 @@ p {
     input[type="checkbox"] + .label {
       font-size: 14px;
       font-weight: normal;
+      vertical-align: middle;
     }
   }
   .label {
@@ -478,6 +479,7 @@ p {
 .add-new-card-link {
   display: inline-block;
   margin-bottom: 40px;
+  font-weight: bold;
 }
 
 #category-select + .select2-container {
@@ -860,5 +862,47 @@ p {
   width: 100%;
   @include media(small-tablet) {
     width: 33.33%;
+  }
+}
+
+.card-added-message-holder {
+  display: none;
+}
+
+.added-card-holder {
+  display: none;
+  margin-bottom: 40px;
+}
+
+.verify-sign.badge-holder {
+  margin: 0;
+  .small-icon {
+    width: 17px;
+    height: 17px;
+    vertical-align: middle;
+  }
+  .text {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.verified-holder {
+  margin-bottom: 40px;
+}
+
+.identification-type {
+  margin-bottom: 30px;
+}
+
+.id-settings {
+  .image_descr {
+    width: auto;
+  }
+  .choose-photo {
+    display: block;
+  }
+  .image_spot, .fields_cont {
+    width: auto;
   }
 }

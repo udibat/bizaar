@@ -1,16 +1,38 @@
 - content_for :title_header do
-  %h1
-    = t("layouts.settings.qualifications")
-    = "-"
-    = t("layouts.settings.qualifications")
+  %h1= t("layouts.no_tribe.settings")
 
 = render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
 
-.left-navi-section
-  %h2= t("admin.communities.listings.id_verification")
-
-- @existing_certifications.each do |cert|
-  .row
-    = cert.pretty_inspect
+.left-navi-section.settings-section.qualifications-section
+  .settings-form
+    .settings-title
+      %h3.section-subtitle.violet= t(".title")
+      = link_to '#', class: 'edit-settings-button' do
+        .icon-edit
+    .row
+      .col-6
+        = select :category_id, categories_for_select, {}, { id: "category-select", data: {:placeholder => 'Choose a Category for your Qualification'} }, class: 'custom-select'
+      .col-6
+        = text_field :name, placeholder: 'The name of your Qualification', class: "input"
+    .row
+      - @existing_certifications.each do |cert|
+        .existing_certifications
+          .certificate-item
+            .thumb-block
+              = image_tag cert.attachment_thumb_url, class: 'image'
+            .certificate-description
+              .file-name.qualification-name
+                = cert.name
+              .file-name.category-name
+                = cert.category_id
+              = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
+              = check_box :_destroy, '', class: 'remove-checkbox', data: {'cert_id' => cert.id}
+      // if user has been verified by admin - show verified-holder
+    .verified-holder
+      .bold.uppercase You have recieved the following badge for this qualification:
+      .verify-sign.badge-holder
+        = image_tag "homepage/medal.png", class: 'small-icon'
+        %span.uppercase.green.text Competitor
+    = link_to '+ Add another qualification', '#', class: 'underline uppercase add-another-qual'
 
   -# = render partial: 'admin/community_listings/table', locals: {placeholder: t('layouts.settings.listings_search_placeholder')}
