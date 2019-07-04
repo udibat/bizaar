@@ -1,13 +1,10 @@
 - content_for :title_header do
-  %h1
-    = t("layouts.settings.qualifications")
-    = "-"
-    = t("layouts.settings.qualifications")
+  %h1= t("layouts.no_tribe.settings")
 
 = render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
 
-.left-navi-section
-  %h2= t("admin.communities.listings.id_verification")
+.left-navi-section.settings-section.qualifications-section
+  %h2= t(".title")
 
 - @existing_certifications.each do |cert|
   .row

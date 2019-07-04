@@ -4,18 +4,15 @@
   - hidden_description = !@current_community.show_description? ? "hidden-title-part" : ""
   %h1.marketplace-lander-content-title.cursor
     Learn
-    %span.typewrite.semultaniously{"data-period" => "2000", "data-type" => "[ \"to play guitar\", \"to do smth\"]"}
+    %span.typewrite.semultaniously{"data-period" => "2000", "data-type" => "[ \"how to do a handstand\", \"coding\", \"how to cook the perfect roast\", \"how to dance\", \"how to solve a Rubik’s cube\", \"Photoshop\", \"anything\"]"}
       %span.wrap
 
   %h2.marketplace-lander-content-title.cursor
     Teach
-    %span.typewrite.semultaniously{"data-period" => "2000", "data-type" => "[ \"fishing\", \"painting\"]"}
+    %span.typewrite.semultaniously{"data-period" => "2000", "data-type" => "[ \"pottery\", \"PC building\", \"photography\", \"trick basketball shots\", \"closet organization\", \"makeup basics\", \"and share your skills\"]"}
       %span.wrap
 
-  %p.marketplace-lander-content-description.cursor{class: hidden_description}
-    %span.typewrite{"data-period" => "2000", "data-type" => "[ \"#{community_description}\" ]"}
-      %span.wrap
-
+  %p.marketplace-lander-content-description{class: hidden_description}= community_description
 
 .home-tutors
   .container
