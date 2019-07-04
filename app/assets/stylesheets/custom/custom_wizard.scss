@@ -437,6 +437,7 @@ p {
     input[type="checkbox"] + .label {
       font-size: 14px;
       font-weight: normal;
+      vertical-align: middle;
     }
   }
   .label {
@@ -478,6 +479,7 @@ p {
 .add-new-card-link {
   display: inline-block;
   margin-bottom: 40px;
+  font-weight: bold;
 }
 
 #category-select + .select2-container {
@@ -869,4 +871,6 @@ p {
 
 .added-card-holder {
   display: none;
+  margin-bottom: 40px;
 }
+
