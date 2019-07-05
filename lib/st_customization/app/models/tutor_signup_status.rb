@@ -5,7 +5,7 @@ class TutorSignupStatus < ApplicationRecord
 
   # validates_presence_of :person
 
-  SKIPPABLE_STEPS = [:cover_photos, :qualifications, :social_media, :index]
+  SKIPPABLE_STEPS = [:qualifications, :social_media, :index]
 
   enum signup_status: [
     :registered,
