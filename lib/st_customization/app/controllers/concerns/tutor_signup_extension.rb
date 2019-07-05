@@ -183,9 +183,22 @@ private
   end
 
   def parsed_custom_params(params)
-    {
-      zip_code: params[:person].delete(:zip_code)
+    res = {
+      string_address: params[:person].delete(:string_address),
+      zip_code: params[:person].delete(:zip_code),
     }
+
+    # if params[:person][:custom_profile_attributes][:avatar].present?
+    #   res[:custom_profile_attributes] = parsed_custom_profile_params(params)
+    # end
+    res[:custom_profile_attributes] = parsed_custom_profile_params(params)
+    params[:person].delete(:custom_profile_attributes)
+
+    res
+  end
+
+  def parsed_custom_profile_params(params)
+    params[:person][:custom_profile_attributes].permit(:id, :avatar, :description)
   end
 
   def parsed_birthday_params(params)

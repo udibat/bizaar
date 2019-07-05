@@ -10,6 +10,10 @@ module PersonExtension
     has_one :tutor_signup_status, dependent: :destroy
     has_one :member_signup_status, dependent: :destroy
     has_one :custom_profile, dependent: :destroy
+    accepts_nested_attributes_for :custom_profile
+    validates_associated :custom_profile
+
+
     after_create :create_custom_profile
 
     validate :validate_age

@@ -12,7 +12,7 @@ module ApplicationControllerExtension
       return unless @current_user
 
       # Admin can access
-      return if @current_user.is_admin?
+      return if @current_user.has_admin_rights?(@current_community)
 
       # default consent field now set to true on signup for all registered users
       # if @current_user.community_membership.pending_consent?

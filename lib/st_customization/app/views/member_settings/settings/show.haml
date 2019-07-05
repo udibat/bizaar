@@ -44,6 +44,10 @@
         .input-holder
           = form.label :email, t('admin.communities.manage_members.email'), class: 'label'
           = form.text_field :email, :class => :text_field, :maxlength => "255", :placeholder => t('admin.communities.manage_members.email')
+      .input-container
+        .input-holder
+          = form.label :zip_code, t('admin.communities.manage_members.zip_code'), class: 'label'
+          = form.text_field :zip_code, :class => :text_field, :maxlength => "10", :placeholder => t('admin.communities.manage_members.zip_code')
         .input-holder
           = label_tag :city, t('admin.communities.manage_members.city'), class: 'label'
           = text_field_tag :city, '', :class => :text_field, :maxlength => "255", :placeholder => t('admin.communities.manage_members.city')
