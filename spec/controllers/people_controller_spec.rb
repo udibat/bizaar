@@ -49,6 +49,7 @@
 #  is_tutor                           :boolean          default(FALSE)
 #  birthday                           :date
 #  zip_code                           :string(255)
+#  string_address                     :string(255)
 #
 # Indexes
 #

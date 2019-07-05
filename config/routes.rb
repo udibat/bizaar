@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   scope "(/:locale)", :constraints => { :locale => locale_matcher } do
     get '/:person_id/settings/qualifications' => 'settings#qualifications', :as => :person_qualifications_settings
     get '/:person_id/settings/id_verification' => 'settings#id_verification', :as => :person_id_verification_settings
+    get '/:person_id/settings/member_payments' => 'settings#member_payments', :as => :member_payment_settings
   end
 
   devise_scope :person do
