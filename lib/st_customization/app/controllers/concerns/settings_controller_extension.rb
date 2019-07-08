@@ -11,7 +11,8 @@ module SettingsControllerExtension
   end
 
   def id_verification
-    @existing_id_verifications = @current_user.custom_profile.id_verifications
+    @id_verification = @current_user.custom_profile.id_verifications.first
+    @id_verification ||= @current_user.custom_profile.id_verifications.build
   end
 
   def member_payments

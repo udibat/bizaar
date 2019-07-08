@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/tutor_wizard/finished' => 'tutor_wizard#finished', as: :tutor_wizard_finished
 
   resources :certifications, only: [:create, :destroy]
+  resources :id_verifications
   resources :custom_profiles, only: [:update]
 
   get '/payment_cards' => 'payment_cards_wizard#index', as: :payment_cards

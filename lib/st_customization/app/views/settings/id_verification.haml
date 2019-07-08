@@ -17,25 +17,55 @@
         %span.uppercase.green.text Id verified
 
     // if user remove id verification block, this block should be shown
-    .row
-      .col-6
-        = link_to 'Choose file', '#', class: 'btn btn--black upload-link trigger_upload'
-    .row.identification-type
-      .col-6
-        = label_tag :identification_type
-        = text_field_tag :identification_type, '', class: 'input', :placeholder => "Identification Type"
-    - @existing_id_verifications.each do |id_vfc|
+    = form_for @id_verification, remote: true, format: :json, html: { multipart: true, class: 'remote_ent_form' }, authenticity_token: true do |f|
       .row
-        .col-12
-          -# = id_vfc.pretty_inspect
-      .existing_cover_photos.id-settings
-        .fields_cont.existing_photo_record
-          .thumb-block
-            = image_tag id_vfc.image.url(:thumb)
-          %div.image_descr
-            %div= id_vfc.image_file_name
-            = label_tag :_destroy, 'Remove this photo', class: 'remove-photo'
-            = check_box_tag :_destroy, '', {class: 'delete_record_chbx'}
-            = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload choose-photo'
-
+        - unless @id_verification.new_record?
+          = f.hidden_field :id
+          .fields_cont.existing_photo_record
+            .thumb-block
+              = image_tag @id_verification.image.url(:thumb)
+        .col-6
+          = f.file_field :image
+          = link_to 'Choose file', '#', class: 'btn btn--black upload-link trigger_upload'
+      -# = f.submit 'Save'
+    = button_tag 'Submit', class: 'remote_ent_form_submit_btn'
+    -# .row.identification-type
+    -#   .col-6
+    -#     = label_tag :identification_type
+    -#     = text_field_tag :identification_type, '', class: 'input', :placeholder => "Identification Type"
+    -# - @existing_id_verifications.each do |id_vfc|
+    -#   .row
+    -#     .col-12
+    -#       -# = id_vfc.pretty_inspect
+    -#   .existing_cover_photos.id-settings
+    -#     .fields_cont.existing_photo_record
+    -#       .thumb-block
+    -#         = image_tag id_vfc.image.url(:thumb)
+    -#       %div.image_descr
+    -#         %div= id_vfc.image_file_name
+    -#         = label_tag :_destroy, 'Remove this photo', class: 'remove-photo'
+    -#         = check_box_tag :_destroy, '', {class: 'delete_record_chbx'}
+    -#         = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload choose-photo'
   -# = render partial: 'admin/community_listings/table', locals: {placeholder: t('layouts.settings.listings_search_placeholder')}
+
+:javascript
+
+  onDocumentReady(function(){
+
+    $('.remote_ent_form_submit_btn').on("click", function(){
+      $(".remote_ent_form").ajaxSubmit({
+        success: function(data){
+          document.location.reload();
+        },
+        error: function(data){
+          console.log(data)
+          if (data.responseJSON !== undefined && 
+            data.responseJSON.error !== undefined) {
+              alert(data.responseJSON.error);
+          }
+        }
+      });
+    });
+
+  });
+
