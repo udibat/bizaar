@@ -19,9 +19,17 @@ module SettingsControllerExtension
     @selected_left_navi_link = "Payments"
   end
 
+  def social_media
+    @custom_profile = @current_user.custom_profile
+  end
+
+  def cover_photos
+    @custom_profile = @current_user.custom_profile
+  end
+
   included do
 
-    before_action :ensure_user_is_tutor, only: [:qualifications]
+    before_action :ensure_user_is_tutor, only: [:qualifications, :cover_photos]
     before_action :ensure_user_is_member, only: [:member_payments]
     before_action :manage_view_path
 

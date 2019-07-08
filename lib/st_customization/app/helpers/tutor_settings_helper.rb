@@ -50,6 +50,20 @@ module TutorSettingsHelper
         :path => person_id_verification_settings_path(person),
         :name => "id verification"
       },
+      {
+        :id => "settings-tab-cover_photos",
+        :text => t("layouts.settings.cover_photos"),
+        :icon_class => icon_class("thumbnails"),
+        :path => person_cover_photos_settings_path(person),
+        :name => "cover photos"
+      },
+      {
+        :id => "settings-tab-social_media",
+        :text => t("layouts.settings.social_media"),
+        :icon_class => icon_class("thumbnails"),
+        :path => person_social_media_settings_path(person),
+        :name => "social media"
+      },
     ]
   end
 

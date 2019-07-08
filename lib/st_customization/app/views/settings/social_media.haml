@@ -1,0 +1,70 @@
+- content_for :title_header do
+  %h1= t("layouts.no_tribe.settings")
+
+= render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
+
+.left-navi-section.settings-section.id-verification-section
+  .settings-form
+    .settings-title
+      %h3.section-subtitle.violet= t(".title")
+      = link_to '#', class: 'edit-settings-button' do
+        .icon-edit
+    = form_for @custom_profile, remote: true, format: :json, html: { multipart: true, class: 'remote_ent_form' }, authenticity_token: true do |f|
+      .row
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/facebook.png'
+            = f.text_field :social_link_facebook, :placeholder => 'Link to your Facebook'
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/twitter.png'
+            = f.text_field :social_link_twitter, :placeholder => 'Link to your Twitter '
+      .row
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/instagram.png'
+            = f.text_field :social_link_instagram, :placeholder => 'Link to your instagram'
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/youtube.png'
+            = f.text_field :social_link_youtube, :placeholder => 'Link to your Youtube'
+      .row
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/twitch.png'
+            = f.text_field :social_link_twitch, :placeholder => 'Link to your Twitch'
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/tumblr.png'
+            = f.text_field :social_link_vimeo, :placeholder => 'Link to your Tumblr'
+      -# = f.submit 'Next', class: 'btn btn--violet get-badge'
+      -# = f.submit 'Save'
+    = button_tag 'Submit', class: 'remote_ent_form_submit_btn'
+    
+:javascript
+
+  onDocumentReady(function(){
+
+    $('.remote_ent_form_submit_btn').on("click", function(){
+      $(".remote_ent_form").ajaxSubmit({
+        success: function(data){
+          document.location.reload();
+        },
+        error: function(data){
+          console.log(data)
+          if (data.responseJSON !== undefined && 
+            data.responseJSON.error !== undefined) {
+              alert(data.responseJSON.error);
+          }
+        }
+      });
+    });
+
+  });
+

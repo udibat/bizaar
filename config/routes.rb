@@ -46,6 +46,8 @@ Rails.application.routes.draw do
     get '/:person_id/settings/qualifications' => 'settings#qualifications', :as => :person_qualifications_settings
     get '/:person_id/settings/id_verification' => 'settings#id_verification', :as => :person_id_verification_settings
     get '/:person_id/settings/member_payments' => 'settings#member_payments', :as => :member_payment_settings
+    get '/:person_id/settings/cover_photos' => 'settings#cover_photos', :as => :person_cover_photos_settings
+    get '/:person_id/settings/social_media' => 'settings#social_media', :as => :person_social_media_settings
   end
 
   devise_scope :person do
