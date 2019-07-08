@@ -183,15 +183,16 @@ private
   end
 
   def parsed_custom_params(params)
-    res = {
-      string_address: params[:person].delete(:string_address),
-      zip_code: params[:person].delete(:zip_code),
-    }
-
-    # if params[:person][:custom_profile_attributes][:avatar].present?
-    #   res[:custom_profile_attributes] = parsed_custom_profile_params(params)
-    # end
-    res[:custom_profile_attributes] = parsed_custom_profile_params(params)
+    res = {}
+    if params[:person][:string_address]
+      res[:string_address] = params[:person].delete(:string_address)
+    end
+    if params[:person][:zip_code]
+      res[:zip_code] = params[:person].delete(:zip_code)
+    end
+    if params[:person][:custom_profile_attributes]
+      res[:custom_profile_attributes] = parsed_custom_profile_params(params)
+    end
     params[:person].delete(:custom_profile_attributes)
 
     res
@@ -202,13 +203,21 @@ private
   end
 
   def parsed_birthday_params(params)
-    birthday_permitted = {
-      birthday: Date.civil(
-        params[:person]["birthday(1i)"].to_i,
-        params[:person]["birthday(2i)"].to_i,
-        params[:person]["birthday(3i)"].to_i
-      )
-    }
+    birthday_permitted = if params[:person]["birthday(1i)"].present? && 
+        params[:person]["birthday(2i)"].present? &&
+        params[:person]["birthday(3i)"].present?
+      
+        {
+        birthday: Date.civil(
+          params[:person]["birthday(1i)"].to_i,
+          params[:person]["birthday(2i)"].to_i,
+          params[:person]["birthday(3i)"].to_i
+        )
+      }
+    else
+      {}
+    end
+    
     params[:person].delete('birthday')
     params[:person].delete('birthday(1i)')
     params[:person].delete('birthday(2i)')
