@@ -1337,6 +1337,7 @@ CREATE TABLE `people` (
   `is_tutor` tinyint(1) DEFAULT '0',
   `birthday` date DEFAULT NULL,
   `zip_code` varchar(255) DEFAULT NULL,
+  `string_address` varchar(255) DEFAULT NULL,
   UNIQUE KEY `index_people_on_username_and_community_id` (`username`,`community_id`) USING BTREE,
   UNIQUE KEY `index_people_on_uuid` (`uuid`),
   UNIQUE KEY `index_people_on_email` (`email`) USING BTREE,
@@ -2504,6 +2505,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190618142100'),
 ('20190621143358'),
 ('20190625160338'),
-('20190626160526');
+('20190626160526'),
+('20190705145857');
 
 

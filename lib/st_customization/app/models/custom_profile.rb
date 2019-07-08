@@ -17,6 +17,24 @@ class CustomProfile < ApplicationRecord
 
   after_commit :ensure_primary_photo_set
 
+  validate :custom_profile_validator
+
+  def custom_profile_validator
+    # Do not validate custom profile for admmins 
+    # and those users, who didn't finished registration process yet
+    if (person.is_admin? ||
+          person.signup_status.nil? ||
+          !person.signup_status.signup_status_finished?)
+      return
+    end
+
+    unless description.present?
+      # errors.add(:description, "Description can't be blank")
+      errors.add(:description, :description_cant_be_blank)
+    end
+
+  end
+
   def ensure_primary_photo_set
     if cover_photos.where(is_primary_photo: true).count == 0
       cover_photos.where(is_primary_photo: false).limit(1).update(is_primary_photo: true)
