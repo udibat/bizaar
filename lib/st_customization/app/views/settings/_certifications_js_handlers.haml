@@ -1,0 +1,157 @@
+:javascript
+  onDocumentReady(function() {
+
+    $('.existing_certifications').on('click', '.remove-photo', function(e){
+      var cert_conainer = $(e.target).parent().parent()[0];
+      var cert_id = $($(e.target).parent().children('input.remove-checkbox').first()[0]).data('certId')
+      // console.log(cert_conainer)
+  
+      $.ajax({
+          url: "#{certifications_path.split('?').first}" + "/" + cert_id + "",
+          type: 'DELETE',
+          success: function(data){            
+            $(cert_conainer).remove();
+            console.log($('.certificate-item').length);
+
+            if($('.certificate-item').length === 0) {
+              $('.added-certifications-holder').hide();
+              $('.uploading-form').show();
+
+              clearForm();
+              
+              $('.skip-qual-btn').css('display', 'block');
+              $('.next-btn').hide();
+            } 
+          },
+          error: function(data){
+            $(".errors").append('<div class="error-item">Can\'t delete item (' + data.status + ')</div>');
+          }
+      });
+    });
+
+    var uploadedImageTemplate = '<div class="uploaded-file"><div class="thumb-block uploaded-thumb-block"></div><div class="file-action-block"><div class="name"></div><a href="#" class="green link underline remove-preview">Remove this photo</a></div></div>'
+
+    document.getElementById('certification_image').addEventListener('change', function (e) {
+      if('.uploaded-file') {
+        $('.uploaded-file').remove();
+      }
+      var file = this.files[0];
+      var reader = new FileReader();
+
+      var extension = file.name.split('.').pop().toLowerCase();
+      var pdfPreview = $('.pdfPreview');
+
+      reader.onload = function(e) {
+        var img = new Image();
+        img.src = reader.result;
+
+        
+        $('.uploaded-file-container').append(uploadedImageTemplate)
+        $('.uploaded-thumb-block').html(img);
+
+        if(extension == 'pdf') {
+          $('.uploaded-thumb-block').parents('div').find(pdfPreview).removeClass('hidden-preview');
+        } else {
+          $('.uploaded-thumb-block').parents('div').find(pdfPreview).addClass('hidden-preview');
+        }
+
+        $('.get-badge').css('display', 'flex');
+      }
+      
+      reader.readAsDataURL(file);
+
+    });
+    
+    $('.uploaded-file-container').on('click', '.remove-preview', function(event) {
+      event.preventDefault();
+      $('#certification_image').val('');
+      $(this).parents('div').find('.uploaded-file').remove();
+      $('.get-badge').hide();
+    });
+
+    $('.submit_remote_form_btn').on('click', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      console.log($(this).data());
+
+      $("#new_certification_form").trigger('submit')
+    });
+      
+    $("#new_certification_form").on('submit', function(e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+
+      $.ajax({
+        type: "POST",
+        url: $(this).attr('action'),
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(data) {
+          $('.after-uploading').show();
+          $('.uploaded-file').hide();
+          $('.existing_certifications').html('')
+          data.existing_certifications.forEach(function(item, i) {
+            var certificateItem = $('<div>', {class: 'certificate-item'});
+            var imageHolder = $('<div>', {class: 'thumb-block'});
+            var certificateDescription = $('<div>', {class: 'certificate-description'});
+
+            var image = $('<img>',{src: item.image_thumb_url, alt: item.name});
+            var qualification = $('<div class="qualification-name">' + item.name + '</div>');
+            var category = $('<div class="category-name">' + item.category_name + '</div>')
+
+            var destroyCheckbox = $('<input type="checkbox" class="remove-checkbox">');
+            $(destroyCheckbox).data('certId', item.id);
+            var destroyLabel = $('<label class="remove-photo" for="__destroy">').html('Remove this photo')
+            
+            certificateDescription.append(qualification, category, destroyLabel, destroyCheckbox);
+            imageHolder.append(image);
+            certificateItem.append(imageHolder, certificateDescription);
+
+            $('.existing_certifications').append(certificateItem);
+
+            $('.uploading-form').hide();
+            clickOutside('.after-uploading');
+            $('.added-certifications-holder').show();
+          })
+          $('.skip-qual-btn').hide();
+          $('.next-btn').css('display', 'block');
+        },
+        error: function(error) {
+          $(".errors").html('').fadeIn();
+          var err_obj = error.responseJSON.error
+          Object.keys(err_obj).forEach(function (key) { 
+            var value = err_obj[key]
+            $(".errors").append('<div class="error-item">' + key + ' ' + value[0] +'</div>');
+          })
+
+          clickOutside('.errors');
+        }
+      });
+    });
+
+    $('.add-another-qual').on('click', function(event) {
+      event.preventDefault();
+      $('.uploading-form').show();
+
+      clearForm();
+    });
+
+    if ($('.certificate-item').length !== 0) {
+      $('.added-certifications-holder').show();
+      $('.skip-qual-btn').hide();
+      $('.next-btn').css('display', 'block');
+    } else {
+      $('.added-certifications-holder').hide();
+      $('.skip-qual-btn').css('display', 'block');
+      $('.next-btn').hide();
+    }
+
+    function clearForm() {
+      $('#certification_image').val('');
+      $('#certification_name').val('');
+      $('#category-select').val(null).trigger('change');
+    }
+  });
+

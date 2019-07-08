@@ -6,7 +6,8 @@ module SettingsControllerExtension
   include MemberChecker
 
   def qualifications
-    @existing_certifications = @current_user.custom_profile.certifications
+    @existing_certifications = @current_user.custom_profile.certifications.to_a
+    @new_certification = @current_user.custom_profile.certifications.build
   end
 
   def id_verification
