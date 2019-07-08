@@ -858,7 +858,7 @@ p {
   overflow: hidden;
 }
 
-.uploaded-file-container > .uploaded-file {
+.uploaded-file-container:not(.settings) > .uploaded-file {
   width: 100%;
   @include media(small-tablet) {
     width: 33.33%;
