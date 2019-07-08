@@ -240,3 +240,15 @@ $(function() {
 
 
 });
+
+function checkPhotosNumber(photoItem) {
+  var item = $(photoItem);
+
+  if(item.length === 10) {
+    // console.log(item.length)
+    $('.upload-link').hide();
+  } else {
+    $('.upload-link').show();
+
+  }
+}

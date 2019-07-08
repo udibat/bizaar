@@ -34,7 +34,7 @@
                     %td
                       .uploaded-file
                         .thumb-block
-                          = image_tag @custom_profile.avatar.url(:thumb) if @custom_profile.avatar
+                          = image_tag @custom_profile.avatar.url(:thumb) if @custom_profile.avatar.present?
                         .file-action-block
                           .file-name #{@custom_profile.avatar.original_filename}
                           = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload'
@@ -78,14 +78,35 @@
           $('.table-striped .files').find('.file-name').text(name);
           $('.table-striped .files').find('.thumb-block img').attr('src', data.result.image_url);
           $('.uploaded-file-container.profile-upload').css('display', 'block');
+          $('.uploaded-file').show();
         } else {
           alert(data.result.error);
         }
       }
     });
 
-    if('.uploaded-file') {
-      $('.uploaded-file-container.profile-upload').css('display', 'block');
+    $('#custom_profile_avatar').on('change', function(event) {
+      var file = this.files[0];
+      var reader = new FileReader();
+      var name = file.name;
+
+      reader.onload = function(e) {
+        var img = new Image();
+        img.src = reader.result;
+
+        $('.thumb-block').html(img);
+        // $('.file-name').html(name);
+      }
+      
+      reader.readAsDataURL(file);
+
+    });
+
+    if($('.thumb-block img').length === 0) {
+      $('.uploaded-file').hide();
+    } else {
+      $('.uploaded-file').show();
     }
+
   });
   
