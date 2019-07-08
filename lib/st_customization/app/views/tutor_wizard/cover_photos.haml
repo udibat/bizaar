@@ -101,6 +101,7 @@
       img_cont.append(img_holder, descr_cont);
 
       $('.existing_cover_photos').append(img_cont);
+      checkPhotosNumber('.fields_cont, .image_spot');
 
     })
   }
@@ -145,5 +146,7 @@
           }
         }
     });
+
+    checkPhotosNumber('.fields_cont, .image_spot');
   });
 
