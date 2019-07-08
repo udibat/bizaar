@@ -1,0 +1,53 @@
+- content_for :title_header do
+  %h1= t("layouts.no_tribe.settings")
+
+= render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
+
+.left-navi-section.settings-section.id-verification-section
+  .settings-form
+    .settings-title
+      %h3.section-subtitle.violet= t(".title")
+      = link_to '#', class: 'edit-settings-button' do
+        .icon-edit
+    = form_for @custom_profile, remote: true, format: :json, html: { multipart: true, class: 'remote_ent_form' }, authenticity_token: true do |f|
+      = f.fields_for :cover_photos, @custom_profile.cover_photos.build do |photos_fields|
+        = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][0][image][]" if photos_fields.object.new_record?
+      .existing_cover_photos
+        = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
+          - unless photos_fields.object.new_record?
+            .fields_cont.existing_photo_record
+              .thumb-block
+                = image_tag photos_fields.object.image.url(:thumb)
+              %div.image_descr
+                %div= photos_fields.object.image.original_filename
+                = photos_fields.hidden_field :id
+                = photos_fields.label :_destroy, 'Remove this photo', class: 'remove-photo'
+                = photos_fields.check_box :_destroy, {class: 'delete_record_chbx'}
+                = photos_fields.check_box :is_primary_photo, {class: 'set_primary_record_chbx'}
+                .primary-holder
+                  = photos_fields.label :is_primary_photo, 'Make primary photo', class: 'remove-photo make-primary'
+                  .primary-photo Primary photo
+      -# = f.submit 'Save'
+    = button_tag 'Submit', class: 'remote_ent_form_submit_btn'
+    
+:javascript
+
+  onDocumentReady(function(){
+
+    $('.remote_ent_form_submit_btn').on("click", function(){
+      $(".remote_ent_form").ajaxSubmit({
+        success: function(data){
+          document.location.reload();
+        },
+        error: function(data){
+          console.log(data)
+          if (data.responseJSON !== undefined && 
+            data.responseJSON.error !== undefined) {
+              alert(data.responseJSON.error);
+          }
+        }
+      });
+    });
+
+  });
+

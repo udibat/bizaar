@@ -11,16 +11,25 @@ module SettingsControllerExtension
   end
 
   def id_verification
-    @existing_id_verifications = @current_user.custom_profile.id_verifications
+    @id_verification = @current_user.custom_profile.id_verifications.first
+    @id_verification ||= @current_user.custom_profile.id_verifications.build
   end
 
   def member_payments
     @selected_left_navi_link = "Payments"
   end
 
+  def social_media
+    @custom_profile = @current_user.custom_profile
+  end
+
+  def cover_photos
+    @custom_profile = @current_user.custom_profile
+  end
+
   included do
 
-    before_action :ensure_user_is_tutor, only: [:qualifications]
+    before_action :ensure_user_is_tutor, only: [:qualifications, :cover_photos]
     before_action :ensure_user_is_member, only: [:member_payments]
     before_action :manage_view_path
 

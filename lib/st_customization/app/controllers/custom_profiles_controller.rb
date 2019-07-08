@@ -78,6 +78,18 @@ private
 
   def custom_profile_update_params
     if params[:custom_profile][:cover_photos_attributes].present?
+      if params[:custom_profile][:cover_photos_attributes]['0']['image'].is_a? Array
+        images_arr = params[:custom_profile][:cover_photos_attributes]['0']['image']
+        params[:custom_profile][:cover_photos_attributes]['0']['image'] = images_arr.shift
+        images_num = params[:custom_profile][:cover_photos_attributes].keys.length
+        images_arr.each_with_index{|im, i|
+           new_i = images_num + i
+           image_blank = params[:custom_profile][:cover_photos_attributes]['0'].clone
+           image_blank['is_primary_photo'] = false
+           image_blank['image'] = im
+           params[:custom_profile][:cover_photos_attributes][new_i.to_s] = image_blank
+        }
+      end
       params[:custom_profile][:cover_photos_attributes].keys.each{|k|
         params[:custom_profile][:cover_photos_attributes][k.to_s].permit(:id, :_destroy, :image, :is_primary_photo)
       }
