@@ -271,10 +271,15 @@ img {
       color: $cust-text;
     }
   }
+}
+
+.btn, 
+button {
   &.disabled {
     pointer-events: none;
     background-color: #dae0e6;
     border-color: #dae0e6;
+    color: #fff;
   }
 }
 
@@ -645,6 +650,10 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   flex-shrink: 0;
 }
 
+.mb-15 {
+  margin-bottom: 15px;
+}
+
 .mb-25 {
   margin-bottom: 25px;
 }
@@ -809,4 +818,14 @@ button {
 
 .disabled {
   pointer-events: none;
+}
+
+.red {
+  color: #ff0000;
+}
+
+.edit-settings-button {
+  .icon-edit {
+    color: $cust-violet;
+  }
 }

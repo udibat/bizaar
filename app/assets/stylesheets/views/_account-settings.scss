@@ -15,7 +15,7 @@
 
   .account-settings-row {
     position: relative;
-    @include border-radius(em(5));
+    // @include border-radius(em(5));
     margin-bottom: lines(1);
     min-height: 42px;
 
@@ -136,6 +136,17 @@
       @include media(desktop) {
         float: none;
       }
+      input[type="checkbox"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        @include media(desktop) {
+          position: static;
+        }
+      }
     }
 
     .settings-email-mobile-label-right {
@@ -198,14 +209,14 @@
 }
 
 .paypal-wizard {
-  border: 1px solid $border;
-  @include border-radius($default-border-radius);
+  // border: 1px solid $border;
+  // @include border-radius($default-border-radius);
   margin-bottom: lines(1);
   margin-top: lines(2);
 }
 
 .paypal-wizard-content {
-  padding: lines(1) lines(1.5);
+  padding: lines(1) 0;
 }
 
 .paypal-wizard-divider {

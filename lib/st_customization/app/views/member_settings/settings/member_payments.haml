@@ -6,7 +6,58 @@
 
 = render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
 
-#person_settings_form.left-navi-section.settings-section.notification-settings
+#person_settings_form.left-navi-section.settings-section.payment-settings
+  .settings-title
+    %h3.section-subtitle.violet= t("settings.payments.title")
+
+  .wizard-content
+    %p Add a payment method and get started exploring Bizaar Classes!
+    // add new card holder
+    .add-card-holder
+      = image_tag "custom_images/cards.png", class: 'image'
+      = form_tag create_payment_card_path, method: 'post', remote: true, id: 'payment_card_form' do |f|
+        .input-holder
+          %span.bold Name on Card
+          .row
+            .col-5
+              = text_field_tag 'first_name', '', placeholder: 'First Name'
+            .col-5
+              = text_field_tag 'last_name', '', placeholder: 'Last Name'
+        .input-holder
+          .row
+            .col-5
+              %span.bold Card information
+              .row
+                .col-12
+                  = text_field_tag 'number', '', placeholder: 'Card Number'
+            .col-5
+              %span.bold.text-right.exp-date Expiration Date
+              .row
+                .col-6
+                  = text_field_tag 'cvc', '', placeholder: 'CVC'
+                .col-6
+                  = text_field_tag 'exp_date', '', placeholder: 'MM/YY'
+                  
+        .checkbox-item.default-checkbox
+          = check_box_tag 'make_card_default', '', false, class: 'input'
+          = label_tag 'make_card_default', 'Make Default Card', class: 'label'
+
+        = submit_tag 'Add Card', class: 'btn btn--violet single-btn add-card'
+    .card-added-message-holder
+      .row
+        .col-7.lined.success-text
+          %p.uppercase.violet.bold Your card information has been saved.
+    .added-card-holder.existing-cards-holder
+      .existing_gallery
+        - @existing_cards.to_a.each_with_index do |card, idx|
+          .row.added-card-list.existing_gallery_item
+            .col-7.lined.added-card-item
+              .checkbox-item.default-checkbox
+                = check_box_tag "default_card[#{idx}]", card.id, card[:is_default_source], class: 'input set_default_card_chbx'
+                = label_tag "default_card[#{idx}]", 'Default Card', class: 'label'
+              .card-info
+                %span.bold Card ending with #{card.last4}
+      = link_to '+ Add a new card', '#', class: 'add-new-card-link link underline uppercase'
   -# = form_for @current_user do |form|
 
   -#   %h2= t(".community_updates")

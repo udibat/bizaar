@@ -4,10 +4,12 @@
 = render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
 
 .left-navi-section.settings-section.payment-settings
-  - if @stripe_enabled
-    %h2= t("payment_settings.title")
-  - else
-    %h2= t("paypal_accounts.payout_info_title")
+  .settings-title
+    %h3.section-subtitle.violet= t("settings.payments.title")
+  -# - if @stripe_enabled
+  -#   %h2= t("payment_settings.title")
+  -# - else
+  -#   %h2= t("paypal_accounts.payout_info_title")
 
   - if @paypal_enabled && @stripe_enabled
     .row
