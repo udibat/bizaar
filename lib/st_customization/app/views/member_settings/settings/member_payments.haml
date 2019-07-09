@@ -10,64 +10,158 @@
   .settings-title
     %h3.section-subtitle.violet= t("settings.payments.title")
 
-  .wizard-content
+  // add new card holder
+  .add-card-holder
     %p Add a payment method and get started exploring Bizaar Classes!
-    // add new card holder
-    .add-card-holder
-      = image_tag "custom_images/cards.png", class: 'image'
-      = form_tag create_payment_card_path, method: 'post', remote: true, id: 'payment_card_form' do |f|
-        .input-holder
-          %span.bold Name on Card
-          .row
-            .col-5
-              = text_field_tag 'first_name', '', placeholder: 'First Name'
-            .col-5
-              = text_field_tag 'last_name', '', placeholder: 'Last Name'
-        .input-holder
-          .row
-            .col-5
-              %span.bold Card information
-              .row
-                .col-12
-                  = text_field_tag 'number', '', placeholder: 'Card Number'
-            .col-5
-              %span.bold.text-right.exp-date Expiration Date
-              .row
-                .col-6
-                  = text_field_tag 'cvc', '', placeholder: 'CVC'
-                .col-6
-                  = text_field_tag 'exp_date', '', placeholder: 'MM/YY'
-                  
-        .checkbox-item.default-checkbox
-          = check_box_tag 'make_card_default', '', false, class: 'input'
-          = label_tag 'make_card_default', 'Make Default Card', class: 'label'
+    = image_tag "custom_images/cards.png", class: 'image'
+    = form_tag create_payment_card_path, method: 'post', remote: true, id: 'payment_card_form' do |f|
+      .input-holder
+        %span.bold Name on Card
+        .row
+          .col-5
+            = text_field_tag 'first_name', '', placeholder: 'First Name'
+          .col-5
+            = text_field_tag 'last_name', '', placeholder: 'Last Name'
+      .input-holder
+        .row
+          .col-5
+            %span.bold Card information
+            .row
+              .col-12
+                = text_field_tag 'number', '', placeholder: 'Card Number'
+          .col-5
+            %span.bold.text-right.exp-date Expiration Date
+            .row
+              .col-6
+                = text_field_tag 'cvc', '', placeholder: 'CVC'
+              .col-6
+                = text_field_tag 'exp_date', '', placeholder: 'MM/YY'
+                
+      .checkbox-item.default-checkbox
+        = check_box_tag 'make_card_default', '', false, class: 'input'
+        = label_tag 'make_card_default', 'Make Default Card', class: 'label'
 
-        = submit_tag 'Add Card', class: 'btn btn--violet single-btn add-card'
-    .card-added-message-holder
-      .row
-        .col-7.lined.success-text
-          %p.uppercase.violet.bold Your card information has been saved.
-    .added-card-holder.existing-cards-holder
-      .existing_gallery
-        - @existing_cards.to_a.each_with_index do |card, idx|
-          .row.added-card-list.existing_gallery_item
-            .col-7.lined.added-card-item
-              .checkbox-item.default-checkbox
-                = check_box_tag "default_card[#{idx}]", card.id, card[:is_default_source], class: 'input set_default_card_chbx'
-                = label_tag "default_card[#{idx}]", 'Default Card', class: 'label'
-              .card-info
-                %span.bold Card ending with #{card.last4}
-      = link_to '+ Add a new card', '#', class: 'add-new-card-link link underline uppercase'
-  -# = form_for @current_user do |form|
+    = submit_tag 'Add Card', class: 'btn btn--violet single-btn add-card'
+  .card-added-message-holder
+    .row
+      .col-7.lined.success-text
+        %p.uppercase.violet.bold Your card information has been saved.
+  .added-card-holder.existing-cards-holder
+    .existing_gallery.mb-40
+      - @existing_cards.to_a.each_with_index do |card, idx|
+        .added-card-list.existing_gallery_item.lined
+          .added-card-item
+            .checkbox-item.default-checkbox
+              = check_box_tag "default_card[#{idx}]", card.id, card[:is_default_source], class: 'input set_default_card_chbx'
+              = label_tag "default_card[#{idx}]", 'Default Card', class: 'label'
+            .card-info
+              %span.bold Card ending with #{card.last4}
+          .remove_existing_card
+            = check_box_tag "remove_card[#{idx}]", card.id, false, class: 'input remove_card'
+            = label_tag "remove_card[#{idx}]", class: 'label' do
+              %span.icon-trash
+              Delete
 
-  -#   %h2= t(".community_updates")
-  -#   = render :partial => "community_updates_radiobutton", :collection => [["email_daily_community_updates", 1], ["email_weekly_community_updates", 7], ["do_not_email_community_updates", 100000]], :as => :options, locals: {target_user: @current_user}
 
-  -#   %h2.lower= t(".newsletters")
-  -#   = render :partial => "notification_checkbox", :collection => Person::EMAIL_NEWSLETTER_TYPES, :as => :notification_type, locals: {target_user: @current_user}
+    = link_to '+ Add a new card', '#', class: 'add-new-card-link link underline uppercase'
 
-  -#   %h2.lower= t(".i_want_to_get_email_notification_when")
-  -#   = render :partial => "notification_checkbox", :collection => @current_community.email_notification_types, :as => :notification_type, locals: {target_user: @current_user}
 
-  -#   = hidden_field_tag "person[preferences][empty_notification]", '1'
-  -#   = form.button t("settings.save_information"), :class => "send_button_notifications"
+:javascript
+  onDocumentReady(function(){
+
+    $(".existing_gallery").on('click', '.set_default_card_chbx', function(e){
+        // console.log($(e.target).val())
+        $.post("#{set_default_payment_card_path('').split('?').first}/" + $(e.target).val() + "", function(data){
+          if (data.errors === undefined) {
+            document.location.reload();
+          } else {
+            $(".errors").html(data.errors)
+          }
+        });
+    });
+
+    $(".existing_gallery").on('click', '.remove_existing_card', function(e){
+        // console.log($(e.target).val())
+        $.post("", function(data){
+          if (data.errors === undefined) {
+            document.location.reload();
+          } else {
+            $(".errors").html(data.errors)
+          }
+        });
+    });
+
+    $(".submit_remote_form_btn").on('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      $("#payment_card_form").submit();
+    });
+
+    $("#payment_card_form").on("ajax:success", function(event, data){
+          $('.add-card-holder').hide();
+          $('.card-added-message-holder').show();
+          $('.added-card-holder').show();
+          
+          if (data.errors === undefined) {
+            document.location.reload();
+          } else {
+            $(".errors").html(data.errors)
+          }
+        }
+      ).on("ajax:error", function(event, data){
+          console.log(data);
+          $(".errors").html('Error:')
+          var err_obj = data.responseJSON.error
+          console.log(err_obj);
+          Object.keys(err_obj).forEach(function (key) { 
+            var value = err_obj[key]
+            $(".errors").append(key + ': ' + value[0]);
+          })
+        }
+      )
+
+      $('.add-new-card-link').on('click', function(event) {
+        event.preventDefault();
+        clearForm();
+        $('.add-card-holder').show();
+      });
+
+      $('.add-card').on('click', function(event) {
+        event.preventDefault();
+        formAjaxSubmit();
+      });
+
+      function clearForm() {
+        $('#payment_card_form').find('input[type="text"]').val('');
+        $('#payment_card_form').find('#make_card_default').prop('checked', false);
+      }
+
+      clickOutside('.errors, .card-added-message-holder');
+
+      if($('.existing_gallery_item').length !== 0) {
+        $('.added-card-holder').show();
+      }
+
+    function formAjaxSubmit() {
+      $("#payment_card_form").ajaxSubmit({
+        success: function(data){
+          document.location.reload();
+        },
+        error: function(data){
+          console.log(data)
+          if (data.responseJSON !== undefined && 
+            data.responseJSON.error !== undefined) {
+              alert(data.responseJSON.error);
+          }
+        }
+      });
+    }
+
+    if($('.added-card-list').length === 0) {
+      $('.add-card-holder').show();
+    } else {
+      $('.add-card-holder').hide();
+    }
+  });
+
+
