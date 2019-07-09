@@ -58,16 +58,127 @@
               .card-info
                 %span.bold Card ending with #{card.last4}
       = link_to '+ Add a new card', '#', class: 'add-new-card-link link underline uppercase'
-  -# = form_for @current_user do |form|
 
-  -#   %h2= t(".community_updates")
-  -#   = render :partial => "community_updates_radiobutton", :collection => [["email_daily_community_updates", 1], ["email_weekly_community_updates", 7], ["do_not_email_community_updates", 100000]], :as => :options, locals: {target_user: @current_user}
+:javascript
 
-  -#   %h2.lower= t(".newsletters")
-  -#   = render :partial => "notification_checkbox", :collection => Person::EMAIL_NEWSLETTER_TYPES, :as => :notification_type, locals: {target_user: @current_user}
+  function build_single_galley_spot(item, idx) {
+    var item_cont = $('<div>', {class: 'row added-card-list existing_gallery_item'})
+    var item_inner_cont = $('<div>', {class: 'col-7 lined added-card-item'})
 
-  -#   %h2.lower= t(".i_want_to_get_email_notification_when")
-  -#   = render :partial => "notification_checkbox", :collection => @current_community.email_notification_types, :as => :notification_type, locals: {target_user: @current_user}
+    var defaul_card_chbx_cont = $('<div>', {class: 'checkbox-item default-checkbox'})
 
-  -#   = hidden_field_tag "person[preferences][empty_notification]", '1'
-  -#   = form.button t("settings.save_information"), :class => "send_button_notifications"
+    var defaul_card_chbx_field = $('<input type="checkbox">', {class: 'input set_default_card_chbx'})
+    $(defaul_card_chbx_field).attr('name', 'make_card_default[' + idx + ']')
+    $(defaul_card_chbx_field).attr('id', 'make_card_default_' + idx + '')
+    //$(defaul_card_chbx_field).attr('id', 'custom_profile_cover_photos_attributes_' + idx + '_is_primary_photo')
+    $(defaul_card_chbx_field).addClass('input');
+    $(defaul_card_chbx_field).addClass('set_default_card_chbx');
+    $(defaul_card_chbx_field).val(item.id)
+    $(defaul_card_chbx_field).prop('checked', item.is_default_source);
+
+    var default_card_label = $('<label>', {class: 'label', for: 'make_card_default_' + idx + ''});
+    $(default_card_label).html('Default Card');
+
+    var card_info_cont = $('<div>', {class: 'card-info'});
+    //%span.bold Card ending with 4856
+    var card_info_span = $('<span>', {class: 'bold'});
+    $(card_info_span).html('Card ending with ' + item.last4 + '')
+    
+    card_info_cont.append(card_info_span);
+    
+    
+    defaul_card_chbx_cont.append(defaul_card_chbx_field);
+    defaul_card_chbx_cont.append(default_card_label);
+    item_inner_cont.append(defaul_card_chbx_cont);
+    item_inner_cont.append(card_info_cont);
+    
+    item_cont.append(item_inner_cont);
+
+    return item_cont;
+  }
+
+  function build_gallery_spots(items) {
+
+    $('.existing_gallery').html('');
+
+    items.forEach(function(item, i){
+      idx = i + 1
+      var item_cont = $('<div>', {class: 'row added-card-list existing_gallery_item'})
+
+      item_cont = build_single_galley_spot(item, idx)
+
+      $('.existing_gallery').append(item_cont);
+    })
+  }
+
+
+  onDocumentReady(function(){
+
+    $(".existing_gallery").on('click', '.set_default_card_chbx', function(e){
+
+        console.log($(e.target).val())
+        $.post("#{set_default_payment_card_path('').split('?').first}/" + $(e.target).val() + "", function(data){
+          if (data.errors === undefined) {
+            build_gallery_spots(data.cards);
+            //document.location = data.new_step_url
+          } else {
+            $(".errors").html(data.errors)
+          }
+        });
+    });
+
+
+    $(".submit_remote_form_btn").on('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      $("#payment_card_form").submit();
+    });
+
+
+    $("#payment_card_form").on("ajax:success", function(event, data){
+          console.log(data);
+          console.log("#{@confirm_step_path}");
+
+          $('.add-card-holder').hide();
+          $('.card-added-message-holder').show();
+          $('.added-card-holder').show();
+          
+          if (data.errors === undefined) {
+            build_gallery_spots(data.cards);
+            //document.location = data.new_step_url
+          } else {
+            $(".errors").html(data.errors)
+          }
+        }
+      ).on("ajax:error", function(event, data){
+          // console.log(data.responseJSON.error);
+          console.log(data);
+          $(".errors").html('Error:')
+          var err_obj = data.responseJSON.error
+          console.log(err_obj);
+          Object.keys(err_obj).forEach(function (key) { 
+            var value = err_obj[key]
+            $(".errors").append(key + ': ' + value[0]);
+          })
+        }
+      )
+
+      $('.add-new-card-link').on('click', function(event) {
+        event.preventDefault();
+        clearForm();
+        $('.add-card-holder').show();
+      });
+
+      function clearForm() {
+        $('#payment_card_form').find('input[type="text"]').val('');
+        $('#payment_card_form').find('#make_card_default').prop('checked', false);
+      }
+
+      clickOutside('.errors, .card-added-message-holder');
+
+      if($('.existing_gallery_item').length !== 0) {
+        $('.added-card-holder').show();
+      }
+  });
+
+
