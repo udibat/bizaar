@@ -10,123 +10,85 @@
   .settings-title
     %h3.section-subtitle.violet= t("settings.payments.title")
 
-  .wizard-content
+  // add new card holder
+  .add-card-holder
     %p Add a payment method and get started exploring Bizaar Classes!
-    // add new card holder
-    .add-card-holder
-      = image_tag "custom_images/cards.png", class: 'image'
-      = form_tag create_payment_card_path, method: 'post', remote: true, id: 'payment_card_form' do |f|
-        .input-holder
-          %span.bold Name on Card
-          .row
-            .col-5
-              = text_field_tag 'first_name', '', placeholder: 'First Name'
-            .col-5
-              = text_field_tag 'last_name', '', placeholder: 'Last Name'
-        .input-holder
-          .row
-            .col-5
-              %span.bold Card information
-              .row
-                .col-12
-                  = text_field_tag 'number', '', placeholder: 'Card Number'
-            .col-5
-              %span.bold.text-right.exp-date Expiration Date
-              .row
-                .col-6
-                  = text_field_tag 'cvc', '', placeholder: 'CVC'
-                .col-6
-                  = text_field_tag 'exp_date', '', placeholder: 'MM/YY'
-                  
-        .checkbox-item.default-checkbox
-          = check_box_tag 'make_card_default', '', false, class: 'input'
-          = label_tag 'make_card_default', 'Make Default Card', class: 'label'
+    = image_tag "custom_images/cards.png", class: 'image'
+    = form_tag create_payment_card_path, method: 'post', remote: true, id: 'payment_card_form' do |f|
+      .input-holder
+        %span.bold Name on Card
+        .row
+          .col-5
+            = text_field_tag 'first_name', '', placeholder: 'First Name'
+          .col-5
+            = text_field_tag 'last_name', '', placeholder: 'Last Name'
+      .input-holder
+        .row
+          .col-5
+            %span.bold Card information
+            .row
+              .col-12
+                = text_field_tag 'number', '', placeholder: 'Card Number'
+          .col-5
+            %span.bold.text-right.exp-date Expiration Date
+            .row
+              .col-6
+                = text_field_tag 'cvc', '', placeholder: 'CVC'
+              .col-6
+                = text_field_tag 'exp_date', '', placeholder: 'MM/YY'
+                
+      .checkbox-item.default-checkbox
+        = check_box_tag 'make_card_default', '', false, class: 'input'
+        = label_tag 'make_card_default', 'Make Default Card', class: 'label'
 
-        = submit_tag 'Add Card', class: 'btn btn--violet single-btn add-card'
-    .card-added-message-holder
-      .row
-        .col-7.lined.success-text
-          %p.uppercase.violet.bold Your card information has been saved.
-    .added-card-holder.existing-cards-holder
-      .existing_gallery
-        - @existing_cards.to_a.each_with_index do |card, idx|
-          .row.added-card-list.existing_gallery_item
-            .col-7.lined.added-card-item
-              .checkbox-item.default-checkbox
-                = check_box_tag "default_card[#{idx}]", card.id, card[:is_default_source], class: 'input set_default_card_chbx'
-                = label_tag "default_card[#{idx}]", 'Default Card', class: 'label'
-              .card-info
-                %span.bold Card ending with #{card.last4}
-      = link_to '+ Add a new card', '#', class: 'add-new-card-link link underline uppercase'
+    = submit_tag 'Add Card', class: 'btn btn--violet single-btn add-card'
+  .card-added-message-holder
+    .row
+      .col-7.lined.success-text
+        %p.uppercase.violet.bold Your card information has been saved.
+  .added-card-holder.existing-cards-holder
+    .existing_gallery
+      - @existing_cards.to_a.each_with_index do |card, idx|
+        .row.added-card-list.existing_gallery_item.lined
+          .col-10.added-card-item
+            .checkbox-item.default-checkbox
+              = check_box_tag "default_card[#{idx}]", card.id, card[:is_default_source], class: 'input set_default_card_chbx'
+              = label_tag "default_card[#{idx}]", 'Default Card', class: 'label'
+            .card-info
+              %span.bold Card ending with #{card.last4}
+          .col-2
+            .remove_existing_card
+              %span.icon-trash
+              Delete
+
+
+    = link_to '+ Add a new card', '#', class: 'add-new-card-link link underline uppercase'
+
 
 :javascript
-
-  function build_single_galley_spot(item, idx) {
-    var item_cont = $('<div>', {class: 'row added-card-list existing_gallery_item'})
-    var item_inner_cont = $('<div>', {class: 'col-7 lined added-card-item'})
-
-    var defaul_card_chbx_cont = $('<div>', {class: 'checkbox-item default-checkbox'})
-
-    var defaul_card_chbx_field = $('<input type="checkbox">', {class: 'input set_default_card_chbx'})
-    $(defaul_card_chbx_field).attr('name', 'make_card_default[' + idx + ']')
-    $(defaul_card_chbx_field).attr('id', 'make_card_default_' + idx + '')
-    //$(defaul_card_chbx_field).attr('id', 'custom_profile_cover_photos_attributes_' + idx + '_is_primary_photo')
-    $(defaul_card_chbx_field).addClass('input');
-    $(defaul_card_chbx_field).addClass('set_default_card_chbx');
-    $(defaul_card_chbx_field).val(item.id)
-    $(defaul_card_chbx_field).prop('checked', item.is_default_source);
-
-    var default_card_label = $('<label>', {class: 'label', for: 'make_card_default_' + idx + ''});
-    $(default_card_label).html('Default Card');
-
-    var card_info_cont = $('<div>', {class: 'card-info'});
-    //%span.bold Card ending with 4856
-    var card_info_span = $('<span>', {class: 'bold'});
-    $(card_info_span).html('Card ending with ' + item.last4 + '')
-    
-    card_info_cont.append(card_info_span);
-    
-    
-    defaul_card_chbx_cont.append(defaul_card_chbx_field);
-    defaul_card_chbx_cont.append(default_card_label);
-    item_inner_cont.append(defaul_card_chbx_cont);
-    item_inner_cont.append(card_info_cont);
-    
-    item_cont.append(item_inner_cont);
-
-    return item_cont;
-  }
-
-  function build_gallery_spots(items) {
-
-    $('.existing_gallery').html('');
-
-    items.forEach(function(item, i){
-      idx = i + 1
-      var item_cont = $('<div>', {class: 'row added-card-list existing_gallery_item'})
-
-      item_cont = build_single_galley_spot(item, idx)
-
-      $('.existing_gallery').append(item_cont);
-    })
-  }
-
-
   onDocumentReady(function(){
 
     $(".existing_gallery").on('click', '.set_default_card_chbx', function(e){
-
-        console.log($(e.target).val())
+        // console.log($(e.target).val())
         $.post("#{set_default_payment_card_path('').split('?').first}/" + $(e.target).val() + "", function(data){
           if (data.errors === undefined) {
-            build_gallery_spots(data.cards);
-            //document.location = data.new_step_url
+            document.location.reload();
           } else {
             $(".errors").html(data.errors)
           }
         });
     });
 
+    $(".existing_gallery").on('click', '.remove_existing_card', function(e){
+        // console.log($(e.target).val())
+        $.post("", function(data){
+          if (data.errors === undefined) {
+            document.location.reload();
+          } else {
+            $(".errors").html(data.errors)
+          }
+        });
+    });
 
     $(".submit_remote_form_btn").on('click', function(e){
       e.preventDefault();
@@ -134,24 +96,18 @@
       $("#payment_card_form").submit();
     });
 
-
     $("#payment_card_form").on("ajax:success", function(event, data){
-          console.log(data);
-          console.log("#{@confirm_step_path}");
-
           $('.add-card-holder').hide();
           $('.card-added-message-holder').show();
           $('.added-card-holder').show();
           
           if (data.errors === undefined) {
-            build_gallery_spots(data.cards);
-            //document.location = data.new_step_url
+            document.location.reload();
           } else {
             $(".errors").html(data.errors)
           }
         }
       ).on("ajax:error", function(event, data){
-          // console.log(data.responseJSON.error);
           console.log(data);
           $(".errors").html('Error:')
           var err_obj = data.responseJSON.error
@@ -169,6 +125,11 @@
         $('.add-card-holder').show();
       });
 
+      $('.add-card').on('click', function(event) {
+        event.preventDefault();
+        formAjaxSubmit();
+      });
+
       function clearForm() {
         $('#payment_card_form').find('input[type="text"]').val('');
         $('#payment_card_form').find('#make_card_default').prop('checked', false);
@@ -179,6 +140,27 @@
       if($('.existing_gallery_item').length !== 0) {
         $('.added-card-holder').show();
       }
+
+    function formAjaxSubmit() {
+      $("#payment_card_form").ajaxSubmit({
+        success: function(data){
+          document.location.reload();
+        },
+        error: function(data){
+          console.log(data)
+          if (data.responseJSON !== undefined && 
+            data.responseJSON.error !== undefined) {
+              alert(data.responseJSON.error);
+          }
+        }
+      });
+    }
+
+    if($('.added-card-list').length === 0) {
+      $('.add-card-holder').show();
+    } else {
+      $('.add-card-holder').hide();
+    }
   });
 
 
