@@ -161,6 +161,10 @@ CREATE TABLE `certifications` (
   `image_file_size` int(11) DEFAULT NULL,
   `image_updated_at` datetime DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '0',
+  `status_updated_at` datetime DEFAULT NULL,
+  `status_updated_by` varchar(255) DEFAULT NULL,
+  `rejection_reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_certifications_on_custom_profile_id` (`custom_profile_id`),
   KEY `index_certifications_on_category_id` (`category_id`),
@@ -2506,6 +2510,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190621143358'),
 ('20190625160338'),
 ('20190626160526'),
-('20190705145857');
+('20190705145857'),
+('20190709125703');
 
 

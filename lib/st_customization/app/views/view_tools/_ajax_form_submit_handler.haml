@@ -1,0 +1,29 @@
+:javascript
+  function formAjaxSubmit(form_selector = '.remote_ent_form') {
+    $(form_selector).ajaxSubmit({
+      success: function(data){
+        document.location.reload();
+      },
+      error: function(data){
+        console.log(data)
+        if (data.responseJSON !== undefined && 
+          data.responseJSON.error !== undefined) {
+            alert(data.responseJSON.error);
+        }
+      }
+    });
+  }
+
+  function deleteItem(delete_url) {
+    $.ajax({
+      url: delete_url,
+      type: 'DELETE',
+      success: function(data){            
+        document.location.reload();
+      },
+      error: function(data){
+        $(".errors").append('<div class="error-item">Can\'t delete item (' + data.status + ')</div>');
+      }
+    });
+  }
+

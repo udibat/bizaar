@@ -9,7 +9,10 @@
       %h3.section-subtitle.violet= t(".title")
       = link_to '#', class: 'edit-settings-button' do
         .icon-edit
-    = form_for @new_certification, remote: true, html: { multipart: true, id: 'new_certification_form', class: 'certification_form' } do |f|  
+    - if @certification_was_created
+      .success_message_spoiler
+        Done!
+    = form_for @new_certification, remote: true, html: { multipart: true, id: 'new_certification_form_ajax_form', class: 'certification_form' }, authenticity_token: true do |f|
       .row
         .col-6
           = f.select :category_id, categories_for_select, {}, { id: "category-select", class: 'custom-select', data: {:placeholder => 'Choose a Category for your Qualification'} }
@@ -29,34 +32,73 @@
             .uploaded-file-container.settings
               .pdfPreview.hidden-preview
                 = image_tag 'custom_images/pdf.png', class: 'image'
-    .row
-      - @existing_certifications.each do |cert|
-        .existing_certifications
-          = form_for cert, remote: true, html: { multipart: true, class: 'certification_form update_certification_form' } do |f|
-            .row
-              .col-6
-                = f.select :category_id, categories_for_select, {}, { id: "category-select", class: 'custom-select', data: {:placeholder => 'Choose a Category for your Qualification'} }
-                -# = select :category_id, categories_for_select, {}, { id: "category-select", data: {:placeholder => 'Choose a Category for your Qualification'} }, class: 'custom-select'
-              .col-6
-                = f.text_field :name, placeholder: 'The name of your Qualification', class: "input"
-                -# = text_field :name, placeholder: 'The name of your Qualification', class: "input"
-              .upload-files-holder
-                = f.file_field :image
-                .uploaded-file-container
-                  .pdfPreview.hidden-preview
-                    = image_tag 'custom_images/pdf.png', class: 'image'
-            = f.submit 'Save'
-          .certificate-item
-            .thumb-block
-              = image_tag cert.attachment_thumb_url, class: 'image'
-            .certificate-description
-              .file-name.qualification-name
-                = cert.name
-              .file-name.category-name
-                = cert.category_id
-              = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
-              = check_box :_destroy, '', class: 'remove-checkbox', data: {'cert_id' => cert.id}
-      // if user has been verified by admin - show verified-holder
+    = button_tag 'Get my badge!', class: 'remote_ent_form_submit_btn form-element'
+    .row.existing_certifications_container
+      .existing_certifications.pending_certifications
+        - if @pending_certifications.present?
+          %h3
+            Pending certifications
+        - @pending_certifications.each do |cert|
+          - cat_name = cert.category_name  
+          .row
+            .col-6
+              = cat_name
+            .col-6
+              = cert.name
+            .certificate-item
+              .thumb-block
+                = image_tag cert.attachment_thumb_url, class: 'image'
+              .certificate-description
+                .file-name.qualification-name
+                  = cert.name
+                .file-name.category-name
+                  = cat_name
+                = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
+                = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
+      .existing_certifications.approved_certifications
+        - if @approved_certifications.present?
+          %h3
+            Approved certifications
+        - @approved_certifications.each do |cert|
+          - cat_name = cert.category_name  
+          .row
+            .col-6
+              = cat_name
+            .col-6
+              = cert.name
+            .certificate-item
+              .thumb-block
+                = image_tag cert.attachment_thumb_url, class: 'image'
+              .certificate-description
+                .file-name.qualification-name
+                  = cert.name
+                .file-name.category-name
+                  = cat_name
+                = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
+                = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
+      .existing_certifications.approved_certifications
+        - if @rejected_certifications.present?
+          %h3
+            Rejected certifications
+        - @rejected_certifications.each do |cert|
+          - cat_name = cert.category_name  
+          .row
+            .col-6
+              = cat_name
+            .col-6
+              = cert.name
+            .col-6
+              = cert.rejection_reason
+            .certificate-item
+              .thumb-block
+                = image_tag cert.attachment_thumb_url, class: 'image'
+              .certificate-description
+                .file-name.qualification-name
+                  = cert.name
+                .file-name.category-name
+                  = cat_name
+                = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
+                = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
     .verified-holder
       .bold.uppercase You have recieved the following badge for this qualification:
       .verify-sign.badge-holder
@@ -67,10 +109,18 @@
   -# = render partial: 'admin/community_listings/table', locals: {placeholder: t('layouts.settings.listings_search_placeholder')}
 
 = render partial: 'certifications_js_handlers'
+= render partial: 'view_tools/ajax_form_submit_handler'
 
 :javascript
   onDocumentReady(function() {
-    $('.certification_form').on("ajax:success", function(){
-      document.location.reload();
+    $('.remote_ent_form_submit_btn').on("click", function(){
+      formAjaxSubmit('#new_certification_form_ajax_form');
+    });
+
+    $('.remove-cert-checkbox').on('click', function(){
+      //console.log($(this).data('certId'))
+      var delete_url = "#{certifications_path.split('?').first}" + "/" + $(this).data('certId') + "";
+      deleteItem(delete_url);
     });
   });
+
