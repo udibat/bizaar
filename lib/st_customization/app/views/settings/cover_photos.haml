@@ -28,6 +28,39 @@
                   = photos_fields.label :is_primary_photo, 'Make primary photo', class: 'remove-photo make-primary'
                   .primary-photo Primary photo
       -# = f.submit 'Save'
+      .row
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/facebook.png'
+            = f.text_field :social_link_facebook, :placeholder => 'Link to your Facebook'
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/twitter.png'
+            = f.text_field :social_link_twitter, :placeholder => 'Link to your Twitter '
+      .row
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/instagram.png'
+            = f.text_field :social_link_instagram, :placeholder => 'Link to your instagram'
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/youtube.png'
+            = f.text_field :social_link_youtube, :placeholder => 'Link to your Youtube'
+      .row
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/twitch.png'
+            = f.text_field :social_link_twitch, :placeholder => 'Link to your Twitch'
+        .col-6
+          .social-media-item
+            .social-icon
+              = image_tag 'custom_images/tumblr.png'
+            = f.text_field :social_link_vimeo, :placeholder => 'Link to your Tumblr'
     = button_tag 'Submit', class: 'remote_ent_form_submit_btn'
     
 :javascript
