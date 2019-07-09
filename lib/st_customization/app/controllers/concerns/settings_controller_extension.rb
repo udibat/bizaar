@@ -17,6 +17,7 @@ module SettingsControllerExtension
 
   def member_payments
     @selected_left_navi_link = "Payments"
+    @existing_cards = CustomStripeUtils.list_customer_payment_cards(@current_user, @current_community)
   end
 
   def social_media
