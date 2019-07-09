@@ -60,7 +60,7 @@
                         .visible-desktop.settings-email-mobile-label
                           = icon_tag("cross", ["account-settings-email-row-delete-cross", disabled_class])
                         .hidden-desktop.settings-email-mobile-label.settings-email-mobile-label{:class => disabled_class}
-                          = t(".email.remove_title")
+                          %span.red= t(".email.remove_title")
                   - else
                     .settings-email-mobile-label-container
                       .visible-desktop.settings-email-mobile-label
@@ -95,11 +95,13 @@
                 = link_to "#", :class => "account-hide-new-email-link" do
                   .visible-desktop= icon_tag("cross")
                   .hidden-desktop
-                    = t(".email.add_new_cancel")
+                    %span.red= t(".email.add_new_cancel")
               .account-settings-email-row-send-notification.account-settings-new-email-row
-                .settings-email-mobile-label= email_form.check_box :send_notifications, :disabled => "disabled"
-                .hidden-desktop.settings-email-mobile-label.settings-email-mobile-label-right
-                  = t(".email.receive_notifications_new_title_mobile")
+                .settings-email-mobile-label.default-checkbox
+                  = email_form.check_box :send_notifications, :disabled => "disabled", class: 'input'
+                  = label_tag "person_email_attributes_send_notifications", class: 'label' do
+                    .hidden-desktop.settings-email-mobile-label.settings-email-mobile-label-right
+                      = t(".email.receive_notifications_new_title_mobile")
 
               .account-settings-email-row-confirmed
                 &nbsp;

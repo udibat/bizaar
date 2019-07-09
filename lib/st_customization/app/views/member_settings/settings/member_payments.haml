@@ -6,7 +6,10 @@
 
 = render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
 
-#person_settings_form.left-navi-section.settings-section.notification-settings
+#person_settings_form.left-navi-section.settings-section.payment-settings
+  .settings-form
+    .settings-title
+      %h3.section-subtitle.violet= t("settings.payments.title")
   -# = form_for @current_user do |form|
 
   -#   %h2= t(".community_updates")

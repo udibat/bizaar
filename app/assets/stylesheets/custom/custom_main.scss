@@ -271,10 +271,15 @@ img {
       color: $cust-text;
     }
   }
+}
+
+.btn, 
+button {
   &.disabled {
     pointer-events: none;
     background-color: #dae0e6;
     border-color: #dae0e6;
+    color: #fff;
   }
 }
 
@@ -809,4 +814,8 @@ button {
 
 .disabled {
   pointer-events: none;
+}
+
+.red {
+  color: #ff0000;
 }
