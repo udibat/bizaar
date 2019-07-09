@@ -911,6 +911,10 @@ p {
   .add-card-holder {
     display: none;
   }
+  .added-card-list {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .remove_existing_card {

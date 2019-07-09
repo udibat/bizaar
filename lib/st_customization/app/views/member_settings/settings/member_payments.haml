@@ -47,17 +47,18 @@
       .col-7.lined.success-text
         %p.uppercase.violet.bold Your card information has been saved.
   .added-card-holder.existing-cards-holder
-    .existing_gallery
+    .existing_gallery.mb-40
       - @existing_cards.to_a.each_with_index do |card, idx|
-        .row.added-card-list.existing_gallery_item.lined
-          .col-10.added-card-item
+        .added-card-list.existing_gallery_item.lined
+          .added-card-item
             .checkbox-item.default-checkbox
               = check_box_tag "default_card[#{idx}]", card.id, card[:is_default_source], class: 'input set_default_card_chbx'
               = label_tag "default_card[#{idx}]", 'Default Card', class: 'label'
             .card-info
               %span.bold Card ending with #{card.last4}
-          .col-2
-            .remove_existing_card
+          .remove_existing_card
+            = check_box_tag "remove_card[#{idx}]", card.id, false, class: 'input remove_card'
+            = label_tag "remove_card[#{idx}]", class: 'label' do
               %span.icon-trash
               Delete
 
