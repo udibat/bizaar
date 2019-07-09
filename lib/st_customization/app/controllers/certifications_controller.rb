@@ -13,6 +13,7 @@ class CertificationsController < ApplicationController
     @cert = @current_user.custom_profile.certifications.build(certification_params)
 
     if @cert.save
+      flash[:certification_was_created] = 'Qualifications was created successfully'
       render json: {
         existing_certifications: CertificationWizardDecorator.decorate_collection(
           @current_user.custom_profile.certifications)

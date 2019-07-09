@@ -6,7 +6,15 @@ module SettingsControllerExtension
   include MemberChecker
 
   def qualifications
-    @existing_certifications = @current_user.custom_profile.certifications.to_a
+    @pending_certifications = CertificationWizardDecorator.decorate_collection(
+      @current_user.custom_profile.certifications.status_pending).to_a
+    @approved_certifications = CertificationWizardDecorator.decorate_collection(
+      @current_user.custom_profile.certifications.status_approved).to_a      
+    @rejected_certifications = CertificationWizardDecorator.decorate_collection(
+      @current_user.custom_profile.certifications.status_rejected).to_a
+
+    @certification_was_created = flash[:certification_was_created].present?
+
     @new_certification = @current_user.custom_profile.certifications.build
   end
 
