@@ -10,6 +10,12 @@ class Certification < ApplicationRecord
     end
   }
 
+  enum status: [
+    :pending,
+    :approved,
+    :rejected
+  ], _prefix: true
+
   validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf']
 
   belongs_to :custom_profile
