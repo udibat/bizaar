@@ -12,7 +12,10 @@
     = form_for @custom_profile, remote: true, format: :json, html: { multipart: true, class: 'remote_ent_form' }, authenticity_token: true do |f|
       = f.fields_for :cover_photos, @custom_profile.cover_photos.build do |photos_fields|
         = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][0][image][]" if photos_fields.object.new_record?
-      .existing_cover_photos
+      .row.mb-25
+        .col-12
+          %h3.section-subtitle.section-subtitle--regular Cover Photos
+      .existing_cover_photos.mb-50
         = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
           - unless photos_fields.object.new_record?
             .fields_cont.existing_photo_record
@@ -28,6 +31,14 @@
                   = photos_fields.label :is_primary_photo, 'Make primary photo', class: 'remove-photo make-primary'
                   .primary-photo Primary photo
       -# = f.submit 'Save'
+      .row.mb-25
+        .col-12
+          %h3.section-subtitle.section-subtitle--regular.mb-15 Social Media Links
+          %p Help our members get to know you better by linking your Bizaar profile with other social media sites you frequent.
+          %p 
+            Keep in mind that we don't allow product advertisements or solicitations on this site, so please don't create links the lead to such pages. Learn more about these policies at our 
+            = link_to 'Community Rules of Conduct.', '#', class: 'link'
+            
       .row
         .col-6
           .social-media-item
@@ -61,13 +72,30 @@
             .social-icon
               = image_tag 'custom_images/tumblr.png'
             = f.text_field :social_link_vimeo, :placeholder => 'Link to your Tumblr'
-    = button_tag 'Submit', class: 'remote_ent_form_submit_btn'
+    = button_tag 'Save Changes', class: 'remote_ent_form_submit_btn form-element'
     
 :javascript
 
   onDocumentReady(function(){
+    $('.trigger_upload').on('click', function(event) {
+      event.preventDefault();
+      $('input[type="file"]').trigger('click');
+    });
+
+    $('.remote_ent_form').on('click', '.delete_record_chbx', function(){
+      formAjaxSubmit();
+    });
+
+    $('.remote_ent_form').on('click', '.set_primary_record_chbx', function(e){
+      $('.set_primary_record_chbx:not(#' + e.target.id + ')').val(0);
+      formAjaxSubmit();
+    });
 
     $('.remote_ent_form_submit_btn').on("click", function(){
+      formAjaxSubmit();
+    });
+
+    function formAjaxSubmit() {
       $(".remote_ent_form").ajaxSubmit({
         success: function(data){
           document.location.reload();
@@ -80,7 +108,7 @@
           }
         }
       });
-    });
+    }
 
   });
 

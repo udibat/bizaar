@@ -86,7 +86,8 @@ $(document).ready(function() {
 
 
   $('.settings-form form').find('textarea, input, select').attr('disabled', 'disabled');
-  $('.settings-form form').find('button, a').addClass('disabled');
+  $('.settings-form form').find('button, a:not(".link")').addClass('disabled');
+  $('.settings-form').find('.form-element').addClass('disabled');
 
   $('.settings-form').on('click', '.edit-settings-button', function(e) {
     e.preventDefault();

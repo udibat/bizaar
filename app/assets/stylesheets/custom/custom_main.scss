@@ -650,6 +650,10 @@ input[type=text], input[type=password], input[type=number], textarea, .custom-se
   flex-shrink: 0;
 }
 
+.mb-15 {
+  margin-bottom: 15px;
+}
+
 .mb-25 {
   margin-bottom: 25px;
 }
@@ -818,4 +822,10 @@ button {
 
 .red {
   color: #ff0000;
+}
+
+.edit-settings-button {
+  .icon-edit {
+    color: $cust-violet;
+  }
 }
