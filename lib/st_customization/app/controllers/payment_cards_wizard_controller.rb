@@ -12,7 +12,7 @@ class PaymentCardsWizardController < ApplicationController
       
     CustomStripeUtils.set_customer_default_source(stripe_customer_id, params['id'])
 
-    cards = CustomStripeUtils.list_customer_payment_cards(@current_user, @current_community)
+    cards = CustomStripeUtils.list_customer_payment_cards(@current_user, @current_community) rescue nil
     
     if cards
       render json: {
@@ -24,7 +24,7 @@ class PaymentCardsWizardController < ApplicationController
   end
 
   def index
-    cards = CustomStripeUtils.list_customer_payment_cards(@current_user, @current_community)
+    cards = CustomStripeUtils.list_customer_payment_cards(@current_user, @current_community) rescue nil
     
     if cards
       render json: {
@@ -89,7 +89,26 @@ class PaymentCardsWizardController < ApplicationController
   end
 
   def destroy
+    error_message = nil
+    res = begin
+      CustomStripeUtils.delete_customer_oayment_card(
+        @current_user,
+        @current_community,
+        params['id']
+      )
+    rescue Stripe::StripeError => e
+      error_message = e.message
+      false
+    rescue => e
+      error_message = 'Ooops! Something went wrong...'
+      false
+    end
 
+    if res
+      render json: res, status: 200
+    else
+      render json: { error: error_message }, status: 422
+    end
   end
 
 end

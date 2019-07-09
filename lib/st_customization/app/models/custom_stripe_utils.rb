@@ -16,7 +16,7 @@ module CustomStripeUtils
 
 
   def self.list_customer_payment_cards(user, community, cached_stripe_customer = nil)
-    sett = StripeService::API::StripeApiWrapper.payment_settings_for(Community.first)
+    sett = StripeService::API::StripeApiWrapper.payment_settings_for(community)
     StripeService::API::StripeApiWrapper.configure_payment_for(sett)
 
     stripe_acc = cached_stripe_customer || self.get_or_create_stripe_customer_account(user, community)
@@ -41,7 +41,7 @@ module CustomStripeUtils
 
   def self.create_customer_payment_card(user, community, card_params = {})
 
-    sett = StripeService::API::StripeApiWrapper.payment_settings_for(Community.first)
+    sett = StripeService::API::StripeApiWrapper.payment_settings_for(community)
     StripeService::API::StripeApiWrapper.configure_payment_for(sett)
 
     stripe_acc_id = user.stripe_account.try(:stripe_customer_id)
@@ -66,6 +66,17 @@ module CustomStripeUtils
     )
   end
 
+  def self.delete_customer_oayment_card(user, community, card_id)
+
+    sett = StripeService::API::StripeApiWrapper.payment_settings_for(community)
+    StripeService::API::StripeApiWrapper.configure_payment_for(sett)
+
+    Stripe::Customer.delete_source(
+      user.stripe_account.stripe_customer_id,
+      card_id
+    )
+  end
+
   # def self.create_customer_payment_card(stripe_customer_acc_id, card_params = {})
   #   Stripe::Customer.create_source(
   #     stripe_customer_acc_id,
@@ -77,7 +88,7 @@ module CustomStripeUtils
 
   def self.get_or_create_stripe_customer_account(user, community)
 
-    sett = StripeService::API::StripeApiWrapper.payment_settings_for(Community.first)
+    sett = StripeService::API::StripeApiWrapper.payment_settings_for(community)
     StripeService::API::StripeApiWrapper.configure_payment_for(sett)
 
     user.create_stripe_account unless user.stripe_account
