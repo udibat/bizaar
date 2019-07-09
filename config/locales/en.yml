@@ -2566,6 +2566,8 @@ en:
     save_information: "Save information"
     payments: 
       title: "Your Payment Settings"
+    cover_photos:
+      title: "Cover Photos & Social Media"
   shipping_address:
     shipping_address: "Shipping address"
   tag_cloud:
