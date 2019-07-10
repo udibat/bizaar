@@ -576,9 +576,15 @@ p {
 .after-uploading {
   display: none;
   .small-title {
+    padding: 27px 83px;
+  }
+}
+
+.after-uploading,
+.success_message_spoiler {
+  .small-title {
     align-items: flex-start;
     background-color: $cust-green;
-    padding: 27px 83px;
     text-align: center;
     line-height: 28px;
     @include sintony;
@@ -591,6 +597,13 @@ p {
     width: 21px;
     height: 21px;
     margin-top: 3px;
+  }
+}
+
+.success_message_spoiler {
+  .small-title {
+    font-size: 18px;
+    padding: 27px 70px;
   }
 }
 
@@ -958,6 +971,9 @@ p {
     display: block;
     margin: 0;
   }
+  .uploaded-file-container {
+    margin-top: 15px;
+  }
 }
 
 .border-column {
@@ -967,11 +983,14 @@ p {
 .cert-info-item {
   padding: 0 20px;
   position: relative;
-  &:first-child {
+  width: 50%;
+  margin-bottom: 10px;
+  &:first-child,
+  &:nth-child(3) {
     padding-left: 0;
   }
-  &:last-child {
-    padding-right: 0;
+  &:nth-child(2) {
+    border: none;
   }
   .remove-photo, .icon-remove {
     color: $cust-violet;
@@ -982,10 +1001,37 @@ p {
   }
   input[type="checkbox"] {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 0;
     height: 0;
     opacity: 0;
+  }
+  @include media(small-tablet) {
+    margin-bottom: 0;
+    &:first-child {
+      padding-left: 0;
+      width: 33.33%;
+    }
+    &:nth-child(2) {
+      border-right: 1px solid $cust-light-gray;
+    }
+    &:nth-child(3) {
+      padding-left: 20px;
+    } 
+    &:nth-child(2), 
+    &:nth-child(3) {
+      width: 25%; 
+    }
+    &:last-child {
+      padding-right: 0;
+      width: 16.67%;
+    }
+  }
+}
+
+.existing-qual-item {
+  display: flex;
+  flex-wrap: wrap;
+  @include media(small-tablet) {
+    flex-wrap: nowrap;
   }
 }

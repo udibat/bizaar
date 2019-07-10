@@ -58,7 +58,7 @@
         processData: false,
         contentType: false,
         success: function(data) {
-          $('.after-uploading').show();
+          // $('.after-uploading').show();
           $('.uploaded-file').hide();
           $('.existing_certifications').html('')
           data.existing_certifications.forEach(function(item, i) {
@@ -81,7 +81,6 @@
             $('.existing_certifications').append(certificateItem);
 
             $('.uploading-form').hide();
-            clickOutside('.after-uploading');
             $('.added-certifications-holder').show();
           })
           // $('.skip-qual-btn').hide();
@@ -107,6 +106,8 @@
       clearForm();
     });
 
+    clickOutside('.after-uploading, .success_message_spoiler');
+    
     if ($('.certificate-item').length !== 0) {
       $('.added-certifications-holder').show();
       $('.skip-qual-btn').hide();
