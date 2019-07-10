@@ -699,6 +699,11 @@ CREATE TABLE `id_verifications` (
   `image_content_type` varchar(255) DEFAULT NULL,
   `image_file_size` int(11) DEFAULT NULL,
   `image_updated_at` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT '0',
+  `status_updated_at` datetime DEFAULT NULL,
+  `status_updated_by` varchar(255) DEFAULT NULL,
+  `rejection_reason` varchar(255) DEFAULT NULL,
+  `identification_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_id_verifications_on_custom_profile_id` (`custom_profile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2511,6 +2516,8 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190625160338'),
 ('20190626160526'),
 ('20190705145857'),
-('20190709125703');
+('20190709125703'),
+('20190710124755'),
+('20190710130334');
 
 
