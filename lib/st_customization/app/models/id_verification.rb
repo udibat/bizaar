@@ -5,5 +5,11 @@ class IdVerification < ApplicationRecord
 
   belongs_to :custom_profile
 
+  enum status: [
+    :pending,
+    :approved,
+    :rejected
+  ], _prefix: true
+
 end
 

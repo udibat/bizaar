@@ -48,7 +48,7 @@ class IdVerificationsController < ApplicationController
 private
 
   def id_verification_params
-    params.require(:id_verification).permit(:id, :image)
+    params.require(:id_verification).permit(:id, :image, :identification_type)
   end
 
   def find_id_vfc
