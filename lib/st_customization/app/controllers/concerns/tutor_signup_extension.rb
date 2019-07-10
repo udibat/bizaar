@@ -19,6 +19,8 @@ module TutorSignupExtension
       show_before_redef
 
       @custom_profile = @service.person.custom_profile || @service.person.create_custom_profile
+      @received_testimonials = @service.person.categorized_testimonials(@current_community)
+
       if @service.person.is_tutor?
         render 'people/show_tutor'
       else

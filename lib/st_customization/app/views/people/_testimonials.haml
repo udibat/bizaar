@@ -1,0 +1,14 @@
+.profile-testimonials-list
+  - testimonial_arr = received_testimonials.take(limit)
+  - curr_category = 0
+  - testimonial_arr.each do |testimonial|
+    - if testimonial.tx.listing.category_id != curr_category
+      - curr_category = testimonial.tx.listing.category_id
+      %h3.category_name
+        = testimonial.tx.listing.category.display_name(I18n.locale)
+    = render partial: 'people/testimonial', locals: {testimonial: testimonial}
+.row.load-more-link
+  - if received_testimonials.size > limit
+    #load-more-categorized-testimonials.load-more-testimonials
+      = link_to t("people.show.show_all_reviews"), "#"
+

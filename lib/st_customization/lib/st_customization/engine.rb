@@ -15,6 +15,7 @@ module StCustomization
       OmniauthController.send(:include, OmniauthTutorExtension)
       SettingsController.send(:include, SettingsControllerExtension)
       HomepageController.send(:include, HomepageControllerExtension)
+      TestimonialsController.send(:include, TestimonialsControllerExtension)
 
       # the following is unstable (causing routes drawing fails on `reload!`), 
       # additional ivestigating required

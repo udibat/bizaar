@@ -2,8 +2,8 @@
   - if @custom_profile.cover_photos.count < 1
     %li
       = image_tag('slider_profile_bg.jpg', :class => "")
-
   - else
-    - @custom_profile.cover_photos.each do |c_photo|
+    - @custom_profile.cover_photos.order(is_primary_photo: :desc).each do |c_photo|
       %li
-        = image_tag(c_photo.image.url(:medium), :class => "")
+        = image_tag(c_photo.image.url(:large), :class => "")
+

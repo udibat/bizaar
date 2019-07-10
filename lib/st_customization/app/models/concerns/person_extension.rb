@@ -20,6 +20,12 @@ module PersonExtension
     validates_presence_of :birthday, unless: :is_admin?
     validates_presence_of :zip_code, unless: :is_admin?
 
+    def categorized_testimonials(community)
+      received_testimonials.by_community(community).
+        joins(tx: :listing).includes(tx: :listing).
+        reorder('listings.category_id asc, testimonials.created_at asc')
+    end
+
     def validate_age
       if birthday.present? && birthday > MIN_PERSON_AGE.years.ago.to_date
         errors.add(:birthday, "You should be over #{MIN_PERSON_AGE} years old.")
