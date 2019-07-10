@@ -6,6 +6,7 @@ module SettingsControllerExtension
   include MemberChecker
 
   def qualifications
+    @selected_left_navi_link = "qualifications"
     @pending_certifications = CertificationWizardDecorator.decorate_collection(
       @current_user.custom_profile.certifications.status_pending).to_a
     @approved_certifications = CertificationWizardDecorator.decorate_collection(
@@ -19,12 +20,13 @@ module SettingsControllerExtension
   end
 
   def id_verification
+    @selected_left_navi_link = "id_verification"
     @id_verification = @current_user.custom_profile.id_verifications.first
     @id_verification ||= @current_user.custom_profile.id_verifications.build
   end
 
   def member_payments
-    @selected_left_navi_link = "Payments"
+    @selected_left_navi_link = "payments"
     @existing_cards = CustomStripeUtils.list_customer_payment_cards(@current_user, @current_community)
   end
 
@@ -33,6 +35,7 @@ module SettingsControllerExtension
   end
 
   def cover_photos
+    @selected_left_navi_link = "cover_photos"
     @custom_profile = @current_user.custom_profile
   end
 
