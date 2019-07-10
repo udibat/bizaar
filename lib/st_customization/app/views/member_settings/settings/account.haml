@@ -69,8 +69,8 @@
                         = t(".email.remove_title")
                 .account-settings-email-row-send-notification
                   .settings-email-mobile-label-container.default-checkbox
-                    = check_box_tag "person[send_notifications][]", email.id, email.send_notifications?, :class => "account-settings-email-row-send-notification-checkbox"
-                    = label_tag "person[send_notifications][]", class: 'label' do
+                    = check_box_tag "person[send_notifications][]", email.id, email.send_notifications?, :class => "account-settings-email-row-send-notification-checkbox", id: "person_send_notifications_#{index}"
+                    = label_tag "person_send_notifications_#{index}", class: 'label' do
                       .hidden-desktop
                         = t(".email.receive_notifications_title_mobile")
                 .account-settings-email-row-confirmed

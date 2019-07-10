@@ -10,6 +10,7 @@
   .settings-title
     %h3.section-subtitle.violet= t("settings.payments.title")
 
+  %span.errors
   // add new card holder
   .add-card-holder
     %p Add a payment method and get started exploring Bizaar Classes!
@@ -38,7 +39,7 @@
                 = text_field_tag 'exp_date', '', placeholder: 'MM/YY'
                 
       .checkbox-item.default-checkbox
-        = check_box_tag 'make_card_default', '', false, class: 'input'
+        = check_box_tag 'make_card_default', 'true', false, class: 'input'
         = label_tag 'make_card_default', 'Make Default Card', class: 'label'
 
     = submit_tag 'Add Card', class: 'btn btn--violet single-btn add-card'
@@ -65,6 +66,7 @@
 
     = link_to '+ Add a new card', '#', class: 'add-new-card-link link underline uppercase'
 
+= render partial: 'view_tools/ajax_form_submit_handler'
 
 :javascript
   onDocumentReady(function(){
@@ -81,44 +83,9 @@
     });
 
     $(".existing_gallery").on('click', '.remove_existing_card', function(e){
-        // console.log($(e.target).val())
-        $.post("", function(data){
-          if (data.errors === undefined) {
-            document.location.reload();
-          } else {
-            $(".errors").html(data.errors)
-          }
-        });
+      var delete_url = "#{destroy_payment_card_path('').split('?').first}" + "/" + encodeURIComponent($(e.target).val()) + "";
+      deleteItem(delete_url);
     });
-
-    $(".submit_remote_form_btn").on('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      $("#payment_card_form").submit();
-    });
-
-    $("#payment_card_form").on("ajax:success", function(event, data){
-          $('.add-card-holder').hide();
-          $('.card-added-message-holder').show();
-          $('.added-card-holder').show();
-          
-          if (data.errors === undefined) {
-            document.location.reload();
-          } else {
-            $(".errors").html(data.errors)
-          }
-        }
-      ).on("ajax:error", function(event, data){
-          console.log(data);
-          $(".errors").html('Error:')
-          var err_obj = data.responseJSON.error
-          console.log(err_obj);
-          Object.keys(err_obj).forEach(function (key) { 
-            var value = err_obj[key]
-            $(".errors").append(key + ': ' + value[0]);
-          })
-        }
-      )
 
       $('.add-new-card-link').on('click', function(event) {
         event.preventDefault();
@@ -128,7 +95,7 @@
 
       $('.add-card').on('click', function(event) {
         event.preventDefault();
-        formAjaxSubmit();
+        formAjaxSubmit("#payment_card_form");
       });
 
       function clearForm() {
@@ -142,26 +109,10 @@
         $('.added-card-holder').show();
       }
 
-    function formAjaxSubmit() {
-      $("#payment_card_form").ajaxSubmit({
-        success: function(data){
-          document.location.reload();
-        },
-        error: function(data){
-          console.log(data)
-          if (data.responseJSON !== undefined && 
-            data.responseJSON.error !== undefined) {
-              alert(data.responseJSON.error);
-          }
-        }
-      });
-    }
-
     if($('.added-card-list').length === 0) {
       $('.add-card-holder').show();
     } else {
       $('.add-card-holder').hide();
     }
   });
-
 

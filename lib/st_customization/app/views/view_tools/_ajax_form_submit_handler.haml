@@ -6,10 +6,7 @@
       },
       error: function(data){
         console.log(data)
-        if (data.responseJSON !== undefined && 
-          data.responseJSON.error !== undefined) {
-            alert(data.responseJSON.error);
-        }
+        displayErrorData(data);
       }
     });
   }
@@ -22,8 +19,32 @@
         document.location.reload();
       },
       error: function(data){
-        $(".errors").append('<div class="error-item">Can\'t delete item (' + data.status + ')</div>');
+        displayErrorData(data);
       }
     });
+  }
+
+  function displayErrorData(data) {
+    if (data.responseJSON !== undefined && data.responseJSON.error !== undefined) {
+      if (typeof data.responseJSON.error == 'string') {
+        $(".errors").append('<div class="error-item">' + data.responseJSON.error + '</div>');
+      } else {
+        var err_obj = data.responseJSON.error
+        console.log(err_obj);
+        Object.keys(err_obj).forEach(function (key) { 
+          var value = err_obj[key]
+          $(".errors").append(key + ': ' + value[0]);
+        })
+      }
+      
+    } else {
+      $(".errors").append('<div class="error-item">Can\'t delete item (' + data.status + ')</div>');
+    }
+    $(".errors").show();
+
+    setTimeout(function(){
+      $(".errors").html('');
+      $(".errors").hide();
+    }, 5000);
   }
 
