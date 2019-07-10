@@ -4,17 +4,16 @@
 = render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
 
 .left-navi-section.settings-section.id-verification-section
-  .settings-form
+  .settings-form-
     .settings-title
       %h3.section-subtitle.violet= t(".title")
       = link_to '#', class: 'edit-settings-button' do
         .icon-edit
     = form_for @custom_profile, remote: true, format: :json, html: { multipart: true, class: 'remote_ent_form' }, authenticity_token: true do |f|
-      = f.fields_for :cover_photos, @custom_profile.cover_photos.build do |photos_fields|
-        = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][0][image][]" if photos_fields.object.new_record?
       .row.mb-25
         .col-12
           %h3.section-subtitle.section-subtitle--regular Cover Photos
+
       .existing_cover_photos.mb-50
         = f.fields_for :cover_photos, @custom_profile.cover_photos do |photos_fields|
           - unless photos_fields.object.new_record?
@@ -31,6 +30,11 @@
                   = photos_fields.label :is_primary_photo, 'Make primary photo', class: 'remove-photo make-primary'
                   .primary-photo Primary photo
       -# = f.submit 'Save'
+      %p.bold.uppercase.violet Upload a new Cover Photo
+      .upload-new-holder
+
+        = f.fields_for :cover_photos, @custom_profile.cover_photos.build do |photos_fields|
+          = photos_fields.file_field :image, multiple: true, name: "custom_profile[cover_photos_attributes][0][image][]" if photos_fields.object.new_record?
       .row.mb-25
         .col-12
           %h3.section-subtitle.section-subtitle--regular.mb-15 Social Media Links

@@ -82,7 +82,7 @@
         });
     });
 
-    $(".existing_gallery").on('click', '.remove_existing_card', function(e){
+    $(".existing_gallery").on('click', '.remove_card', function(e){
       var delete_url = "#{destroy_payment_card_path('').split('?').first}" + "/" + encodeURIComponent($(e.target).val()) + "";
       deleteItem(delete_url);
     });

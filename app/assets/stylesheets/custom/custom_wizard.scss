@@ -536,20 +536,25 @@ p {
   margin: 30px auto; 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   display: none;
-  svg {
-    width: 19px;
-    height: 17px;
-    margin-right: 4px;
-    path {
-      fill: #fff;
-    }
-  }
-  &:hover, &:focus {
+  &-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     svg {
+      width: 19px;
+      height: 17px;
+      margin-right: 4px;
       path {
-        fill: $cust-green;
+        fill: #fff;
+      }
+    }
+    &:hover, &:focus {
+      svg {
+        path {
+          fill: $cust-green;
+        }
       }
     }
   }
@@ -571,9 +576,15 @@ p {
 .after-uploading {
   display: none;
   .small-title {
+    padding: 27px 83px;
+  }
+}
+
+.after-uploading,
+.success_message_spoiler {
+  .small-title {
     align-items: flex-start;
     background-color: $cust-green;
-    padding: 27px 83px;
     text-align: center;
     line-height: 28px;
     @include sintony;
@@ -586,6 +597,13 @@ p {
     width: 21px;
     height: 21px;
     margin-top: 3px;
+  }
+}
+
+.success_message_spoiler {
+  .small-title {
+    font-size: 18px;
+    padding: 27px 70px;
   }
 }
 
@@ -915,9 +933,105 @@ p {
     display: flex;
     justify-content: space-between;
   }
+  .add-new-card-link {
+    margin-top: 40px;
+  }
+
 }
 
 .remove_existing_card {
   padding: 10px 0 20px;
   cursor: pointer;
+  position: relative;
+  input[type="checkbox"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+}
+
+.settings-section {
+  font-size: 13px;
+  @include sintony;
+  .get-badge {
+    margin: 0;
+  }
+}
+
+.get-badge-btn {
+  width: 100%;
+}
+
+.settings-qualification {
+  .certification_form {
+    display: none;
+  }
+  .existing_certifications {
+    display: block;
+    margin: 0;
+  }
+  .uploaded-file-container {
+    margin-top: 15px;
+  }
+}
+
+.border-column {
+  border-right: 1px solid $cust-light-gray;
+}
+
+.cert-info-item {
+  padding: 0 20px;
+  position: relative;
+  width: 50%;
+  margin-bottom: 10px;
+  &:first-child,
+  &:nth-child(3) {
+    padding-left: 0;
+  }
+  &:nth-child(2) {
+    border: none;
+  }
+  .remove-photo, .icon-remove {
+    color: $cust-violet;
+  }
+  .remove-photo {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  input[type="checkbox"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  @include media(small-tablet) {
+    margin-bottom: 0;
+    &:first-child {
+      padding-left: 0;
+      width: 33.33%;
+    }
+    &:nth-child(2) {
+      border-right: 1px solid $cust-light-gray;
+    }
+    &:nth-child(3) {
+      padding-left: 20px;
+    } 
+    &:nth-child(2), 
+    &:nth-child(3) {
+      width: 25%; 
+    }
+    &:last-child {
+      padding-right: 0;
+      width: 16.67%;
+    }
+  }
+}
+
+.existing-qual-item {
+  display: flex;
+  flex-wrap: wrap;
+  @include media(small-tablet) {
+    flex-wrap: nowrap;
+  }
 }
