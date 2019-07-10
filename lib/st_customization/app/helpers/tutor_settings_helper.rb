@@ -3,11 +3,21 @@ module TutorSettingsHelper
 
   def custom_settings_links_for(person, community=nil, restrict_for_admin=false)
 
-    if person.is_tutor?
+    links_arr = if person.is_tutor?
       tutor_settings_links(person, community, restrict_for_admin)
     else
       member_settings_links(person, community, restrict_for_admin)
     end
+
+    links_arr + [
+      {
+        :id => "settings-tab-logout",
+        :text => t('community_memberships.new.log_out'),
+        :icon_class => icon_class("thumbnails"),
+        :path => logout_path,
+        :name => "Log out"
+      },
+    ]
 
   end
 
@@ -21,14 +31,14 @@ module TutorSettingsHelper
         :text => t("layouts.settings.payments"),
         :icon_class => icon_class("thumbnails"),
         :path => member_payment_settings_path(person),
-        :name => "Payments"
+        :name => "payments"
       },
       {
         :id => "settings-tab-id_verification",
-        :text => t("layouts.settings.id_verification"),
+        :text => 'Id verification',
         :icon_class => icon_class("thumbnails"),
         :path => person_id_verification_settings_path(person),
-        :name => "id verification"
+        :name => "id_verification"
       },
     ]
   end
@@ -38,24 +48,24 @@ module TutorSettingsHelper
     settings_links_for(person, community, restrict_for_admin) + [
       {
         :id => "settings-tab-qualifications",
-        :text => t("layouts.settings.qualifications"),
+        :text => 'Qualifications',
         :icon_class => icon_class("thumbnails"),
         :path => person_qualifications_settings_path(person),
         :name => "qualifications"
       },
       {
         :id => "settings-tab-id_verification",
-        :text => t("layouts.settings.id_verification"),
+        :text => 'Id verification',
         :icon_class => icon_class("thumbnails"),
         :path => person_id_verification_settings_path(person),
-        :name => "id verification"
+        :name => "id_verification"
       },
       {
         :id => "settings-tab-cover_photos",
-        :text => t("layouts.settings.cover_photos"),
+        :text => 'Cover photos',
         :icon_class => icon_class("thumbnails"),
         :path => person_cover_photos_settings_path(person),
-        :name => "cover photos"
+        :name => "cover_photos"
       },
       # {
       #   :id => "settings-tab-social_media",
