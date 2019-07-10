@@ -536,20 +536,25 @@ p {
   margin: 30px auto; 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   display: none;
-  svg {
-    width: 19px;
-    height: 17px;
-    margin-right: 4px;
-    path {
-      fill: #fff;
-    }
-  }
-  &:hover, &:focus {
+  &-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     svg {
+      width: 19px;
+      height: 17px;
+      margin-right: 4px;
       path {
-        fill: $cust-green;
+        fill: #fff;
+      }
+    }
+    &:hover, &:focus {
+      svg {
+        path {
+          fill: $cust-green;
+        }
       }
     }
   }
@@ -920,4 +925,14 @@ p {
 .remove_existing_card {
   padding: 10px 0 20px;
   cursor: pointer;
+}
+
+.settings-section {
+  .get-badge {
+    margin: 0;
+  }
+}
+
+.get-badge-btn {
+  width: 100%;
 }
