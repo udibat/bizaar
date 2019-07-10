@@ -920,11 +920,21 @@ p {
     display: flex;
     justify-content: space-between;
   }
+  .add-new-card-link {
+    margin-top: 40px;
+  }
 }
 
 .remove_existing_card {
   padding: 10px 0 20px;
   cursor: pointer;
+  position: relative;
+  input[type="checkbox"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
 }
 
 .settings-section {
@@ -935,4 +945,10 @@ p {
 
 .get-badge-btn {
   width: 100%;
+}
+
+.settings-qualification {
+  .certification_form {
+    display: none;
+  }
 }
