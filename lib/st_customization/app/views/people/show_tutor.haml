@@ -80,10 +80,23 @@
               = t(".no_reviews")
           - if @service.received_testimonials?
             #profile-testimonials-list
-              = render :partial => "testimonials", :locals => {:received_testimonials => @service.received_testimonials, :limit => 3}
+              = render :partial => "testimonials", :locals => {:received_testimonials => @received_testimonials, :limit => 3}
 
 
 
 - content_for :extra_javascript do
   :javascript
     window.ST.initializeFollowButtons();
+
+:javascript
+  onDocumentReady(function() {
+    $('#load-more-categorized-testimonials').click(function() {
+      load_more_path = "#{person_categorized_testimonials_path(@service.person)}";
+      $.get(load_more_path, {per_page: 200, page: 1}, function(data) {
+        $('#profile-testimonials-list').html(data);
+        display_rating($('#profile-testimonials-list'));
+      });
+      return false;
+    });
+  });
+
