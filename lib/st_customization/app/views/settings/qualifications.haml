@@ -69,53 +69,65 @@
       
 
       -# = button_tag 'Get my badge!', class: 'remote_ent_form_submit_btn form-element'
-      .row.existing_certifications_container
+      .existing_certifications_container
         .existing_certifications.pending_certifications
           - if @pending_certifications.present?
             %h3.section-subtitle.section-subtitle--regular.mb-25
               Pending certifications:
           - @pending_certifications.each do |cert|
             - cat_name = cert.category_name  
-            .row
-              .col-4
+            - img_name = cert.image_file_name
+            .row.mb-25
+              .col-4.cert-info-item.border-column
                 %div Name of Qualification
-                %div= cat_name
-              .col-4
-
-                %div= cert.name
-              .col-4
-              .certificate-item
+                %div.file-name.uppercase.bold= cert.name
+              .col-3.cert-info-item.border-column
+                %div Category
+                %div.uppercase.bold= cat_name
+              .col-3.cert-info-item
+                %div Badge
+                %div.verify-sign.badge-holder
+                  = image_tag "homepage/medal.png", class: 'small-icon'
+                  %span.uppercase.green Competitor
+              .col-2.cert-info-item
+                = label :_destroy, '', class: 'link underline remove-photo' do
+                  .icon-remove
+                  Cancel
+                = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
+                
+            .row.mb-50
+              .col-12.certificate-item
                 .thumb-block
                   = image_tag cert.attachment_thumb_url, class: 'image'
                 .certificate-description
-                  .file-name.qualification-name
-                    = cert.name
-                  .file-name.category-name
-                    = cat_name
-                  = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
-                  = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
+                  .file-name
+                    = img_name
         .existing_certifications.approved_certifications
           - if @approved_certifications.present?
             %h3.section-subtitle.section-subtitle--regular.mb-25
               Approved certifications:
           - @approved_certifications.each do |cert|
             - cat_name = cert.category_name  
+            - img_name = cert.image_file_name
             .row
-              .col-4
+              .col-4.cert-info-item.border-column
                 %div Name of Qualification
-                = cat_name
-              .col-4
-                = cert.name
-              .col-4
-
-              .certificate-item
+                %div.file-name.uppercase.bold= cert.name
+              .col-4.cert-info-item.border-column
+                %div Category
+                %div.uppercase.bold= cat_name
+              .col-4.cert-info-item
+                %div Badge
+                %div.verify-sign.badge-holder
+                  = image_tag "homepage/medal.png", class: 'small-icon'
+                  %span.uppercase.green Competitor
+            .row
+              .col-12.certificate-item
                 .thumb-block
                   = image_tag cert.attachment_thumb_url, class: 'image'
                 .certificate-description
-                  .file-name.qualification-name
-                    = cert.name
-                  .file-name.category-name
-                    = cat_name
+                  .file-name
+                    = img_name
                   = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
                   = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
         .existing_certifications.approved_certifications
@@ -124,23 +136,24 @@
               Rejected certifications:
           - @rejected_certifications.each do |cert|
             - cat_name = cert.category_name  
+            - img_name = cert.image_file_name
             .row
-              .col-4
+              .col-4.cert-info-item.border-column
                 %div Name of Qualification
-                %div= cat_name
-              .col-4
+                %div.file-name.uppercase.bold= cert.name
+              .col-4.cert-info-item.border-column
                 %div Category
-                %div= cert.name
-              .col-4
+                %div.uppercase.bold= cat_name
+              .col-4.cert-info-item
+                %div Rejection reason
                 = cert.rejection_reason
-              .certificate-item
+            .row
+              .col-12.certificate-item
                 .thumb-block
                   = image_tag cert.attachment_thumb_url, class: 'image'
                 .certificate-description
                   .file-name.qualification-name
-                    = cert.name
-                  .file-name.category-name
-                    = cat_name
+                    = img_name
                   = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
                   = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
       -# .verified-holder

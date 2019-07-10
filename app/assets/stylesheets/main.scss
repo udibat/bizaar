@@ -219,6 +219,7 @@ ul {
   @include media(tablet) {
     padding: 0 lines(0.5);
     margin-left: lines(10.5);
+    margin-left: 18.75em;
   }
 
   @include media(desktop) {

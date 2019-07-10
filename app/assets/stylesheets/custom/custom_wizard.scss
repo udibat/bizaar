@@ -923,6 +923,7 @@ p {
   .add-new-card-link {
     margin-top: 40px;
   }
+
 }
 
 .remove_existing_card {
@@ -938,6 +939,8 @@ p {
 }
 
 .settings-section {
+  font-size: 13px;
+  @include sintony;
   .get-badge {
     margin: 0;
   }
@@ -950,5 +953,39 @@ p {
 .settings-qualification {
   .certification_form {
     display: none;
+  }
+  .existing_certifications {
+    display: block;
+    margin: 0;
+  }
+}
+
+.border-column {
+  border-right: 1px solid $cust-light-gray;
+}
+
+.cert-info-item {
+  padding: 0 20px;
+  position: relative;
+  &:first-child {
+    padding-left: 0;
+  }
+  &:last-child {
+    padding-right: 0;
+  }
+  .remove-photo, .icon-remove {
+    color: $cust-violet;
+  }
+  .remove-photo {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
   }
 }
