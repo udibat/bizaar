@@ -1,0 +1,23 @@
+= form_for @service.person, remote: true, format: :json, authenticity_token: true, html: { id: "custom_profile_form" }  do |form|
+  = hidden_field_tag :update_after_social_signup, true
+  -# Name
+  .input-container
+    .input-holder
+      -#= form.label :given_name, t('.given_name')
+      = form.text_field :given_name, :class => :text_field, :maxlength => "30", :placeholder => t('people.new.given_name')
+    .input-holder
+      -#= form.label :family_name, t('.family_name')
+      = form.text_field :family_name, :class => :text_field, :maxlength => "30", :placeholder => t('people.new.family_name')
+
+  -# Email
+  .input-container
+    .input-holder
+      -# = form.label :email, t('.email')
+      = form.text_field :email, :class => :text_field, :maxlength => "255", :placeholder => @current_user.primary_email.try(:address) || t('people.new.email'), disabled: :disabled
+    .input-holder
+      = form.text_field :zip_code, :class => :text_field, :maxlength => "255", :placeholder => t('people.new.zip_code')
+
+  // Birthday holder
+  = render :partial => "people/signup_date_fields", locals: {form: form}
+  = button_tag t('settings.account.save'), type: 'button', class: 'submit_remote_form_btn btn btn--violet btn--left signup-btn'
+

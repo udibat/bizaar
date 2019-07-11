@@ -1,6 +1,7 @@
 
 .page-content-inner.signup-instructor
   .signup-form.centered-section.wizard-section
+    .errors
     %h2.section-title.text-center Sign up to be an Instructor
     %h3.section-subtitle.section-subtitle--regular.text-center Earn money with your passions, skills and talents by joining our community.
     
@@ -15,41 +16,15 @@
     -#           :allowed_emails => @current_community.allowed_emails,
     -#           :count => (@current_community.allowed_emails.split(",").count))
 
-    = form_for @service.person do |form|
-      = hidden_field_tag :update_after_social_signup, true
-      -# Name
-      .input-container
-        .input-holder
-          -#= form.label :given_name, t('.given_name')
-          = form.text_field :given_name, :class => :text_field, :maxlength => "30", :placeholder => t('people.new.given_name')
-        .input-holder
-          -#= form.label :family_name, t('.family_name')
-          = form.text_field :family_name, :class => :text_field, :maxlength => "30", :placeholder => t('people.new.family_name')
+    = render partial: 'member_wizard/registered_oauth_form'
 
-      -# Email
-      .input-container
-        .input-holder
-          -# = form.label :email, t('.email')
-          = form.text_field :email, :class => :text_field, :maxlength => "255", :placeholder => @current_user.primary_email.try(:address) || t('people.new.email'), disabled: :disabled
-        .input-holder
-          = form.text_field :zip_code, :class => :text_field, :maxlength => "255", :placeholder => t('people.new.zip_code')
-      
-      // Birthday holder
+-# = render partial: 'view_tools/remote_form_submit_handler'
+= render partial: 'view_tools/ajax_form_submit_handler'
 
-      = render :partial => "people/signup_date_fields", locals: {form: form}
-
-      -# .birthday-holder
-      -#   %h3.section-subtitle.section-subtitle--regular Birthday
-      -#   %p Your birthday is confidential. You do have to be 19 and older to sign up with us
-      -#   .input-container.custom-select-holder
-      -#     = form.date_select :birthday, order: [:day, :month, :year], :start_year => (Date.today.year - 100), :end_year => Date.today.year
-          // %select#select_month.select-month.custom-select{:name => ""}
-          //   %option Month
-          // %select#select_day.select-day.custom-select{:name => ""}
-          //   %option Day
-          // %select#select_year.select-year.custom-select{:name => ""}
-          //   %option Year
-      = button_tag t('settings.account.save'), class: 'btn btn--violet btn--left signup-btn'
-
-  // = render :partial => "help_texts", :collection => ["terms", "help_invitation_code", "privacy"], :as => :field
+:javascript
+  onDocumentReady(function() {
+    $('.submit_remote_form_btn').on("click", function(){
+      formAjaxSubmit('#custom_profile_form');
+    });
+  });
 
