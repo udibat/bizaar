@@ -90,10 +90,10 @@
                   = image_tag "homepage/medal.png", class: 'small-icon'
                   %span.uppercase.green Competitor
               .cert-info-item
-                = label :_destroy, '', class: 'link underline remove-photo' do
+                = label_tag "_destroy_#{cert.id}", '', class: 'link underline remove-photo-nohandler' do
                   .icon-remove
                   Cancel
-                = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
+                = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}, id: "_destroy_#{cert.id}"
             .row.mb-50
               .col-12.certificate-item
                 .thumb-block
@@ -121,10 +121,10 @@
                   = image_tag "homepage/medal.png", class: 'small-icon'
                   %span.uppercase.green Competitor
               .cert-info-item
-                = label :_destroy, '', class: 'link underline remove-photo' do
+                = label_tag "_destroy_#{cert.id}", '', class: 'link underline remove-photo-nohandler' do
                   .icon-remove
                   Remove
-                = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
+                = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}, id: "_destroy_#{cert.id}"
             .row.mb-50
               .col-12.certificate-item
                 .thumb-block
@@ -152,10 +152,10 @@
                 %div Rejection reason
                 = cert.rejection_reason
               .cert-info-item
-                = label :_destroy, '', class: 'link underline remove-photo' do
+                = label_tag "_destroy_#{cert.id}", '', class: 'link underline remove-photo-nohandler' do
                   .icon-remove
                   Remove
-                = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
+                = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}, id: "_destroy_#{cert.id}"
             .row.mb-50
               .col-12.certificate-item
                 .thumb-block
