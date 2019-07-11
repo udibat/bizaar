@@ -4,7 +4,7 @@
 = render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
 
 .left-navi-section.settings-section.id-verification-section
-  .settings-form-
+  .settings-form
     .settings-title
       %h3.section-subtitle.violet= t(".title")
       = link_to '#', class: 'edit-settings-button' do

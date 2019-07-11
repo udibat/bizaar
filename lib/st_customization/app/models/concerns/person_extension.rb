@@ -17,8 +17,15 @@ module PersonExtension
     after_create :create_custom_profile
 
     validate :validate_age
-    validates_presence_of :birthday, if: :need_validate?
-    validates_presence_of :zip_code, if: :need_validate?
+    validates_presence_of :birthday, if: :need_validate_after_oauth?
+    validates_presence_of :zip_code, if: :need_validate_after_oauth?
+
+
+    def need_validate_after_oauth?
+      (signup_process_complete? || 
+        signup_status.try(:signup_status_registered_oauth?) == true) && 
+          !is_admin?
+    end
 
     def need_validate?
       signup_process_complete? && !is_admin?
