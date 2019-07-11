@@ -45,16 +45,16 @@
               .uploaded-file-container.settings
                 .pdfPreview.hidden-preview
                   = image_tag 'custom_images/pdf.png', class: 'image'
+              .identification-type
+                = label_tag :identification_type
+                = f.text_field :identification_type, class: 'input', :placeholder => "Identification Type"
             - unless @id_verification.new_record?
               .fields_cont.existing_photo_record
                 .thumb-block
                   = image_tag @id_verification.image.url(:thumb)
-      .row.identification-type
-        .col-6
-          = label_tag :identification_type
-          = f.text_field :identification_type, class: 'input', :placeholder => "Identification Type"
+                = button_tag 'Delete', class: 'delete_verification_btn'
+                
     = button_tag 'Save!', class: 'remote_ent_form_submit_btn form-element'
-    = button_tag 'Delete', class: 'delete_verification_btn'
 
 = render partial: 'view_tools/ajax_form_submit_handler'
 - delete_path = id_verification_path(@id_verification.id) if @id_verification.id.present?
@@ -72,39 +72,8 @@
       deleteItem(delete_url);
     });
 
-    var uploadedImageTemplate = '<div class="uploaded-file"><div class="thumb-block uploaded-thumb-block"></div><div class="file-action-block"><div class="name"></div><a href="#" class="green link underline remove-preview">Remove this photo</a></div></div>'
-
-    $('#id_verification_image').on('change', function(event) {
-      if('.uploaded-file') {
-        $('.uploaded-file').remove();
-      }
-
-      var file = this.files[0];
-      var reader = new FileReader();
-      var name = file.name;
-
-      var extension = file.name.split('.').pop().toLowerCase();
-      var pdfPreview = $('.pdfPreview');
-
-      reader.onload = function(e) {
-        var img = new Image();
-        img.src = reader.result;
-        
-        $('.uploaded-file-container').append(uploadedImageTemplate)
-        $('.uploaded-thumb-block').html(img);
-        $('.name').html(name)
-
-        if(extension == 'pdf') {
-          $('.uploaded-thumb-block').parents('div').find(pdfPreview).removeClass('hidden-preview');
-        } else {
-          $('.uploaded-thumb-block').parents('div').find(pdfPreview).addClass('hidden-preview');
-        }
-      }
-      
-      reader.readAsDataURL(file);
-
-    });
-
+    photoPreload('id_verification_image');
+    
     $('.uploaded-file-container').on('click', '.remove-preview', function(event) {
       event.preventDefault();
       $('#id_verification_image').val('');
