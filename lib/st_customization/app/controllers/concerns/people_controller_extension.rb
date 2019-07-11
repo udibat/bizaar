@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module TutorSignupExtension
+module PeopleControllerExtension
   extend ActiveSupport::Concern
 
   included do
