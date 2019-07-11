@@ -31,6 +31,7 @@ module SettingsControllerExtension
   end
 
   def social_media
+    @selected_left_navi_link = "social_media"
     @custom_profile = @current_user.custom_profile
   end
 

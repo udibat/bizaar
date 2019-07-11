@@ -6,7 +6,8 @@
 .left-navi-section.settings-section.id-verification-section
   .settings-form
     .settings-title
-      %h3.section-subtitle.violet= t(".title")
+      %h3.section-subtitle.violet
+        Social Media
       = link_to '#', class: 'edit-settings-button' do
         .icon-edit
     = form_for @custom_profile, remote: true, format: :json, html: { multipart: true, class: 'remote_ent_form' }, authenticity_token: true do |f|
