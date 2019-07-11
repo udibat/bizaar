@@ -9,7 +9,7 @@ module StCustomization
       # require_dependency Rails.root.to_s + '/lib/st_customization/app/controllers/concerns/signup_extension'
       # ToDo: automate this
       ApplicationController.send(:include, ApplicationControllerExtension)
-      PeopleController.send(:include, ::TutorSignupExtension)
+      PeopleController.send(:include, PeopleControllerExtension)
       ConfirmationsController.send(:include, ::ConfirmationsExtension)
       Person.send(:include, PersonExtension)
       OmniauthController.send(:include, OmniauthTutorExtension)

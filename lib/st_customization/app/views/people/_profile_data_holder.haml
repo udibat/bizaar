@@ -37,8 +37,8 @@
 
 
 
-    %h3.profile-subtitle International Table Soccer Federation Finalist
-    %h3.profile-subtitle Official Co-founder of Vancouver Foosball Club
+    
+    %h3.profile-subtitle Description
 
     .row.profile-about-me
       - if person.description && !person.description.blank?
@@ -66,8 +66,5 @@
                 - else
                   %span.people-custom-fields-value
                     = custom_field_value.display_value
-
-    %p
-      = @custom_profile.description
 
     = render "profile_soc_list"
