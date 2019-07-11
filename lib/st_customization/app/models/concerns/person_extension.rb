@@ -11,14 +11,22 @@ module PersonExtension
     has_one :member_signup_status, dependent: :destroy
     has_one :custom_profile, dependent: :destroy
     accepts_nested_attributes_for :custom_profile
-    validates_associated :custom_profile
+    validates_associated :custom_profile, if: :need_validate?
 
 
     after_create :create_custom_profile
 
     validate :validate_age
-    validates_presence_of :birthday, unless: :is_admin?
-    validates_presence_of :zip_code, unless: :is_admin?
+    validates_presence_of :birthday, if: :need_validate?
+    validates_presence_of :zip_code, if: :need_validate?
+
+    def need_validate?
+      signup_process_complete? && !is_admin?
+    end
+
+    def description
+      custom_profile.try(:description)
+    end
 
     def categorized_testimonials(community)
       received_testimonials.by_community(community).
@@ -27,9 +35,13 @@ module PersonExtension
     end
 
     def validate_age
-      if birthday.present? && birthday > MIN_PERSON_AGE.years.ago.to_date
+      if birthday.present? && allowed_age?
         errors.add(:birthday, "You should be over #{MIN_PERSON_AGE} years old.")
       end
+    end
+
+    def allowed_age?
+      birthday > MIN_PERSON_AGE.years.ago.to_date
     end
 
     # we'll use our own less strict consent logic
@@ -58,7 +70,7 @@ module PersonExtension
   end
 
   def signup_process_complete?
-    signup_status.signup_status_finished?
+    signup_status.try(:signup_status_finished?) == true
   end
 
   def signup_status
