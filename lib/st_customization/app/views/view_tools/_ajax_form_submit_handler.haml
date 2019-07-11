@@ -48,3 +48,38 @@
     }, 5000);
   }
 
+  function photoPreload(fileInput) {
+    var uploadedImageTemplate = '<div class="uploaded-file"><div class="thumb-block uploaded-thumb-block"></div><div class="file-action-block"><div class="name"></div><a href="#" class="green link underline remove-preview">Remove this photo</a></div></div>'
+
+    document.getElementById(fileInput).addEventListener('change', function (e) {
+      // if('.uploaded-file') {
+      //   $('.uploaded-file').remove();
+      // }
+      var file = this.files[0];
+      var reader = new FileReader();
+
+      var extension = file.name.split('.').pop().toLowerCase();
+      var pdfPreview = $('.pdfPreview');
+
+      reader.onload = function(e) {
+        var img = new Image();
+        img.src = reader.result;
+
+        
+        $('.uploaded-file-container').append(uploadedImageTemplate)
+        $('.uploaded-thumb-block').html(img);
+
+        if(extension == 'pdf') {
+          $('.uploaded-thumb-block').parents('div').find(pdfPreview).removeClass('hidden-preview');
+        } else {
+          $('.uploaded-thumb-block').parents('div').find(pdfPreview).addClass('hidden-preview');
+        }
+
+        $('.get-badge').css('display', 'flex');
+      }
+      
+      reader.readAsDataURL(file);
+
+    });
+  }
+

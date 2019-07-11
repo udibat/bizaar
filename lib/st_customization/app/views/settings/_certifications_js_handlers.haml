@@ -29,38 +29,7 @@
       });
     });
 
-    var uploadedImageTemplate = '<div class="uploaded-file"><div class="thumb-block uploaded-thumb-block"></div><div class="file-action-block"><div class="name"></div><a href="#" class="green link underline remove-preview">Remove this photo</a></div></div>'
-
-    document.getElementById('certification_image').addEventListener('change', function (e) {
-      if('.uploaded-file') {
-        $('.uploaded-file').remove();
-      }
-      var file = this.files[0];
-      var reader = new FileReader();
-
-      var extension = file.name.split('.').pop().toLowerCase();
-      var pdfPreview = $('.pdfPreview');
-
-      reader.onload = function(e) {
-        var img = new Image();
-        img.src = reader.result;
-
-        
-        $('.uploaded-file-container').append(uploadedImageTemplate)
-        $('.uploaded-thumb-block').html(img);
-
-        if(extension == 'pdf') {
-          $('.uploaded-thumb-block').parents('div').find(pdfPreview).removeClass('hidden-preview');
-        } else {
-          $('.uploaded-thumb-block').parents('div').find(pdfPreview).addClass('hidden-preview');
-        }
-
-        $('.get-badge').css('display', 'flex');
-      }
-      
-      reader.readAsDataURL(file);
-
-    });
+    photoPreload('certification_image');
     
     $('.uploaded-file-container').on('click', '.remove-preview', function(event) {
       event.preventDefault();
@@ -89,7 +58,7 @@
         processData: false,
         contentType: false,
         success: function(data) {
-          $('.after-uploading').show();
+          // $('.after-uploading').show();
           $('.uploaded-file').hide();
           $('.existing_certifications').html('')
           data.existing_certifications.forEach(function(item, i) {
@@ -112,11 +81,10 @@
             $('.existing_certifications').append(certificateItem);
 
             $('.uploading-form').hide();
-            clickOutside('.after-uploading');
             $('.added-certifications-holder').show();
           })
-          $('.skip-qual-btn').hide();
-          $('.next-btn').css('display', 'block');
+          // $('.skip-qual-btn').hide();
+          // $('.next-btn').css('display', 'block');
         },
         error: function(error) {
           $(".errors").html('').fadeIn();
@@ -138,6 +106,8 @@
       clearForm();
     });
 
+    clickOutside('.after-uploading, .success_message_spoiler');
+    
     if ($('.certificate-item').length !== 0) {
       $('.added-certifications-holder').show();
       $('.skip-qual-btn').hide();

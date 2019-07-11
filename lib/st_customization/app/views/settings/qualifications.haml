@@ -4,23 +4,26 @@
 = render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(@current_user, @current_community) }
 
 .left-navi-section.settings-section.qualifications-section
-  .settings-form
+  .settings-form.settings-qualification
     .settings-title
       %h3.section-subtitle.violet= t(".title")
       = link_to '#', class: 'edit-settings-button' do
         .icon-edit
-    - if @certification_was_created
-      .success_message_spoiler
-        Done!
+
     = form_for @new_certification, remote: true, html: { multipart: true, id: 'new_certification_form_ajax_form', class: 'certification_form' }, authenticity_token: true do |f|
-      .row
+      %p 1. From the dropdown, choose the Category that best describes the Qualification that you have in mind.
+      .row.mb-25
         .col-6
           = f.select :category_id, categories_for_select, {}, { id: "category-select", class: 'custom-select', data: {:placeholder => 'Choose a Category for your Qualification'} }
           -# = select :category_id, categories_for_select, {}, { id: "category-select", data: {:placeholder => 'Choose a Category for your Qualification'} }, class: 'custom-select'
+
+      %p 2. Describe your qualification.
+      .row.mb-25
         .col-6
           = f.text_field :name, placeholder: 'The name of your Qualification', class: "input"
           -# = text_field :name, placeholder: 'The name of your Qualification', class: "input"
-      .row
+      %p 3. Upload photo proof of your qualification. Please upload documentation of your qualification to qualify for a badge. Only Bizaar staff will see and have access this photo- it will not be viewable by other Instructors or Members.
+      .row.mb-25
         .col-6
           .upload-files-holder
             = label_tag :certification_image, class: 'btn btn--black upload-link' do
@@ -32,79 +35,142 @@
             .uploaded-file-container.settings
               .pdfPreview.hidden-preview
                 = image_tag 'custom_images/pdf.png', class: 'image'
-    = button_tag 'Get my badge!', class: 'remote_ent_form_submit_btn form-element'
-    .row.existing_certifications_container
-      .existing_certifications.pending_certifications
-        - if @pending_certifications.present?
-          %h3
-            Pending certifications
-        - @pending_certifications.each do |cert|
-          - cat_name = cert.category_name  
-          .row
-            .col-6
-              = cat_name
-            .col-6
-              = cert.name
-            .certificate-item
-              .thumb-block
-                = image_tag cert.attachment_thumb_url, class: 'image'
-              .certificate-description
-                .file-name.qualification-name
-                  = cert.name
-                .file-name.category-name
-                  = cat_name
-                = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
+    .row.get-badge
+      .col-3
+        = link_to '<< Go back', '#', class: 'go-back underline uppercase bold'
+      .col-6
+        = button_tag class: 'btn btn--green block remote_ent_form_submit_btn form-element get-badge-btn' do
+          .small-icon
+            %svg.svg-inline--fa.fa-graduation-cap.fa-w-20{"aria-hidden" => "true", "data-icon" => "graduation-cap", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 640 512", :xmlns => "http://www.w3.org/2000/svg"}
+              %path{:d => "M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z", :fill => "currentColor"}
+          Get my badge!
+
+    .qualifications-holder
+      .awards-head.no-badge
+        %p.mb-25 Are you certified to teach? Do you have certifications related to what you plan to teach, or have you compted in tournaments? Tell us and tell your students!
+        %p
+          If you have photo proof of your qualifications, you can get a 
+          %span.verify-sign
+            = image_tag "homepage/medal.png", class: 'small-icon'
+            %span.uppercase.green Competitor
+          Badge or a
+          %span.verify-sign
+            = image_tag "homepage/certificate.png", class: 'small-icon'
+            %span.uppercase.green Certified instructor
+
+      - if @certification_was_created
+        .success_message_spoiler
+          %h3.small-title.flex-block
+            .title-image-holder
+              %svg.svg-inline--fa.fa-check-circle.fa-w-16{"aria-hidden" => "true", "data-icon" => "check-circle", "data-prefix" => "far", :focusable => "false", :role => "img", :viewbox => "0 0 512 512", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{:d => "M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z", :fill => "#fff"}
+
+            %span Thank you for uploading your documents! We will review the documents, and notify you when it’s approved.
+      
+
+      -# = button_tag 'Get my badge!', class: 'remote_ent_form_submit_btn form-element'
+      .existing_certifications_container
+        .existing_certifications.pending_certifications
+          - if @pending_certifications.present?
+            %h3.section-subtitle.section-subtitle--regular.mb-25
+              Pending certifications:
+          - @pending_certifications.each do |cert|
+            - cat_name = cert.category_name  
+            - img_name = cert.image_file_name
+            .existing-qual-item.mb-25
+              .cert-info-item.border-column
+                %div Name of Qualification
+                %div.file-name.uppercase.bold= cert.name
+              .cert-info-item.border-column
+                %div Category
+                %div.uppercase.bold= cat_name
+              .cert-info-item
+                %div Badge
+                %div.verify-sign.badge-holder
+                  = image_tag "homepage/medal.png", class: 'small-icon'
+                  %span.uppercase.green Competitor
+              .cert-info-item
+                = label :_destroy, '', class: 'link underline remove-photo' do
+                  .icon-remove
+                  Cancel
                 = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
-      .existing_certifications.approved_certifications
-        - if @approved_certifications.present?
-          %h3
-            Approved certifications
-        - @approved_certifications.each do |cert|
-          - cat_name = cert.category_name  
-          .row
-            .col-6
-              = cat_name
-            .col-6
-              = cert.name
-            .certificate-item
-              .thumb-block
-                = image_tag cert.attachment_thumb_url, class: 'image'
-              .certificate-description
-                .file-name.qualification-name
-                  = cert.name
-                .file-name.category-name
-                  = cat_name
-                = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
+            .row.mb-50
+              .col-12.certificate-item
+                .thumb-block
+                  = image_tag cert.attachment_thumb_url, class: 'image'
+                .certificate-description
+                  .file-name
+                    = img_name
+        .existing_certifications.approved_certifications
+          - if @approved_certifications.present?
+            %h3.section-subtitle.section-subtitle--regular.mb-25
+              Approved certifications:
+          - @approved_certifications.each do |cert|
+            - cat_name = cert.category_name  
+            - img_name = cert.image_file_name
+            .existing-qual-item.mb-25
+              .cert-info-item.border-column
+                %div Name of Qualification
+                %div.file-name.uppercase.bold= cert.name
+              .cert-info-item.border-column
+                %div Category
+                %div.uppercase.bold= cat_name
+              .cert-info-item
+                %div Badge
+                %div.verify-sign.badge-holder
+                  = image_tag "homepage/medal.png", class: 'small-icon'
+                  %span.uppercase.green Competitor
+              .cert-info-item
+                = label :_destroy, '', class: 'link underline remove-photo' do
+                  .icon-remove
+                  Remove
                 = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
-      .existing_certifications.approved_certifications
-        - if @rejected_certifications.present?
-          %h3
-            Rejected certifications
-        - @rejected_certifications.each do |cert|
-          - cat_name = cert.category_name  
-          .row
-            .col-6
-              = cat_name
-            .col-6
-              = cert.name
-            .col-6
-              = cert.rejection_reason
-            .certificate-item
-              .thumb-block
-                = image_tag cert.attachment_thumb_url, class: 'image'
-              .certificate-description
-                .file-name.qualification-name
-                  = cert.name
-                .file-name.category-name
-                  = cat_name
-                = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
+            .row.mb-50
+              .col-12.certificate-item
+                .thumb-block
+                  = image_tag cert.attachment_thumb_url, class: 'image'
+                .certificate-description
+                  .file-name
+                    = img_name
+                  -# = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
+                  -# = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
+        .existing_certifications.approved_certifications
+          - if @rejected_certifications.present?
+            %h3.section-subtitle.section-subtitle--regular.mb-25
+              Rejected certifications:
+          - @rejected_certifications.each do |cert|
+            - cat_name = cert.category_name  
+            - img_name = cert.image_file_name
+            .existing-qual-item.mb-25
+              .cert-info-item.border-column
+                %div Name of Qualification
+                %div.file-name.uppercase.bold= cert.name
+              .cert-info-item.border-column
+                %div Category
+                %div.uppercase.bold= cat_name
+              .cert-info-item
+                %div Rejection reason
+                = cert.rejection_reason
+              .cert-info-item
+                = label :_destroy, '', class: 'link underline remove-photo' do
+                  .icon-remove
+                  Remove
                 = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
-    .verified-holder
-      .bold.uppercase You have recieved the following badge for this qualification:
-      .verify-sign.badge-holder
-        = image_tag "homepage/medal.png", class: 'small-icon'
-        %span.uppercase.green.text Competitor
-    = link_to '+ Add another qualification', '#', class: 'underline uppercase add-another-qual'
+            .row.mb-50
+              .col-12.certificate-item
+                .thumb-block
+                  = image_tag cert.attachment_thumb_url, class: 'image'
+                .certificate-description
+                  .file-name.qualification-name
+                    = img_name
+                  -# = label :_destroy, 'Remove this photo', class: 'green link underline remove-photo'
+                  -# = check_box :_destroy, '', class: 'remove-cert-checkbox', data: {'cert_id' => cert.id}
+      -# .verified-holder
+      -#   .bold.uppercase You have received the following badge for this qualification:
+      -#   .verify-sign.badge-holder
+      -#     = image_tag "homepage/medal.png", class: 'small-icon'
+      -#     %span.uppercase.green.text Competitor
+      = link_to '+ Add a qualification', '#', class: 'underline uppercase add-another-qual', data: {:first => "+ Add a qualification", :another => "+ Add another qualification"}
 
   -# = render partial: 'admin/community_listings/table', locals: {placeholder: t('layouts.settings.listings_search_placeholder')}
 
@@ -122,5 +188,33 @@
       var delete_url = "#{certifications_path.split('?').first}" + "/" + $(this).data('certId') + "";
       deleteItem(delete_url);
     });
+
+    $('.settings-qualification').on('click', '.add-another-qual', function(event) {
+      event.preventDefault();
+      $('.certification_form').show();
+      $('.qualifications-holder').hide();
+      // $(this).hide();
+    });
+
+    $('.go-back').on('click', function(event) {
+      event.preventDefault();
+      document.location.reload();
+    });
+
+    changeBtnText();
+
+    function changeBtnText() {
+      var addAnotherBtn = $('.add-another-qual');
+      var defaultText = addAnotherBtn.data('first');
+      var anotherText = addAnotherBtn.data('another');
+      
+      if($('.certificate-item').length === 0) {
+        addAnotherBtn.text(defaultText);
+        console.log('test') 
+      } else {
+        addAnotherBtn.text(anotherText);  
+      }
+    }
+
   });
 
