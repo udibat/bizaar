@@ -82,7 +82,7 @@ $(document).ready(function() {
     }
   });
 
-  wordsCounter('#custom_profile_description, #person_description');
+  wordsCounter('#custom_profile_description, #person_description, .update_profile_description_text_area');
 
 
   $('.settings-form form').find('textarea, input, select').attr('disabled', 'disabled');
@@ -93,8 +93,9 @@ $(document).ready(function() {
     e.preventDefault();
     var $this = $(this);
     var parent = $this.parents('div');
-    parent.find('textarea, input, select').attr('disabled', false)
-    parent.find('button, a').removeClass('disabled')
+    parent.find('textarea, input, select').attr('disabled', false);
+    parent.find('button, a').removeClass('disabled');
+    parent.find('.form-element').removeClass('disabled');
   })
 
 });

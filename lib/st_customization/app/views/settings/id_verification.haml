@@ -25,8 +25,8 @@
             .thumb-block
               = image_tag @id_verification.image.url(:thumb)
         .col-6
-          = f.file_field :image
           = link_to 'Choose file', '#', class: 'btn btn--black upload-link trigger_upload'
+          = f.file_field :image
       -# = f.submit 'Save'
     = button_tag 'Submit', class: 'remote_ent_form_submit_btn'
     -# .row.identification-type
@@ -51,6 +51,11 @@
 :javascript
 
   onDocumentReady(function(){
+    
+    $('.trigger_upload').on('click', function(event) {
+      event.preventDefault();
+      $('input[type="file"]').trigger('click');
+    });
 
     $('.remote_ent_form_submit_btn').on("click", function(){
       $(".remote_ent_form").ajaxSubmit({
