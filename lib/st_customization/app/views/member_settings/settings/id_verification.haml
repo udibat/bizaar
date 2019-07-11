@@ -11,20 +11,18 @@
         .icon-edit
     // if user has been verified by admin - show verified-holder
     %span.errors
-    - if @id_verification.status_pending?
-      .pending-holder
+    .result-holder
+      - if @id_verification.status_pending?
         .bold.uppercase Pending...:
         .verify-sign.badge-holder
           = image_tag "custom_images/checked.png", class: 'small-icon'
           %span.uppercase.green.text Id verified
-    - if @id_verification.status_approved?
-      .verified-holder
+      - if @id_verification.status_approved?
         .bold.uppercase Your Id has been verified. You have the following badge:
         .verify-sign.badge-holder
           = image_tag "custom_images/checked.png", class: 'small-icon'
           %span.uppercase.green.text Id verified
-    - if @id_verification.status_rejected?
-      .rejected-holder
+      - if @id_verification.status_rejected?
         .bold.uppercase Your Id has been rejected: #{@id_verification.rejection_reason}
         .verify-sign.badge-holder
           = image_tag "custom_images/checked.png", class: 'small-icon'
@@ -52,9 +50,10 @@
               .fields_cont.existing_photo_record
                 .thumb-block
                   = image_tag @id_verification.image.url(:thumb)
-                = button_tag 'Delete', class: 'delete_verification_btn'
-                
-    = button_tag 'Save!', class: 'remote_ent_form_submit_btn form-element'
+                .div
+                  = @id_verification.identification_type
+                  = button_tag 'Remove this document', class: 'delete_verification_btn delete-verification-btn'
+    = button_tag 'Save Changes', class: 'remote_ent_form_submit_btn form-element'
 
 = render partial: 'view_tools/ajax_form_submit_handler'
 - delete_path = id_verification_path(@id_verification.id) if @id_verification.id.present?
