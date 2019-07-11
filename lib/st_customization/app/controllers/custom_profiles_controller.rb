@@ -78,16 +78,17 @@ private
 
   def custom_profile_update_params
     if params[:custom_profile][:cover_photos_attributes].present?
-      if params[:custom_profile][:cover_photos_attributes]['0']['image'].is_a? Array
-        images_arr = params[:custom_profile][:cover_photos_attributes]['0']['image']
-        params[:custom_profile][:cover_photos_attributes]['0']['image'] = images_arr.shift
-        if params[:custom_profile][:cover_photos_attributes]['0']['image'].blank?
-          params[:custom_profile][:cover_photos_attributes].delete('0')
+      if params[:custom_profile][:cover_photos_attributes]['new'].present? && 
+              params[:custom_profile][:cover_photos_attributes]['new']['image'].is_a?(Array)
+        images_arr = params[:custom_profile][:cover_photos_attributes]['new']['image']
+        params[:custom_profile][:cover_photos_attributes]['new']['image'] = images_arr.shift
+        if params[:custom_profile][:cover_photos_attributes]['new']['image'].blank?
+          params[:custom_profile][:cover_photos_attributes].delete('new')
         else
           images_num = params[:custom_profile][:cover_photos_attributes].keys.length
           images_arr.each_with_index{|im, i|
              new_i = images_num + i
-             image_blank = params[:custom_profile][:cover_photos_attributes]['0'].clone
+             image_blank = params[:custom_profile][:cover_photos_attributes]['new'].clone
              image_blank['is_primary_photo'] = false
              image_blank['image'] = im
              params[:custom_profile][:cover_photos_attributes][new_i.to_s] = image_blank
