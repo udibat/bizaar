@@ -52,9 +52,10 @@
     var uploadedImageTemplate = '<div class="uploaded-file"><div class="thumb-block uploaded-thumb-block"></div><div class="file-action-block"><div class="name"></div><a href="#" class="green link underline remove-preview">Remove this photo</a></div></div>'
 
     document.getElementById(fileInput).addEventListener('change', function (e) {
-      // if('.uploaded-file') {
-      //   $('.uploaded-file').remove();
-      // }
+      if('.uploaded-file') {
+        $('.uploaded-file').remove();
+      }
+      
       var file = this.files[0];
       var reader = new FileReader();
 
