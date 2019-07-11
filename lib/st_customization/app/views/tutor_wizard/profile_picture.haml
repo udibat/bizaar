@@ -64,5 +64,11 @@
         }
       }
     });
+
+    if($('.thumb-block img').length === 0) {
+      $('.uploaded-file-container.profile-upload').hide();
+    } else {
+      $('.uploaded-file-container.profile-upload').show();
+    }
   });
   
