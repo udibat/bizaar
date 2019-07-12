@@ -7,6 +7,8 @@
 = render :partial => "layouts/left_hand_navigation", :locals => { :links => custom_settings_links_for(target_user, @current_community) }
 
 #person_settings_form.left-navi-section.settings-section.notification-settings
+  .settings-title
+    %h3.section-subtitle.violet= t(".title")
   = form_for target_user do |form|
 
     %h2= t(".community_updates")

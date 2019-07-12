@@ -2506,6 +2506,7 @@ en:
         status_confirmed: Confirmed
         status_pending: Pending
     notifications:
+      title: Notifications
       email_from_admins: "I accept to receive occasional emails from the %{service_name} team"
       i_want_to_get_email_notification_when: "I want to get an email notification when..."
       newsletters: "Emails from administrators"

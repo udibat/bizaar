@@ -11,6 +11,10 @@
       = link_to '#', class: 'edit-settings-button' do
         .icon-edit
     = form_for @custom_profile, remote: true, format: :json, html: { multipart: true, class: 'remote_ent_form' }, authenticity_token: true do |f|
+      .mb-25
+        %p 
+          Keep in mind that we don't allow product advertisements or solicitations on this site, so please don't create links the lead to such pages. Learn more about these policies at our 
+          = link_to 'Community Rules of Conduct.', '#', class: 'link underline'
       .row
         .col-6
           .social-media-item
@@ -46,7 +50,7 @@
             = f.text_field :social_link_vimeo, :placeholder => 'Link to your Tumblr'
       -# = f.submit 'Next', class: 'btn btn--violet get-badge'
       -# = f.submit 'Save'
-    = button_tag 'Submit', class: 'remote_ent_form_submit_btn'
+    = button_tag 'Save Chages', class: 'remote_ent_form_submit_btn'
     
 :javascript
 
