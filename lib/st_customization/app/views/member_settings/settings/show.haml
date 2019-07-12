@@ -49,8 +49,8 @@
 
 
       .birthday-holder
-        %h3.section-subtitle.section-subtitle--regular Birthday
-        %p Your birthday is confidential. You do have to be 19 and older to sign up with us
+        .label Birthday
+        -# %p Your birthday is confidential. You do have to be 19 and older to sign up with us
         .input-container.custom-select-holder
           = form.date_select :birthday, order: [:month, :day, :year], :start_year => (Date.today.year - 100), :end_year => Date.today.year
       -# -# Display name
@@ -90,27 +90,27 @@
       -#   = form.text_field :phone_number, :class => "text_field", :maxlength => "25"
 
       -# Profile picture
-
-      .inline-label-container
-        = form.label :image, t('settings.profile.change_profile_picture'), class: 'label'
-      %span.alert-box-icon
-        = icon_tag("information", ["icon-fix"])
-      %small
-        = t("settings.profile.profile_picture_description")
-      .row
-        .col-6
-          = link_to 'Choose File', '#', class: 'btn btn--black upload-link trigger_upload'
-      -# = render 'layouts/filename', file_field: target_user.image
-      .uploaded-file-container.profile-upload
-        = form.fields_for :custom_profile do |custom_profile_fields|
-          = custom_profile_fields.file_field :avatar, :size => 30, :id => "avatar_file", class: 'avatar-file'
-          .uploaded-file
-            .thumb-block
-              = image_tag target_user.custom_profile.avatar.url(:thumb)
-            .file-action-block
-              .file-name 
-                = target_user.custom_profile.avatar.original_filename
-              = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload'
+      .mb-50
+        .inline-label-container
+          %p= t('settings.profile.change_profile_picture')
+        -# %span.alert-box-icon
+        -#   = icon_tag("information", ["icon-fix"])
+        -# %small
+        -#   = t("settings.profile.profile_picture_description")
+        .row
+          .col-6
+            = link_to 'Choose File', '#', class: 'btn btn--black upload-link trigger_upload'
+        -# = render 'layouts/filename', file_field: target_user.image
+        .uploaded-file-container.profile-upload
+          = form.fields_for :custom_profile do |custom_profile_fields|
+            = custom_profile_fields.file_field :avatar, :size => 30, :id => "avatar_file", class: 'avatar-file'
+            .uploaded-file
+              .thumb-block
+                = image_tag target_user.custom_profile.avatar.url(:thumb)
+              .file-action-block
+                .file-name 
+                  = target_user.custom_profile.avatar.original_filename
+                = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload'
       -# About text
       -# = form.label :description, t("settings.profile.short_intro"), :class => "input"
       -# %p 
