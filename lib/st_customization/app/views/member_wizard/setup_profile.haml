@@ -42,7 +42,7 @@
     %h2.small-title.flex-block 
       .title-image-holder
         = image_tag "custom_images/edit.png"
-      Write something about yourself (optional)
+      Write something about yourself
     -# .errors
     .wizard-content
       .wizard-inner
@@ -59,8 +59,10 @@
             -# .col-6
             -#   = link_to "Skip this step", member_wizard_skip_step_path(@member_status.signup_status), class: 'block skip-btn'
 
+= render partial: 'view_tools/ajax_form_submit_handler'
 = render partial: 'view_tools/remote_form_submit_handler'
 = render partial: 'view_tools/confirm_step_btn_js'
+
 
 :javascript
   onDocumentReady(function(){
@@ -79,8 +81,8 @@
           $('.table-striped .files').find('.thumb-block img').attr('src', data.result.image_url);
           $('.uploaded-file-container.profile-upload').css('display', 'block');
           $('.uploaded-file').show();
-        } else {
-          alert(data.result.error);
+        } else {         
+          displayErrorData(data)
         }
       }
     });

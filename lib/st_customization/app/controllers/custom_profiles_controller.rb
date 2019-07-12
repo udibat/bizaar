@@ -37,7 +37,7 @@ class CustomProfilesController < ApplicationController
       render json: {image_url: @custom_profile.avatar.url(:thumb)}
     else
       # flash[:error] = @custom_profile.errors.first.to_s
-      render json: {error: @custom_profile.errors.first.to_s}
+      render json: {error: @custom_profile.errors.messages.first.try(:last)}
     end
   end
 

@@ -3,7 +3,8 @@ class CustomProfile < ApplicationRecord
   MAX_DESCRIPTION_LENGTH = 500
 
   has_attached_file :avatar, styles: { medium: "265x310^#", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/, 
+    message: "Sorry, we cannot accept that file. Please upload serviceable jpeg, png picture."
 
   belongs_to :person, foreign_key: "person_id"
   has_many :certifications, dependent: :destroy

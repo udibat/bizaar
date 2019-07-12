@@ -16,7 +16,7 @@ module WizardHelper
       },
       {
         key_name: :setup_profile,
-        display_name: 'Set up your profile',
+        display_name: 'Bolster your profile',
       },
       {
         key_name: :social_media,

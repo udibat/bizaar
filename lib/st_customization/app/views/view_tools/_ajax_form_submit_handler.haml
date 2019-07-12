@@ -37,14 +37,25 @@
         })
       }
       
+    } else if (data.result !== undefined && data.result.error !== undefined) {
+      //console.log(typeof(data.result.error))
+      var message = '';
+      try {
+        Object.keys(data.result.error).forEach(function (key) { 
+          message = data.result.error[key];
+        })
+      } catch (e) {
+        message = data.result.error;
+      }
+      $(".errors").append(message);
     } else {
-      $(".errors").append('<div class="error-item">Can\'t delete item (' + data.status + ')</div>');
+      $(".errors").append('<div class="error-item">Can\'t process item (' + data.status + ')</div>');
     }
     $(".errors").show();
 
     setTimeout(function(){
       $(".errors").html('');
-      $(".errors").hide();
+      //$(".errors").hide();
     }, 5000);
   }
 
