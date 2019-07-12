@@ -28,14 +28,14 @@
                 %span.bold Card information
                 .row
                   .col-12
-                    = text_field_tag 'number', '', placeholder: 'Card Number'
+                    = text_field_tag 'number', '', placeholder: 'Card Number', :maxlength => '16', class: 'numeric-input'
               .col-5
                 %span.bold.text-right.exp-date Expiration Date
                 .row
                   .col-6
-                    = text_field_tag 'cvc', '', placeholder: 'CVC'
+                    = text_field_tag 'cvc', '', placeholder: 'CVC', :maxlength => '3', class: 'numeric-input'
                   .col-6
-                    = text_field_tag 'exp_date', '', placeholder: 'MM/YY'
+                    = text_field_tag 'exp_date', '', placeholder: 'MM/YY', :maxlength => '5', :pattern => '\d?[\/]?\d+', class: 'payment-date-input'
                     
           .checkbox-item.default-checkbox
             = check_box_tag 'make_card_default', '', false, class: 'input'
