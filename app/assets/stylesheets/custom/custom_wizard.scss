@@ -1095,3 +1095,8 @@ button.delete-verification-btn {
     margin-bottom: 10px;
   }
 }
+
+.settings_listings {
+  font-size: 13px;
+  @include sintony;
+}
