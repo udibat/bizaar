@@ -24,15 +24,15 @@
           %span.uppercase.green.text Id verified
       - if @id_verification.status_rejected?
         .bold.uppercase Your Id has been rejected: #{@id_verification.rejection_reason}
-        .verify-sign.badge-holder
-          = image_tag "custom_images/checked.png", class: 'small-icon'
-          %span.uppercase.green.text Id verified
+        -# .verify-sign.badge-holder
+        -#   = image_tag "custom_images/checked.png", class: 'small-icon'
+        -#   %span.uppercase.green.text Id verified
 
     = form_for @id_verification, remote: true, format: :json, html: { multipart: true, id: 'id_verification_form', class: 'id_verification_form' }, authenticity_token: true do |f|
-      // if user remove id verification block, this block should be shown
       .row
         .col-6
           .upload-files-holder
+            // if user remove id verification block, this block should be shown
             .uploading-block
               = label_tag :id_verification_image, class: 'btn btn--black upload-link form-element' do
                 .small-icon
@@ -44,16 +44,17 @@
                 .pdfPreview.hidden-preview
                   = image_tag 'custom_images/pdf.png', class: 'image'
               .identification-type
-                = label_tag :identification_type
+                = label_tag :identification_type, 'Identification type', class: 'label'
                 = f.text_field :identification_type, class: 'input', :placeholder => "Identification Type"
             - unless @id_verification.new_record?
               .fields_cont.existing_photo_record
                 .thumb-block
                   = image_tag @id_verification.image.url(:thumb)
                 .div
+                  %div= @id_verification.image.original_filename
                   = @id_verification.identification_type
                   = button_tag 'Remove this document', class: 'delete_verification_btn delete-verification-btn'
-    = button_tag 'Save Changes', class: 'remote_ent_form_submit_btn form-element'
+    = button_tag 'Save Changes', class: 'remote_ent_form_submit_btn form-element save-id-btn'
 
 = render partial: 'view_tools/ajax_form_submit_handler'
 - delete_path = id_verification_path(@id_verification.id) if @id_verification.id.present?
@@ -63,6 +64,7 @@
     $('.remote_ent_form_submit_btn').on("click", function(){
       formAjaxSubmit('#id_verification_form');
       $('.uploading-block').hide();
+      $('.save-id-btn').hide();
     });
 
     $('.delete_verification_btn').on('click', function(){
@@ -81,5 +83,7 @@
 
     if($('.existing_photo_record').length === 0) {
       $('.uploading-block').show();
+      $('.save-id-btn').show();
+      $('.result-holder').hide();
     }
   });

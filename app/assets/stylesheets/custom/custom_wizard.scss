@@ -1046,10 +1046,15 @@ p {
   .existing_photo_record {
     width: 100%;
   }
+  .upload-link {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 .uploading-block {
   display: none;
+  max-width: 290px;
 }
 
 button.delete-verification-btn {
@@ -1061,8 +1066,37 @@ button.delete-verification-btn {
   max-width: 100%;
   font-weight: normal;
   text-transform: none;
+  &:hover, &:focus, &:active {
+    background-color: transparent;
+  }
 }
 
 .result-holder {
   margin-bottom: 40px;
+}
+
+.save-id-btn {
+  display: none;
+}
+
+.multiple-cover-photos {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  position: absolute;
+}
+
+.settings_cover_photos {
+  .uploaded-file-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .uploaded-file {
+    margin-bottom: 10px;
+  }
+}
+
+.settings_listings {
+  font-size: 13px;
+  @include sintony;
 }
