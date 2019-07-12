@@ -10,67 +10,80 @@
       = link_to '#', class: 'edit-settings-button' do
         .icon-edit
     // if user has been verified by admin - show verified-holder
-    .verified-holder
-      .bold.uppercase Your Id has been verified. You have the following badge:
-      .verify-sign.badge-holder
-        = image_tag "custom_images/checked.png", class: 'small-icon'
-        %span.uppercase.green.text Id verified
+    %span.errors
+    .result-holder
+      - if @id_verification.status_pending?
+        .bold.uppercase Pending...:
+        .verify-sign.badge-holder
+          = image_tag "custom_images/checked.png", class: 'small-icon'
+          %span.uppercase.green.text Id verified
+      - if @id_verification.status_approved?
+        .bold.uppercase Your Id has been verified. You have the following badge:
+        .verify-sign.badge-holder
+          = image_tag "custom_images/checked.png", class: 'small-icon'
+          %span.uppercase.green.text Id verified
+      - if @id_verification.status_rejected?
+        .bold.uppercase Your Id has been rejected: #{@id_verification.rejection_reason}
+        -# .verify-sign.badge-holder
+        -#   = image_tag "custom_images/checked.png", class: 'small-icon'
+        -#   %span.uppercase.green.text Id verified
 
-    // if user remove id verification block, this block should be shown
-    = form_for @id_verification, remote: true, format: :json, html: { multipart: true, class: 'remote_ent_form' }, authenticity_token: true do |f|
+    = form_for @id_verification, remote: true, format: :json, html: { multipart: true, id: 'id_verification_form', class: 'id_verification_form' }, authenticity_token: true do |f|
       .row
-        - unless @id_verification.new_record?
-          = f.hidden_field :id
-          .fields_cont.existing_photo_record
-            .thumb-block
-              = image_tag @id_verification.image.url(:thumb)
         .col-6
-          = link_to 'Choose file', '#', class: 'btn btn--black upload-link trigger_upload'
-          = f.file_field :image
-      -# = f.submit 'Save'
-    = button_tag 'Submit', class: 'remote_ent_form_submit_btn'
-    -# .row.identification-type
-    -#   .col-6
-    -#     = label_tag :identification_type
-    -#     = text_field_tag :identification_type, '', class: 'input', :placeholder => "Identification Type"
-    -# - @existing_id_verifications.each do |id_vfc|
-    -#   .row
-    -#     .col-12
-    -#       -# = id_vfc.pretty_inspect
-    -#   .existing_cover_photos.id-settings
-    -#     .fields_cont.existing_photo_record
-    -#       .thumb-block
-    -#         = image_tag id_vfc.image.url(:thumb)
-    -#       %div.image_descr
-    -#         %div= id_vfc.image_file_name
-    -#         = label_tag :_destroy, 'Remove this photo', class: 'remove-photo'
-    -#         = check_box_tag :_destroy, '', {class: 'delete_record_chbx'}
-    -#         = link_to 'Choose another photo', '#', class: 'green link underline trigger_upload choose-photo'
-  -# = render partial: 'admin/community_listings/table', locals: {placeholder: t('layouts.settings.listings_search_placeholder')}
+          .upload-files-holder
+            // if user remove id verification block, this block should be shown
+            .uploading-block
+              = label_tag :id_verification_image, class: 'btn btn--black upload-link form-element' do
+                .small-icon
+                  %svg.svg-inline--fa.fa-file-upload.fa-w-12{"aria-hidden" => "true", "data-icon" => "file-upload", "data-prefix" => "fas", :focusable => "false", :role => "img", :viewbox => "0 0 384 512", :xmlns => "http://www.w3.org/2000/svg"}
+                    %path{:d => "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z", :fill => "currentColor"}
+                Upload Files from computer
+              = f.file_field :image
+              .uploaded-file-container.settings
+                .pdfPreview.hidden-preview
+                  = image_tag 'custom_images/pdf.png', class: 'image'
+              .identification-type
+                = label_tag :identification_type, 'Identification type', class: 'label'
+                = f.text_field :identification_type, class: 'input', :placeholder => "Identification Type"
+            - unless @id_verification.new_record?
+              .fields_cont.existing_photo_record
+                .thumb-block
+                  = image_tag @id_verification.image.url(:thumb)
+                .div
+                  %div= @id_verification.image.original_filename
+                  = @id_verification.identification_type
+                  = button_tag 'Remove this document', class: 'delete_verification_btn delete-verification-btn'
+    = button_tag 'Save Changes', class: 'remote_ent_form_submit_btn form-element save-id-btn'
+
+= render partial: 'view_tools/ajax_form_submit_handler'
+- delete_path = id_verification_path(@id_verification.id) if @id_verification.id.present?
 
 :javascript
-
-  onDocumentReady(function(){
-    
-    $('.trigger_upload').on('click', function(event) {
-      event.preventDefault();
-      $('input[type="file"]').trigger('click');
-    });
-
+  onDocumentReady(function() {
     $('.remote_ent_form_submit_btn').on("click", function(){
-      $(".remote_ent_form").ajaxSubmit({
-        success: function(data){
-          document.location.reload();
-        },
-        error: function(data){
-          console.log(data)
-          if (data.responseJSON !== undefined && 
-            data.responseJSON.error !== undefined) {
-              alert(data.responseJSON.error);
-          }
-        }
-      });
+      formAjaxSubmit('#id_verification_form');
+      $('.uploading-block').hide();
+      $('.save-id-btn').hide();
     });
 
-  });
+    $('.delete_verification_btn').on('click', function(){
+      //console.log($(this).data('certId'))
+      var delete_url = "#{delete_path.to_s}";
+      deleteItem(delete_url);
+    });
 
+    photoPreload('id_verification_image');
+    
+    $('.uploaded-file-container').on('click', '.remove-preview', function(event) {
+      event.preventDefault();
+      $('#id_verification_image').val('');
+      $(this).parents('div').find('.uploaded-file').remove();
+    });
+
+    if($('.existing_photo_record').length === 0) {
+      $('.uploading-block').show();
+      $('.save-id-btn').show();
+      $('.result-holder').hide();
+    }
+  });
