@@ -684,6 +684,9 @@ input[type="text"].location-input {
 
 .search-holder {
   &:not(.home-search) {
+    .search-item {
+      margin-bottom: 0.75em;
+    }
     @include media(tablet) {
       .search-item {
         min-width: 50%;

@@ -339,6 +339,7 @@
   border: none;
   stroke: #000;
   cursor: pointer;
+  min-width: 1px;
 
   &:hover,
   &:active {

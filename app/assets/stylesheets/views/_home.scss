@@ -26,8 +26,10 @@
   width: 100%;
 
   &.filters-enabled {
-    width: 50%;
-    padding-left: lines(0.5 / 2);
+    display: flex;
+    justify-content: center;
+    // width: 50%;
+    // padding-left: lines(0.5 / 2);
   }
 
   @include media(tablet) {
@@ -42,6 +44,9 @@
   @include button($link);
   @include button-group-button;
   @include ellipsis;
+  text-align: center;
+  float: none;
+  min-width: 1px;
 
   // Notice: hard-coded for three buttons
   width: 33.3%;
