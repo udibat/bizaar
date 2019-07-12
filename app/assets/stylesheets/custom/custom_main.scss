@@ -829,3 +829,36 @@ button {
     color: $cust-violet;
   }
 }
+
+.sessions_new {
+  a.fb-connect,
+  a.google-login-button {
+    margin-top: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    height: auto;
+    min-height: 1px;
+    .google-icon {
+      display: inline-block;
+      padding-top: 0;
+    }
+  }
+  a.fb-connect {
+    border: 1px solid #365899;
+    // margin-bottom: 0;
+    .fb-text {
+      color: #fff;
+    }
+    .fb-icon {
+      height: 40px;
+      svg {
+        height: 21px;
+      }
+    }
+  }
+  .fb-text, .google-text {
+    line-height: 1;
+  }
+  a.google-login-button {
+    margin-bottom: 20px;
+  }
+}

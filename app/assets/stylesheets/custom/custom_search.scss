@@ -26,7 +26,7 @@
   }
 }
 
-.filters-enabled {
+.home-toolbar-button-group.filters-enabled.filters-enabled {
   @media (min-width: 1125px) {
     display: none;
   }
@@ -684,6 +684,9 @@ input[type="text"].location-input {
 
 .search-holder {
   &:not(.home-search) {
+    .search-item {
+      margin-bottom: 0.75em;
+    }
     @include media(tablet) {
       .search-item {
         min-width: 50%;

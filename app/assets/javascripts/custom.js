@@ -98,6 +98,36 @@ $(document).ready(function() {
     parent.find('.form-element').removeClass('disabled');
   })
 
+  // Install input filters.
+
+  $(".numeric-input").inputFilter(function(value) {
+    return /^\d*$/.test(value); });
+
+  $('.payment-date-input').on('input', function(event) {
+    var value = event.currentTarget.value
+    var cleanValue = value.replace('/', '')
+    var reg = new RegExp('^[0-9]+$');
+    
+    if (cleanValue.length && !reg.test(+cleanValue)){
+      $(this).val('')
+      return false
+    }
+  })
+
+  $('.payment-date-input').on('keyup', function(event) {
+    var value = event.currentTarget.value
+    
+    var key = event.keyCode || event.charCode;
+    if( key == 8 || key == 46 )
+          return true;
+    
+    if (value && value.length === 2) {
+      value += '/'
+    }
+    
+    $(this).val(value)
+  })
+
 });
 
 $(window).on('scroll', function() {
@@ -254,3 +284,20 @@ function checkPhotosNumber(photoItem) {
 
   }
 }
+
+// Restricts input for each element in the set of matched elements to the given inputFilter.
+(function($) {
+  $.fn.inputFilter = function(inputFilter) {
+    return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+      if (inputFilter(this.value)) {
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      }
+    });
+  };
+}(jQuery));
+
