@@ -171,4 +171,10 @@
       reader.readAsDataURL(file);
 
     });
+
+    if($('.thumb-block img').length === 0) {
+      $('.uploaded-file').hide();
+    } else {
+      $('.uploaded-file').show();
+    }
   });
