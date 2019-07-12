@@ -1,19 +1,26 @@
 .soc-list
-  .soc-item
-    %i.icon.icon-soc.icon-faceb
-    = link_to 'faceb', @custom_profile.social_link_facebook, :class => 'soc-link', :target => '_blank'
-  .soc-item
-    %i.icon.icon-soc.icon-youtube
-    = link_to 'youtube', @custom_profile.social_link_youtube, :class => 'soc-link', :target => '_blank'
-  .soc-item
-    %i.icon.icon-soc.icon-twit
-    = link_to 'twitter', @custom_profile.social_link_twitter, :class => 'soc-link', :target => '_blank'
-  .soc-item
-    %i.icon.icon-soc.icon-insta
-    = link_to 'instagram', '#', :class => 'soc-link', :target => '_blank'
-  .soc-item
-    %i.icon.icon-soc.icon-tamblr
-    = link_to 'tamblr', '#', :class => 'soc-link', :target => '_blank'
-  .soc-item
-    %i.icon.icon-soc.icon-twitch
-    = link_to 'twitch', '#', :class => 'soc-link', :target => '_blank'
+  - if @custom_profile.social_link_facebook.present?
+    .soc-item
+      %i.icon.icon-soc.icon-faceb
+      = link_to 'faceb', @custom_profile.social_link_facebook, :class => 'soc-link', :target => '_blank'
+  - if @custom_profile.social_link_youtube.present?
+    .soc-item
+      %i.icon.icon-soc.icon-youtube
+      = link_to 'youtube', @custom_profile.social_link_youtube, :class => 'soc-link', :target => '_blank'
+  - if @custom_profile.social_link_twitter.present?
+    .soc-item
+      %i.icon.icon-soc.icon-twit
+      = link_to 'twitter', @custom_profile.social_link_twitter, :class => 'soc-link', :target => '_blank'
+  - if @custom_profile.social_link_instagram.present?
+    .soc-item
+      %i.icon.icon-soc.icon-insta
+      = link_to 'instagram', @custom_profile.social_link_instagram, :class => 'soc-link', :target => '_blank'
+  - if @custom_profile.social_link_vimeo.present?
+    .soc-item
+      %i.icon.icon-soc.icon-tamblr
+      = link_to 'tamblr', @custom_profile.social_link_vimeo, :class => 'soc-link', :target => '_blank'
+  - if @custom_profile.social_link_twitch.present?
+    .soc-item
+      %i.icon.icon-soc.icon-twitch
+      = link_to 'twitch', @custom_profile.social_link_twitch, :class => 'soc-link', :target => '_blank'
+    

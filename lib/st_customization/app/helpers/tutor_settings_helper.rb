@@ -69,7 +69,7 @@ module TutorSettingsHelper
       },
       {
         :id => "settings-tab-cover_photos",
-        :text => 'Cover photos',
+        :text => 'Photos & Social Media',
         :icon_class => icon_class("thumbnails"),
         :path => person_cover_photos_settings_path(person),
         :name => "cover_photos"
