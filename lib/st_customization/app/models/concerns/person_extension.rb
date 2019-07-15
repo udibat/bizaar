@@ -31,6 +31,14 @@ module PersonExtension
       signup_process_complete? && !is_admin?
     end
 
+    def image_processing
+      false
+    end
+
+    def image
+      custom_profile.try(:avatar)
+    end
+
     def description
       custom_profile.try(:description)
     end
