@@ -24,8 +24,10 @@ module TutorSettingsHelper
   def member_settings_links(person, community=nil, restrict_for_admin=false)
     
     common_links = settings_links_for(person, community, restrict_for_admin)
+    hidden_links = ['settings-tab-listings']
     # replace bank account payment link with member payment link
-    common_links.reject{|h| h[:id] == 'settings-tab-payments'} + [
+    hidden_links << 'settings-tab-payments'
+    common_links.reject{|h| hidden_links.include?(h[:id].to_s)} + [
       {
         :id => "settings-tab-member_payments",
         :text => t("layouts.settings.payments"),

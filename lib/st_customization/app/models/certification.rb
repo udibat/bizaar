@@ -10,6 +10,8 @@ class Certification < ApplicationRecord
     end
   }
 
+  after_commit :update_cutom_profile_badge
+
   enum status: [
     :pending,
     :approved,
@@ -22,6 +24,11 @@ class Certification < ApplicationRecord
   belongs_to :category
 
   validates_presence_of :name, :category
+
+
+  def update_cutom_profile_badge
+    # binding.pry
+  end
 
   def attachment_thumb_url
     if attachment_is_pdf?

@@ -1,0 +1,85 @@
+- content_for :title_header do
+  %h1
+    = t("layouts.admin.admin")
+    = "-"
+    = t("admin.communities.manage_members.manage_members")
+
+= render :partial => "admin/left_hand_navigation", :locals => { :links => admin_links_for(@service.community) }
+
+.left-navi-section
+  -# %h2= t("admin.communities.manage_members.manage_members", :community_name => @service.community.name(I18n.locale))
+
+  %h2
+    User Id Veification
+
+  .errors
+  %table#admin_members_list
+    %thead
+      %tr
+        -# %th= render partial: "layouts/sort_link", locals: { column: "name", direction: sort_link_direction("name"), title: t("admin.communities.manage_members.name") }
+        -# %th= render partial: "layouts/sort_link", locals: { column: "email", direction: sort_link_direction("email"), title: t("admin.communities.manage_members.email") }
+        -# %th= render partial: "layouts/sort_link", locals: { column: "join_date", direction: sort_link_direction("join_date"), title: t("admin.communities.manage_members.join_date") }
+        %th Identification type
+        %th Image
+        %th Status
+        %th
+    %tbody
+      - @id_vfc.each do |cert|
+        %tr
+          %td
+            = cert.identification_type
+          %td
+            = image_tag cert.image.url(:thumb), title: "#{cert.identification_type}", class: 'cert_image', id: "cert_image_#{cert.id}", data: {full_url: cert.image.url(:original)}
+          %td
+            = cert.status
+            - if cert.status_rejected? && cert.rejection_reason.present?
+              %p
+                = cert.rejection_reason
+          %td
+            .hidden_forms_cont
+              = form_tag admin_user_id_verifications_approve_path(@service.target_user), method: 'POST', remote: true, format: :json, authenticity_token: true, id: "approve_cert_form_#{cert.id}", class: 'change_status_form' do |f|
+                = hidden_field_tag :badge
+              = form_tag admin_user_id_verifications_reject_path(@service.target_user), method: 'POST', remote: true, format: :json, authenticity_token: true, id: "reject_cert_form_#{cert.id}", class: 'change_status_form' do |f|
+                = hidden_field_tag :rejection_reason, '', id: "rejection_reason_#{cert.id}"
+            = link_to '#', class: "approve_item_link", data: {cert_id: cert.id} do
+              Approve
+            = link_to '#', class: "reject_item_link", data: {cert_id: cert.id} do
+              Reject
+
+= render partial: 'view_tools/ajax_form_submit_handler'
+
+:javascript
+  onDocumentReady(function(){
+    $('.cert_image').on('click', function(e){
+      console.log($(e.target).data('fullUrl'))
+      var img_cont = $('<img>')
+      $(img_cont).attr('src', $(e.target).data('fullUrl'))
+      $(img_cont).lightbox_me({centered: true});
+    });
+
+    $('.approve_item_link').on('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      console.log($(e.target).data('certId'))
+      formAjaxSubmit('#approve_cert_form_' + $(e.target).data('certId') + '');
+    });
+
+    $('.reject_item_link').on('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      console.log($(e.target).data('certId'))
+      var rejection_reason = window.prompt("Reject the id verification? \nYou can add a rejection reason here:", "");
+      if (rejection_reason !== null) {
+        console.log('send form')
+        $('#rejection_reason_' + $(e.target).data('certId') + '').val(rejection_reason)
+        formAjaxSubmit('#reject_cert_form_' + $(e.target).data('certId') + '');
+      }
+    });
+    
+
+
+
+
+  });
+
+  
