@@ -43,6 +43,18 @@ Rails.application.routes.draw do
   locale_matcher = Regexp.new(locale_regex_string)
 
   scope "(/:locale)", :constraints => { :locale => locale_matcher } do
+
+    namespace :admin do
+      get 'qualifications/:person_id' => 'user_qualifications#index', as: :user_qualifications_index
+      post 'qualifications/:person_id/:id/approve' => 'user_qualifications#approve', as: :user_qualifications_approve
+      post 'qualifications/:person_id/:id/reject' => 'user_qualifications#reject', as: :user_qualifications_reject
+
+      get 'id_verifications/:person_id' => 'user_id_verifications#index', as: :user_id_verifications_index
+      post 'id_verifications/:person_id/approve' => 'user_id_verifications#approve', as: :user_id_verifications_approve
+      post 'id_verifications/:person_id/reject' => 'user_id_verifications#reject', as: :user_id_verifications_reject
+    end
+
+
     get '/:person_id/categorized_testimonials' => 'testimonials#categorized_testimonials', :as => :person_categorized_testimonials
 
     get '/:person_id/settings/qualifications' => 'settings#qualifications', :as => :person_qualifications_settings

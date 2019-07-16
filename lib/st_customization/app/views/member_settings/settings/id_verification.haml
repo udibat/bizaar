@@ -13,17 +13,17 @@
     %span.errors
     .result-holder
       - if @id_verification.status_pending?
-        .bold.uppercase Pending...:
-        .verify-sign.badge-holder
-          = image_tag "custom_images/checked.png", class: 'small-icon'
-          %span.uppercase.green.text Id verified
+        .bold.uppercase.left-navi-link-text Status: Pending...
+        -# .verify-sign.badge-holder
+        -#   = image_tag "custom_images/checked.png", class: 'small-icon'
+        -#   %span.uppercase.green.text Pending...:
       - if @id_verification.status_approved?
         .bold.uppercase Your Id has been verified. You have the following badge:
         .verify-sign.badge-holder
           = image_tag "custom_images/checked.png", class: 'small-icon'
           %span.uppercase.green.text Id verified
       - if @id_verification.status_rejected?
-        .bold.uppercase Your Id has been rejected: #{@id_verification.rejection_reason}
+        .bold.uppercase.red Your Id has been rejected: #{@id_verification.rejection_reason}
         -# .verify-sign.badge-holder
         -#   = image_tag "custom_images/checked.png", class: 'small-icon'
         -#   %span.uppercase.green.text Id verified

@@ -5,11 +5,17 @@ class IdVerification < ApplicationRecord
 
   belongs_to :custom_profile
 
+  after_commit :update_cutom_profile_badge
+
   enum status: [
     :pending,
     :approved,
     :rejected
   ], _prefix: true
+
+  def update_cutom_profile_badge
+    # binding.pry
+  end
 
 end
 
