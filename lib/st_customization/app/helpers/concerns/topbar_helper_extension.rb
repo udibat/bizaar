@@ -20,7 +20,13 @@ module TopbarHelperExtension
           landing_page: landing_page,
           host_with_port: host_with_port)
 
+        # add some custom user fields
         original_props[:user].merge!(build_user_react_fields(user))
+
+        # disable newListingButton for members (not tutors)
+        unless (user.present? && user.is_tutor?)
+          original_props[:newListingButton] = nil
+        end
 
         original_props
 
@@ -28,9 +34,7 @@ module TopbarHelperExtension
 
       def build_user_react_fields(user)
         res = {}
-
-        res[:userType] = user.is_tutor? ? 'tutor' : 'member'
-
+        res[:userType] = (user.present? && user.is_tutor?) ? 'tutor' : 'member'
         res
       end
 
