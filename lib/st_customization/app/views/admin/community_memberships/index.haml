@@ -104,13 +104,22 @@
               %td{:style => "text-align: center"}
                 = select_tag "mark[#{member.id}]", options_for_select(Person.marks.keys.map{|k| [k.humanize, k]},  member.mark), include_blank: true, class: :change_mark, data: {url: person_mark_admin_community_community_memberships_path(@current_community), member_id: member.id}
               %td{:style => "text-align: center"}
-                = member.custom_profile.try(:id_verified?) ? 'yes' : 'no'
+                = member.custom_profile.id_verified? ? 'yes' : 'no'
+                - if member.custom_profile.has_new_id_verifications?
+                  %span.bold.red{title: 'This user has pending Id Verifications'}
+                    (*)
                 %p
                   = link_to 'Manage', admin_user_id_verifications_index_path(member)
               %td{:style => "text-align: center"}
-                = member.custom_profile.try(:cert_verified?) ? 'yes' : 'no'
-                %p
-                  = link_to 'Manage', admin_user_qualifications_index_path(member)
+                - if member.is_tutor?
+                  = member.custom_profile.cert_verified? ? 'yes' : 'no'
+                  - if member.custom_profile.has_new_certifications?
+                    %span.bold.red{title: 'This user has pending Qualifications'}
+                      (*)
+                  %p
+                    = link_to 'Manage', admin_user_qualifications_index_path(member)
+                - else
+                  N/A
               %td.membership-actions
                 - edit_class = membership.banned?  ? 'is-disabled' : ''
                 %span{class: edit_class}

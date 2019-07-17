@@ -2,7 +2,7 @@ class CustomProfile < ApplicationRecord
 
   MAX_DESCRIPTION_LENGTH = 500
 
-  has_attached_file :avatar, styles: { medium: "265x310^#", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "265x310^#", thumb: "100x100^#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/, 
     message: "Sorry, we cannot accept that file. Please upload serviceable jpeg, png picture."
 
@@ -40,6 +40,15 @@ class CustomProfile < ApplicationRecord
     if cover_photos.where(is_primary_photo: true).count == 0
       cover_photos.where(is_primary_photo: false).limit(1).update(is_primary_photo: true)
     end
+  end
+
+  # ToDo: refactor these methods if they cause performance issues
+  def has_new_id_verifications?
+    id_verifications.status_pending.exists?
+  end
+
+  def has_new_certifications?
+    certifications.status_pending.exists?
   end
 
 end

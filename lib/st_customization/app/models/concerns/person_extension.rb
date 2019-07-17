@@ -35,7 +35,9 @@ module PersonExtension
       false
     end
 
+    alias_method :image_before_redef, :image
     def image(*args, &block)
+      return image_before_redef(*args, &block) unless custom_profile.present?
       custom_profile.avatar(*args, &block)
     end
 
