@@ -35,8 +35,8 @@ module PersonExtension
       false
     end
 
-    def image
-      custom_profile.try(:avatar)
+    def image(*args, &block)
+      custom_profile.avatar(*args, &block)
     end
 
     def description
