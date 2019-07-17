@@ -27,7 +27,8 @@ class Certification < ApplicationRecord
 
 
   def update_cutom_profile_badge
-    # binding.pry
+    return if custom_profile.destroyed?
+    custom_profile.update_column(:cert_verified, custom_profile.certifications.status_approved.exists?)
   end
 
   def attachment_thumb_url

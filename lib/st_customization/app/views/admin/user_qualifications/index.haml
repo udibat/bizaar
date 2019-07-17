@@ -32,7 +32,11 @@
           %td
             = cert.category_name
           %td
-            = image_tag cert.image.url(:thumb), title: "#{cert.name}", class: 'cert_image', id: "cert_image_#{cert.id}", data: {full_url: cert.image.url(:original)}
+            - if cert.attachment_is_image?
+              = image_tag cert.attachment_thumb_url, title: "#{cert.name}", class: 'cert_image', id: "cert_image_#{cert.id}", data: {full_url: cert.image.url(:original), is_image: cert.attachment_is_image?}
+            - else
+              = link_to cert.image.url(:original), class: 'cert_image_link', download: cert.image.original_filename do
+                = image_tag cert.attachment_thumb_url, title: "#{cert.name}"
           %td
             = cert.status
           %td
@@ -51,7 +55,7 @@
 :javascript
   onDocumentReady(function(){
     $('.cert_image').on('click', function(e){
-      console.log($(e.target).data('fullUrl'))
+      //console.log($(e.target).data('fullUrl'))
       var img_cont = $('<img>')
       $(img_cont).attr('src', $(e.target).data('fullUrl'))
       $(img_cont).lightbox_me({centered: true});
@@ -60,7 +64,7 @@
     $('.approve_item_link').on('click', function(e){
       e.preventDefault();
       e.stopPropagation();
-      console.log($(e.target).data('certId'))
+      //console.log($(e.target).data('certId'))
       formAjaxSubmit('#approve_cert_form_' + $(e.target).data('certId') + '');
     });
 
@@ -70,16 +74,10 @@
       console.log($(e.target).data('certId'))
       var rejection_reason = window.prompt("Reject the qualification? \nYou can add a rejection reason here:", "");
       if (rejection_reason !== null) {
-        console.log('send form')
+        //console.log('send form')
         $('#rejection_reason_' + $(e.target).data('certId') + '').val(rejection_reason)
         formAjaxSubmit('#reject_cert_form_' + $(e.target).data('certId') + '');
       }
     });
-    
-
-
-
-
   });
 
-  

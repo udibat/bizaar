@@ -14,7 +14,8 @@ class IdVerification < ApplicationRecord
   ], _prefix: true
 
   def update_cutom_profile_badge
-    # binding.pry
+    return if custom_profile.destroyed?
+    custom_profile.update_column(:id_verified, custom_profile.id_verifications.status_approved.exists?)
   end
 
 end
