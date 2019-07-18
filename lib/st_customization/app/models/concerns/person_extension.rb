@@ -22,9 +22,16 @@ module PersonExtension
 
 
     def need_validate_after_oauth?
+
+      # Allow users, who registered with oauth and didn't filled-up first step fields
+      # to reset password and continue signup process
+      password_reset_inprogress = (encrypted_password.to_s.present? && 
+        encrypted_password.to_s != encrypted_password_was.to_s && 
+        reset_password_period_valid? && reset_password_token?)
+
       (signup_process_complete? || 
         signup_status.try(:signup_status_registered_oauth?) == true) && 
-          !is_admin?
+          !is_admin? && !password_reset_inprogress
     end
 
     def need_validate?
