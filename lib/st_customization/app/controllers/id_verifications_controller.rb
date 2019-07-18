@@ -25,7 +25,7 @@ class IdVerificationsController < ApplicationController
     if @id_vfc.save
       render json: @id_vfc, status: 200
     else
-      render json: { error: @id_vfc.errors.messages }, status: 422
+      render json: { error: @id_vfc.errors.messages.first.to_s }, status: 422
     end
 
   end

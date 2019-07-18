@@ -66,7 +66,7 @@ class CustomProfilesController < ApplicationController
           } 
         }}
     else
-      render json: {error: @custom_profile.errors.first.to_s}
+      render json: {error: @custom_profile.errors.messages.first}
     end
   end
 

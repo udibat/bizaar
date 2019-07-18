@@ -53,7 +53,7 @@
                 .div
                   %div= @id_verification.image.original_filename
                   = @id_verification.identification_type
-                  = button_tag 'Remove this document', class: 'delete_verification_btn delete-verification-btn'
+                  = button_tag 'Remove this document', class: 'delete_verification_btn delete-verification-btn form-element'
     = button_tag 'Save Changes', class: 'remote_ent_form_submit_btn form-element save-id-btn'
 
 = render partial: 'view_tools/ajax_form_submit_handler'
@@ -63,8 +63,8 @@
   onDocumentReady(function() {
     $('.remote_ent_form_submit_btn').on("click", function(){
       formAjaxSubmit('#id_verification_form');
-      $('.uploading-block').hide();
-      $('.save-id-btn').hide();
+      //$('.uploading-block').hide();
+      //$('.save-id-btn').hide();
     });
 
     $('.delete_verification_btn').on('click', function(){

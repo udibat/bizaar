@@ -60,6 +60,7 @@
           // = link_to "Skip current step", tutor_wizard_skip_step_path(@tutor_status.signup_status), class: ''
 
 = render partial: 'view_tools/confirm_step_btn_js'
+= render partial: 'view_tools/ajax_form_submit_handler'
 
 :javascript
 
@@ -118,14 +119,7 @@
         build_photo_spots(data.images);
       }
     ).on("ajax:error", function(event, data){
-        // console.log(data.responseJSON.error);
-        //console.log(data);
-        $(".errors").html('Error:')
-        var err_obj = data.responseJSON.error
-        Object.keys(err_obj).forEach(function (key) { 
-          var value = err_obj[key]
-          $(".errors").append(key + ': ' + value[0]);
-        })
+        displayErrorData(data);
       }
     )
     
@@ -134,7 +128,7 @@
           if (data.result.error === undefined) {
             build_photo_spots(data.result.images);
           } else {
-            alert(data.result.error);
+            displayErrorData(data);
           }
         }
     });
