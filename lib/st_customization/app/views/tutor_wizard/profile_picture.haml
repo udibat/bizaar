@@ -59,10 +59,26 @@
           $('.profile-upload').find('.file-name').text(name);
           $('.profile-upload').find('.thumb-block img').attr('src', data.result.image_url);
           $('.uploaded-file-container.profile-upload').css('display', 'block');
+          $('.uploaded-file').show();
         } else {
           alert(data.result.error);
         }
       }
+    });
+
+    $('#custom_profile_avatar').on('change', function(event) {
+      var file = this.files[0];
+      var reader = new FileReader();
+      var name = file.name;
+
+      reader.onload = function(e) {
+        var img = new Image();
+        img.src = reader.result;
+        $('.thumb-block').html(img);
+      }
+      
+      reader.readAsDataURL(file);
+
     });
 
     if($('.thumb-block img').length === 0) {
