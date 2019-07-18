@@ -105,6 +105,7 @@ Rails.application.configure do
   mail_delivery_method = (APP_CONFIG.mail_delivery_method.present? ? APP_CONFIG.mail_delivery_method.to_sym : :sendmail)
 
   config.action_mailer.delivery_method = mail_delivery_method
+  config.action_mailer.asset_host = APP_CONFIG.asset_host
 
   if mail_delivery_method == :smtp
     ActionMailer::Base.smtp_settings = {
