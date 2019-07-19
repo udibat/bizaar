@@ -70,7 +70,7 @@ const signupDropdownProps = (routes) => {
   }
 };
 
-const avatarDropdownProps = (avatarDropdown, customColor, username, isAdmin, notificationCount, routes) => {
+const avatarDropdownProps = (avatarDropdown, customColor, username, isAdmin, notificationCount, routes, user) => {
   const color = customColor || styleVariables['--customColorFallback'];
   const actions = {
     inboxAction: () => false,
@@ -89,7 +89,7 @@ const avatarDropdownProps = (avatarDropdown, customColor, username, isAdmin, not
     adminDashboard: t('web.topbar.admin_dashboard'),
     logout: t('web.topbar.logout'),
   };
-  return { actions, translations, customColor: color, isAdmin, notificationCount, ...avatarDropdown };
+  return { actions, translations, customColor: color, isAdmin, notificationCount, user, ...avatarDropdown };
 };
 
 const mobileProfileLinks = function mobileProfileLinks(username, isAdmin, router, location, customColor, unReadMessagesCount) {
@@ -269,7 +269,6 @@ class Topbar extends Component {
     const oldSearchParams = parseSearchParams(location);
     const searchPlaceholder = this.props.search ? this.props.search.search_placeholder : null;
     const textLogo = this.props.logo.image ? '' : css.textLogo;
-
     return div({ className: classNames('Topbar', css.topbar) }, [
       hasMenuProps ? r(MenuMobile, { ...mobileMenuProps, className: css.topbarMobileMenu }) : null,
       div({ className: css.topbarMenuSpacer }, hasMenuProps ?
@@ -286,7 +285,7 @@ class Topbar extends Component {
       this.props.avatarDropdown && loggedInUsername ?
         r(AvatarDropdown, {
           ...avatarDropdownProps(this.props.avatarDropdown, marketplaceColor1,
-                                 loggedInUsername, isAdmin, this.props.unReadMessagesCount, this.props.routes),
+                                 loggedInUsername, isAdmin, this.props.unReadMessagesCount, this.props.routes, this.props.user),
           classSet: css.topbarAvatarDropdown,
         }) :
         r(LoginLinks, {

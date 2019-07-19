@@ -31,14 +31,16 @@ const eitherStringOrFunc = PropTypes.oneOfType([
 ]);
 
 ProfileActionCard.propTypes = {
-  icon: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  action: eitherStringOrFunc.isRequired,
+  icon: PropTypes.string,
+  label: PropTypes.string,
+  action: eitherStringOrFunc,
   notificationCount: PropTypes.number,
 };
 
 class ProfileDropdown extends Component {
   render() {
+    const showListingsProfileActionCard = this.props.user.userType === 'tutor' || this.props.isAdmin ? { label: this.props.translations.listings, icon: listingsIcon, action: this.props.actions.listingsAction } : null;
+      const hideListingActionCardClass = this.props.user.userType === 'member' ? css.profileActionMember : css.profileActions;
     return div({
       className: classNames(this.props.classNames),
       ref: this.props.profileDropdownRef,
@@ -46,9 +48,9 @@ class ProfileDropdown extends Component {
       div({ className: css.rootArrowTop }),
       div({ className: css.rootArrowBelow }),
       div({ className: css.box }, [
-        div({ className: css.profileActions }, [
+        div({ className: hideListingActionCardClass }, [
           r(ProfileActionCard, { label: this.props.translations.inbox, icon: inboxEmptyIcon, action: this.props.actions.inboxAction, notificationCount: this.props.notificationCount }),
-          r(ProfileActionCard, { label: this.props.translations.listings, icon: listingsIcon, action: this.props.actions.listingsAction }),
+          r(ProfileActionCard, showListingsProfileActionCard),
           r(ProfileActionCard, { label: this.props.translations.profile, icon: profileIcon, action: this.props.actions.profileAction }),
           r(ProfileActionCard, { label: this.props.translations.settings, icon: settingsIcon, action: this.props.actions.settingsAction }),
         ]),

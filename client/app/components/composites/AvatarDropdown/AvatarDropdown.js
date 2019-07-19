@@ -91,6 +91,7 @@ class AvatarDropdown extends Component {
         isAdmin: this.props.isAdmin,
         notificationCount: this.props.notificationCount,
         translations: this.props.translations,
+        user: this.props.user,
         profileDropdownRef: (c) => {
           this.profileDropdown = c;
         },
