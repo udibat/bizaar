@@ -205,40 +205,49 @@ img {
   border-radius: 0;
   line-height: 1;
   &--white {
-    background-color: #fff;
+    background-color: $white;
     color: $cust-violet;
     font-size: 16px;
-    border: 2px solid #fff;
+    border: 2px solid $white;
     &:hover {
       background-color: transparent;
-      color: #fff;
+      color: $white;
     }
   }
   &--transparent {
     background-color: transparent;
-    border: 2px solid #fff;
-    color: #fff;
+    border: 2px solid $white;
+    color: $white;
     &:hover {
       color: $cust-violet;
-      background-color: #fff;
+      background-color: $white;
     }
   }
   &--violet {
     background-color: $cust-violet;
-    color: #fff;
+    color: $white;
     border: 2px solid $cust-violet;
     &:hover, &:focus, &:active {
-      background-color: #fff;
+      background-color: $white;
       color: $cust-violet;
     }
   }
   &--green {
     background-color: $cust-green;
     border: 2px solid $cust-green;
-    color: #fff;
+    color: $white;
     &:hover, &:focus {
-      background-color: #fff;
+      background-color: $white;
       color: $cust-green;
+    }
+  }
+  &--red {
+    background-color: $cust-red;
+    color: $white;
+    border: 2px solid $cust-red;
+    &:hover, &:focus, &:active {
+      background-color: $white;
+      color: $cust-red;
     }
   }
   &--green-transp {
@@ -267,7 +276,7 @@ img {
     color: #fff;
     border: 2px solid $cust-text;
     &:hover, &:focus {
-      background-color: #fff;
+      background-color: $white;
       color: $cust-text;
     }
   }

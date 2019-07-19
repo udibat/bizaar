@@ -45,9 +45,11 @@
                 = hidden_field_tag :badge
               = form_tag admin_user_qualifications_reject_path(@service.target_user, cert), method: 'POST', remote: true, format: :json, authenticity_token: true, id: "reject_cert_form_#{cert.id}", class: 'change_status_form' do |f|
                 = hidden_field_tag :rejection_reason, '', id: "rejection_reason_#{cert.id}"
-            = link_to '#', class: "approve_item_link", data: {cert_id: cert.id} do
+          %td
+            = link_to '#', class: "btn btn--green approve_item_link", data: {cert_id: cert.id} do
               Approve
-            = link_to '#', class: "reject_item_link", data: {cert_id: cert.id} do
+          %td
+            = link_to '#', class: "btn btn--red reject_item_link", data: {cert_id: cert.id} do
               Reject
 
 = render partial: 'view_tools/ajax_form_submit_handler'

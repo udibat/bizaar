@@ -15,6 +15,14 @@
   display: flex;
 }
 
+.profileActionMember {
+  display: flex;
+}
+
+.profileActionMember a:nth-child(2) {
+  display: none;
+}
+
 .profileAction {
   width: 8.6em;
   height: 8.6em;
