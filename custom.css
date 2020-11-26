@@ -1,0 +1,8 @@
+@media (min-width: 63em)
+.marketplace-lander .marketplace-lander-content-title {
+    width: 70%;
+    margin: auto;
+    padding-bottom: 15px;
+    font-size: 3.75em;
+    line-height: 1.1;
+}
